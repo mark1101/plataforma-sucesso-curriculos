@@ -262,7 +262,7 @@
             <div class="footer__logo">
                 <a href=""><img src="{{asset('img/footer-logo.png')}}" alt=""></a>
             </div>
-            <p>Sucesso Empregos 2021 © Copyright. Todos os direitos reservados.</p>
+            <p>Sucesso Empregos 2022 © Copyright. Todos os direitos reservados.</p>
         </div>
     </div>
 </footer>
