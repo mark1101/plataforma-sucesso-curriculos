@@ -27,9 +27,9 @@
     <div class="offcanvas-menu">
         <div class="main-menu">
             <ul class="d-block">
-                <li><a href="">Sou Candidato</a></li>
-                <li><a href="">Sou Empresa</a></li>
-                <li><a href="">Sugestões</a></li>
+                <li><a href="{{url('candidato')}}">Sou Candidato</a></li>
+                <li><a href="{{url('empresa')}}">Sou Empresa</a></li>
+                <li><a href="{{url('sugestoes')}}">Sugestões</a></li>
                 <li><a href="{{url('faq')}}">FAQ</a></li>
                 <li><a href="{{url('suporte')}}">Suporte</a></li>
             </ul>
@@ -49,9 +49,9 @@
         <div class="header__right">
             <div class="main__menu">
                 <ul>
-                    <li><a href="">Sou Candidato</a></li>
-                    <li><a href="">Sou Empresa</a></li>
-                    <li><a href="">Sugestões</a></li>
+                    <li><a href="{{url('candidato')}}">Sou Candidato</a></li>
+                    <li><a href="{{url('empresa')}}">Sou Empresa</a></li>
+                    <li><a href="{{url('sugestoes')}}">Sugestões</a></li>
                     <li><a href="{{url('faq')}}">FAQ</a></li>
                     <li><a href="{{url('suporte')}}">Suporte</a></li>
                 </ul>

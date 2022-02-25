@@ -17,7 +17,8 @@
     <title>@yield('title')</title>
 </head>
 
-<body>
+<body style="background-color: #F2F2F2;">
+
 
 <!--------- Offcanvas area start --------->
 <div class="offcanvas-area">
@@ -27,34 +28,35 @@
     <div class="offcanvas-menu">
         <div class="main-menu">
             <ul class="d-block">
-                <li><a href="{{url('candidato')}}">Sou Candidato</a></li>
-                <li><a href="{{url('empresa')}}">Sou Empresa</a></li>
+                <li><a href="">Sou Candidato</a></li>
+                <li><a href="">Sou Empresa</a></li>
                 <li><a href="{{url('sugestoes')}}">Sugestões</a></li>
                 <li><a href="{{url('faq')}}">FAQ</a></li>
                 <li><a href="{{url('suporte')}}">Suporte</a></li>
+                <li><a href=""><span><img src="{{asset('img/cart-btn.png')}}" alt=""></span></a></li>
             </ul>
         </div>
     </div>
 </div>
-
 <div class="offcanvas-overlay"></div>
 <!--------- Offcanvas area end --------->
 
 
 <!--------- Header area start --------->
-<header class="header__area">
+<header class="header__area support--header">
     <div class="container">
         <div class="logo__main">
-            <a href=""><img src="{{asset('img/logo-white.png')}}" alt=""></a>
+            <a href=""><img src="{{asset('img/logo.svg')}}" alt=""></a>
         </div>
         <div class="header__right">
-            <div class="main__menu blue--links">
+            <div class="main__menu">
                 <ul>
-                    <li><a href="{{url('candidato')}}" class="link--white">Sou Candidato</a></li>
-                    <li><a href="{{url('empresa')}}">Sou Empresa</a></li>
+                    <li class="red--links"><a href="">Sou Candidato</a></li>
+                    <li class="red--links"><a href="">Sou Empresa</a></li>
                     <li><a href="{{url('sugestoes')}}">Sugestões</a></li>
                     <li><a href="{{url('faq')}}">FAQ</a></li>
                     <li><a href="{{url('suporte')}}">Suporte</a></li>
+                    <li><a href=""><span><img src="{{asset('img/cart-btn.png')}}" alt=""></span></a></li>
                 </ul>
             </div>
             <div class="menu-open">
@@ -80,11 +82,10 @@
 </footer>
 <!--------- Footer area end --------->
 
-
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/popper.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
-<script src="{{asset('js/owl.carousel.min.js')}}"></script>
+<script src="{{asset('js/jquery.nice-number.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
 <script>
 

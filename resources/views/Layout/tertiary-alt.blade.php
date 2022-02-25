@@ -28,9 +28,9 @@
     <div class="offcanvas-menu">
         <div class="main-menu">
             <ul class="d-block">
-                <li><a href="">Sou Candidato</a></li>
-                <li><a href="">Sou Empresa</a></li>
-                <li><a href="{{url('sugestao')}}">Sugestões</a></li>
+                <li><a href="{{url('candidato')}}">Sou Candidato</a></li>
+                <li><a href="{{url('empresa')}}">Sou Empresa</a></li>
+                <li><a href="{{url('sugestoes')}}">Sugestões</a></li>
                 <li><a href="{{url('faq')}}">FAQ</a></li>
                 <li><a href="{{url('suporte')}}">Suporte</a></li>
                 <li><a href=""><span><img src="{{asset('img/cart-btn.png')}}" alt=""></span></a></li>
@@ -51,9 +51,9 @@
         <div class="header__right">
             <div class="main__menu red--links">
                 <ul>
-                    <li><a href="">Sou Candidato</a></li>
-                    <li><a href="">Sou Empresa</a></li>
-                    <li><a href="{{url('sugestao')}}">Sugestões</a></li>
+                    <li><a href="{{url('candidato')}}">Sou Candidato</a></li>
+                    <li><a href="{{url('empresa')}}">Sou Empresa</a></li>
+                    <li><a href="{{url('sugestoes')}}">Sugestões</a></li>
                     <li><a href="{{url('faq')}}">FAQ</a></li>
                     <li><a href="{{url('suporte')}}">Suporte</a></li>
                     <li><a href=""><span><img src="{{asset('img/cart-btn.png')}}" alt=""></span></a></li>
@@ -76,7 +76,7 @@
             <div class="footer__logo">
                 <a href=""><img src="{{asset('img/footer-logo.png')}}" alt=""></a>
             </div>
-            <p>Sucesso Empregos 2021 © Copyright. Todos os direitos reservados.</p>
+            <p>Sucesso Empregos 2022 © Copyright. Todos os direitos reservados.</p>
         </div>
     </div>
 </footer>
