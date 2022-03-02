@@ -22,7 +22,7 @@
                             currículos Guarapuavanos
                             mais adequados para cada vaga, escolhendo candidatos por tempo de experiência, área de
                             formação, idade, gênero e muito mais!</p>
-                        <a href="">Preencha seu currículo!</a>
+                        <a href="">Baixar currículos</a>
                     </div>
                 </div>
                 <div class="note-thumb note-thumb-2">
