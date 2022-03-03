@@ -29,9 +29,9 @@
             <ul class="d-block">
                 <li><a href="{{url('candidato')}}">Sou Candidato</a></li>
                 <li><a href="{{url('empresa')}}">Sou Empresa</a></li>
-                <li><a href="{{url('sugestoes')}}">Sugestões</a></li>
+                <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                 <li><a href="{{url('faq')}}">FAQ</a></li>
-                <li><a href="{{url('suporte')}}">Suporte</a></li>
+                <li><a href="{{url('suporte/cadastro')}}">Suporte</a></li>
             </ul>
         </div>
     </div>
@@ -51,9 +51,9 @@
                 <ul>
                     <li><a href="{{url('candidato')}}">Sou Candidato</a></li>
                     <li><a href="{{url('empresa')}}">Sou Empresa</a></li>
-                    <li><a href="{{url('sugestoes')}}">Sugestões</a></li>
+                    <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                     <li><a href="{{url('faq')}}">FAQ</a></li>
-                    <li><a href="{{url('suporte')}}">Suporte</a></li>
+                    <li><a href="{{url('suporte/cadastro')}}">Suporte</a></li>
                 </ul>
             </div>
             <div class="menu-open">
@@ -73,7 +73,7 @@
             <div class="footer__logo">
                 <a href=""><img src="{{asset('img/footer-logo.png')}}" alt=""></a>
             </div>
-            <p>Sucesso Empregos 2021 © Copyright. Todos os direitos reservados.</p>
+            <p>Sucesso Empregos 2022 © Copyright. Todos os direitos reservados.</p>
         </div>
     </div>
 </footer>
