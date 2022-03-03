@@ -44,7 +44,7 @@
 <header class="header__area">
     <div class="container">
         <div class="logo__main">
-            <a href=""><img src="{{asset('img/logo-white.png')}}" alt=""></a>
+            <a href="/"><img src="{{asset('img/logo-white.png')}}" alt=""></a>
         </div>
         <div class="header__right">
             <div class="main__menu red--links">
@@ -71,7 +71,7 @@
     <div class="container">
         <div class="footer__wrapper">
             <div class="footer__logo">
-                <a href=""><img src="{{asset('img/footer-logo.png')}}" alt=""></a>
+                <a href="/"><img src="{{asset('img/footer-logo.png')}}" alt=""></a>
             </div>
             <p>Sucesso Empregos 2022 © Copyright. Todos os direitos reservados.</p>
         </div>
