@@ -67,6 +67,9 @@ Route::prefix('avaliacao')->group(function (){
 
 Route::prefix('curriculos')->group(function (){
 
+    Route::get('/cadastro', function (){
+        return view('Applicant.Registration.register-tab');
+    });
     Route::get('/buscar', function (){
         return view('Search.search');
     });
@@ -77,11 +80,4 @@ Route::prefix('curriculos')->group(function (){
 
 Route::get('/planos', function (){
     return view('plans');
-});
-
-Route::get('/1', function (){
-   return view('Applicant.Registration.register-test');
-});
-Route::get('/2', function (){
-    return view('Applicant.Registration.register-2');
 });

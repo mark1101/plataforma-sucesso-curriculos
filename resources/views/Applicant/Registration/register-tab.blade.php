@@ -19,7 +19,7 @@
     </style>
     <body>
 
-    <form id="regForm" action="/action_page.php">
+    <form id="regForm" action="">
         <!-- One "tab" for each step in the form: -->
         <div class="tab">
             <section class="hero__area cadetro-hero pt-5 pb-5 ">
@@ -535,24 +535,251 @@
                 </div>
             </section>
         </div>
+        <div class="tab">
+            <section class="hero__area cadetro-hero pt-5 pb-5">
+                <div class="container position-relative">
+                    <div class="row ">
+                        <div class="col-md-5">
+                            <div class="cadestro__content__wrap">
+                                <h4>O seu futuro <br>
+                                    começa aqui!
+                                </h4>
+                                <p>É só preencher seus dados para você garantir sua vaga dos sonhos!</p>
+                                <div class="hero__progress">
+                                    <div class="progress__top">
+                                        <p>Progresso</p>
+                                        <h5>69%</h5>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 69%;"
+                                             aria-valuenow="69"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="hero__form__right">
+                                <h4> VOCÊ ESTÁ EMPREGADO OU DESEMPREGADO?</h4>
+                                <form action="">
+                                    <div class="form__card">
+                                        <div class="single__input__item employed-flex d-flex align-items-center">
+                                           <label for=""> Atualmente estou:</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="employmentCheckbox"
+                                                       id="flexRadioDefault9">
+                                                <label class="form-check-label" for="flexRadioDefault9">
+                                                    Desempregado
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="employmentCheckbox"
+                                                       id="flexRadioDefault10">
+                                                <label class="form-check-label" for="flexRadioDefault10">
+                                                    Empregado
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value=""
+                                                       id="flexCheckDefault">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    Não mostre meu currículo para meu atual empregador.
+                                                </label>
+                                            </div>
+                                            <div class="help__blk">
+                                                <span><img src="{{asset('img/help.png')}}" alt=""></span>
+                                                <p>Evite constrangimentos na hora de procurar um novo emprego. Com essa
+                                                    função
+                                                    seu currículo será ocultado do seu atual empregador.
+                                                    <b>Esta função possui um custo adicional de R$6,50/mês.</b>
+                                                </p>
+                                            </div>
+                                            <div class="single__input__item d-flex align-items-center">
+                                                <label for=""> CNPJ do Empregador</label>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="tab">
+            <section class="hero__area cadetro-hero pt-5 pb-5">
+                <div class="container position-relative">
+                    <div class="row ">
+                        <div class="col-md-4">
+                            <div class="cadestro__content__wrap">
+                                <h4>Escolha o
+                                    plano ideal
+                                    para você </h4>
+                                <p>Escolha o plano mais adequado a sua necessidade e boa sorte na sua jornada!</p>
+                                <div class="hero__progress">
+                                    <div class="progress__top">
+                                        <p>Progresso</p>
+                                        <h5>86%</h5>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 86%;"
+                                             aria-valuenow="86"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="pricing__wrapper">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="pricing__single__card">
+                                            <div class="pricing__card__body">
+                                                <div class="pricing__card__title">
+                                                    <p>plano </p>
+                                                    <h5>Mensal</h5>
+                                                </div>
+                                                <hr>
+                                                <div class="pricing__card__price">
+                                                    <div class="rate--count">1x</div>
+                                                    <span>R$<b>15</b>,90</span>
+                                                </div>
+                                                <div class="p">ou seja <b> R$0,53/dia</b></div>
+                                                <hr>
+                                                <div class="validity__text">
+                                                    Vigência de 30 dias
+                                                </div>
+                                            </div>
+                                            <div class="pricing__card__bottom">
+                                                <a href="">Escolher Plano</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="pricing__single__card card-sky-blue">
+                                            <div class="pricing__card__body">
+                                                <div class="b-1">
+                                                    <img src="{{asset('img/b-1.svg')}}" alt="">
+                                                </div>
+                                                <div class="pricing__card__title">
+                                                    <p>plano </p>
+                                                    <h5>Trimestral</h5>
+                                                </div>
+                                                <hr>
+                                                <div class="pricing__card__price">
+                                                    <div class="rate--count">3x</div>
+                                                    <span>R$<b>12</b>,90</span>
+                                                </div>
+                                                <div class="p">ou seja <b> R$0,43/dia</b></div>
+                                                <hr>
+                                                <div class="validity__text">
+                                                    Vigência de 90 dias
+                                                </div>
+                                            </div>
+                                            <div class="pricing__card__bottom">
+                                                <a href="">Escolher Plano</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="pricing__single__card card-sky">
+                                            <div class="b-1">
+                                                <img src="{{asset('img/b-2.svg')}}" alt="">
+                                            </div>
+                                            <div class="pricing__card__body">
+                                                <div class="pricing__card__title">
+                                                    <p>plano </p>
+                                                    <h5>semestral</h5>
+                                                </div>
+                                                <hr>
+                                                <div class="pricing__card__price">
+                                                    <div class="rate--count">1x</div>
+                                                    <span>R$<b>9</b>,90</span>
+                                                </div>
+                                                <div class="p">ou seja <b> R$0,33/dia</b></div>
+                                                <hr>
+                                                <div class="validity__text">
+                                                    Vigência de 180 dias
+                                                </div>
+                                            </div>
+                                            <div class="pricing__card__bottom">
+                                                <a href="">Escolher Plano</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="tab">
+            <section class="hero__area cadetro-hero pt-5 pb-5">
+                <div class="container position-relative">
+                    <div class="row ">
+                        <div class="col-md-5">
+                            <div class="cadestro__content__wrap">
+                                <h4>Parabéns!
+                                </h4>
+                                <p>Estamos torcendo por você e te manteremos informado sobre novidades.</p>
+                                <div class="hero__progress">
+                                    <div class="progress__top">
+                                        <p>Progresso</p>
+                                        <h5>100%</h5>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 100%;"
+                                             aria-valuenow="100"
+                                             aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="hero__form__right">
+                                <h4> Seu currículo já está aparecendo nas buscas.</h4>
+                                <p class="text-md">Para aumentar suas chances lembre-se de preencher o máximo de
+                                    informações
+                                    possíveis.</p>
+                                <div class="view__resume__btn">
+                                    <a href="" class="btn-gray">Visualizar Currículo</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
         <div class="col-sm-12">
             <div class="container position-relative">
                 <div class="row">
                     <div class="col" style="text-align: left">
-                <div class="  justify-content-start">
-                    <button type="button" class="return__btn " id="prevBtn" onclick="nextPrev(-1)">Voltar</button>
-                </div>
+                        <div class="justify-content-start">
+                            <button type="button" class="return__btn " id="prevBtn" onclick="nextPrev(-1)">Voltar
+                            </button>
+                        </div>
                     </div>
                     <div class="col" style="text-align: right">
-                <div class="form__button justify-content-end">
-                    <button type="submit" id="nextBtn" onclick="nextPrev(1)">Salvar e próximo</button>
-                </div>
+                        <div class="form__button justify-content-end">
+                            <button type="submit" id="nextBtn" onclick="nextPrev(1)">Salvar e próximo</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Circles which indicates the steps of the form: -->
         <div style="text-align:center;margin-top:40px;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
             <span class="step"></span>
             <span class="step"></span>
             <span class="step"></span>
@@ -575,7 +802,7 @@
                 document.getElementById("prevBtn").style.display = "inline";
             }
             if (n == (x.length - 1)) {
-                document.getElementById("nextBtn").innerHTML = "Submit";
+                document.getElementById("nextBtn").innerHTML = "Finalizar e sair";
             } else {
                 document.getElementById("nextBtn").innerHTML = "Salvar e próximo";
             }
@@ -586,8 +813,9 @@
         function nextPrev(n) {
             // This function will figure out which tab to display
             var x = document.getElementsByClassName("tab");
+            console.log(x);
             // Exit the function if any field in the current tab is invalid:
-            if (n == 1 && !validateForm()) return false;
+            //if (n == 1 && !validateForm()) return false;
             // Hide the current tab:
             x[currentTab].style.display = "none";
             // Increase or decrease the current tab by 1:
