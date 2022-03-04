@@ -1,6 +1,6 @@
 @extends('Layout.tertiary')
 
-@section('title', 'Sucesso Empregos - Login Empresa')
+@section('title', 'Sucesso Empregos - Registro')
 
 @section('content')
 
@@ -22,7 +22,6 @@
                             currículos Guarapuavanos
                             mais adequados para cada vaga, escolhendo candidatos por tempo de experiência, área de
                             formação, idade, gênero e muito mais!</p>
-                        <a href="">Baixar currículos</a>
                     </div>
                 </div>
                 <div class="note-thumb note-thumb-2">
@@ -30,11 +29,29 @@
                 </div>
                 <div class="col-md-6">
                     <div class="hero__form__wrapper">
-                        <h4 class="text-red">Já sou cadastrado</h4>
-                        <form method="POST" action="{{ route('login') }}">
+                        <h4 class="text-red">Crie sua conta Empresa</h4>
+                        <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="single__input__item">
-                                <label for="email">{{ __('Digite seu email') }}</label>
+                                <label for="name">{{__('Digite o nome da sua empresa') }}</label>
+
+                                <input id="name" type="text" class="form-control" name="name" required>
+                            </div>
+
+                            <div class="single__input__item">
+                                <label for="cnpj">{{__('Digite o CNPJ da sua empresa') }}</label>
+
+                                <input id="cnpj" type="text" class="form-control" name="cnpj" required>
+                            </div>
+
+                            <div class="single__input__item">
+                                <label for="address">{{__('Endereço da sua Empresa') }}</label>
+
+                                <input id="address" type="text" class="form-control" name="address" required>
+                            </div>
+
+                            <div class="single__input__item">
+                                <label for="email">{{ __('Digite o email corporativo') }}</label>
 
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                                     name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -47,7 +64,7 @@
 
                             </div>
                             <div class="single__input__item">
-                                <label for="password">{{ __('Sua senha') }}</label>
+                                <label for="password">{{ __('Crie uma senha') }}</label>
 
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password" required
@@ -61,19 +78,8 @@
 
                             </div>
                             <div class="hero__form__bottom d-flex justify-content-between pt-3">
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Recuperar senha') }}
-                                    </a>
-                                @endif
-                                <a class="btn btn-link" href="{{ url('empresa/registro') }}">
-                                    {{ __('Criar uma Conta') }}
-                                </a>
+                                <button class="btn-red" type="submit" style="width: 100%!important;">Criar Conta</button>
                             </div>
-                        </form>
-                        <div class="hero__form__bottom d-flex justify-content-between pt-3">
-                            <button type="submit" class="btn-red" style="width: 100%!important;">Entrar</button>
-                        </div>
                         </form>
                     </div>
                 </div>

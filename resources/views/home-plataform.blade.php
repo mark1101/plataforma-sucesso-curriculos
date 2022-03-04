@@ -57,15 +57,17 @@
         <div class="container">
             <div class="service__boxes__wrapper">
                 <div class="row justify-content-center">
-                    <div class="col-md-4 col-md-6">
+                    <div class="col-md-4 col-md-6 pb-2">
                         <div class="service__box__card">
                             <div class="service__box__card__icon">
-                                <img src="{{asset('img/icons/i-1.png')}}" alt="">
+                                <img src="{{asset('img/icons/i-3.png')}}" alt="">
                             </div>
-                            <h4>Quem somos</h4>
-                            <p>Somos uma empresa especializada na procura de empregos na cidade de Guarapuava e região.
-                                Acreditamos na ideia que a entrega de currículos deveria ser uma tarefa muito mais
-                                simples e dinâmica, facilitando a interação entre candidato e empregador.</p>
+                            <h4> por que devo entrar?</h4>
+                            <p>Pois é muito mais fácil, barato e eficiente do que entregar currículos físicos ou por
+                                e-mail. Você sabia que procurar emprego de forma tradicional custa 10x mais caro do que
+                                usar nossa plataforma? Considere os gastos de transporte, alimentação, impressões de
+                                currículo e internet móvel – você perceberá que você gasta mais do que o necessário
+                                apenas para conseguir um emprego.</p>
                         </div>
                     </div>
                     <div class="col-md-4 col-md-6">
@@ -85,14 +87,12 @@
                     <div class="col-md-4 col-md-6">
                         <div class="service__box__card">
                             <div class="service__box__card__icon">
-                                <img src="{{asset('img/icons/i-3.png')}}" alt="">
+                                <img src="{{asset('img/icons/i-1.png')}}" alt="">
                             </div>
-                            <h4> por que devo entrar?</h4>
-                            <p>Pois é muito mais fácil, barato e eficiente do que entregar currículos físicos ou por
-                                e-mail. Você sabia que procurar emprego de forma tradicional custa 10x mais caro do que
-                                usar nossa plataforma? Considere os gastos de transporte, alimentação, impressões de
-                                currículo e internet móvel – você perceberá que você gasta mais do que o necessário
-                                apenas para conseguir um emprego.</p>
+                            <h4>Quem somos</h4>
+                            <p>Somos uma empresa especializada na procura de empregos na cidade de Guarapuava e região.
+                                Acreditamos na ideia que a entrega de currículos deveria ser uma tarefa muito mais
+                                simples e dinâmica, facilitando a interação entre candidato e empregador.</p>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
         <div class="container">
             <h4>Alguma dúvida?</h4>
             <div class="newsletter__btn">
-                <a href="">leia nosso faq!</a>
+                <a href="{{url('faq')}}">leia nosso faq!</a>
             </div>
         </div>
     </section>

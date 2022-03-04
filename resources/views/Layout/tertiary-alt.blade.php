@@ -28,8 +28,8 @@
     <div class="offcanvas-menu">
         <div class="main-menu">
             <ul class="d-block">
-                <li><a href="{{url('candidato')}}">Sou Candidato</a></li>
-                <li><a href="{{url('empresa')}}">Sou Empresa</a></li>
+                <li><a href="{{url('candidato/login')}}">Sou Candidato</a></li>
+                <li><a href="{{url('empresa/login')}}">Sou Empresa</a></li>
                 <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                 <li><a href="{{url('faq')}}">FAQ</a></li>
                 <li><a href="{{url('suporte/cadastro')}}">Suporte</a></li>
@@ -46,13 +46,13 @@
 <header class="header__area position-relative">
     <div class="container">
         <div class="logo__main">
-            <a href=""><img src="{{asset('img/logo.svg')}}" alt=""></a>
+            <a href="/"><img src="{{asset('img/logo.svg')}}" alt=""></a>
         </div>
         <div class="header__right">
             <div class="main__menu red--links">
                 <ul>
-                    <li><a href="{{url('candidato')}}">Sou Candidato</a></li>
-                    <li><a href="{{url('empresa')}}">Sou Empresa</a></li>
+                    <li><a href="{{url('candidato/login')}}">Sou Candidato</a></li>
+                    <li><a href="{{url('empresa/login')}}">Sou Empresa</a></li>
                     <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                     <li><a href="{{url('faq')}}">FAQ</a></li>
                     <li><a href="{{url('suporte/cadastro')}}">Suporte</a></li>
@@ -74,7 +74,7 @@
     <div class="container">
         <div class="footer__wrapper">
             <div class="footer__logo">
-                <a href=""><img src="{{asset('img/footer-logo.png')}}" alt=""></a>
+                <a href="/"><img src="{{asset('img/footer-logo.png')}}" alt=""></a>
             </div>
             <p>Sucesso Empregos 2022 © Copyright. Todos os direitos reservados.</p>
         </div>

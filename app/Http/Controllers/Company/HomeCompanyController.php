@@ -13,6 +13,7 @@ class HomeCompanyController extends Controller
 {
     public function index()
     {
+        return view('Company.create-account');
         // return view de cadastro da empresa
     }
 
@@ -29,7 +30,7 @@ class HomeCompanyController extends Controller
             'user_id' => $newUser['id'],
             'name' => $data['name'],
             'cnpj' => $data['cnpj'],
-            'addredd' => $data['address']
+            'address' => $data['address']
         ]);
 
         CompanyCurriculumQuantity::create([
@@ -47,6 +48,6 @@ class HomeCompanyController extends Controller
 
     public function destroy($user_id)
     {
-        
+
     }
 }
