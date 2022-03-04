@@ -13,4 +13,13 @@ class CompanyPlanRelation extends Model
         'plan_id',
         'quantity',
     ];
+
+
+    public function company(){
+        return $this->hasOne(Company::class, 'company_id' , 'id');
+    }
+
+    public function plan(){
+        return $this->hasOne(CompanyPlan::class, 'plan_id' , 'id');
+    }
 }

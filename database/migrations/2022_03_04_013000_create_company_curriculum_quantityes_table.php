@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCandidateTable extends Migration
+class CreateCompanyCurriculumQuantityesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class CreateCandidateTable extends Migration
      */
     public function up()
     {
-        Schema::create('candidate', function (Blueprint $table) {
+        Schema::create('company_curriculum_quantityes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned();
-            $table->foreign('user_id')
-            ->references('id')->on('users')
+            $table->bigInteger('company_id')->unsigned();
+            $table->foreign('company_id')
+            ->references('id')->on('company')
             ->onDelete('cascade');
-            $table->string('name');
-            //$table->string('access_control');
-            $table->string('status');
-            $table->date('entry_date');
+            $table->integer('quantity')->default(0);
             $table->timestamps();
+
         });
     }
 
@@ -34,6 +32,6 @@ class CreateCandidateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('candidate');
+        Schema::dropIfExists('company_curriculum_quantityes');
     }
 }

@@ -19,6 +19,7 @@ class CreateCompanyPlanRelationTable extends Migration
             $table->foreignId('plan_id')->nullable()->constrained('company_plan');
             $table->float('quantity');
             $table->timestamps();
+            //colocar aqui o on delete cascade 
         });
     }
 

@@ -15,10 +15,15 @@ class CreateUserPlanRelationTable extends Migration
     {
         Schema::create('user_plan_relation', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade');
             $table->foreignId('plan_id')->nullable()->constrained('user_plan');
             $table->date('bought_date');
             $table->timestamps();
+
+            //colocar aqui o on delete cascade
         });
     }
 
