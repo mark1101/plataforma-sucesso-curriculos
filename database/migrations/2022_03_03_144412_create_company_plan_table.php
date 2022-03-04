@@ -16,8 +16,8 @@ class CreateCompanyPlanTable extends Migration
         Schema::create('company_plan', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('price');
-            $table->float('quantity');
+            $table->decimal('price');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }

@@ -15,8 +15,14 @@ class CreateEmailUserRelationTable extends Migration
     {
         Schema::create('email_user_relation', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users');
-            $table->foreignId('type_id')->nullable()->constrained('email_type');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade');
+            $table->bigInteger('type_id')->unsigned();
+            $table->foreign('type_id')
+            ->references('id')->on('email_type')
+            ->onDelete('cascade');
             $table->date('sent_date');
             $table->timestamps();
         });

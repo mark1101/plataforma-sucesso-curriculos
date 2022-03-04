@@ -13,4 +13,12 @@ class UserPlanRelation extends Model
         'plan_id',
         'bought_date',
     ];
+
+    public function user(){
+        return $this->hasOne(User::class, 'user_id' , 'id');
+    }
+
+    public function plan(){
+        return $this->hasOne(UserPlan::class, 'plan_id', 'id');
+    }
 }

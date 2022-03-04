@@ -17,10 +17,11 @@ class CreateCompanyTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->string('name');
-            $table->string('status');
+            $table->boolean('status')->default(1);
             $table->string('cnpj');
             $table->string('address');
             $table->timestamps();
+            //colocar on delete
         });
     }
 

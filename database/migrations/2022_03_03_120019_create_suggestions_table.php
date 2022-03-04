@@ -15,7 +15,7 @@ class CreateSuggestionsTable extends Migration
     {
         Schema::create('suggestions', function (Blueprint $table) {
             $table->id();
-            $table->string('suggestion', 300);
+            $table->longText('suggestion');
             $table->date('date');
             $table->timestamps();
         });
