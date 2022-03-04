@@ -18,6 +18,7 @@ class CreateCurriculumBlockTable extends Migration
             $table->foreignId('user_id')->nullable()->constrained('users');
             $table->foreignId('company_id')->nullable()->constrained('company');
             $table->timestamps();
+            //colocar aqui o on delete cascade
         });
     }
 

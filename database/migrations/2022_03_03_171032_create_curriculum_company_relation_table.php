@@ -18,6 +18,7 @@ class CreateCurriculumCompanyRelationTable extends Migration
             $table->foreignId('company_id')->nullable()->constrained('company');
             $table->foreignId('curriculum_id')->nullable()->constrained('curriculum');
             $table->timestamps();
+            //colocar aqui o on delete cascade
         });
     }
 

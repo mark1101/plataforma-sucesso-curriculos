@@ -15,4 +15,12 @@ class Company extends Model
         'cnpj',
         'address',
     ];
+
+    public function user(){
+        return $this->hasOne(User::class, 'user_id' , 'id');
+    }
+
+    public function curriculumDownload(){
+        return $this->belongsTo(CurriculumCompany::class, 'company_id' , 'id');
+    }
 }

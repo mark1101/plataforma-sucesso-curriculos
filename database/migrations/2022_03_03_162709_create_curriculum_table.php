@@ -15,7 +15,10 @@ class CreateCurriculumTable extends Migration
     {
         Schema::create('curriculum', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade');
             $table->string('name');
             $table->string('address');
             $table->string('state');
@@ -28,7 +31,7 @@ class CreateCurriculumTable extends Migration
             $table->boolean('is_employed');
             $table->boolean('is_handicapped');
             $table->string('cnh');
-            $table->float('desired_salary');
+            $table->decimal('desired_salary');
             $table->string('hiring_type');
             $table->string('desired_function');
             $table->string('schooling_level');
@@ -37,9 +40,10 @@ class CreateCurriculumTable extends Migration
             $table->float('experience_time');
             $table->string('company_field');
             $table->string('courses');
-            $table->string('additional_considerations', 500);
+            $table->longText('additional_considerations');
             $table->string('curriculum_photo_url');
             $table->string('found_us');
+            $table->boolean('active')->default(1);
             $table->timestamps();
         });
     }

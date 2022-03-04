@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserPlanTable extends Migration
+class CreateCandidateDueDatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateUserPlanTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_plan', function (Blueprint $table) {
+        Schema::create('candidate_due_dates', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->date('validity_time');
-            $table->decimal('price');
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onDelete('cascade');
+            $table->date('due_date');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateUserPlanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_plan');
+        Schema::dropIfExists('candidate_due_dates');
     }
 }
