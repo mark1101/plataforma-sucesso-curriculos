@@ -28,11 +28,11 @@
     <div class="offcanvas-menu">
         <div class="main-menu">
             <ul class="d-block">
-                <li><a href="">Sou Candidato</a></li>
-                <li><a href="">Sou Empresa</a></li>
-                <li><a href="{{url('sugestoes')}}">Sugestões</a></li>
+                <li><a href="{{url('candidato')}}">Sou Candidato</a></li>
+                <li><a href="{{url('empresa')}}">Sou Empresa</a></li>
+                <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                 <li><a href="{{url('faq')}}">FAQ</a></li>
-                <li><a href="{{url('suporte')}}">Suporte</a></li>
+                <li><a href="{{url('suporte/cadastro')}}">Suporte</a></li>
                 <li><a href=""><span><img src="{{asset('img/cart-btn.png')}}" alt=""></span></a></li>
             </ul>
         </div>
@@ -51,11 +51,11 @@
         <div class="header__right">
             <div class="main__menu">
                 <ul>
-                    <li class="red--links"><a href="">Sou Candidato</a></li>
-                    <li class="red--links"><a href="">Sou Empresa</a></li>
-                    <li><a href="{{url('sugestoes')}}">Sugestões</a></li>
+                    <li class="red--links"><a href="{{url('candidato')}}">Sou Candidato</a></li>
+                    <li class="red--links"><a href="{{url('empresa')}}">Sou Empresa</a></li>
+                    <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                     <li><a href="{{url('faq')}}">FAQ</a></li>
-                    <li><a href="{{url('suporte')}}">Suporte</a></li>
+                    <li><a href="{{url('suporte/cadastro')}}">Suporte</a></li>
                     <li><a href=""><span><img src="{{asset('img/cart-btn.png')}}" alt=""></span></a></li>
                 </ul>
             </div>

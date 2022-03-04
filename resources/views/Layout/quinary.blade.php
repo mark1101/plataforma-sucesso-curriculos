@@ -19,6 +19,7 @@
 
 <body>
 
+
 <!--------- Offcanvas area start --------->
 <div class="offcanvas-area">
     <div class="menu-close">
@@ -42,15 +43,15 @@
 
 
 <!--------- Header area start --------->
-<header class="header__area">
+<header class="header__area position-relative">
     <div class="container">
         <div class="logo__main">
-            <a href=""><img src="{{asset('img/logo-white.png')}}" alt=""></a>
+            <a href=""><img src="{{asset('img/logo-main.png')}}" alt=""></a>
         </div>
         <div class="header__right">
             <div class="main__menu blue--links">
                 <ul>
-                    <li><a href="{{url('candidato')}}" class="link--white">Sou Candidato</a></li>
+                    <li><a href="{{url('candidato')}}">Sou Candidato</a></li>
                     <li><a href="{{url('empresa')}}">Sou Empresa</a></li>
                     <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                     <li><a href="{{url('faq')}}">FAQ</a></li>
@@ -64,9 +65,7 @@
     </div>
 </header>
 <!--------- Header area end --------->
-
 @yield('content')
-
 <!--------- Footer area start --------->
 <footer class="footer__area">
     <div class="container">
@@ -79,7 +78,6 @@
     </div>
 </footer>
 <!--------- Footer area end --------->
-
 
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/popper.js')}}"></script>

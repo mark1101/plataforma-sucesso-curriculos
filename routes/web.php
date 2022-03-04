@@ -24,20 +24,24 @@ Route::get('/faq' , function (){
     return view('faq');
 });
 
-Route::get('/suporte' , function (){
-   return view('Support.support-form');
+Route::prefix('suporte')->group(function (){
+
+    Route::get('/cadastro' , function (){
+        return view('Support.support-form');
+    });
+    Route::get('/agradecimento', function (){
+        return view('Support.thank-you-support');
+    });
 });
 
-Route::get('/obrigado-suporte', function (){
-    return view('Support.thank-you-support');
-});
+Route::prefix('sugestao')->group(function (){
 
-Route::get('/sugestoes' , function () {
-    return view('Suggestion.suggestion');
-});
-
-Route::get('/obrigado-sugestao', function (){
-    return view('Suggestion.thank-you-suggestion');
+    Route::get('/cadastro' , function () {
+        return view('Suggestion.suggestion');
+    });
+    Route::get('/agradecimento', function (){
+        return view('Suggestion.thank-you-suggestion');
+    });
 });
 
 Route::get('/empresa', function (){
@@ -48,24 +52,30 @@ Route::get('/candidato', function () {
     return view('Applicant.login-applicant');
 });
 
-Route::get('/gostou', function (){
-    return view('Evaluation.evaluation');
+Route::prefix('avaliacao')->group(function (){
+
+    Route::get('/gostou-do-nosso-site', function (){
+        return view('Evaluation.evaluation');
+    });
+    Route::get('/avalie-sua-experiencia', function (){
+        return view('Evaluation.rate-us');
+    });
+    Route::get('/agradecimento', function (){
+        return view('Evaluation.thank-you');
+    });
 });
 
-Route::get('/avalie-sua-experiencia', function (){
-    return view('Evaluation.rate-us');
-});
+Route::prefix('curriculos')->group(function (){
 
-Route::get('/obrigado-avaliacao', function (){
-    return view('Evaluation.thank-you');
-});
-
-Route::get('/buscar-curriculos', function (){
-    return view('Search.search');
-});
-
-Route::get('/resultado-busca-curriculos', function (){
-    return view('Search.search-result');
+    Route::get('/cadastro', function (){
+        return view('Applicant.Registration.register-tab');
+    });
+    Route::get('/buscar', function (){
+        return view('Search.search');
+    });
+    Route::get('/resultado', function (){
+        return view('Search.search-result');
+    });
 });
 
 Route::get('/planos', function (){
