@@ -31,20 +31,46 @@
                 <div class="col-md-6">
                     <div class="hero__form__wrapper">
                         <h4 class="text-red">Já sou cadastrado</h4>
-                        <form action="">
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
                             <div class="single__input__item">
-                                <label for="">Login</label>
-                                <input type="email" class="form-control">
+                                <label for="email">{{ __('Digite seu email') }}</label>
+
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                    name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
                             </div>
                             <div class="single__input__item">
-                                <label for="">Senha</label>
-                                <input type="password" class="form-control">
+                                <label for="password">{{ __('Sua senha') }}</label>
+
+                                <input id="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password" required
+                                    autocomplete="current-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
                             </div>
                             <div class="hero__form__bottom d-flex justify-content-between pt-3">
-                                <a href="">Esqueceu a senha?</a>
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Recuperar senha') }}
+                                    </a>
+                                @endif
                                 <button type="submit" class="btn-red">entrar</button>
                             </div>
                         </form>
+                    </div>
+                </div>
                     </div>
                 </div>
             </div>
