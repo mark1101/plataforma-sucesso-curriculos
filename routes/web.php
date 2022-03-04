@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Candidate\HomeCandidateController;
+use App\Http\Controllers\Company\HomeCompanyController;
+use App\Http\Controllers\Company;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,13 +49,34 @@ Route::prefix('sugestao')->group(function (){
     });
 });
 
-Route::get('/empresa', function (){
-   return view('Company.login-company');
+
+Route::prefix('empresa')->group(function (){
+
+    Route::get('/login', function (){
+        return view('Company.login-company');
+     });
+
+     Route::get('/registro', [HomeCompanyController::class, 'index'])->name('registro');
+     Route::post('/register-company', [HomeCompanyController::class, 'store'])->name('register-company');
+
 });
 
-Route::get('/candidato', function () {
-    return view('Applicant.login-applicant');
+
+
+Route::prefix('candidato')->group(function (){
+
+    Route::get('/login', function () {
+        return view('Applicant.login-applicant');
+    });
+    Route::get('/registro', [HomeCandidateController::class, 'index'])->name('registro');
+    Route::post('/register-candidate', [HomeCandidateController::class, 'store'])->name('register-candidate');
+
 });
+
+
+/*Route::get('/candidato', function () {
+    return view('Applicant.login-applicant');
+});*/
 
 Route::prefix('avaliacao')->group(function (){
 

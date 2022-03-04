@@ -1,6 +1,6 @@
 @extends('Layout.secundary')
 
-@section('title', 'Sucesso Empregos - Login')
+@section('title', 'Sucesso Empregos - Login Candidato')
 
 @section('content')
 
@@ -24,6 +24,7 @@
                         <h5>Pague <span>R$9,90</span> por mês e fique disponível <br> para 100% das empresas de
                             Guarapuava <br> e região!</h5>
                         <a href="{{ url('curriculos/cadastro') }}">Preencha seu currículo!</a>
+
                     </div>
                 </div>
                 <div class="note-thumb">
@@ -67,9 +68,14 @@
                                         {{ __('Recuperar senha') }}
                                     </a>
                                 @endif
-                                <button type="submit">entrar</button>
+                                <a class="btn btn-link" href="{{ url('candidato/registro') }}">
+                                    {{ __('Criar uma Conta') }}
+                                </a>
                             </div>
                         </form>
+                        <div class="hero__form__bottom d-flex justify-content-between pt-3">
+                            <button type="submit" style="width: 100%!important;">Entrar</button>
+                        </div>
                     </div>
                 </div>
             </div>

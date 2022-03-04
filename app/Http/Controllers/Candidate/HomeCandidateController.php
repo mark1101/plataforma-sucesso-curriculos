@@ -12,6 +12,7 @@ class HomeCandidateController extends Controller
 
     public function index()
     {
+        return view('Applicant.create-account');
         // return view de cadastro do candidado
     }
 
@@ -24,8 +25,13 @@ class HomeCandidateController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        //cria o novo candidato com new user
+    }
 
-        //cria o novo candidato com new user 
+    public function store(Request $request)
+    {
+
+
     }
 
     public function edit(Request $request, $user_id)
