@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Candidate extends Model
 {
     use HasFactory;
+    protected $table = "candidate";
     protected $fillable = [
         'user_id',
         'name',
@@ -26,5 +27,5 @@ class Candidate extends Model
         return $this->belongsTo(Curriculum::class, 'user_id', 'id');
     }
 
-    
+
 }
