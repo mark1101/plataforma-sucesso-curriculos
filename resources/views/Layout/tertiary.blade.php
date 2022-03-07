@@ -26,7 +26,7 @@
     <div class="offcanvas-menu">
         <div class="main-menu">
             <ul class="d-block">
-                <li><a href="{{url('candidato/login')}}">Sou Candidato</a></li>
+                <li><a href="{{url('candidato/entrar')}}">Sou Candidato</a></li>
                 <li><a href="{{url('empresa/login')}}">Sou Empresa</a></li>
                 <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                 <li><a href="{{url('faq')}}">FAQ</a></li>
@@ -49,7 +49,7 @@
         <div class="header__right">
             <div class="main__menu red--links">
                 <ul>
-                    <li><a href="{{url('candidato/login')}}" class="link--white">Sou Candidato</a></li>
+                    <li><a href="{{url('candidato/entrar')}}" class="link--white">Sou Candidato</a></li>
                     <li><a href="{{url('empresa/login')}}">Sou Empresa</a></li>
                     <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                     <li><a href="{{url('faq')}}">FAQ</a></li>

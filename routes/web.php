@@ -61,21 +61,14 @@ Route::prefix('empresa')->group(function (){
 
 });
 
-
-
 Route::prefix('candidato')->group(function (){
 
-    Route::get('/login', [HomeCandidateController::class, 'login'])->name('login');
-    Route::post('/login', [HomeCandidateController::class, 'dashboard']);
-    Route::get('/registro', [HomeCandidateController::class, 'index'])->name('registro');
+    Route::get('/entrar', [HomeCandidateController::class, 'entrar']);
+    Route::get('/dashboard', [HomeCandidateController::class, 'dashboard']);
+    Route::get('/registro', [HomeCandidateController::class, 'index']);
     Route::post('/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');
 
 });
-
-
-/*Route::get('/candidato', function () {
-    return view('Applicant.login-applicant');
-});*/
 
 Route::prefix('avaliacao')->group(function (){
 

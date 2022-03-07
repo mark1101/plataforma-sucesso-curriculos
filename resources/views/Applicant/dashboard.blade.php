@@ -11,23 +11,21 @@
         </div>
         <div class="container position-relative">
             <div class="row ">
-                <div class="col-md-6" style="text-align:center">
+                <div class="col-md-6 mt-5" style="text-align:center">
                     <div class="hero__content__wrapp">
                         <h4>
-                            <span>Bem-vindo, ... </span>
+                            <span>Bem-vindo, {...} </span>
                         </h4>
                         <h5>Seu plano expira em:<span> 10 </span> dias</h5>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="hero__area" style="text-align:center">
-                        <div class="hero__content__wrapp">
-                            <a href="{{ url('curriculos/cadastro') }}">Preencha seu currículo!</a>
-                        </div>
-                        <div class="mt-5">
-                            <div class="hero__content__wrapp">
-                                <a href="{{ url('') }}">Edite seu currículo</a>
-                            </div>
+                <div class="col-md-6 mt-5" style="text-align:center">
+                    <div class="evaluation__content__bottom__btns">
+                        <a href="{{ url('curriculos/cadastro') }}">Preencha seu currículo!</a>
+                    </div>
+                    <div class="mt-5">
+                        <div class="evaluation__content__bottom__btns">
+                            <a href="{{ url('') }}">Edite seu currículo</a>
                         </div>
                     </div>
                 </div>
