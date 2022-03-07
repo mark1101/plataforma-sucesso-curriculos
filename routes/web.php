@@ -65,11 +65,10 @@ Route::prefix('empresa')->group(function (){
 
 Route::prefix('candidato')->group(function (){
 
-    Route::get('/login', function () {
-        return view('Applicant.login-applicant');
-    });
+    Route::get('/login', [HomeCandidateController::class, 'login'])->name('login');
+    Route::post('/login', [HomeCandidateController::class, 'dashboard']);
     Route::get('/registro', [HomeCandidateController::class, 'index'])->name('registro');
-    Route::post('/register-candidate', [HomeCandidateController::class, 'store'])->name('register-candidate');
+    Route::post('/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');
 
 });
 

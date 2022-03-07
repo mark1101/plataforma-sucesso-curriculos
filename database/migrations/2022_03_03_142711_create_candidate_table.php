@@ -22,7 +22,7 @@ class CreateCandidateTable extends Migration
             $table->string('name');
             //$table->string('access_control');
             $table->string('status');
-            $table->date('entry_date');
+            $table->timestamp('entry_date');
             $table->timestamps();
         });
     }
