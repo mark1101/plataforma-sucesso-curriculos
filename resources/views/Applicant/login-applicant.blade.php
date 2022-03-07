@@ -39,10 +39,10 @@
                                 <label for="email">{{ __('Digite seu email') }}</label>
 
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                       name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -52,11 +52,12 @@
                                 <label for="password">{{ __('Sua senha') }}</label>
 
                                 <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password" required
-                                    autocomplete="current-password">
+                                       class="form-control @error('password') is-invalid @enderror" name="password"
+                                       required
+                                       autocomplete="current-password">
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -72,10 +73,10 @@
                                     {{ __('Criar uma Conta') }}
                                 </a>
                             </div>
+                            <div class="hero__form__bottom d-flex justify-content-between pt-3">
+                                <button type="submit" style="width: 100%!important;">Entrar</button>
+                            </div>
                         </form>
-                        <div class="hero__form__bottom d-flex justify-content-between pt-3">
-                            <button type="submit" style="width: 100%!important;">Entrar</button>
-                        </div>
                     </div>
                 </div>
             </div>
