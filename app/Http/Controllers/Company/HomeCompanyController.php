@@ -11,6 +11,19 @@ use Illuminate\Support\Facades\Hash;
 
 class HomeCompanyController extends Controller
 {
+    public function login()
+    {
+        return view('Company.login-company');
+        //return view login da empresa
+    }
+
+    public function authLogin(Request $request)
+    {
+
+
+
+    }
+
     public function index()
     {
         return view('Company.create-account');
@@ -37,7 +50,7 @@ class HomeCompanyController extends Controller
             'company_id' => $newCompany['id'],
         ]);
 
-        return response()->json(['message' => 'Companhia e relacoes cadastradas com sucesso!'], 200);
+        return response()->json(['message' => 'Empresa e relações cadastradas com sucesso!'], 200);
 
     }
 

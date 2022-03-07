@@ -52,12 +52,11 @@ Route::prefix('sugestao')->group(function (){
 
 Route::prefix('empresa')->group(function (){
 
-    Route::get('/login', function (){
-        return view('Company.login-company');
-     });
+    Route::get('/login', [HomeCompanyController::class, 'login'])->name('company.login');
+    Route::post('/login', [HomeCompanyController::class, 'authLogin'])->name('company.login.post');
 
-     Route::get('/registro', [HomeCompanyController::class, 'index'])->name('registro');
-     Route::post('/register-company', [HomeCompanyController::class, 'store'])->name('register-company');
+    Route::get('/registro', [HomeCompanyController::class, 'index'])->name('registro');
+    Route::post('/register-company', [HomeCompanyController::class, 'store'])->name('register-company');
 
 });
 

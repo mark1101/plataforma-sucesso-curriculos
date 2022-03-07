@@ -7,7 +7,7 @@
     <!--------- Hero area start --------->
     <section class="hero__area presa-hero">
         <div class="hero__shape-2">
-            <img src="{{asset('img/shapes/shape-3.png')}}" alt="">
+            <img src="{{ asset('img/shapes/shape-3.png') }}" alt="">
         </div>
         <div class="container position-relative">
             <div class="row align-items-center">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="note-thumb note-thumb-2">
-                    <img src="{{asset('img/thumb/thumb-3.png')}}" alt="">
+                    <img src="{{ asset('img/thumb/thumb-3.png') }}" alt="">
                 </div>
                 <div class="col-md-6">
                     <div class="hero__form__wrapper">
@@ -70,13 +70,10 @@
                                     {{ __('Criar uma Conta') }}
                                 </a>
                             </div>
+                            <div class="hero__form__bottom d-flex justify-content-between pt-3">
+                                <button type="submit" class="btn-red" style="width: 100%!important;">Entrar</button>
+                            </div>
                         </form>
-                        <div class="hero__form__bottom d-flex justify-content-between pt-3">
-                            <button type="submit" class="btn-red" style="width: 100%!important;">Entrar</button>
-                        </div>
-                        </form>
-                    </div>
-                </div>
                     </div>
                 </div>
             </div>
