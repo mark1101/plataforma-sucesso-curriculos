@@ -33,7 +33,7 @@
                 <div class="col-md-6">
                     <div class="hero__form__wrapper">
                         <h4>Já sou cadastrado</h4>
-                        <form method="POST" action="{{ route('login') }}">
+                        <form method="POST" action="{{route('login')}}">
                             @csrf
                             <div class="single__input__item">
                                 <label for="email">{{ __('Digite seu email') }}</label>
