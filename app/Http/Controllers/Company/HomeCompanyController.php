@@ -8,20 +8,24 @@ use App\Models\CompanyCurriculumQuantity;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class HomeCompanyController extends Controller
 {
-    public function login()
+    public function enter()
     {
         return view('Company.login-company');
-        //return view login da empresa
     }
 
-    public function authLogin(Request $request)
+    public function dashboard()
     {
+        $userName = Auth::user()->name;
+        $curriculumUser = Curriculum::where('user_id' , Auth::user()->id)->first();
 
-
-
+        return view('Company.dashboard' , [
+            'name' => $userName,
+            'curriculum' => $curriculumUser
+        ]);
     }
 
     public function index()
@@ -33,6 +37,7 @@ class HomeCompanyController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
+
         $newUser =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -50,7 +55,9 @@ class HomeCompanyController extends Controller
             'company_id' => $newCompany['id'],
         ]);
 
-        return response()->json(['message' => 'Empresa e relações cadastradas com sucesso!'], 200);
+        if($newCompany){
+            return view('Company.login-company');
+        }
 
     }
 

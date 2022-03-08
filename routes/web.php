@@ -7,6 +7,7 @@ use App\Http\Controllers\Candidate\HomeCandidateController;
 use App\Http\Controllers\Company\HomeCompanyController;
 use App\Http\Controllers\Company;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +18,14 @@ use App\Http\Controllers\Company;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+/*Route::get('/verify-acess', function(){
+    if(Auth::user()->candidate == 1){
+        return redirect('/candidato/dashboard');
+    }else{
+        return redirect('/empresa/dashboard');
+    }
+});*/
 
 Route::get('/', function () {
     return view('home-plataform');
@@ -52,30 +61,21 @@ Route::prefix('sugestao')->group(function (){
 
 Route::prefix('empresa')->group(function (){
 
-    Route::get('/login', function (){
-        return view('Company.login-company');
-     });
-
-     Route::get('/registro', [HomeCompanyController::class, 'index'])->name('registro');
-     Route::post('/register-company', [HomeCompanyController::class, 'store'])->name('register-company');
+     Route::get('/entrar', [HomeCompanyController::class, 'enter']);
+     Route::get('/dashboard', [HomeCompanyController::class, 'dashboard'])->middleware('company-acess');
+     Route::get('/registro', [HomeCompanyController::class, 'index']);
+     Route::post('/register-company', [HomeCompanyController::class, 'create'])->name('register-company');
 
 });
 
-
-
 Route::prefix('candidato')->group(function (){
 
-    Route::get('/login', [HomeCandidateController::class, 'login']);
-    Route::post('/login', [HomeCandidateController::class, 'dashboard']);
+    Route::get('/entrar', [HomeCandidateController::class, 'entrar']);
+    Route::get('/dashboard', [HomeCandidateController::class, 'dashboard'])->middleware('candidate-acess');
     Route::get('/registro', [HomeCandidateController::class, 'index']);
     Route::post('/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');
 
 });
-
-
-/*Route::get('/candidato', function () {
-    return view('Applicant.login-applicant');
-});*/
 
 Route::prefix('avaliacao')->group(function (){
 
