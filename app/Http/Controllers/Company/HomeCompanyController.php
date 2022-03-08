@@ -17,10 +17,11 @@ class HomeCompanyController extends Controller
         //return view login da empresa
     }
 
-    public function dashboard(){
+    public function authLogin(Request $request)
+    {
 
-        return view('Company.dashboard');
-        //return view dashboard da empresa
+
+
     }
 
     public function index()
@@ -32,7 +33,6 @@ class HomeCompanyController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
-
         $newUser =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -45,11 +45,6 @@ class HomeCompanyController extends Controller
             'cnpj' => $data['cnpj'],
             'address' => $data['address']
         ]);
-
-        if ($newCompany) {
-            return view('Company.login-company');
-
-        }
 
         CompanyCurriculumQuantity::create([
             'company_id' => $newCompany['id'],

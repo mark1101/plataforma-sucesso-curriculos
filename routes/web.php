@@ -52,11 +52,12 @@ Route::prefix('sugestao')->group(function (){
 
 Route::prefix('empresa')->group(function (){
 
-    Route::get('/login', [HomeCompanyController::class, 'login'])->name('company.login');
-    Route::post('/login', [HomeCompanyController::class, 'authLogin'])->name('company.login.post');
+    Route::get('/login', function (){
+        return view('Company.login-company');
+     });
 
-    Route::get('/registro', [HomeCompanyController::class, 'index'])->name('registro');
-    Route::post('/register-company', [HomeCompanyController::class, 'store'])->name('register-company');
+     Route::get('/registro', [HomeCompanyController::class, 'index'])->name('registro');
+     Route::post('/register-company', [HomeCompanyController::class, 'store'])->name('register-company');
 
 });
 
@@ -64,11 +65,10 @@ Route::prefix('empresa')->group(function (){
 
 Route::prefix('candidato')->group(function (){
 
-    Route::get('/login', function () {
-        return view('Applicant.login-applicant');
-    });
-    Route::get('/registro', [HomeCandidateController::class, 'index'])->name('registro');
-    Route::post('/register-candidate', [HomeCandidateController::class, 'store'])->name('register-candidate');
+    Route::get('/login', [HomeCandidateController::class, 'login']);
+    Route::post('/login', [HomeCandidateController::class, 'dashboard']);
+    Route::get('/registro', [HomeCandidateController::class, 'index']);
+    Route::post('/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');
 
 });
 
