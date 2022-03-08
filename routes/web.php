@@ -64,7 +64,7 @@ Route::prefix('empresa')->group(function (){
 Route::prefix('candidato')->group(function (){
 
     Route::get('/entrar', [HomeCandidateController::class, 'entrar']);
-    Route::get('/dashboard', [HomeCandidateController::class, 'dashboard']);
+    Route::get('/dashboard', [HomeCandidateController::class, 'dashboard'])->middleware('candidate-acess');
     Route::get('/registro', [HomeCandidateController::class, 'index']);
     Route::post('/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');
 

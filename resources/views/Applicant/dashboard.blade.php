@@ -14,20 +14,28 @@
                 <div class="col-md-6 mt-5" style="text-align:center">
                     <div class="hero__content__wrapp">
                         <h4>
-                            <span>Bem-vindo, {...} </span>
+                            <span>Bem-vindo, {{$name}} </span>
                         </h4>
                         <h5>Seu plano expira em:<span> 10 </span> dias</h5>
                     </div>
                 </div>
                 <div class="col-md-6 mt-5" style="text-align:center">
-                    <div class="evaluation__content__bottom__btns">
-                        <a href="{{ url('curriculos/cadastro') }}">Preencha seu currículo!</a>
-                    </div>
-                    <div class="mt-5">
+                    @if($curriculum == null)
                         <div class="evaluation__content__bottom__btns">
-                            <a href="{{ url('') }}">Edite seu currículo</a>
+                            <a href="{{ url('curriculos/cadastro') }}">Criar agora meu currículo!</a>
                         </div>
-                    </div>
+                    @else
+                        <div class="mt-5">
+                            <div class="evaluation__content__bottom__btns">
+                                <a href="{{ url('') }}">Visualizar meu currículo</a>
+                            </div>
+                        </div>
+                        <div class="mt-5">
+                            <div class="evaluation__content__bottom__btns">
+                                <a href="{{ url('') }}">Editar meu currículo</a>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

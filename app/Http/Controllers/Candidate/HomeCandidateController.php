@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Candidate;
 
 use App\Http\Controllers\Controller;
 use App\Models\Candidate;
+use App\Models\Curriculum;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class HomeCandidateController extends Controller
@@ -14,7 +16,13 @@ class HomeCandidateController extends Controller
         return view('Applicant.login-applicant');
     }
     public function dashboard(){
-        return view('Applicant.dashboard');
+        $userName = Auth::user()->name;
+        $curriculumUser = Curriculum::where('user_id' , Auth::user()->id)->first();
+
+        return view('Applicant.dashboard' , [
+            'name' => $userName,
+            'curriculum' => $curriculumUser
+        ]);
     }
     public function index()
     {
