@@ -1381,11 +1381,26 @@ textarea.form-control {
     position: relative;
 }
 
-.evaluation__content__bottom__btns>* {
+.evaluation__content__bottom__btns>*{
     display: block;
     padding: 10px 35px;
     text-align: center;
     background: #0A4FB9;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 50px;
+    margin: 0 15px;
+    font-size: 15px;
+    border: 0;
+}
+
+.evaluation__content__bottom__btns-red >*{
+    display: block;
+    padding: 10px 35px;
+    text-align: center;
+    background: #F5264B;
     text-transform: uppercase;
     text-decoration: none;
     color: #fff;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyCurriculumQuantity;
+use App\Models\Curriculum;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,11 +21,13 @@ class HomeCompanyController extends Controller
     public function dashboard()
     {
         $userName = Auth::user()->name;
-        $curriculumUser = Curriculum::where('user_id' , Auth::user()->id)->first();
+        //$curriculumUser = Curriculum::where('user_id' , Auth::user()->id)->first();
 
         return view('Company.dashboard' , [
             'name' => $userName,
-            'curriculum' => $curriculumUser
+            'cnpj'=> $userName,
+            'status' => $userName,
+            'address' => $userName,
         ]);
     }
 
