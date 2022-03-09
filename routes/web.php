@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Candidate\HomeCandidateController;
 use App\Http\Controllers\Company\HomeCompanyController;
 use App\Http\Controllers\Company;
+use App\Http\Controllers\SuggestionController;
+use \App\Http\Controllers\SupportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,24 +31,19 @@ Route::get('/faq' , function (){
     return view('faq');
 });
 
+
 Route::prefix('suporte')->group(function (){
 
-    Route::get('/cadastro' , function (){
-        return view('Support.support-form');
-    });
-    Route::get('/agradecimento', function (){
-        return view('Support.thank-you-support');
-    });
+    Route::get('/cadastro', [SupportController::class, 'register']);
+    Route::post('/register-support', [SupportController::class, 'create']);
+    Route::get('/agradecimento', [SupportController::class, 'thankYou']);
 });
 
 Route::prefix('sugestao')->group(function (){
 
-    Route::get('/cadastro' , function () {
-        return view('Suggestion.suggestion');
-    });
-    Route::get('/agradecimento', function (){
-        return view('Suggestion.thank-you-suggestion');
-    });
+    Route::get('/cadastro', [SuggestionController::class, 'register']);
+    Route::post('/register-suggestion', [SuggestionController::class, 'create']);
+    Route::get('/agradecimento', [SuggestionController::class, 'thankYou']);
 });
 
 
@@ -63,11 +60,10 @@ Route::prefix('empresa')->group(function (){
 
 Route::prefix('candidato')->group(function (){
 
-    Route::get('/entrar', [HomeCandidateController::class, 'entrar']);
+    Route::get('/entrar', [HomeCandidateController::class, 'register']);
     Route::get('/dashboard', [HomeCandidateController::class, 'dashboard'])->middleware('candidate-acess');
     Route::get('/registro', [HomeCandidateController::class, 'index']);
     Route::post('/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');
-
 });
 
 Route::prefix('avaliacao')->group(function (){
