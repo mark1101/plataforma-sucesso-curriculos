@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class HomeCandidateController extends Controller
 {
-    public function entrar(){
+    public function enter(){
         return view('Applicant.login-applicant');
     }
     public function dashboard(){
@@ -38,6 +38,7 @@ class HomeCandidateController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'candidate' => 1,
         ]);
 
         $newCandidate = Candidate::create([

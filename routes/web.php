@@ -2,10 +2,15 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Candidate\HomeCandidateController;
 use App\Http\Controllers\Company\HomeCompanyController;
+use App\Http\Controllers\SuggestionController;
+use App\Http\Controllers\SupportController;
 use App\Http\Controllers\Company;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +23,14 @@ use App\Http\Controllers\Company;
 |
 */
 
+Route::get('/verify-acess', function(){
+    if(Auth::user()->candidate == 1){
+        return redirect()->route('dashboard.candidate');
+    }else{
+        return  redirect()->route('dashboard.company');
+    }
+});
+
 Route::get('/', function () {
     return view('home-plataform');
 });
@@ -29,46 +42,37 @@ Route::get('/faq' , function (){
     return view('faq');
 });
 
+//ROUTES SUPPORT
 Route::prefix('suporte')->group(function (){
 
-    Route::get('/cadastro' , function (){
-        return view('Support.support-form');
-    });
-    Route::get('/agradecimento', function (){
-        return view('Support.thank-you-support');
-    });
+    Route::get('/cadastro', [SupportController::class, 'register']);
+    Route::post('/register-support', [SupportController::class, 'create']);
+    Route::get('/agradecimento', [SupportController::class, 'thankYou']);
 });
 
+
+//ROUTES SUGGESTION
 Route::prefix('sugestao')->group(function (){
 
-    Route::get('/cadastro' , function () {
-        return view('Suggestion.suggestion');
-    });
-    Route::get('/agradecimento', function (){
-        return view('Suggestion.thank-you-suggestion');
-    });
+    Route::get('/cadastro', [SuggestionController::class, 'register']);
+    Route::post('/register-suggestion', [SuggestionController::class, 'create']);
+    Route::get('/agradecimento', [SuggestionController::class, 'thankYou']);
 });
 
 
-Route::prefix('empresa')->group(function (){
+//ROUTES COMPANY
+Route::get('/empresa/entrar', [HomeCompanyController::class, 'enter']);
+Route::get('/empresa/dashboard', [HomeCompanyController::class, 'dashboard'])->middleware('company-acess')->name('dashboard.company');
+Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
+Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'])->name('register-company');
 
-    Route::get('/login', function (){
-        return view('Company.login-company');
-     });
 
-     Route::get('/registro', [HomeCompanyController::class, 'index'])->name('registro');
-     Route::post('/register-company', [HomeCompanyController::class, 'store'])->name('register-company');
+//ROUTES CANDIDATE
+Route::get('/candidato/entrar', [HomeCandidateController::class, 'enter']);
+Route::get('/candidato/dashboard', [HomeCandidateController::class, 'dashboard'])->middleware('candidate-acess')->name('dashboard.candidate');
+Route::get('/candidato/registro', [HomeCandidateController::class, 'index']);
+Route::post('/candidato/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');
 
-});
-
-Route::prefix('candidato')->group(function (){
-
-    Route::get('/entrar', [HomeCandidateController::class, 'entrar']);
-    Route::get('/dashboard', [HomeCandidateController::class, 'dashboard'])->middleware('candidate-acess');
-    Route::get('/registro', [HomeCandidateController::class, 'index']);
-    Route::post('/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');
-
-});
 
 Route::prefix('avaliacao')->group(function (){
 

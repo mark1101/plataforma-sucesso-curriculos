@@ -5,12 +5,32 @@ namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyCurriculumQuantity;
+use App\Models\Curriculum;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class HomeCompanyController extends Controller
 {
+    public function enter()
+    {
+        return view('Company.login-company');
+    }
+
+    public function dashboard()
+    {
+        $userName = Auth::user()->name;
+        //$curriculumUser = Curriculum::where('user_id' , Auth::user()->id)->first();
+
+        return view('Company.dashboard' , [
+            'name' => $userName,
+            'cnpj'=> $userName,
+            'status' => $userName,
+            'address' => $userName,
+        ]);
+    }
+
     public function index()
     {
         return view('Company.create-account');
@@ -20,10 +40,13 @@ class HomeCompanyController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
+
         $newUser =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'company'=> 1,
+
         ]);
 
         $newCompany = Company::create([
@@ -37,7 +60,9 @@ class HomeCompanyController extends Controller
             'company_id' => $newCompany['id'],
         ]);
 
-        return response()->json(['message' => 'Companhia e relacoes cadastradas com sucesso!'], 200);
+        if($newCompany){
+            return view('Company.login-company');
+        }
 
     }
 

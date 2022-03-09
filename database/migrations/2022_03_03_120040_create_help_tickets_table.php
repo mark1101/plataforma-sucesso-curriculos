@@ -15,6 +15,9 @@ class CreateHelpTicketsTable extends Migration
     {
         Schema::create('help_tickets', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('email');
+            $table->string('subject');
             $table->longText('problem');
             $table->date('date');
             $table->timestamps();

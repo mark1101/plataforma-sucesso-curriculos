@@ -30,7 +30,7 @@
                 <div class="col-md-6">
                     <div class="hero__form__wrapper">
                         <h4 class="text-red">Crie sua conta Empresa</h4>
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('register-company') }}">
                             @csrf
                             <div class="single__input__item">
                                 <label for="name">{{__('Digite o nome da sua empresa') }}</label>

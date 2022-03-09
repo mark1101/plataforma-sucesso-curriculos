@@ -21,7 +21,7 @@ class CreateCandidateTable extends Migration
             ->onDelete('cascade');
             $table->string('name');
             //$table->string('access_control');
-            $table->string('status');
+            $table->boolean('status')->default(0)->nullable();
             $table->timestamp('entry_date');
             $table->timestamps();
         });

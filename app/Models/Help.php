@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Help extends Model
 {
     use HasFactory;
+    protected $table = "help_tickets";
     protected $fillable = [
+        'name',
+        'email',
+        'subject',
         'problem',
         'date',
     ];

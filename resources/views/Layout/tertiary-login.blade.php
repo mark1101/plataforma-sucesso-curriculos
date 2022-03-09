@@ -18,7 +18,6 @@
 </head>
 
 <body>
-
 <!--------- Offcanvas area start --------->
 <div class="offcanvas-area">
     <div class="menu-close">
@@ -48,9 +47,9 @@
             <a href="/"><img src="{{asset('img/logo-white.png')}}" alt=""></a>
         </div>
         <div class="header__right">
-            <div class="main__menu blue--links">
+            <div class="main__menu red--links">
                 <ul>
-                    <li><a href="{{url('candidato/entrar')}}" class="link--white">Sou Candidato</a></li>
+                   <li><a href="{{url('candidato/entrar')}}" class="link--white">Sou Candidato</a></li>
                     <li><a href="{{url('empresa/entrar')}}">Sou Empresa</a></li>
                     <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                     <li><a href="{{url('faq')}}">FAQ</a></li>
@@ -80,7 +79,6 @@
 </footer>
 <!--------- Footer area end --------->
 
-
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/popper.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
@@ -89,6 +87,7 @@
 <script>
 
 </script>
+
 
 
 </body>

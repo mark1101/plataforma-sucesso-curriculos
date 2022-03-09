@@ -29,7 +29,7 @@
         <div class="main-menu">
             <ul class="d-block">
                 <li><a href="{{url('candidato/entrar')}}">Sou Candidato</a></li>
-                <li><a href="{{url('empresa/login')}}">Sou Empresa</a></li>
+                <li><a href="{{url('empresa/entrar')}}">Sou Empresa</a></li>
                 <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                 <li><a href="{{url('faq')}}">FAQ</a></li>
                 <li><a href="{{url('suporte/cadastro')}}">Suporte</a></li>
@@ -52,7 +52,7 @@
             <div class="main__menu blue--links">
                 <ul>
                     <li><a href="{{url('candidato/entrar')}}">Sou Candidato</a></li>
-                    <li><a href="{{url('empresa/login')}}">Sou Empresa</a></li>
+                    <li><a href="{{url('empresa/entrar')}}">Sou Empresa</a></li>
                     <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                     <li><a href="{{url('faq')}}">FAQ</a></li>
                     <li><a href="{{url('suporte/cadastro')}}">Suporte</a></li>
