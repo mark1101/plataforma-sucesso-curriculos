@@ -68,7 +68,7 @@ Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'
 
 
 //ROUTES CANDIDATE
-Route::get('/candidato/entrar', [HomeCandidateController::class, 'register']);
+Route::get('/candidato/entrar', [HomeCandidateController::class, 'enter']);
 Route::get('/candidato/dashboard', [HomeCandidateController::class, 'dashboard'])->middleware('candidate-acess')->name('dashboard.candidate');
 Route::get('/candidato/registro', [HomeCandidateController::class, 'index']);
 Route::post('/candidato/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');

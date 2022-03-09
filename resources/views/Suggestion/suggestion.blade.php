@@ -13,10 +13,14 @@
                     <div class="evalutaion__content__wrapper suggestion-content-wrapper">
                         <h5>Possui alguma sugestão de melhorias
                             em nosso site? Escreva aqui!</h5>
-                        <textarea name="" id="" placeholder="Deixe sua sugestão aqui…" class="form-control"></textarea>
-                        <div class="evaluation__content__bottom__btns">
-                            <button type="button" class="bg-red"> Enviar</button>
-                        </div>
+                        <form action="{{url('/sugestao/register-suggestion')}}" method="POST">
+                            @csrf
+                            <textarea name="suggestion" id="suggestion" placeholder="Deixe sua sugestão aqui…"
+                                      class="form-control"></textarea>
+                            <div class="evaluation__content__bottom__btns">
+                                <button type="submit" class="bg-red"> Enviar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-5">

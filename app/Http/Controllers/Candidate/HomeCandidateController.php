@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class HomeCandidateController extends Controller
 {
-    public function register(){
+    public function enter(){
         return view('Applicant.login-applicant');
     }
     public function dashboard(){
