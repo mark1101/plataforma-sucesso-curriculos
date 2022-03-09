@@ -2,10 +2,14 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Candidate\HomeCandidateController;
 use App\Http\Controllers\Company\HomeCompanyController;
+use App\Http\Controllers\SuggestionController;
+use App\Http\Controllers\SupportController;
 use App\Http\Controllers\Company;
+
 
 
 /*
@@ -64,7 +68,7 @@ Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'
 
 
 //ROUTES CANDIDATE
-Route::get('/candidato/entrar', [HomeCandidateController::class, 'entrar']);
+Route::get('/candidato/entrar', [HomeCandidateController::class, 'register']);
 Route::get('/candidato/dashboard', [HomeCandidateController::class, 'dashboard'])->middleware('candidate-acess')->name('dashboard.candidate');
 Route::get('/candidato/registro', [HomeCandidateController::class, 'index']);
 Route::post('/candidato/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');
