@@ -11,9 +11,9 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6 mt-5" style="text-align:center">
+            <div class="col-md-6 mt-5" style="padding-left: 146.5px">
                 <div class="hero__content__wrapp">
-                    <h4>
+                    <h4 style="text-transform: capitalize">
                         <span>Bem-vindo, {{ $name }} </span>
                     </h4>
                     <h5>Seu plano expira em:<span> 10 </span> dias</h5>

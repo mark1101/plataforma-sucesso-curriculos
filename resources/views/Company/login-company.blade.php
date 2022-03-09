@@ -1,4 +1,4 @@
-@extends('Layout.tertiary')
+@extends('Layout.tertiary-login')
 
 @section('title', 'Sucesso Empregos - Login Empresa')
 

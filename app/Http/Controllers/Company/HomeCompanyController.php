@@ -45,6 +45,8 @@ class HomeCompanyController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'company'=> 1,
+
         ]);
 
         $newCompany = Company::create([
