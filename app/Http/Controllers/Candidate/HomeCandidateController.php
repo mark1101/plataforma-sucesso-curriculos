@@ -38,7 +38,6 @@ class HomeCandidateController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'candidate' => 1,
         ]);
 
         $newCandidate = Candidate::create([
