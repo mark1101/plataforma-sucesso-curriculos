@@ -23,7 +23,7 @@
             <div class="col-md-6 mt-5" style="text-align:-webkit-center">
 
                 <div class="evaluation__content__bottom__btns-red" style="max-width: 50%">
-                    <a href="{{ url('') }}">Encontrar Currículos</a>
+                    <a href="{{ url('/empresa/encontrar-curriculos') }}">Encontrar Currículos</a>
                 </div>
 
                 <div class="evaluation__content__bottom__btns-red mt-3" style="max-width: 50%">

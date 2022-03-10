@@ -1,4 +1,4 @@
-@extends('Layout.tertiary-alt')
+@extends('Layout.tertiary-faq-suggestion')
 
 @section('title', 'FAQ - Sucesso Empregos')
 
