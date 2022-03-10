@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('candidate')->default(0);
             $table->boolean('company')->default(0);
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(0)->nullable();
             //$table->date('entry_date');
             $table->rememberToken();
             $table->timestamps();

@@ -1,4 +1,4 @@
-@extends('Layout.tertiary')
+@extends('Layout.tertiary-login')
 
 @section('title', 'Sucesso Empregos - Registro')
 
@@ -7,7 +7,7 @@
     <!--------- Hero area start --------->
     <section class="hero__area presa-hero">
         <div class="hero__shape-2">
-            <img src="{{asset('img/shapes/shape-3.png')}}" alt="">
+            <img src="{{ asset('img/shapes/shape-3.png') }}" alt="">
         </div>
         <div class="container position-relative">
             <div class="row align-items-center">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="note-thumb note-thumb-2">
-                    <img src="{{asset('img/thumb/thumb-3.png')}}" alt="">
+                    <img src="{{ asset('img/thumb/thumb-3.png') }}" alt="">
                 </div>
                 <div class="col-md-6">
                     <div class="hero__form__wrapper">
@@ -33,19 +33,19 @@
                         <form method="POST" action="{{ route('register-company') }}">
                             @csrf
                             <div class="single__input__item">
-                                <label for="name">{{__('Digite o nome da sua empresa') }}</label>
+                                <label for="name">{{ __('Digite o nome da sua empresa') }}</label>
 
                                 <input id="name" type="text" class="form-control" name="name" required>
                             </div>
 
                             <div class="single__input__item">
-                                <label for="cnpj">{{__('Digite o CNPJ da sua empresa') }}</label>
+                                <label for="cnpj">{{ __('Digite o CNPJ da sua empresa') }}</label>
 
-                                <input id="cnpj" type="text" class="form-control" name="cnpj" required>
+                                <input id="cnpj" type="text" class="form-control cnpj" name="cnpj" required>
                             </div>
 
                             <div class="single__input__item">
-                                <label for="address">{{__('Endereço da sua Empresa') }}</label>
+                                <label for="address">{{ __('Endereço da sua Empresa') }}</label>
 
                                 <input id="address" type="text" class="form-control" name="address" required>
                             </div>
@@ -78,16 +78,28 @@
 
                             </div>
                             <div class="hero__form__bottom d-flex justify-content-between pt-3">
-                                <button class="btn-red" type="submit" style="width: 100%!important;">Criar Conta</button>
+                                <button class="btn-red" type="submit" style="width: 100%!important;">Criar
+                                    Conta</button>
                             </div>
                         </form>
                     </div>
                 </div>
-                    </div>
-                </div>
             </div>
+        </div>
+        </div>
         </div>
     </section>
     <!--------- Hero area end --------->
 
 @endsection
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function($) {
+        $('.cnpj').mask('00.000.000/0000-00');
+
+    });
+</script>

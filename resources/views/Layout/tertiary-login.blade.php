@@ -14,12 +14,11 @@
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <link href="{{asset('css/responsive.css')}}" rel="stylesheet">
 
-     <title>@yield('title')</title>
+    <title>@yield('title')</title>
 </head>
 
 <body>
-
-<!--------- Offcanvas area start MOBILE--------->
+<!--------- Offcanvas area start --------->
 <div class="offcanvas-area">
     <div class="menu-close">
         <i class="far fa-times"></i>
@@ -27,8 +26,8 @@
     <div class="offcanvas-menu">
         <div class="main-menu">
             <ul class="d-block">
-               <!-- <li><a href="{{url('candidato/entrar')}}">Sou Candidato</a></li>
-                <li><a href="{{url('empresa/entrar')}}">Sou Empresa</a></li> -->
+                <li><a href="{{url('candidato/entrar')}}">Sou Candidato</a></li>
+                <li><a href="{{url('empresa/entrar')}}">Sou Empresa</a></li>
                 <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                 <li><a href="{{url('faq')}}">FAQ</a></li>
                 <li><a href="{{url('suporte/cadastro')}}">Suporte</a></li>
@@ -36,21 +35,23 @@
         </div>
     </div>
 </div>
+
 <div class="offcanvas-overlay"></div>
 <!--------- Offcanvas area end --------->
 
 
-<!--------- Header area start WEB--------->
+<!--------- Header area start --------->
 <header class="header__area">
     <div class="container">
         <div class="logo__main">
-            <a href="/"><img src="{{asset('img/logo-main.png')}}" alt=""></a>
+            <a href="/"><img src="{{asset('img/logo-white.png')}}" alt=""></a>
         </div>
         <div class="header__right">
-            <div class="main__menu">
+            <div class="main__menu red--links">
                 <ul>
-                  <!--  <li><a href="{{url('candidato/entrar')}}">Sou Candidato</a></li>
+                   <!-- <li><a href="{{url('candidato/entrar')}}" class="link--white">Sou Candidato</a></li>
                     <li><a href="{{url('empresa/entrar')}}">Sou Empresa</a></li> -->
+                    <li><a href="{{url('/')}}">Início</a></li>
                     <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                     <li><a href="{{url('faq')}}">FAQ</a></li>
                     <li><a href="{{url('suporte/cadastro')}}">Suporte</a></li>
@@ -79,7 +80,6 @@
 </footer>
 <!--------- Footer area end --------->
 
-
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/popper.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
@@ -88,6 +88,7 @@
 <script>
 
 </script>
+
 
 
 </body>
