@@ -28,14 +28,14 @@
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <div class="hero__btn__card">
-                                        <p>Sou empresa</p>
-                                        <a href="">BAIXAR CURRÍCULO</a>
+                                        <p>Sou candidato</p>
+                                        <a href="{{url('/candidato/entrar')}}">CADASTRAR CURRÍCULO</a>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="hero__btn__card theme--red">
-                                        <p> Sou candidato</p>
-                                        <a href=""> CADASTRAR CURRÍCULO</a>
+                                        <p> Sou empresa</p>
+                                        <a href="{{url('/empresa/entrar')}}"> BAIXAR CURRÍCULO</a>
                                     </div>
                                 </div>
                             </div>

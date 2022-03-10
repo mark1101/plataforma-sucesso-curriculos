@@ -62,6 +62,8 @@ class HomeCompanyController extends Controller
 
         if($newCompany){
             return view('Company.login-company');
+        }else{
+            return view('home-plataform');
         }
 
     }

@@ -1,4 +1,4 @@
-@extends('Layout.secundary')
+@extends('Layout.secundary-login')
 
 @section('title', 'Sucesso Empregos - Login Candidato')
 
@@ -23,7 +23,7 @@
                             por e-mail para as empresas é pior ainda, são quase 100% das vezes descartados.</p>
                         <h5>Pague <span>R$9,90</span> por mês e fique disponível <br> para 100% das empresas de
                             Guarapuava <br> e região!</h5>
-                        <a href="{{ url('curriculos/cadastro') }}">Preencha seu currículo!</a>
+                       <!--  <a href="{{ url('curriculos/cadastro') }}">Preencha seu currículo!</a> -->
 
                     </div>
                 </div>
