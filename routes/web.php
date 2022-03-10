@@ -69,20 +69,19 @@ Route::middleware(['no-auth'])->group(function () {
 //ROUTES COMPANY
 Route::middleware(['company-acess'])->group(function () {
     Route::get('/empresa/dashboard', [HomeCompanyController::class, 'dashboard'])->name('dashboard.company');
-    Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
-    Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'])->name('register-company');
     Route::get('/empresa/encontrar-curriculos', [HomeCompanyController::class, 'search']);
     Route::get('/empresa/resultado-busca', [HomeCompanyController::class, 'result']);
 });
+Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
+Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'])->name('register-company');
 
 
 //ROUTES CANDIDATE
 Route::middleware(['candidate-acess'])->group(function () {
     Route::get('/candidato/dashboard', [HomeCandidateController::class, 'dashboard'])->middleware('candidate-acess')->name('dashboard.candidate');
-    Route::get('/candidato/registro', [HomeCandidateController::class, 'index']);
-    Route::post('/candidato/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');
 });
-
+Route::get('/candidato/registro', [HomeCandidateController::class, 'index']);
+Route::post('/candidato/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');
 
 
 Route::prefix('avaliacao')->group(function () {

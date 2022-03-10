@@ -21,9 +21,6 @@
                 </div>
                 <div class="col-md-6">
                     <div class="hero__area__right text-center">
-                        <div class="hero__thumb">
-                            <img src="{{asset('img/hero-thumb.png')}}" alt="">
-                        </div>
                         <div class="hero__btns">
                             <div class="row g-3">
                                 <div class="col-sm-6">
@@ -39,6 +36,9 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="hero__thumb mt-5">
+                            <img src="{{asset('img/hero-thumb.png')}}" alt="">
                         </div>
                     </div>
                 </div>
