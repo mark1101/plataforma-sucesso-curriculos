@@ -431,14 +431,8 @@
                                         <div class="user__image__upload__wrapper">
                                             <div class="user__image__upload__left">
                                                 <div class="user__image__up__btns d-flex">
-                                                    <div class="add-experience">
-                                                        <button><span><i class="far fa-plus"></i></span> adicionar
-                                                            experiência
-                                                        </button>
-                                                    </div>
-                                                    <button class="btn-gray">Enviar</button>
+                                                    <button class="btn-gray">Enviar Imagem</button>
                                                 </div>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                             </div>
                                             <div class="user__image">
                                                 <img src="{{asset('img/user-image.png')}}" alt="">

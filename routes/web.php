@@ -23,11 +23,11 @@ use App\Http\Controllers\Company;
 |
 */
 
-Route::get('/verify-acess', function(){
-    if(Auth::user()->candidate == 1){
+Route::get('/verify-acess', function () {
+    if (Auth::user()->candidate == 1) {
         return redirect()->route('dashboard.candidate');
-    }else{
-        return  redirect()->route('dashboard.company');
+    } else {
+        return redirect()->route('dashboard.company');
     }
 });
 
@@ -38,12 +38,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/faq' , function (){
+Route::get('/faq', function () {
     return view('faq');
 });
 
 //ROUTES SUPPORT
-Route::prefix('suporte')->group(function (){
+Route::prefix('suporte')->group(function () {
 
     Route::get('/cadastro', [SupportController::class, 'register']);
     Route::post('/register-support', [SupportController::class, 'create']);
@@ -52,7 +52,7 @@ Route::prefix('suporte')->group(function (){
 
 
 //ROUTES SUGGESTION
-Route::prefix('sugestao')->group(function (){
+Route::prefix('sugestao')->group(function () {
 
     Route::get('/cadastro', [SuggestionController::class, 'register']);
     Route::post('/register-suggestion', [SuggestionController::class, 'create']);
@@ -60,46 +60,55 @@ Route::prefix('sugestao')->group(function (){
 });
 
 
+//ROUTES GUEST
+Route::middleware(['no-auth'])->group(function () {
+    Route::get('/empresa/entrar', [HomeCompanyController::class, 'enter']);
+    Route::get('/candidato/entrar', [HomeCandidateController::class, 'enter']);
+});
+
 //ROUTES COMPANY
-Route::get('/empresa/entrar', [HomeCompanyController::class, 'enter']);
-Route::get('/empresa/dashboard', [HomeCompanyController::class, 'dashboard'])->middleware('company-acess')->name('dashboard.company');
-Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
-Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'])->name('register-company');
+Route::middleware(['company-acess'])->group(function () {
+    Route::get('/empresa/dashboard', [HomeCompanyController::class, 'dashboard'])->name('dashboard.company');
+    Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
+    Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'])->name('register-company');
+});
 
 
 //ROUTES CANDIDATE
-Route::get('/candidato/entrar', [HomeCandidateController::class, 'enter']);
-Route::get('/candidato/dashboard', [HomeCandidateController::class, 'dashboard'])->middleware('candidate-acess')->name('dashboard.candidate');
-Route::get('/candidato/registro', [HomeCandidateController::class, 'index']);
-Route::post('/candidato/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');
+Route::middleware(['candidate-acess'])->group(function () {
+    Route::get('/candidato/dashboard', [HomeCandidateController::class, 'dashboard'])->middleware('candidate-acess')->name('dashboard.candidate');
+    Route::get('/candidato/registro', [HomeCandidateController::class, 'index']);
+    Route::post('/candidato/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');
+});
 
 
-Route::prefix('avaliacao')->group(function (){
 
-    Route::get('/gostou-do-nosso-site', function (){
+Route::prefix('avaliacao')->group(function () {
+
+    Route::get('/gostou-do-nosso-site', function () {
         return view('Evaluation.evaluation');
     });
-    Route::get('/avalie-sua-experiencia', function (){
+    Route::get('/avalie-sua-experiencia', function () {
         return view('Evaluation.rate-us');
     });
-    Route::get('/agradecimento', function (){
+    Route::get('/agradecimento', function () {
         return view('Evaluation.thank-you');
     });
 });
 
-Route::prefix('curriculos')->group(function (){
+Route::prefix('curriculos')->group(function () {
 
-    Route::get('/cadastro', function (){
+    Route::get('/cadastro', function () {
         return view('Applicant.Registration.register-tab');
     });
-    Route::get('/buscar', function (){
+    Route::get('/buscar', function () {
         return view('Search.search');
     });
-    Route::get('/resultado', function (){
+    Route::get('/resultado', function () {
         return view('Search.search-result');
     });
 });
 
-Route::get('/planos', function (){
+Route::get('/planos', function () {
     return view('plans');
 });
