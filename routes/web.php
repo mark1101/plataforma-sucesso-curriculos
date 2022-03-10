@@ -71,6 +71,8 @@ Route::middleware(['company-acess'])->group(function () {
     Route::get('/empresa/dashboard', [HomeCompanyController::class, 'dashboard'])->name('dashboard.company');
     Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
     Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'])->name('register-company');
+    Route::get('/empresa/encontrar-curriculos', [HomeCompanyController::class, 'search']);
+    Route::get('/empresa/resultado-busca', [HomeCompanyController::class, 'result']);
 });
 
 

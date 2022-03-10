@@ -14,7 +14,7 @@
                     <h4>Selecione os filtros e <br>
                         encontre o candidato de ouro!</h4>
                     <div class="evalutaion__content__wrapper text-start support-content-wrapper">
-                        <form action="">
+                        <form action="{{url('/empresa/resultado-busca')}}">
                             <div class="row gx-3 gy-1">
                                 <div class="col-sm-6">
                                     <div class="single__input__item">
@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                             <div class="evaluation__content__bottom__btns">
-                                <button type="button" class="bg-red"> Enviar</button>
+                                <button type="submit" class="bg-red"> Enviar</button>
                             </div>
                         </form>
                     </div>

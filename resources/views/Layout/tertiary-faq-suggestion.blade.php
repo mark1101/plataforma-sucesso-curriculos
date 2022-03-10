@@ -42,15 +42,15 @@
 
 
 <!--------- Header area start --------->
-<header class="header__area support--header">
+<header class="header__area position-relative">
     <div class="container">
         <div class="logo__main">
             <a href="/"><img src="{{asset('img/logo.svg')}}" alt=""></a>
         </div>
         <div class="header__right">
-            <div class="main__menu">
+            <div class="main__menu red--links">
                 <ul>
-                    <li class="red--links"><a href="{{url('/')}}">Início</a></li>
+                    <li><a href="{{url('/')}}">Início</a></li>
                     <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                     <li><a href="{{url('faq')}}">FAQ</a></li>
                     <li><a href="{{url('suporte/cadastro')}}">Suporte</a></li>
@@ -80,10 +80,11 @@
 </footer>
 <!--------- Footer area end --------->
 
+
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/popper.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
-<script src="{{asset('js/jquery.nice-number.js')}}"></script>
+<script src="{{asset('js/owl.carousel.min.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
 <script>
 

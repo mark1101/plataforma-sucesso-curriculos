@@ -18,6 +18,15 @@ class HomeCompanyController extends Controller
         return view('Company.login-company');
     }
 
+    public function search()
+    {
+        return view('Search.search');
+    }
+    public function result()
+    {
+        return view('Search.search-result');
+    }
+
     public function dashboard()
     {
         $userName = Auth::user()->name;
