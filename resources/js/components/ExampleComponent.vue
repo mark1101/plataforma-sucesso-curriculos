@@ -16,6 +16,9 @@
 
 <script>
     export default {
+
+        name: 'example-component.vue',
+
         mounted() {
             console.log('Component mounted.')
         }

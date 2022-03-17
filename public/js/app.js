@@ -5251,6 +5251,742 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "filter-curriculum.vue",
+  data: function data() {
+    return {};
+  },
+  mounted: function mounted() {
+    console.log("componente para filtragem de curriculo ok");
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -5279,8 +6015,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'example-component.vue',
   mounted: function mounted() {
     console.log('Component mounted.');
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SegundoComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SegundoComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'segundo-component.vue',
+  mounted: function mounted() {
+    console.log('segundo componente montado');
   }
 });
 
@@ -5311,6 +6074,9 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', (__webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]));
+Vue.component('segundo-component', (__webpack_require__(/*! ./components/SegundoComponent.vue */ "./resources/js/components/SegundoComponent.vue")["default"])); //COMPONENT COMPANY 
+
+Vue.component('filter-curriculum', (__webpack_require__(/*! ./components/Company/FilterCurriculum.vue */ "./resources/js/components/Company/FilterCurriculum.vue")["default"]));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -27805,6 +28571,45 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./resources/js/components/Company/FilterCurriculum.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/Company/FilterCurriculum.vue ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _FilterCurriculum_vue_vue_type_template_id_233de630___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FilterCurriculum.vue?vue&type=template&id=233de630& */ "./resources/js/components/Company/FilterCurriculum.vue?vue&type=template&id=233de630&");
+/* harmony import */ var _FilterCurriculum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FilterCurriculum.vue?vue&type=script&lang=js& */ "./resources/js/components/Company/FilterCurriculum.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FilterCurriculum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FilterCurriculum_vue_vue_type_template_id_233de630___WEBPACK_IMPORTED_MODULE_0__.render,
+  _FilterCurriculum_vue_vue_type_template_id_233de630___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Company/FilterCurriculum.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue":
 /*!******************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue ***!
@@ -27844,6 +28649,61 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/SegundoComponent.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/SegundoComponent.vue ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _SegundoComponent_vue_vue_type_template_id_1b90aaa2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SegundoComponent.vue?vue&type=template&id=1b90aaa2& */ "./resources/js/components/SegundoComponent.vue?vue&type=template&id=1b90aaa2&");
+/* harmony import */ var _SegundoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SegundoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/SegundoComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SegundoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SegundoComponent_vue_vue_type_template_id_1b90aaa2___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SegundoComponent_vue_vue_type_template_id_1b90aaa2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/SegundoComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Company/FilterCurriculum.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/Company/FilterCurriculum.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterCurriculum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FilterCurriculum.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterCurriculum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -27860,6 +28720,39 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/SegundoComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/SegundoComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SegundoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SegundoComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SegundoComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SegundoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Company/FilterCurriculum.vue?vue&type=template&id=233de630&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/Company/FilterCurriculum.vue?vue&type=template&id=233de630& ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterCurriculum_vue_vue_type_template_id_233de630___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterCurriculum_vue_vue_type_template_id_233de630___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterCurriculum_vue_vue_type_template_id_233de630___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FilterCurriculum.vue?vue&type=template&id=233de630& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=template&id=233de630&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&":
 /*!*************************************************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e& ***!
@@ -27873,6 +28766,1905 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ExampleComponent.vue?vue&type=template&id=299e239e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/SegundoComponent.vue?vue&type=template&id=1b90aaa2&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/SegundoComponent.vue?vue&type=template&id=1b90aaa2& ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SegundoComponent_vue_vue_type_template_id_1b90aaa2___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SegundoComponent_vue_vue_type_template_id_1b90aaa2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SegundoComponent_vue_vue_type_template_id_1b90aaa2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SegundoComponent.vue?vue&type=template&id=1b90aaa2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SegundoComponent.vue?vue&type=template&id=1b90aaa2&");
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=template&id=233de630&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=template&id=233de630& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("section", { staticClass: "result__area" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-3" }, [
+              _c("div", { staticClass: "results__filter__area" }, [
+                _c("form", { attrs: { action: "" } }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "single__input__item mb-0" }, [
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: { type: "text", placeholder: "Busca por ID" },
+                      }),
+                      _vm._v(" "),
+                      _c("button", { staticClass: "src-btn" }, [
+                        _c("i", { staticClass: "far fa-search" }),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card p-0 pb-2" }, [
+                    _c("h4", [_vm._v("Filtros")]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "accordion",
+                        attrs: { id: "accordionExample" },
+                      },
+                      [
+                        _c("div", { staticClass: "accordion-item" }, [
+                          _c(
+                            "h2",
+                            {
+                              staticClass: "accordion-header",
+                              attrs: { id: "headingOne" },
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "accordion-button",
+                                  attrs: {
+                                    type: "button",
+                                    "data-bs-toggle": "collapse",
+                                    "data-bs-target": "#collapseOne",
+                                    "aria-expanded": "true",
+                                    "aria-controls": "collapseOne",
+                                  },
+                                },
+                                [
+                                  _c("span", [
+                                    _c("i", { staticClass: "far fa-check" }),
+                                  ]),
+                                  _vm._v(
+                                    "\n                        Localidade\n                        "
+                                  ),
+                                  _c("i", {
+                                    staticClass: "far fa-chevron-down",
+                                  }),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "accordion-collapse collapse show",
+                              attrs: {
+                                id: "collapseOne",
+                                "aria-labelledby": "headingOne",
+                                "data-bs-parent": "#accordionExample",
+                              },
+                            },
+                            [
+                              _c("div", { staticClass: "accordion-body" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Paraná")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item mb-0" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Guarapuava")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "accordion-item" }, [
+                          _c(
+                            "h2",
+                            {
+                              staticClass: "accordion-header",
+                              attrs: { id: "headingTwo" },
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "accordion-button collapsed",
+                                  attrs: {
+                                    type: "button",
+                                    "data-bs-toggle": "collapse",
+                                    "data-bs-target": "#collapseTwo",
+                                    "aria-expanded": "false",
+                                    "aria-controls": "collapseTwo",
+                                  },
+                                },
+                                [
+                                  _c("span", [
+                                    _c("i", { staticClass: "far fa-check" }),
+                                  ]),
+                                  _vm._v(
+                                    "\n                        Função\n                        "
+                                  ),
+                                  _c("i", {
+                                    staticClass: "far fa-chevron-down",
+                                  }),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "accordion-collapse collapse",
+                              attrs: {
+                                id: "collapseTwo",
+                                "aria-labelledby": "headingTwo",
+                                "data-bs-parent": "#accordionExample",
+                              },
+                            },
+                            [
+                              _c("div", { staticClass: "accordion-body" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Paraná")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item mb-0" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Guarapuava")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "accordion-item" }, [
+                          _c(
+                            "h2",
+                            {
+                              staticClass: "accordion-header",
+                              attrs: { id: "headingThree" },
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "accordion-button collapsed",
+                                  attrs: {
+                                    type: "button",
+                                    "data-bs-toggle": "collapse",
+                                    "data-bs-target": "#collapseThree",
+                                    "aria-expanded": "false",
+                                    "aria-controls": "collapseThree",
+                                  },
+                                },
+                                [
+                                  _c("span", [
+                                    _c("i", { staticClass: "far fa-check" }),
+                                  ]),
+                                  _vm._v(
+                                    "\n                        Tempo de Experiência\n                        "
+                                  ),
+                                  _c("i", {
+                                    staticClass: "far fa-chevron-down",
+                                  }),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "accordion-collapse collapse",
+                              attrs: {
+                                id: "collapseThree",
+                                "aria-labelledby": "headingThree",
+                                "data-bs-parent": "#accordionExample",
+                              },
+                            },
+                            [
+                              _c("div", { staticClass: "accordion-body" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Paraná")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item mb-0" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Guarapuava")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "accordion-item" }, [
+                          _c(
+                            "h2",
+                            {
+                              staticClass: "accordion-header",
+                              attrs: { id: "headingFour" },
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "accordion-button collapsed",
+                                  attrs: {
+                                    type: "button",
+                                    "data-bs-toggle": "collapse",
+                                    "data-bs-target": "#collapseFour",
+                                    "aria-expanded": "false",
+                                    "aria-controls": "collapseFour",
+                                  },
+                                },
+                                [
+                                  _c("span", [
+                                    _c("i", { staticClass: "far fa-check" }),
+                                  ]),
+                                  _vm._v(
+                                    "\n                        Escolaridade\n                        "
+                                  ),
+                                  _c("i", {
+                                    staticClass: "far fa-chevron-down",
+                                  }),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "accordion-collapse collapse",
+                              attrs: {
+                                id: "collapseFour",
+                                "aria-labelledby": "headingFour",
+                                "data-bs-parent": "#accordionExample",
+                              },
+                            },
+                            [
+                              _c("div", { staticClass: "accordion-body" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Paraná")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item mb-0" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Guarapuava")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "accordion-item" }, [
+                          _c(
+                            "h2",
+                            {
+                              staticClass: "accordion-header",
+                              attrs: { id: "headingFive" },
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "accordion-button collapsed",
+                                  attrs: {
+                                    type: "button",
+                                    "data-bs-toggle": "collapse",
+                                    "data-bs-target": "#collapseFive",
+                                    "aria-expanded": "false",
+                                    "aria-controls": "collapseFive",
+                                  },
+                                },
+                                [
+                                  _c("span", [
+                                    _c("i", { staticClass: "far fa-check" }),
+                                  ]),
+                                  _vm._v(
+                                    "\n                        Formação\n                        "
+                                  ),
+                                  _c("i", {
+                                    staticClass: "far fa-chevron-down",
+                                  }),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "accordion-collapse collapse",
+                              attrs: {
+                                id: "collapseFive",
+                                "aria-labelledby": "headingFive",
+                                "data-bs-parent": "#accordionExample",
+                              },
+                            },
+                            [
+                              _c("div", { staticClass: "accordion-body" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Paraná")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item mb-0" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Guarapuava")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "accordion-item" }, [
+                          _c(
+                            "h2",
+                            {
+                              staticClass: "accordion-header",
+                              attrs: { id: "headingSix" },
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "accordion-button collapsed",
+                                  attrs: {
+                                    type: "button",
+                                    "data-bs-toggle": "collapse",
+                                    "data-bs-target": "#collapseSix",
+                                    "aria-expanded": "false",
+                                    "aria-controls": "collapseSix",
+                                  },
+                                },
+                                [
+                                  _c("span", [
+                                    _c("i", { staticClass: "far fa-check" }),
+                                  ]),
+                                  _vm._v(
+                                    "\n                        Gênero\n                        "
+                                  ),
+                                  _c("i", {
+                                    staticClass: "far fa-chevron-down",
+                                  }),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "accordion-collapse collapse",
+                              attrs: {
+                                id: "collapseSix",
+                                "aria-labelledby": "headingSix",
+                                "data-bs-parent": "#accordionExample",
+                              },
+                            },
+                            [
+                              _c("div", { staticClass: "accordion-body" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Paraná")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item mb-0" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Guarapuava")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "accordion-item" }, [
+                          _c(
+                            "h2",
+                            {
+                              staticClass: "accordion-header",
+                              attrs: { id: "headingSeven" },
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "accordion-button collapsed",
+                                  attrs: {
+                                    type: "button",
+                                    "data-bs-toggle": "collapse",
+                                    "data-bs-target": "#collapseSeven",
+                                    "aria-expanded": "false",
+                                    "aria-controls": "collapseSeven",
+                                  },
+                                },
+                                [
+                                  _c("span", [
+                                    _c("i", { staticClass: "far fa-check" }),
+                                  ]),
+                                  _vm._v(
+                                    "\n                        Faixa Etária\n                        "
+                                  ),
+                                  _c("i", {
+                                    staticClass: "far fa-chevron-down",
+                                  }),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "accordion-collapse collapse",
+                              attrs: {
+                                id: "collapseSeven",
+                                "aria-labelledby": "headingSeven",
+                                "data-bs-parent": "#accordionExample",
+                              },
+                            },
+                            [
+                              _c("div", { staticClass: "accordion-body" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Paraná")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item mb-0" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Guarapuava")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "accordion-item" }, [
+                          _c(
+                            "h2",
+                            {
+                              staticClass: "accordion-header",
+                              attrs: { id: "headingEight" },
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "accordion-button collapsed",
+                                  attrs: {
+                                    type: "button",
+                                    "data-bs-toggle": "collapse",
+                                    "data-bs-target": "#collapseEight",
+                                    "aria-expanded": "false",
+                                    "aria-controls": "collapseEight",
+                                  },
+                                },
+                                [
+                                  _c("span", [
+                                    _c("i", { staticClass: "far fa-check" }),
+                                  ]),
+                                  _vm._v(
+                                    "\n                        Pretenção Salarial\n                        "
+                                  ),
+                                  _c("i", {
+                                    staticClass: "far fa-chevron-down",
+                                  }),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "accordion-collapse collapse",
+                              attrs: {
+                                id: "collapseEight",
+                                "aria-labelledby": "headingEight",
+                                "data-bs-parent": "#accordionExample",
+                              },
+                            },
+                            [
+                              _c("div", { staticClass: "accordion-body" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Paraná")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item mb-0" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Guarapuava")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "accordion-item" }, [
+                          _c(
+                            "h2",
+                            {
+                              staticClass: "accordion-header",
+                              attrs: { id: "headingNine" },
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "accordion-button collapsed",
+                                  attrs: {
+                                    type: "button",
+                                    "data-bs-toggle": "collapse",
+                                    "data-bs-target": "#collapseNine",
+                                    "aria-expanded": "false",
+                                    "aria-controls": "collapseNine",
+                                  },
+                                },
+                                [
+                                  _c("span", [
+                                    _c("i", { staticClass: "far fa-check" }),
+                                  ]),
+                                  _vm._v(
+                                    "\n                        Tipo de Contratação\n                        "
+                                  ),
+                                  _c("i", {
+                                    staticClass: "far fa-chevron-down",
+                                  }),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "accordion-collapse collapse",
+                              attrs: {
+                                id: "collapseNine",
+                                "aria-labelledby": "headingNine",
+                                "data-bs-parent": "#accordionExample",
+                              },
+                            },
+                            [
+                              _c("div", { staticClass: "accordion-body" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Paraná")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item mb-0" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Guarapuava")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "accordion-item" }, [
+                          _c(
+                            "h2",
+                            {
+                              staticClass: "accordion-header",
+                              attrs: { id: "headingTen" },
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "accordion-button collapsed",
+                                  attrs: {
+                                    type: "button",
+                                    "data-bs-toggle": "collapse",
+                                    "data-bs-target": "#collapseTen",
+                                    "aria-expanded": "false",
+                                    "aria-controls": "collapseTen",
+                                  },
+                                },
+                                [
+                                  _c("span", [
+                                    _c("i", { staticClass: "far fa-check" }),
+                                  ]),
+                                  _vm._v(
+                                    "\n                        CNH\n                        "
+                                  ),
+                                  _c("i", {
+                                    staticClass: "far fa-chevron-down",
+                                  }),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "accordion-collapse collapse",
+                              attrs: {
+                                id: "collapseTen",
+                                "aria-labelledby": "headingTen",
+                                "data-bs-parent": "#accordionExample",
+                              },
+                            },
+                            [
+                              _c("div", { staticClass: "accordion-body" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Paraná")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item mb-0" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Guarapuava")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "accordion-item" }, [
+                          _c(
+                            "h2",
+                            {
+                              staticClass: "accordion-header",
+                              attrs: { id: "headingEleven" },
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "accordion-button collapsed",
+                                  attrs: {
+                                    type: "button",
+                                    "data-bs-toggle": "collapse",
+                                    "data-bs-target": "#collapseEleven",
+                                    "aria-expanded": "false",
+                                    "aria-controls": "collapseEleven",
+                                  },
+                                },
+                                [
+                                  _c("span", [
+                                    _c("i", { staticClass: "far fa-check" }),
+                                  ]),
+                                  _vm._v(
+                                    "\n                        Pessoa com Deficiência\n                        "
+                                  ),
+                                  _c("i", {
+                                    staticClass: "far fa-chevron-down",
+                                  }),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "accordion-collapse collapse",
+                              attrs: {
+                                id: "collapseEleven",
+                                "aria-labelledby": "headingEleven",
+                                "data-bs-parent": "#accordionExample",
+                              },
+                            },
+                            [
+                              _c("div", { staticClass: "accordion-body" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Paraná")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item mb-0" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Guarapuava")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "accordion-item" }, [
+                          _c(
+                            "h2",
+                            {
+                              staticClass: "accordion-header",
+                              attrs: { id: "headingTwelve" },
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "accordion-button collapsed",
+                                  attrs: {
+                                    type: "button",
+                                    "data-bs-toggle": "collapse",
+                                    "data-bs-target": "#collapseTwelve",
+                                    "aria-expanded": "false",
+                                    "aria-controls": "collapseTwelve",
+                                  },
+                                },
+                                [
+                                  _c("span", [
+                                    _c("i", { staticClass: "far fa-check" }),
+                                  ]),
+                                  _vm._v(
+                                    "\n                        Situação Empregatícia\n                        "
+                                  ),
+                                  _c("i", {
+                                    staticClass: "far fa-chevron-down",
+                                  }),
+                                ]
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "accordion-collapse collapse",
+                              attrs: {
+                                id: "collapseTwelve",
+                                "aria-labelledby": "headingTwelve",
+                                "data-bs-parent": "#accordionExample",
+                              },
+                            },
+                            [
+                              _c("div", { staticClass: "accordion-body" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Paraná")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "single__input__item mb-0" },
+                                  [
+                                    _c(
+                                      "select",
+                                      {
+                                        staticClass: "form-select",
+                                        attrs: {
+                                          "aria-label":
+                                            "Default select example",
+                                        },
+                                      },
+                                      [
+                                        _c(
+                                          "option",
+                                          { attrs: { selected: "" } },
+                                          [_vm._v("Guarapuava")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "1" } },
+                                          [_vm._v("One")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "2" } },
+                                          [_vm._v("Two")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "option",
+                                          { attrs: { value: "3" } },
+                                          [_vm._v("Three")]
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
+                        ]),
+                      ]
+                    ),
+                  ]),
+                ]),
+              ]),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-9" }, [
+              _c("div", { staticClass: "result__area__right__wrapper" }, [
+                _c("div", { staticClass: "result__are__title" }, [
+                  _c("h3", [_vm._v("resultados da busca")]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "result__items__wrapper" }, [
+                  _c("div", { staticClass: "single__result__item" }, [
+                    _c("div", { staticClass: "single__result__item__top" }, [
+                      _c("p", [_vm._v("ID do currículo: 123456")]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "single__result__item__body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-sm-6" }, [
+                          _c("p", [
+                            _vm._v("Função que Atuou: "),
+                            _c("b", [_vm._v("Vendedor")]),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-6" }, [
+                          _c("p", [
+                            _vm._v("Escolaridade: "),
+                            _c("b", [_vm._v("Superior Completo")]),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-6" }, [
+                          _c("p", [
+                            _vm._v(
+                              "\n                        Tempo de Experiência:\n                        "
+                            ),
+                            _c("b", [_vm._v(" 4 anos e 6 meses")]),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-6" }, [
+                          _c("p", [
+                            _vm._v(
+                              "\n                        Formação:\n                        "
+                            ),
+                            _c("b", [_vm._v("Administração")]),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-6" }, [
+                          _c("p", [
+                            _vm._v("Ramo da Empresa que Atuou: "),
+                            _c("b", [_vm._v("Automóveis")]),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-6" }, [
+                          _c("p", [
+                            _vm._v(
+                              "\n                        Salário Pretendido:"
+                            ),
+                            _c("b", [_vm._v(" R$4.000,00 - R$6.000,00")]),
+                          ]),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "single__result__item__bottom" }, [
+                      _c("p", [
+                        _c("span", [
+                          _c("i", { staticClass: "fas fa-map-marker-alt" }),
+                        ]),
+                        _vm._v(
+                          "\n                    Guarapuava/Paraná\n                  "
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "single__result__item__bottom__right" },
+                        [
+                          _c("div", { staticClass: "add__to__favourite" }, [
+                            _vm._v(
+                              "\n                      Adicionar aos favoritos\n                      "
+                            ),
+                            _c("span", { staticClass: "favourite__btn" }, [
+                              _c("i", { staticClass: "far fa-star" }),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "already__downloaded__alert" },
+                            [
+                              _vm._v(
+                                "\n                      Você já baixou este currículo.\n                    "
+                              ),
+                            ]
+                          ),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "single__result__item" }, [
+                    _c("div", { staticClass: "single__result__item__top" }, [
+                      _c("p", [_vm._v("ID do currículo: 123456")]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "single__result__item__body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-sm-6" }, [
+                          _c("p", [
+                            _vm._v("Função que Atuou: "),
+                            _c("b", [_vm._v("Vendedor")]),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-6" }, [
+                          _c("p", [
+                            _vm._v("Escolaridade: "),
+                            _c("b", [_vm._v("Superior Completo")]),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-6" }, [
+                          _c("p", [
+                            _vm._v(
+                              "\n                        Tempo de Experiência:\n                        "
+                            ),
+                            _c("b", [_vm._v(" 4 anos e 6 meses")]),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-6" }, [
+                          _c("p", [
+                            _vm._v(
+                              "\n                        Formação:\n                        "
+                            ),
+                            _c("b", [_vm._v("Administração")]),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-6" }, [
+                          _c("p", [
+                            _vm._v("Ramo da Empresa que Atuou: "),
+                            _c("b", [_vm._v("Automóveis")]),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-6" }, [
+                          _c("p", [
+                            _vm._v(
+                              "\n                        Salário Pretendido:"
+                            ),
+                            _c("b", [_vm._v(" R$4.000,00 - R$6.000,00")]),
+                          ]),
+                        ]),
+                      ]),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "single__result__item__bottom" }, [
+                      _c("p", [
+                        _c("span", [
+                          _c("i", { staticClass: "fas fa-map-marker-alt" }),
+                        ]),
+                        _vm._v(
+                          "\n                    Guarapuava/Paraná\n                  "
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "single__result__item__bottom__right" },
+                        [
+                          _c("div", { staticClass: "add__to__favourite" }, [
+                            _vm._v(
+                              "\n                      Adicionar aos favoritos\n                      "
+                            ),
+                            _c("span", { staticClass: "favourite__btn" }, [
+                              _c("i", { staticClass: "far fa-star" }),
+                            ]),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "add__cart__btn" }, [
+                            _c("button", [_vm._v("Colocar no carrinho")]),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                  ]),
+                ]),
+              ]),
+            ]),
+          ]),
+        ]),
+      ]),
+    ])
+  },
+]
+render._withStripped = true
+
 
 
 /***/ }),
@@ -27919,6 +30711,33 @@ var staticRenderFns = [
     ])
   },
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SegundoComponent.vue?vue&type=template&id=1b90aaa2&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SegundoComponent.vue?vue&type=template&id=1b90aaa2& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("h1", [
+    _vm._v("Aqui fica alinhado o segundo componente para teste"),
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -40089,7 +42908,7 @@ Vue.compile = compileToFunctions;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
+module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21","name":"axios","escapedName":"axios","rawSpec":"^0.21","saveSpec":null,"fetchSpec":"^0.21"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21","_where":"/Users/agenciaheyimac2015/Desktop/Projetos em desenvolvimento/plataforma-sucesso-empregos","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
 
 /***/ })
 

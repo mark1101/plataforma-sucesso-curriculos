@@ -4,7 +4,6 @@
 
 @section('content')
 
-
     <!--------- Hero area start --------->
     <section class="hero__area">
         <div class="container">
@@ -26,26 +25,26 @@
                                 <div class="col-sm-6">
                                     <div class="hero__btn__card">
                                         <p>Sou candidato</p>
-                                        <a href="{{url('/candidato/entrar')}}">CADASTRAR CURRÍCULO</a>
+                                        <a href="{{ url('/candidato/entrar') }}">CADASTRAR CURRÍCULO</a>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="hero__btn__card theme--red">
                                         <p> Sou empresa</p>
-                                        <a href="{{url('/empresa/entrar')}}"> BAIXAR CURRÍCULO</a>
+                                        <a href="{{ url('/empresa/entrar') }}"> BAIXAR CURRÍCULO</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="hero__thumb mt-5">
-                            <img src="{{asset('img/hero-thumb.png')}}" alt="">
+                            <img src="{{ asset('img/hero-thumb.png') }}" alt="">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="hero__shape-1">
-            <img src="{{asset('img/hero-shape.png')}}" alt="">
+            <img src="{{ asset('img/hero-shape.png') }}" alt="">
         </div>
     </section>
     <!--------- Hero area end --------->
@@ -60,7 +59,7 @@
                     <div class="col-md-4 col-md-6 pb-2">
                         <div class="service__box__card">
                             <div class="service__box__card__icon">
-                                <img src="{{asset('img/icons/i-3.png')}}" alt="">
+                                <img src="{{ asset('img/icons/i-3.png') }}" alt="">
                             </div>
                             <h4> por que devo entrar?</h4>
                             <p>Pois é muito mais fácil, barato e eficiente do que entregar currículos físicos ou por
@@ -73,7 +72,7 @@
                     <div class="col-md-4 col-md-6">
                         <div class="service__box__card">
                             <div class="service__box__card__icon">
-                                <img src="{{asset('img/icons/i-2.png')}}" alt="">
+                                <img src="{{ asset('img/icons/i-2.png') }}" alt="">
                             </div>
                             <h4>o que fazemos </h4>
                             <p>Nossa tarefa é bastante simples, porém de extrema importância, se você pensar a respeito.
@@ -87,7 +86,7 @@
                     <div class="col-md-4 col-md-6">
                         <div class="service__box__card">
                             <div class="service__box__card__icon">
-                                <img src="{{asset('img/icons/i-1.png')}}" alt="">
+                                <img src="{{ asset('img/icons/i-1.png') }}" alt="">
                             </div>
                             <h4>Quem somos</h4>
                             <p>Somos uma empresa especializada na procura de empregos na cidade de Guarapuava e região.
@@ -124,7 +123,7 @@
         <div class="container">
             <h4>Alguma dúvida?</h4>
             <div class="newsletter__btn">
-                <a href="{{url('faq')}}">leia nosso faq!</a>
+                <a href="{{ url('faq') }}">leia nosso faq!</a>
             </div>
         </div>
     </section>
