@@ -19,11 +19,14 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('segundo-component' , require('./components/SegundoComponent.vue').default);
 
-//COMPONENT COMPANY 
+//COMPONENT COMPANY
 Vue.component('filter-curriculum' , require('./components/Company/FilterCurriculum.vue').default);
+
+//COMPONENT CANDIDATE
+Vue.component('register-curriculum' , require('./components/Candidate/RegisterCurriculum.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

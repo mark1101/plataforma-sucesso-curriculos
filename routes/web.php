@@ -114,6 +114,3 @@ Route::get('/planos', function () {
     return view('plans');
 });
 
-Route::get('/teste', function () {
-    return view('example');
-});
