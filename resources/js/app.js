@@ -8,6 +8,10 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 
+import VueSweetalert2 from "vue-sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+Vue.use(VueSweetalert2);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -19,10 +23,11 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('segundo-component' , require('./components/SegundoComponent.vue').default);
 
 //COMPONENT COMPANY
 Vue.component('filter-curriculum' , require('./components/Company/FilterCurriculum.vue').default);
+Vue.component('primary-filter-curriculum' , require('./components/Company/PrimaryFilterCurriculum.vue').default);
+Vue.component('acess-curriculum' , require('./components/Company/AcessCurriculum.vue').default);
 
 //COMPONENT CANDIDATE
 Vue.component('register-curriculum' , require('./components/Candidate/RegisterCurriculum.vue').default);

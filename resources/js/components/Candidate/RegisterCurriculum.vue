@@ -37,7 +37,7 @@
                                         <div class="col-md-5">
                                             <div class="single__input__item">
                                                 <label for=""> Endereço</label>
-                                                <input type="text" class="form-control" v-model="address" >
+                                                <input type="text" class="form-control" v-model="address">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -49,7 +49,8 @@
                                         <div class="col-md-3">
                                             <div class="single__input__item">
                                                 <label for=""> Estado</label>
-                                                <select class="form-select" aria-label="Default select example" v-model="state">
+                                                <select class="form-select" aria-label="Default select example"
+                                                        v-model="state">
                                                     <option selected></option>
                                                     <option value="1">One</option>
                                                     <option value="2">Two</option>
@@ -60,7 +61,8 @@
                                         <div class="col-md-3">
                                             <div class="single__input__item">
                                                 <label for=""> Cidade</label>
-                                                <select class="form-select" aria-label="Default select example" v-model="city">
+                                                <select class="form-select" aria-label="Default select example"
+                                                        v-model="city">
                                                     <option selected></option>
                                                     <option value="1">One</option>
                                                     <option value="2">Two</option>
@@ -89,11 +91,11 @@
                                         <div class="col-md-3">
                                             <div class="single__input__item">
                                                 <label for=""> Gênero</label>
-                                                <select class="form-select" aria-label="Default select example" v-model="gender">
-                                                    <option selected></option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                <select class="form-select" aria-label="Default select example"
+                                                        v-model="gender">
+                                                    <option value="Feminino">Feminino</option>
+                                                    <option value="Masculino">Masculino</option>
+                                                    <option value="Outro">Outro</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -142,11 +144,15 @@
                                         <label for="">Grau de Escolaridade</label>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected></option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                <select class="form-select" aria-label="Default select example"
+                                                        v-model="schooling_level">
+                                                    <option value="Educacao Infantil">Educação Infantil</option>
+                                                    <option value="Ensino Fundamental">Ensino Fundamental</option>
+                                                    <option value="Ensino Medio">Ensino Médio</option>
+                                                    <option value="Ensino Superior">Ensino Superior</option>
+                                                    <option value="Pos-graduacao">Pós-graduação</option>
+                                                    <option value="Mestrado">Mestrado</option>
+                                                    <option value="Doutorado">Doutorado</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -154,8 +160,16 @@
                                     <div class="single__input__item d-flex align-items-center">
                                         <label for=""> Formação</label>
                                         <div class="row">
-                                            <div class="col-md-9">
-                                                <input type="text" class="form-control">
+                                            <div class="col-md-6">
+                                                <select class="form-select" aria-label="Default select example"
+                                                        v-model="formation">
+                                                    <option value="Bacharelado">Bacharelado</option>
+                                                    <option value="Licenciatura">Licenciatura</option>
+                                                    <option value="Tecnologico">Tecnológico</option>
+                                                    <option value="Sequencial">Sequencial</option>
+                                                    <option value="Graduacao Modulada">Graduação Modulada</option>
+                                                    <option value="Educacao a Distancia">Educação à Distância</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -163,7 +177,7 @@
                                         <label for=""> Instituição de Ensino</label>
                                         <div class="row">
                                             <div class="col-md-11">
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" v-model="institution">
                                             </div>
                                         </div>
                                     </div>
@@ -171,11 +185,13 @@
                                         <label for="">Tipo de Contratação</label>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected></option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                <select class="form-select" aria-label="Default select example"
+                                                        v-model="hiring_type">
+                                                    <option value="Clt">CLT</option>
+                                                    <option value="Pj">Pessoa Jurídica (PJ)</option>
+                                                    <option value="Estagiario">Estagiário</option>
+                                                    <option value="Trainee">Trainee</option>
+                                                    <option value="JovemAprendiz">Jovem Aprendiz</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -184,20 +200,15 @@
                                         <label for=""> Função desejada</label>
                                         <div class="row">
                                             <div class="col-md-11">
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" v-model="desired_function">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="single__input__item d-flex align-items-center">
                                         <label for="">Pretensão Salarial</label>
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected></option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </select>
+                                            <div class="col-md-11">
+                                                <input type="text" class="form-control" v-money="desired_salary">
                                             </div>
                                         </div>
                                     </div>
@@ -205,11 +216,10 @@
                                         <label for="">Pessoa com Deficiência (PcD)?</label>
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected></option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                <select class="form-select" aria-label="Default select example"
+                                                        v-model="is_handicapped">
+                                                    <option value="Nao">Não</option>
+                                                    <option value="Sim">Sim</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -218,11 +228,10 @@
                                         <label for="">Carteira Nacional de Habilitação (CNH)</label>
                                         <div class="row">
                                             <div class="col-md-5">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected></option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
+                                                <select class="form-select" aria-label="Default select example"
+                                                        v-model="cnh">
+                                                    <option value="Nao">Não</option>
+                                                    <option value="Sim">Sim</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -268,7 +277,7 @@
                                                 <label for="">Nome da Empresa</label>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" v-model="name_company">
                                                     </div>
                                                 </div>
                                             </div>
@@ -276,7 +285,7 @@
                                                 <label for=""> Ramo da Empresa </label>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" v-model="company_field">
                                                     </div>
                                                 </div>
                                             </div>
@@ -284,18 +293,18 @@
                                                 <label for="">Cargo Ocupado</label>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" v-model="occupied_job">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="single__input__item d-flex align-items-center">
                                                 <label for=""> Período</label>
                                                 <div class="nice__numbers__wrapper">
-                                                    <input type="number">
+                                                    <input type="number" v-model="years">
                                                     <label for="">Anos e</label>
                                                 </div>
                                                 <div class="nice__numbers__wrapper">
-                                                    <input type="number">
+                                                    <input type="number" v-model="months">
                                                     <label for=""> Meses.</label>
                                                 </div>
                                             </div>
@@ -312,7 +321,7 @@
                                                 <label for=""> Nome do Curso</label>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" v-model="name_courses">
                                                     </div>
                                                 </div>
                                             </div>
@@ -320,14 +329,14 @@
                                                 <label for=""> Instituição ou Escola</label>
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control" v-model="school">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="single__input__item d-flex align-items-center">
                                                 <label for=""> Carga Horária</label>
                                                 <div class="nice__numbers__wrapper">
-                                                    <input type="number">
+                                                    <input type="number" v-model="hours">
                                                     <label for=""> Horas</label>
                                                 </div>
                                             </div>
@@ -374,104 +383,35 @@
                                 <form action="">
                                     <div class="form__card">
                                         <div class="user__image__upload__wrapper">
-                                            <div class="user__image__upload__left">
-                                                <div class="user__image__up__btns d-flex">
-                                                    <button class="btn-gray">Enviar Imagem</button>
+                                            <div class="user__image__up__btns d-flex">
+                                                <div class="row">
+                                                    <input type="file" v-on:change="onChange">
+                                                </div>
+                                                <div class="row">
+                                                    <a v-if="curriculum_photo" style="cursor: pointer"
+                                                       @click="removeImagem">Remover foto</a>
                                                 </div>
                                             </div>
                                             <div class="user__image">
-                                                <img src="img/user-image.png" alt="">
+                                                <img :src="curriculum_photo" v-if="curriculum_photo" alt="">
                                             </div>
                                         </div>
                                     </div>
                                     <h4> Considerações adicionais</h4>
                                     <div class="additional__form__wrapper">
                                         <div class="single__input__item">
-                                            <textarea name="" id="" class="form-control"></textarea>
+                                            <textarea name="" id="" class="form-control"
+                                                      v-model="additional_considerations"></textarea>
                                         </div>
                                         <div class="additional__checkboxes">
                                             <label for="">Como conheceu nosso site?</label>
                                             <div class="row">
-                                                <div class="col-sm-3 col-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                               name="findCheckbox"
-                                                               id="flexRadioDefault1">
-                                                        <label class="form-check-label" for="flexRadioDefault1">
-                                                            Indicação
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 col-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                               name="findCheckbox"
-                                                               id="flexRadioDefault2">
-                                                        <label class="form-check-label" for="flexRadioDefault2">
-                                                            Rádio
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 col-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                               name="findCheckbox"
-                                                               id="flexRadioDefault3">
-                                                        <label class="form-check-label" for="flexRadioDefault3">
-                                                            Televisão
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 col-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                               name="findCheckbox"
-                                                               id="flexRadioDefault4">
-                                                        <label class="form-check-label" for="flexRadioDefault4">
-                                                            Google
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 col-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                               name="findCheckbox"
-                                                               id="flexRadioDefault5">
-                                                        <label class="form-check-label" for="flexRadioDefault5">
-                                                            Youtube
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 col-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                               name="findCheckbox"
-                                                               id="flexRadioDefault6">
-                                                        <label class="form-check-label" for="flexRadioDefault6">
-                                                            Facebook
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 col-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                               name="findCheckbox"
-                                                               id="flexRadioDefault7">
-                                                        <label class="form-check-label" for="flexRadioDefault7">
-                                                            Instagram
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 col-4">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                               name="findCheckbox"
-                                                               id="flexRadioDefault8">
-                                                        <label class="form-check-label" for="flexRadioDefault8">
-                                                            Outros
-                                                        </label>
-                                                    </div>
-                                                </div>
+                                                <select class="form-control" v-model="found_us">
+                                                    <option v-for="option in options" :value="option.id">{{
+                                                            option.name
+                                                        }}
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -513,22 +453,10 @@
                                     <div class="form__card">
                                         <div class="single__input__item employed-flex d-flex align-items-center">
                                             <label for=""> Atualmente estou:</label>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio"
-                                                       name="employmentCheckbox"
-                                                       id="flexRadioDefault9">
-                                                <label class="form-check-label" for="flexRadioDefault9">
-                                                    Desempregado
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio"
-                                                       name="employmentCheckbox"
-                                                       id="flexRadioDefault10">
-                                                <label class="form-check-label" for="flexRadioDefault10">
-                                                    Empregado
-                                                </label>
-                                            </div>
+                                            <select v-model="is_employed">
+                                                <option>Empregado</option>
+                                                <option>Desempregado</option>
+                                            </select>
                                         </div>
                                         <div class="card-body">
                                             <div class="form-check">
@@ -747,9 +675,14 @@
 </template>
 
 <script>
+
+import {VMoney} from 'v-money';
+
 export default {
 
     name: 'register-curriculum.vue',
+
+    directives: {money: VMoney},
 
     data() {
         return {
@@ -770,13 +703,45 @@ export default {
             institution: "",
             hiring_type: "",
             desired_function: "",
-            desired_salary: "",
+            desired_salary: {
+                decimal: ',',
+                thousands: '.',
+                prefix: '',
+                suffix: '',
+                precision: 2,
+                masked: false
+            },
             is_handicapped: "",
             cnh: "",
 
+            name_company: "",
             company_field: "",
             occupied_job: "",
-            experience_time: "",
+            years: "",
+            months: "",
+
+            name_courses: "",
+            school: "",
+            hours: "",
+
+            is_employed: "",
+            found_us: "",
+            file: null,
+            removenull: null,
+            subi: null,
+            curriculum_photo: "",
+            additional_considerations: "",
+            options: [
+                {name: "Indicação"},
+                {name: "Rádio"},
+                {name: "Televisão"},
+                {name: "Google"},
+                {name: "YouTube"},
+                {name: "Facebook"},
+                {name: "Instagram"},
+                {name: "Outros"},
+            ]
+
         };
     },
 
@@ -790,7 +755,26 @@ export default {
         },
         remove() {
             this.activePhase = this.activePhase - 1;
-        }
+        },
+
+        onChange(e) {
+            this.file = e.target.files[0];
+            const teste = e.target.files[0];
+            if (this.file.size < 1005222) {
+                //console.log(this.file.size);
+                this.subi = this.file.name;
+                this.curriculum_photo = URL.createObjectURL(teste);
+            } else {
+                this.$swal("Oops...", "Imagem com tamanho acima do permitido!", "error");
+                this.removeImagem();
+            }
+        },
+
+        removeImagem() {
+            this.subi = null;
+            this.file = this.removenull;
+            this.curriculum_photo = null;
+        },
     }
 };
 </script>

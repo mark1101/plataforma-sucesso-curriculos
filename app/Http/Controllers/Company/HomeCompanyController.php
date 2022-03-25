@@ -22,6 +22,10 @@ class HomeCompanyController extends Controller
     {
         return view('Search.search');
     }
+    public function acess()
+    {
+        return view('Search.my-curriculum');
+    }
     public function result()
     {
         return view('Search.search-result');

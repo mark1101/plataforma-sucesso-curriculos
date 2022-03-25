@@ -70,6 +70,7 @@ Route::middleware(['no-auth'])->group(function () {
 Route::middleware(['company-acess'])->group(function () {
     Route::get('/empresa/dashboard', [HomeCompanyController::class, 'dashboard'])->name('dashboard.company');
     Route::get('/empresa/encontrar-curriculos', [HomeCompanyController::class, 'search']);
+    Route::get('/empresa/acessar-curriculos', [HomeCompanyController::class, 'acess']);
     Route::get('/empresa/resultado-busca', [HomeCompanyController::class, 'result']);
 });
 Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
