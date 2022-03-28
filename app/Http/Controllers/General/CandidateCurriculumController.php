@@ -5,13 +5,79 @@ namespace App\Http\Controllers\General;
 use App\Http\Controllers\Controller;
 use App\Models\Curriculum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CandidateCurriculumController extends Controller
 {
 
-    public function create(Request $request, $user_id)
+    public function create(Request $request)
     {
-        // cria o curriculo do usuario
+        $data = $request->all();
+
+        $imageName =  null;
+
+        dd($data['experiences'], $data['courses']);
+
+        if($request->file == []){
+            $newCurriculum = Curriculum::create([
+                'user_id' => Auth::user()->id,
+                'name' => $data['name'],
+                'address' => $data['address'],
+                'cep'=> $data['cep'],
+                'state' => $data['state'],
+                'city' => $data['city'],
+                'age'=> $data['age'],
+                'phone' => $data['phone'],
+                'whatsapp' => $data['whatsapp'],
+                'email' => $data['email'],
+                'gender' => $data['gender'],
+                'schooling_level' => $data['schooling_level'],
+                'formation' => $data['formation'],
+                'institution' => $data['institution'],
+                'hiring_type' => $data['hiring_type'],
+                'desired_function' => $data['desired_function'],
+                'desired_salary' => $data['desired_salary'],
+                'is_handicapped' => $data['is_handicapped'],
+                'cnh' => $data['cnh'],
+                'additional_considerations' => $data['additional_considerations'],
+                'curriculum_photo_url' => $imageName,
+                'is_employes' => $data['is_employed'],
+                'found_us' => $data['found_us'] 
+            ]);
+
+            return;
+        }
+
+        $imageName = bin2hex(random_bytes(10)) . time() . '.' . $data['file']->extension();
+        $data['file']->move(public_path('images/feed/'), $imageName);
+
+        $newCurriculum = Curriculum::create([
+            'name' => $data['name'],
+            'address' => $data['address'],
+            'cep'=> $data['cep'],
+            'state' => $data['state'],
+            'city' => $data['city'],
+            'age'=> $data['age'],
+            'phone' => $data['phone'],
+            'whatsapp' => $data['whatsapp'],
+            'email' => $data['email'],
+            'gender' => $data['gender'],
+            'schooling_level' => $data['schooling_level'],
+            'formation' => $data['formation'],
+            'institution' => $data['institution'],
+            'hiring_type' => $data['hiring_type'],
+            'desired_function' => $data['desired_funcion'],
+            'desired_salary' => $data['desired_salary'],
+            'is_handicapped' => $data['is_handicapped'],
+            'cnh' => $data['cnh'],
+            'additional_considerations' => $data['additional_considerations'],
+            'curriculum_photo_url' => $imageName,
+            'is_employes' => $data['is_employed'],
+            'found_us' => $data['found_us'] 
+        ]);
+
+        return $newCurriculum;
+        
     }
 
     public function getUserCurriculum($user_id)

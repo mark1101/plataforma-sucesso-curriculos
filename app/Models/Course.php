@@ -11,6 +11,7 @@ class Course extends Model
 
     protected $table = "courses";
     protected $fillable = [
+        'curriculum_id',
         'name_courses',
         'school',
         'hours',

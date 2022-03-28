@@ -15,6 +15,9 @@ class CreateCourses extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('curriculum_id')->unsigned();
+            $table->foreign('curriculum_id')->references('id')
+            ->on('curriculum')->onDelete('cascade');
             $table->string('name_courses');
             $table->string('school');
             $table->string('hours');
