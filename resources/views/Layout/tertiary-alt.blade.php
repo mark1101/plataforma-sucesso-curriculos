@@ -14,7 +14,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}" /> 
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
 
     <title>@yield('title')</title>
 </head>
