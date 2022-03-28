@@ -6271,6 +6271,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "register-curriculum.vue",
@@ -6381,6 +6388,11 @@ __webpack_require__.r(__webpack_exports__);
       this.years = "";
       this.months = "";
     },
+    removeOccupiedjob: function removeOccupiedjob(name) {
+      this.experiences = this.experiences.filter(function (item) {
+        return item.name_company != name;
+      }); //this.experiences.pop();
+    },
     addCourses: function addCourses() {
       this.courses.push({
         name_courses: this.name_courses,
@@ -6390,6 +6402,11 @@ __webpack_require__.r(__webpack_exports__);
       this.name_courses = "";
       this.school = "";
       this.hours = "";
+    },
+    removeCourses: function removeCourses(name) {
+      this.courses = this.courses.filter(function (item) {
+        return item.name_courses != name;
+      });
     },
     createCurriculum: function createCurriculum() {
       var _this = this;
@@ -31757,6 +31774,35 @@ var render = function () {
                                 _c(
                                   "div",
                                   {
+                                    staticClass: "row",
+                                    staticStyle: {
+                                      "text-align": "right",
+                                      padding: "15px",
+                                    },
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-trash",
+                                      staticStyle: {
+                                        align: "right",
+                                        cursor: "pointer",
+                                        color: "#ff4415",
+                                        "font-size": "25px",
+                                      },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.removeOccupiedjob(
+                                            experience.name_company
+                                          )
+                                        },
+                                      },
+                                    }),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
                                     staticClass:
                                       "single__input__item d-flex align-items-center",
                                   },
@@ -32222,6 +32268,35 @@ var render = function () {
                                 staticClass: "card-body",
                               },
                               [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "row",
+                                    staticStyle: {
+                                      "text-align": "right",
+                                      padding: "15px",
+                                    },
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-trash",
+                                      staticStyle: {
+                                        align: "right",
+                                        cursor: "pointer",
+                                        color: "#ff4415",
+                                        "font-size": "25px",
+                                      },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.removeCourses(
+                                            course.name_courses
+                                          )
+                                        },
+                                      },
+                                    }),
+                                  ]
+                                ),
+                                _vm._v(" "),
                                 _c(
                                   "div",
                                   {

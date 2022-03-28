@@ -373,6 +373,10 @@
                                             v-for="experience in experiences"
                                             :key="experience.name_company"
                                         >
+                                        <div class="row" style="text-align: right; padding:15px;">
+                                            <i style="align: right; cursor: pointer; color: #ff4415; font-size: 25px;" @click="removeOccupiedjob(experience.name_company)" class="fa fa-trash"></i>
+                                        </div>
+
                                             <div
                                                 class="single__input__item d-flex align-items-center"
                                             >
@@ -522,6 +526,9 @@
                                             v-for="course in courses"
                                             :key="course.name_courses"
                                         >
+                                        <div class="row" style="text-align: right; padding:15px;">
+                                            <i style="align: right; cursor: pointer; color: #ff4415; font-size: 25px;" @click="removeCourses(course.name_courses)" class="fa fa-trash"></i>
+                                        </div>
                                             <div
                                                 class="single__input__item d-flex align-items-center"
                                             >
@@ -1078,6 +1085,7 @@ export default {
     },
 
     methods: {
+
         add() {
             this.activePhase = this.activePhase + 1;
         },
@@ -1123,6 +1131,14 @@ export default {
             this.months = "";
         },
 
+        removeOccupiedjob(name){
+            this.experiences = this.experiences.filter(function(item){
+                return item.name_company != name;
+            });
+
+            //this.experiences.pop();
+        },
+
         addCourses() {
             this.courses.push({
                 name_courses: this.name_courses,
@@ -1133,6 +1149,11 @@ export default {
             this.name_courses = "";
             this.school = "";
             this.hours = "";
+        },
+        removeCourses(name){
+            this.courses = this.courses.filter(function(item){
+                return item.name_courses != name;
+            });
         },
 
         createCurriculum() {
@@ -1166,6 +1187,7 @@ export default {
                 file: this.file,
                 additional_considerations: this.additional_considerations,
             };
+
 
             axios
                 .post("/create-curriculum", payload)
