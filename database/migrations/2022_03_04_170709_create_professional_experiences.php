@@ -15,6 +15,9 @@ class CreateProfessionalExperiences extends Migration
     {
         Schema::create('professional_experiences', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('curriculum_id')->unsigned();
+            $table->foreign('curriculum_id')->references('id')
+            ->on('curriculum')->onDelete('cascade');
             $table->string('name_company');
             $table->string('company_field');
             $table->string('occupied_job');
