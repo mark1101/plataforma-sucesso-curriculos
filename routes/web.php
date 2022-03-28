@@ -9,8 +9,7 @@ use App\Http\Controllers\Company\HomeCompanyController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\Company;
-
-
+use App\Http\Controllers\General\CandidateCurriculumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +78,10 @@ Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'
 
 //ROUTES CANDIDATE
 Route::middleware(['candidate-acess'])->group(function () {
-    Route::get('/candidato/dashboard', [HomeCandidateController::class, 'dashboard'])->middleware('candidate-acess')->name('dashboard.candidate');
+    Route::get('/candidato/dashboard', [HomeCandidateController::class, 'dashboard'])->name('dashboard.candidate');
+
+    //CURRICULUM
+    Route::post('/create-curriculum', [CandidateCurriculumController::class, 'create']);
 });
 Route::get('/candidato/registro', [HomeCandidateController::class, 'index']);
 Route::post('/candidato/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');

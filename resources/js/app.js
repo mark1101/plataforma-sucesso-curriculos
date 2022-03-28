@@ -8,6 +8,8 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 
+import VueTheMask from 'vue-the-mask'
+Vue.use(VueTheMask);
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 Vue.use(VueSweetalert2);
@@ -25,12 +27,12 @@ Vue.use(VueSweetalert2);
 
 
 //COMPONENT COMPANY
-Vue.component('filter-curriculum' , require('./components/Company/FilterCurriculum.vue').default);
-Vue.component('primary-filter-curriculum' , require('./components/Company/PrimaryFilterCurriculum.vue').default);
-Vue.component('acess-curriculum' , require('./components/Company/AcessCurriculum.vue').default);
+Vue.component('filter-curriculum', require('./components/Company/FilterCurriculum.vue').default);
+Vue.component('primary-filter-curriculum', require('./components/Company/PrimaryFilterCurriculum.vue').default);
+Vue.component('acess-curriculum', require('./components/Company/AcessCurriculum.vue').default);
 
 //COMPONENT CANDIDATE
-Vue.component('register-curriculum' , require('./components/Candidate/RegisterCurriculum.vue').default);
+Vue.component('register-curriculum', require('./components/Candidate/RegisterCurriculum.vue').default);
 
 
 /**

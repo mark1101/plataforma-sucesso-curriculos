@@ -19,38 +19,30 @@ class CreateCurriculumTable extends Migration
             $table->foreign('user_id')
             ->references('id')->on('users')
             ->onDelete('cascade');
-            $table->bigInteger('experiences_professional_id')->unsigned();
-            $table->foreign('experiences_professional_id')
-                ->references('id')->on('professional_experiences')
-                ->onDelete('cascade');
-            $table->bigInteger('courses_id')->unsigned();
-            $table->foreign('courses_id')
-                ->references('id')->on('courses')
-                ->onDelete('cascade');
             $table->string('name');
-            $table->string('address');
-            $table->string('cep');
-            $table->string('state');
-            $table->string('city');
-            $table->integer('age');
-            $table->string('phone');
-            $table->string('whatsapp');
-            $table->string('email');
-            $table->string('gender');
+            $table->string('address')->nullable();
+            $table->string('cep')->nullable();
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
+            $table->integer('age')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('whatsapp')->nullable();
+            $table->string('email')->nullable();
+            $table->string('gender')->nullable();
 
-            $table->string('schooling_level');
-            $table->string('formation');
-            $table->string('institution');
-            $table->string('hiring_type');
-            $table->string('desired_function');
-            $table->decimal('desired_salary');
-            $table->boolean('is_handicapped');
-            $table->string('cnh');
+            $table->string('schooling_level')->nullable();
+            $table->string('formation')->nullable();
+            $table->string('institution')->nullable();
+            $table->string('hiring_type')->nullable();
+            $table->string('desired_function')->nullable();
+            $table->decimal('desired_salary')->nullable();
+            $table->boolean('is_handicapped')->nullable();
+            $table->string('cnh')->nullable();
 
-            $table->longText('additional_considerations');
-            $table->string('curriculum_photo_url');
-            $table->boolean('is_employed');
-            $table->string('found_us');
+            $table->longText('additional_considerations')->nullable();
+            $table->string('curriculum_photo_url')->nullable();
+            $table->boolean('is_employed')->nullable();
+            $table->string('found_us')->nullable();
             $table->boolean('active')->default(1);
             $table->timestamps();
         });
