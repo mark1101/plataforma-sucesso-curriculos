@@ -19,8 +19,17 @@ class CreateCurriculumTable extends Migration
             $table->foreign('user_id')
             ->references('id')->on('users')
             ->onDelete('cascade');
+            $table->bigInteger('experiences_professional_id')->unsigned();
+            $table->foreign('experiences_professional_id')
+                ->references('id')->on('professional_experiences')
+                ->onDelete('cascade');
+            $table->bigInteger('courses_id')->unsigned();
+            $table->foreign('courses_id')
+                ->references('id')->on('courses')
+                ->onDelete('cascade');
             $table->string('name');
             $table->string('address');
+            $table->string('cep');
             $table->string('state');
             $table->string('city');
             $table->integer('age');
@@ -28,20 +37,19 @@ class CreateCurriculumTable extends Migration
             $table->string('whatsapp');
             $table->string('email');
             $table->string('gender');
-            $table->boolean('is_employed');
-            $table->boolean('is_handicapped');
-            $table->string('cnh');
-            $table->decimal('desired_salary');
-            $table->string('hiring_type');
-            $table->string('desired_function');
+
             $table->string('schooling_level');
             $table->string('formation');
-            $table->string('occupied_job');
-            $table->float('experience_time');
-            $table->string('company_field');
-            $table->string('courses');
+            $table->string('institution');
+            $table->string('hiring_type');
+            $table->string('desired_function');
+            $table->decimal('desired_salary');
+            $table->boolean('is_handicapped');
+            $table->string('cnh');
+
             $table->longText('additional_considerations');
             $table->string('curriculum_photo_url');
+            $table->boolean('is_employed');
             $table->string('found_us');
             $table->boolean('active')->default(1);
             $table->timestamps();

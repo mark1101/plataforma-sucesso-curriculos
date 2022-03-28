@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="evaluation__content__bottom__btns-red mt-3" style="max-width: 50%">
-                    <a href="{{ url('') }}">acessar meus currículos</a>
+                    <a href="{{ url('/empresa/acessar-curriculos') }}">acessar meus currículos</a>
                 </div>
 
             </div>
