@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
+        "mask-input": "^1.0.3",
         "sweetalert2": "^11.4.6",
         "v-money": "^0.8.1",
         "vue-sweetalert2": "^5.0.2",

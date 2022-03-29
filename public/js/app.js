@@ -6265,6 +6265,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "register-curriculum.vue",
@@ -6362,13 +6375,23 @@ __webpack_require__.r(__webpack_exports__);
       this.curriculum_photo = null;
     },
     addExperience: function addExperience() {
-      this.experience.push({
+      this.experiences.push({
         name_company: this.name_company,
-        company_fied: thise.company_field,
+        company_field: this.company_field,
         occupied_job: this.occupied_job,
         years: this.years,
         months: this.months
       });
+      this.name_company = "";
+      this.company_field = "";
+      this.occupied_job = "";
+      this.years = "";
+      this.months = "";
+    },
+    removeOccupiedjob: function removeOccupiedjob(name) {
+      this.experiences = this.experiences.filter(function (item) {
+        return item.name_company != name;
+      }); //this.experiences.pop();
     },
     addCourses: function addCourses() {
       this.courses.push({
@@ -6379,6 +6402,11 @@ __webpack_require__.r(__webpack_exports__);
       this.name_courses = "";
       this.school = "";
       this.hours = "";
+    },
+    removeCourses: function removeCourses(name) {
+      this.courses = this.courses.filter(function (item) {
+        return item.name_courses != name;
+      });
     },
     createCurriculum: function createCurriculum() {
       var _this = this;
@@ -31227,7 +31255,7 @@ var render = function () {
                                     { attrs: { value: "Educacao Infantil" } },
                                     [
                                       _vm._v(
-                                        "\n                          Educação Infantil\n                        "
+                                        "\n                                                    Educação Infantil\n                                                "
                                       ),
                                     ]
                                   ),
@@ -31237,7 +31265,7 @@ var render = function () {
                                     { attrs: { value: "Ensino Fundamental" } },
                                     [
                                       _vm._v(
-                                        "\n                          Ensino Fundamental\n                        "
+                                        "\n                                                    Ensino Fundamental\n                                                "
                                       ),
                                     ]
                                   ),
@@ -31253,7 +31281,7 @@ var render = function () {
                                     { attrs: { value: "Ensino Superior" } },
                                     [
                                       _vm._v(
-                                        "\n                          Ensino Superior\n                        "
+                                        "\n                                                    Ensino Superior\n                                                "
                                       ),
                                     ]
                                   ),
@@ -31360,7 +31388,7 @@ var render = function () {
                                     { attrs: { value: "Graduacao Modulada" } },
                                     [
                                       _vm._v(
-                                        "\n                          Graduação Modulada\n                        "
+                                        "\n                                                    Graduação Modulada\n                                                "
                                       ),
                                     ]
                                   ),
@@ -31372,7 +31400,7 @@ var render = function () {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                          Educação à Distância\n                        "
+                                        "\n                                                    Educação à Distância\n                                                "
                                       ),
                                     ]
                                   ),
@@ -31735,6 +31763,277 @@ var render = function () {
                         "div",
                         { staticClass: "form__card" },
                         [
+                          _vm._l(_vm.experiences, function (experience) {
+                            return _c(
+                              "div",
+                              {
+                                key: experience.name_company,
+                                staticClass: "card-body",
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "row",
+                                    staticStyle: {
+                                      "text-align": "right",
+                                      padding: "15px",
+                                    },
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-trash",
+                                      staticStyle: {
+                                        align: "right",
+                                        cursor: "pointer",
+                                        color: "#ff4415",
+                                        "font-size": "25px",
+                                      },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.removeOccupiedjob(
+                                            experience.name_company
+                                          )
+                                        },
+                                      },
+                                    }),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "single__input__item d-flex align-items-center",
+                                  },
+                                  [
+                                    _c("label", { attrs: { for: "" } }, [
+                                      _vm._v("Nome da Empresa"),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "row" }, [
+                                      _c("div", { staticClass: "col-md-12" }, [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: experience.name_company,
+                                              expression:
+                                                "experience.name_company",
+                                            },
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: { type: "text", disabled: "" },
+                                          domProps: {
+                                            value: experience.name_company,
+                                          },
+                                          on: {
+                                            input: function ($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                experience,
+                                                "name_company",
+                                                $event.target.value
+                                              )
+                                            },
+                                          },
+                                        }),
+                                      ]),
+                                    ]),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "single__input__item d-flex align-items-center",
+                                  },
+                                  [
+                                    _c("label", { attrs: { for: "" } }, [
+                                      _vm._v(" Ramo da Empresa "),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "row" }, [
+                                      _c("div", { staticClass: "col-md-12" }, [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: experience.company_field,
+                                              expression:
+                                                "experience.company_field",
+                                            },
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: { type: "text", disabled: "" },
+                                          domProps: {
+                                            value: experience.company_field,
+                                          },
+                                          on: {
+                                            input: function ($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                experience,
+                                                "company_field",
+                                                $event.target.value
+                                              )
+                                            },
+                                          },
+                                        }),
+                                      ]),
+                                    ]),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "single__input__item d-flex align-items-center",
+                                  },
+                                  [
+                                    _c("label", { attrs: { for: "" } }, [
+                                      _vm._v("Cargo Ocupado"),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "row" }, [
+                                      _c("div", { staticClass: "col-md-12" }, [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: experience.occupied_job,
+                                              expression:
+                                                "experience.occupied_job",
+                                            },
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: { type: "text", disabled: "" },
+                                          domProps: {
+                                            value: experience.occupied_job,
+                                          },
+                                          on: {
+                                            input: function ($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                experience,
+                                                "occupied_job",
+                                                $event.target.value
+                                              )
+                                            },
+                                          },
+                                        }),
+                                      ]),
+                                    ]),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "single__input__item d-flex align-items-center",
+                                  },
+                                  [
+                                    _c("label", { attrs: { for: "" } }, [
+                                      _vm._v(" Período"),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "nice__numbers__wrapper" },
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: experience.years,
+                                              expression: "experience.years",
+                                            },
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            type: "number",
+                                            disabled: "",
+                                          },
+                                          domProps: { value: experience.years },
+                                          on: {
+                                            input: function ($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                experience,
+                                                "years",
+                                                $event.target.value
+                                              )
+                                            },
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c("label", { attrs: { for: "" } }, [
+                                          _vm._v("Anos e"),
+                                        ]),
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "nice__numbers__wrapper" },
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: experience.months,
+                                              expression: "experience.months",
+                                            },
+                                          ],
+                                          staticClass: "form-control",
+                                          attrs: {
+                                            type: "number",
+                                            disabled: "",
+                                          },
+                                          domProps: {
+                                            value: experience.months,
+                                          },
+                                          on: {
+                                            input: function ($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                experience,
+                                                "months",
+                                                $event.target.value
+                                              )
+                                            },
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c("label", { attrs: { for: "" } }, [
+                                          _vm._v(" Meses."),
+                                        ]),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                              ]
+                            )
+                          }),
+                          _vm._v(" "),
                           _c("div", { staticClass: "card-body" }, [
                             _c(
                               "div",
@@ -31932,242 +32231,6 @@ var render = function () {
                             ),
                           ]),
                           _vm._v(" "),
-                          _vm._l(_vm.experiences, function (experience) {
-                            return _c(
-                              "div",
-                              {
-                                key: experience.name_company,
-                                staticClass: "card-body",
-                              },
-                              [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "single__input__item d-flex align-items-center",
-                                  },
-                                  [
-                                    _c("label", { attrs: { for: "" } }, [
-                                      _vm._v("Nome da Empresa"),
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "row" }, [
-                                      _c("div", { staticClass: "col-md-12" }, [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: experience.name_company,
-                                              expression:
-                                                "experience.name_company",
-                                            },
-                                          ],
-                                          staticClass: "form-control",
-                                          attrs: { type: "text" },
-                                          domProps: {
-                                            value: experience.name_company,
-                                          },
-                                          on: {
-                                            input: function ($event) {
-                                              if ($event.target.composing) {
-                                                return
-                                              }
-                                              _vm.$set(
-                                                experience,
-                                                "name_company",
-                                                $event.target.value
-                                              )
-                                            },
-                                          },
-                                        }),
-                                      ]),
-                                    ]),
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "single__input__item d-flex align-items-center",
-                                  },
-                                  [
-                                    _c("label", { attrs: { for: "" } }, [
-                                      _vm._v(" Ramo da Empresa "),
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "row" }, [
-                                      _c("div", { staticClass: "col-md-12" }, [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: experience.company_field,
-                                              expression:
-                                                "experience.company_field",
-                                            },
-                                          ],
-                                          staticClass: "form-control",
-                                          attrs: { type: "text" },
-                                          domProps: {
-                                            value: experience.company_field,
-                                          },
-                                          on: {
-                                            input: function ($event) {
-                                              if ($event.target.composing) {
-                                                return
-                                              }
-                                              _vm.$set(
-                                                experience,
-                                                "company_field",
-                                                $event.target.value
-                                              )
-                                            },
-                                          },
-                                        }),
-                                      ]),
-                                    ]),
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "single__input__item d-flex align-items-center",
-                                  },
-                                  [
-                                    _c("label", { attrs: { for: "" } }, [
-                                      _vm._v("Cargo Ocupado"),
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "row" }, [
-                                      _c("div", { staticClass: "col-md-12" }, [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: experience.occupied_job,
-                                              expression:
-                                                "experience.occupied_job",
-                                            },
-                                          ],
-                                          staticClass: "form-control",
-                                          attrs: { type: "text" },
-                                          domProps: {
-                                            value: experience.occupied_job,
-                                          },
-                                          on: {
-                                            input: function ($event) {
-                                              if ($event.target.composing) {
-                                                return
-                                              }
-                                              _vm.$set(
-                                                experience,
-                                                "occupied_job",
-                                                $event.target.value
-                                              )
-                                            },
-                                          },
-                                        }),
-                                      ]),
-                                    ]),
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "single__input__item d-flex align-items-center",
-                                  },
-                                  [
-                                    _c("label", { attrs: { for: "" } }, [
-                                      _vm._v(" Período"),
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "nice__numbers__wrapper" },
-                                      [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: experience.years,
-                                              expression: "experience.years",
-                                            },
-                                          ],
-                                          staticClass: "form-control",
-                                          attrs: { type: "number" },
-                                          domProps: { value: experience.years },
-                                          on: {
-                                            input: function ($event) {
-                                              if ($event.target.composing) {
-                                                return
-                                              }
-                                              _vm.$set(
-                                                experience,
-                                                "years",
-                                                $event.target.value
-                                              )
-                                            },
-                                          },
-                                        }),
-                                        _vm._v(" "),
-                                        _c("label", { attrs: { for: "" } }, [
-                                          _vm._v("Anos e"),
-                                        ]),
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "nice__numbers__wrapper" },
-                                      [
-                                        _c("input", {
-                                          directives: [
-                                            {
-                                              name: "model",
-                                              rawName: "v-model",
-                                              value: experience.months,
-                                              expression: "experience.months",
-                                            },
-                                          ],
-                                          staticClass: "form-control",
-                                          attrs: { type: "number" },
-                                          domProps: {
-                                            value: experience.months,
-                                          },
-                                          on: {
-                                            input: function ($event) {
-                                              if ($event.target.composing) {
-                                                return
-                                              }
-                                              _vm.$set(
-                                                experience,
-                                                "months",
-                                                $event.target.value
-                                              )
-                                            },
-                                          },
-                                        }),
-                                        _vm._v(" "),
-                                        _c("label", { attrs: { for: "" } }, [
-                                          _vm._v(" Meses."),
-                                        ]),
-                                      ]
-                                    ),
-                                  ]
-                                ),
-                              ]
-                            )
-                          }),
-                          _vm._v(" "),
                           _c("div", { staticClass: "add-experience" }, [
                             _c(
                               "button",
@@ -32182,7 +32245,7 @@ var render = function () {
                               [
                                 _vm._m(3),
                                 _vm._v(
-                                  " adicionar\n                      experiência\n                    "
+                                  " adicionar\n                                            experiência\n                                        "
                                 ),
                               ]
                             ),
@@ -32205,6 +32268,35 @@ var render = function () {
                                 staticClass: "card-body",
                               },
                               [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "row",
+                                    staticStyle: {
+                                      "text-align": "right",
+                                      padding: "15px",
+                                    },
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fa fa-trash",
+                                      staticStyle: {
+                                        align: "right",
+                                        cursor: "pointer",
+                                        color: "#ff4415",
+                                        "font-size": "25px",
+                                      },
+                                      on: {
+                                        click: function ($event) {
+                                          return _vm.removeCourses(
+                                            course.name_courses
+                                          )
+                                        },
+                                      },
+                                    }),
+                                  ]
+                                ),
+                                _vm._v(" "),
                                 _c(
                                   "div",
                                   {
@@ -32487,7 +32579,7 @@ var render = function () {
                               [
                                 _vm._m(4),
                                 _vm._v(
-                                  " adicionar Curso\n                    "
+                                  " adicionar Curso\n                                        "
                                 ),
                               ]
                             ),
@@ -32633,9 +32725,9 @@ var render = function () {
                                   { domProps: { value: option.name } },
                                   [
                                     _vm._v(
-                                      "\n                          " +
+                                      "\n                                                    " +
                                         _vm._s(option.name) +
-                                        "\n                        "
+                                        "\n                                                "
                                     ),
                                   ]
                                 )
@@ -32671,7 +32763,7 @@ var render = function () {
                           "div",
                           {
                             staticClass:
-                              "\n                      single__input__item\n                      employed-flex\n                      d-flex\n                      align-items-center\n                    ",
+                              "\n                    single__input__item\n                    employed-flex\n                    d-flex\n                    align-items-center\n                  ",
                           },
                           [
                             _c("label", { attrs: { for: "" } }, [
@@ -32786,7 +32878,11 @@ var render = function () {
                     attrs: { type: "button" },
                     on: { click: _vm.remove },
                   },
-                  [_vm._v("\n              Voltar\n            ")]
+                  [
+                    _vm._v(
+                      "\n                            Voltar\n                        "
+                    ),
+                  ]
                 ),
               ]),
             ]
@@ -32809,7 +32905,7 @@ var render = function () {
                         },
                         [
                           _vm._v(
-                            "\n              Salvar e Visualizar Currículo\n            "
+                            "\n                            Salvar e Visualizar Currículo\n                        "
                           ),
                         ]
                       ),
@@ -32849,14 +32945,16 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-md-5" }, [
       _c("div", { staticClass: "cadestro__content__wrap" }, [
         _c("h4", [
-          _vm._v("\n                O seu futuro "),
+          _vm._v("\n                                O seu futuro "),
           _c("br"),
-          _vm._v("\n                começa aqui!\n              "),
+          _vm._v(
+            "\n                                começa aqui!\n                            "
+          ),
         ]),
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                É só preencher seus dados para você garantir sua vaga dos\n                sonhos!\n              "
+            "\n                                É só preencher seus dados para você garantir sua vaga dos\n                                sonhos!\n                            "
           ),
         ]),
         _vm._v(" "),
@@ -32890,14 +32988,16 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-md-5" }, [
       _c("div", { staticClass: "cadestro__content__wrap" }, [
         _c("h4", [
-          _vm._v("\n                O seu futuro "),
+          _vm._v("\n                                O seu futuro "),
           _c("br"),
-          _vm._v("\n                começa aqui!\n              "),
+          _vm._v(
+            "\n                                começa aqui!\n                            "
+          ),
         ]),
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                É só preencher seus dados para você garantir sua vaga dos\n                sonhos!\n              "
+            "\n                                É só preencher seus dados para você garantir sua vaga dos\n                                sonhos!\n                            "
           ),
         ]),
         _vm._v(" "),
@@ -32931,14 +33031,16 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-md-5" }, [
       _c("div", { staticClass: "cadestro__content__wrap" }, [
         _c("h4", [
-          _vm._v("\n                O seu futuro "),
+          _vm._v("\n                                O seu futuro "),
           _c("br"),
-          _vm._v("\n                começa aqui!\n              "),
+          _vm._v(
+            "\n                                começa aqui!\n                            "
+          ),
         ]),
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                É só preencher seus dados para você garantir sua vaga dos\n                sonhos!\n              "
+            "\n                                É só preencher seus dados para você garantir sua vaga dos\n                                sonhos!\n                            "
           ),
         ]),
         _vm._v(" "),
@@ -32984,14 +33086,16 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-md-5" }, [
       _c("div", { staticClass: "cadestro__content__wrap" }, [
         _c("h4", [
-          _vm._v("\n                O seu futuro "),
+          _vm._v("\n                                O seu futuro "),
           _c("br"),
-          _vm._v("\n                começa aqui!\n              "),
+          _vm._v(
+            "\n                                começa aqui!\n                            "
+          ),
         ]),
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                É só preencher seus dados para você garantir sua vaga dos\n                sonhos!\n              "
+            "\n                                É só preencher seus dados para você garantir sua vaga dos\n                                sonhos!\n                            "
           ),
         ]),
         _vm._v(" "),
@@ -33025,14 +33129,16 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-md-5" }, [
       _c("div", { staticClass: "cadestro__content__wrap" }, [
         _c("h4", [
-          _vm._v("\n                O seu futuro "),
+          _vm._v("\n                                O seu futuro "),
           _c("br"),
-          _vm._v("\n                começa aqui!\n              "),
+          _vm._v(
+            "\n                                começa aqui!\n                            "
+          ),
         ]),
         _vm._v(" "),
         _c("p", [
           _vm._v(
-            "\n                É só preencher seus dados para você garantir sua vaga dos\n                sonhos!\n              "
+            "\n                                É só preencher seus dados para você garantir sua vaga dos\n                                sonhos!\n                            "
           ),
         ]),
         _vm._v(" "),
@@ -33074,7 +33180,7 @@ var staticRenderFns = [
         { staticClass: "form-check-label", attrs: { for: "flexCheckDefault" } },
         [
           _vm._v(
-            "\n                        Não mostre meu currículo para meu atual empregador.\n                      "
+            "\n                                                Não mostre meu currículo para meu atual empregador.\n                                            "
           ),
         ]
       ),
@@ -33089,11 +33195,11 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("p", [
         _vm._v(
-          "\n                        Evite constrangimentos na hora de procurar um novo\n                        emprego. Com essa função seu currículo será ocultado\n                        do seu atual empregador.\n                        "
+          "\n                                                Evite constrangimentos na hora de procurar um novo\n                                                emprego. Com essa função seu currículo será ocultado\n                                                do seu atual empregador.\n                                                "
         ),
         _c("b", [
           _vm._v(
-            "Esta função possui um custo adicional de\n                          R$6,50/mês."
+            "Esta função possui um custo adicional de\n                                                    R$6,50/mês."
           ),
         ]),
       ]),
@@ -33112,7 +33218,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", [
                 _vm._v(
-                  "\n                Escolha o plano mais adequado a sua necessidade e boa sorte na\n                sua jornada!\n              "
+                  "\n                                Escolha o plano mais adequado a sua necessidade e boa sorte na\n                                sua jornada!\n                            "
                 ),
               ]),
               _vm._v(" "),
@@ -33302,7 +33408,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", [
                 _vm._v(
-                  "\n                Estamos torcendo por você e te manteremos informado sobre\n                novidades.\n              "
+                  "\n                                Estamos torcendo por você e te manteremos informado sobre\n                                novidades.\n                            "
                 ),
               ]),
               _vm._v(" "),
@@ -33337,7 +33443,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", { staticClass: "text-md" }, [
                 _vm._v(
-                  "\n                Para aumentar suas chances lembre-se de preencher o máximo de\n                informações possíveis.\n              "
+                  "\n                                Para aumentar suas chances lembre-se de preencher o máximo de\n                                informações possíveis.\n                            "
                 ),
               ]),
             ]),
@@ -48598,7 +48704,7 @@ Vue.compile = compileToFunctions;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21","name":"axios","escapedName":"axios","rawSpec":"^0.21","saveSpec":null,"fetchSpec":"^0.21"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21","_where":"/Users/agenciaheyimac2015/Desktop/Projetos em desenvolvimento/plataforma-sucesso-empregos","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
 
 /***/ })
 
