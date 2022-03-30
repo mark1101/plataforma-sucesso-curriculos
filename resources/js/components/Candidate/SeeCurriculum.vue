@@ -2,6 +2,11 @@
   <div>
     <h2 align="center">Currículo completo {{ curriculum.name }}</h2>
     <div class="container mb-5 mt-5">
+      <div class="row mt-3 mb-2">
+        <div class="col-sm-4">
+          <img src="img/user-image.png" alt="" />
+        </div>
+      </div>
       <h3>Dados Pessoais</h3>
       <div class="row mt-3">
         <div class="col-sm-4">
@@ -230,7 +235,12 @@
           <h5>Nome do Curso: {{ course.name_courses }}</h5>
           <p>Escola: {{ course.school }}</p>
           <p>Horas Empregadas: {{ course.hours }}</p>
-          <p style="color: blue; cursor: pointer">Editar curso</p>
+          <p
+            style="color: blue; cursor: pointer"
+            @click="openModalCourse(course.id)"
+          >
+            Editar curso
+          </p>
         </div>
       </div>
     </div>
@@ -247,11 +257,112 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Experiência</h5>
+            <h5 class="modal-title" id="exampleModalLabel">
+              Editar Experiência
+            </h5>
           </div>
-          <div class="modal-body">...</div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Nome da empresa</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="experienceUpdate.name_company"
+                />
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Ramo da empresa</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="experienceUpdate.company_field"
+                />
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Cargo Ocupado</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="experienceUpdate.occupied_job"
+                />
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Anos</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="experienceUpdate.years"
+                />
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Meses</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="experienceUpdate.months"
+                />
+              </div>
+            </div>
+          </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Salvar</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="editExperience"
+            >
+              Salvar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="edit-course"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar Curso</h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Nome do Curso</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="courseUpdate.name_courses"
+                />
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Escola</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="courseUpdate.school"
+                />
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Horas</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="courseUpdate.hours"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" @click="editCourse">
+              Salvar
+            </button>
           </div>
         </div>
       </div>
@@ -266,6 +377,8 @@ export default {
   data() {
     return {
       curriculum: [],
+      experienceUpdate: [],
+      courseUpdate: [],
 
       experiences: [],
       courses: [],
@@ -288,20 +401,66 @@ export default {
         .catch((error) => {});
     },
 
-    editData() {
+    editData(experience) {
       axios
-        .put("")
+        .put()
         .then((response) => {})
         .catch((error) => {});
     },
 
     openModalExperience(experience) {
-      /* axios
-        .get("")
-        .then((response) => {})
-        .catch((error) => {}); */
+      axios
+        .get("/get-experience/" + experience)
+        .then((response) => {
+          this.experienceUpdate = response.data.experience;
+          $("#edit-experience").modal("show");
+        })
+        .catch((error) => {});
+    },
 
-      $("#edit-experience").modal("show");
+    editExperience() {
+      let payload = {
+        name_company: this.experienceUpdate.name_company,
+        company_field: this.experienceUpdate.company_field,
+        occupied_job: this.experienceUpdate.occupied_job,
+        years: this.experienceUpdate.years,
+        months: this.experienceUpdate.months,
+      };
+      axios
+        .put("/edit-experience/" + this.experienceUpdate.id, payload)
+        .then((response) => {
+          this.$swal("Sucesso!", "Os dados foram atualizados", "success");
+          $("#edit-experience").modal("hide");
+          this.getData();
+        })
+        .catch((error) => {});
+    },
+
+    openModalCourse(course) {
+      axios
+        .get("/get-course/" + course)
+        .then((response) => {
+          this.courseUpdate = response.data.course;
+          $("#edit-course").modal("show");
+        })
+        .catch((error) => {});
+    },
+
+    editCourse() {
+      let payload = {
+        name_courses: this.courseUpdate.name_courses,
+        school: this.courseUpdate.school,
+        hours: this.courseUpdate.hours,
+      };
+
+      axios
+        .put("/edit-course/" + this.courseUpdate.id, payload)
+        .then((response) => {
+          this.$swal("Sucesso!", "Os dados foram atualizados", "success");
+          $("#edit-course").modal("hide");
+          this.getData();
+        })
+        .catch((error) => {});
     },
   },
 };

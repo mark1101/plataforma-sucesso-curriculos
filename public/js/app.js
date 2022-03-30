@@ -6758,11 +6758,124 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "see-curriculum",
   data: function data() {
     return {
       curriculum: [],
+      experienceUpdate: [],
+      courseUpdate: [],
       experiences: [],
       courses: []
     };
@@ -6780,15 +6893,58 @@ __webpack_require__.r(__webpack_exports__);
         _this.courses = response.data.courses;
       })["catch"](function (error) {});
     },
-    editData: function editData() {
-      axios.put("").then(function (response) {})["catch"](function (error) {});
+    editData: function editData(experience) {
+      axios.put().then(function (response) {})["catch"](function (error) {});
     },
     openModalExperience: function openModalExperience(experience) {
-      /* axios
-        .get("")
-        .then((response) => {})
-        .catch((error) => {}); */
-      $("#edit-experience").modal("show");
+      var _this2 = this;
+
+      axios.get("/get-experience/" + experience).then(function (response) {
+        _this2.experienceUpdate = response.data.experience;
+        $("#edit-experience").modal("show");
+      })["catch"](function (error) {});
+    },
+    editExperience: function editExperience() {
+      var _this3 = this;
+
+      var payload = {
+        name_company: this.experienceUpdate.name_company,
+        company_field: this.experienceUpdate.company_field,
+        occupied_job: this.experienceUpdate.occupied_job,
+        years: this.experienceUpdate.years,
+        months: this.experienceUpdate.months
+      };
+      axios.put("/edit-experience/" + this.experienceUpdate.id, payload).then(function (response) {
+        _this3.$swal("Sucesso!", "Os dados foram atualizados", "success");
+
+        $("#edit-experience").modal("hide");
+
+        _this3.getData();
+      })["catch"](function (error) {});
+    },
+    openModalCourse: function openModalCourse(course) {
+      var _this4 = this;
+
+      axios.get("/get-course/" + course).then(function (response) {
+        _this4.courseUpdate = response.data.course;
+        $("#edit-course").modal("show");
+      })["catch"](function (error) {});
+    },
+    editCourse: function editCourse() {
+      var _this5 = this;
+
+      var payload = {
+        name_courses: this.courseUpdate.name_courses,
+        school: this.courseUpdate.school,
+        hours: this.courseUpdate.hours
+      };
+      axios.put("/edit-course/" + this.courseUpdate.id, payload).then(function (response) {
+        _this5.$swal("Sucesso!", "Os dados foram atualizados", "success");
+
+        $("#edit-course").modal("hide");
+
+        _this5.getData();
+      })["catch"](function (error) {});
     }
   }
 });
@@ -33917,6 +34073,8 @@ var render = function () {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "container mb-5 mt-5" }, [
+      _vm._m(0),
+      _vm._v(" "),
       _c("h3", [_vm._v("Dados Pessoais")]),
       _vm._v(" "),
       _c("div", { staticClass: "row mt-3" }, [
@@ -34635,9 +34793,18 @@ var render = function () {
               _vm._v(" "),
               _c("p", [_vm._v("Horas Empregadas: " + _vm._s(course.hours))]),
               _vm._v(" "),
-              _c("p", { staticStyle: { color: "blue", cursor: "pointer" } }, [
-                _vm._v("Editar curso"),
-              ]),
+              _c(
+                "p",
+                {
+                  staticStyle: { color: "blue", cursor: "pointer" },
+                  on: {
+                    click: function ($event) {
+                      return _vm.openModalCourse(course.id)
+                    },
+                  },
+                },
+                [_vm._v("\n          Editar curso\n        ")]
+              ),
             ]
           )
         }),
@@ -34645,15 +34812,7 @@ var render = function () {
       ),
     ]),
     _vm._v(" "),
-    _vm._m(0),
-  ])
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
+    _c(
       "div",
       {
         staticClass: "modal fade",
@@ -34671,31 +34830,361 @@ var staticRenderFns = [
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "h5",
-                  {
-                    staticClass: "modal-title",
-                    attrs: { id: "exampleModalLabel" },
-                  },
-                  [_vm._v("Editar Experiência")]
-                ),
-              ]),
+              _vm._m(1),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [_vm._v("...")]),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
+                      _vm._v("Nome da empresa"),
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.experienceUpdate.name_company,
+                          expression: "experienceUpdate.name_company",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.experienceUpdate.name_company },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.experienceUpdate,
+                            "name_company",
+                            $event.target.value
+                          )
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
+                      _vm._v("Ramo da empresa"),
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.experienceUpdate.company_field,
+                          expression: "experienceUpdate.company_field",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.experienceUpdate.company_field },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.experienceUpdate,
+                            "company_field",
+                            $event.target.value
+                          )
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
+                      _vm._v("Cargo Ocupado"),
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.experienceUpdate.occupied_job,
+                          expression: "experienceUpdate.occupied_job",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.experienceUpdate.occupied_job },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.experienceUpdate,
+                            "occupied_job",
+                            $event.target.value
+                          )
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
+                      _vm._v("Anos"),
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.experienceUpdate.years,
+                          expression: "experienceUpdate.years",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.experienceUpdate.years },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.experienceUpdate,
+                            "years",
+                            $event.target.value
+                          )
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
+                      _vm._v("Meses"),
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.experienceUpdate.months,
+                          expression: "experienceUpdate.months",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.experienceUpdate.months },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.experienceUpdate,
+                            "months",
+                            $event.target.value
+                          )
+                        },
+                      },
+                    }),
+                  ]),
+                ]),
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
                 _c(
                   "button",
-                  { staticClass: "btn btn-primary", attrs: { type: "button" } },
-                  [_vm._v("Salvar")]
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.editExperience },
+                  },
+                  [_vm._v("\n            Salvar\n          ")]
                 ),
               ]),
             ]),
           ]
         ),
       ]
-    )
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "edit-course",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true",
+        },
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
+                      _vm._v("Nome do Curso"),
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.courseUpdate.name_courses,
+                          expression: "courseUpdate.name_courses",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.courseUpdate.name_courses },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.courseUpdate,
+                            "name_courses",
+                            $event.target.value
+                          )
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
+                      _vm._v("Escola"),
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.courseUpdate.school,
+                          expression: "courseUpdate.school",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.courseUpdate.school },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.courseUpdate,
+                            "school",
+                            $event.target.value
+                          )
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
+                      _vm._v("Horas"),
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.courseUpdate.hours,
+                          expression: "courseUpdate.hours",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text" },
+                      domProps: { value: _vm.courseUpdate.hours },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.courseUpdate,
+                            "hours",
+                            $event.target.value
+                          )
+                        },
+                      },
+                    }),
+                  ]),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.editCourse },
+                  },
+                  [_vm._v("\n            Salvar\n          ")]
+                ),
+              ]),
+            ]),
+          ]
+        ),
+      ]
+    ),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mt-3 mb-2" }, [
+      _c("div", { staticClass: "col-sm-4" }, [
+        _c("img", { attrs: { src: "img/user-image.png", alt: "" } }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("\n            Editar Experiência\n          ")]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Editar Curso")]
+      ),
+    ])
   },
 ]
 render._withStripped = true

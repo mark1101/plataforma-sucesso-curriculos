@@ -136,6 +136,50 @@ class CandidateCurriculumController extends Controller
         ], 200);
     }
 
+    public function getExperience($experience)
+    {
+        $experience = ProfessionalExperience::where('id', $experience)->first();
+        return response()->json(['experience' => $experience]);
+    }
+
+    public function editExperience(Request $request, $experience)
+    {
+        $experienceUpdate = ProfessionalExperience::where('id', $experience)->update([
+            'name_company' =>  $request->name_company,
+            'company_field' => $request->company_field,
+            'occupied_job' => $request->occupied_job,
+            'years' => $request->years,
+            'months' => $request->months
+        ]);
+
+        if($experienceUpdate){
+            return response()->json(['message' => 'Sucesss', 200]);
+        }else{
+            return;
+        }
+    }
+
+    public function getCourse($course)
+    {
+        $course = Course::where('id', $course)->first();
+        return response()->json(['course' => $course]);
+    }
+
+    public function editCourse(Request $request, $course)
+    {
+        $courseUpdate = Course::where('id' , $course)->update([
+            'name_courses' => $request->name_courses, 
+            'school' => $request->school,
+            'hours' => $request->hours
+        ]);
+
+        if($courseUpdate){
+            return response()->json(['message' => 'Sucesss', 200]);
+        }else{
+            return;
+        }
+    }
+
     public function editUserCurriculum(Request $request, $user_id)
     {
         // edita o curriculo do usuario
