@@ -1,0 +1,470 @@
+<template>
+  <div>
+    <h2 align="center">Currículo completo {{ curriculum.name }}</h2>
+    <div class="container mb-5 mt-5">
+      <div class="row mt-3 mb-2">
+        <div class="col-sm-4">
+          <img src="img/user-image.png" alt="" />
+        </div>
+      </div>
+      <h3>Dados Pessoais</h3>
+      <div class="row mt-3">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="formGroupExampleInput">Nome completo</label>
+            <input type="text" class="form-control" v-model="curriculum.name" />
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.email"
+            />
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="formGroupExampleInput">Endereço</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.address"
+            />
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Cidade</label>
+            <input type="text" class="form-control" v-model="curriculum.city" />
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="formGroupExampleInput">Estado</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.state"
+            />
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Data de Nascimento</label>
+            <input type="text" class="form-control" v-model="curriculum.age" />
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="formGroupExampleInput">CEP</label>
+            <input type="text" class="form-control" v-model="curriculum.cep" />
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Telefone</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.phone"
+            />
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="formGroupExampleInput">WhatsApp</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.whatsapp"
+            />
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Gênero Sexual</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.gender"
+            />
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="formGroupExampleInput">Nível de Escolaridade</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.schooling_level"
+            />
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Formação</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.formation"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="formGroupExampleInput">Instituição</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.institution"
+            />
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2"
+              >Tipo de Contratação Desejada</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.hiring_type"
+            />
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="formGroupExampleInput">Função Desejada</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.desired_function"
+            />
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Possuí Deficiência?</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.is_handicapped"
+            />
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="formGroupExampleInput">Pretenção Salarial</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.desired_salary"
+            />
+          </div>
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Possuí CNH?</label>
+            <input type="text" class="form-control" v-model="curriculum.cnh" />
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="formGroupExampleInput">Considerações Adicionais</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.additional_considerations"
+            />
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="formGroupExampleInput"
+              >Onde Foi Encontrada a Plataforma</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.found_us"
+            />
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="formGroupExampleInput2">Está Empregado?</label>
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.is_employed"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="">
+        <div class="mt-5">
+          <div class="evaluation__content__bottom__btns">
+            <a href="#" @click="editData">Atualizar dados</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mb-5 mt-5">
+      <h3>Experiências Profissionais</h3>
+      <div class="row mb-3">
+        <div
+          class="col-sm-6"
+          v-for="experience in experiences"
+          :key="experience.experience"
+        >
+          <h5>Nome da Empresa: {{ experience.name_company }}</h5>
+          <p>Ramo na empresa: {{ experience.company_field }}</p>
+          <p>Cargo Ocupado: {{ experience.occupied_job }}</p>
+          <p>Anos: {{ experience.years }}</p>
+          <p>Meses: {{ experience.months }}</p>
+          <p
+            style="color: blue; cursor: pointer"
+            @click="openModalExperience(experience.id)"
+          >
+            Editar esperiência
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mb-5 mt-5">
+      <h3>Cursos</h3>
+      <div class="row mb-3">
+        <div
+          class="col-sm-6"
+          v-for="course in courses"
+          :key="course.name_courses"
+        >
+          <h5>Nome do Curso: {{ course.name_courses }}</h5>
+          <p>Escola: {{ course.school }}</p>
+          <p>Horas Empregadas: {{ course.hours }}</p>
+          <p
+            style="color: blue; cursor: pointer"
+            @click="openModalCourse(course.id)"
+          >
+            Editar curso
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="edit-experience"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Editar Experiência
+            </h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Nome da empresa</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="experienceUpdate.name_company"
+                />
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Ramo da empresa</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="experienceUpdate.company_field"
+                />
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Cargo Ocupado</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="experienceUpdate.occupied_job"
+                />
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Anos</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="experienceUpdate.years"
+                />
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Meses</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="experienceUpdate.months"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="editExperience"
+            >
+              Salvar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="edit-course"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar Curso</h5>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Nome do Curso</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="courseUpdate.name_courses"
+                />
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Escola</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="courseUpdate.school"
+                />
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Horas</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model="courseUpdate.hours"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" @click="editCourse">
+              Salvar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "see-curriculum",
+
+  data() {
+    return {
+      curriculum: [],
+      experienceUpdate: [],
+      courseUpdate: [],
+
+      experiences: [],
+      courses: [],
+    };
+  },
+
+  mounted() {
+    this.getData();
+  },
+
+  methods: {
+    getData() {
+      axios
+        .get("/get-my-curriculum")
+        .then((response) => {
+          this.curriculum = response.data.curriculum;
+          this.experiences = response.data.experiences;
+          this.courses = response.data.courses;
+        })
+        .catch((error) => {});
+    },
+
+    editData(experience) {
+      axios
+        .put()
+        .then((response) => {})
+        .catch((error) => {});
+    },
+
+    openModalExperience(experience) {
+      axios
+        .get("/get-experience/" + experience)
+        .then((response) => {
+          this.experienceUpdate = response.data.experience;
+          $("#edit-experience").modal("show");
+        })
+        .catch((error) => {});
+    },
+
+    editExperience() {
+      let payload = {
+        name_company: this.experienceUpdate.name_company,
+        company_field: this.experienceUpdate.company_field,
+        occupied_job: this.experienceUpdate.occupied_job,
+        years: this.experienceUpdate.years,
+        months: this.experienceUpdate.months,
+      };
+      axios
+        .put("/edit-experience/" + this.experienceUpdate.id, payload)
+        .then((response) => {
+          this.$swal("Sucesso!", "Os dados foram atualizados", "success");
+          $("#edit-experience").modal("hide");
+          this.getData();
+        })
+        .catch((error) => {});
+    },
+
+    openModalCourse(course) {
+      axios
+        .get("/get-course/" + course)
+        .then((response) => {
+          this.courseUpdate = response.data.course;
+          $("#edit-course").modal("show");
+        })
+        .catch((error) => {});
+    },
+
+    editCourse() {
+      let payload = {
+        name_courses: this.courseUpdate.name_courses,
+        school: this.courseUpdate.school,
+        hours: this.courseUpdate.hours,
+      };
+
+      axios
+        .put("/edit-course/" + this.courseUpdate.id, payload)
+        .then((response) => {
+          this.$swal("Sucesso!", "Os dados foram atualizados", "success");
+          $("#edit-course").modal("hide");
+          this.getData();
+        })
+        .catch((error) => {});
+    },
+  },
+};
+</script>
+
+<style>
+</style>

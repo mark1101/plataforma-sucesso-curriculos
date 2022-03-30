@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\General;
 
 use App\Http\Controllers\Controller;
+use App\Models\Course;
 use App\Models\Curriculum;
+use App\Models\ProfessionalExperience;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,20 +15,18 @@ class CandidateCurriculumController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
-
         $imageName =  null;
 
-        dd($data['experiences'], $data['courses']);
 
-        if($request->file == []){
-            $newCurriculum = Curriculum::create([
+        if ($request->file == []) {
+            $newCurriculum = Curriculum::updateOrCreate([
                 'user_id' => Auth::user()->id,
                 'name' => $data['name'],
                 'address' => $data['address'],
-                'cep'=> $data['cep'],
+                'cep' => $data['cep'],
                 'state' => $data['state'],
                 'city' => $data['city'],
-                'age'=> $data['age'],
+                'age' => $data['age'],
                 'phone' => $data['phone'],
                 'whatsapp' => $data['whatsapp'],
                 'email' => $data['email'],
@@ -41,23 +41,43 @@ class CandidateCurriculumController extends Controller
                 'cnh' => $data['cnh'],
                 'additional_considerations' => $data['additional_considerations'],
                 'curriculum_photo_url' => $imageName,
-                'is_employes' => $data['is_employed'],
-                'found_us' => $data['found_us'] 
+                'is_employed' => $data['is_employed'],
+                'found_us' => $data['found_us']
             ]);
 
-            return;
+            foreach ($data['experiences'] as $experience) {
+                ProfessionalExperience::updateOrCreate([
+                    'curriculum_id' => $newCurriculum["id"],
+                    'name_company' => $experience["name_company"],
+                    'company_field' => $experience["company_field"],
+                    'occupied_job' => $experience["occupied_job"],
+                    'years' => $experience["years"],
+                    'months' => $experience["months"]
+                ]);
+            }
+
+            foreach ($data['courses'] as $course) {
+                Course::updateOrCreate([
+                    'curriculum_id' => $newCurriculum["id"],
+                    'name_courses' => $course["name_courses"],
+                    'school' => $course["school"],
+                    'hours' => $course["hours"]
+                ]);
+            }
+
+            return $newCurriculum;
         }
 
         $imageName = bin2hex(random_bytes(10)) . time() . '.' . $data['file']->extension();
         $data['file']->move(public_path('images/feed/'), $imageName);
 
-        $newCurriculum = Curriculum::create([
+        $newCurriculum = Curriculum::updateOrCreate([
             'name' => $data['name'],
             'address' => $data['address'],
-            'cep'=> $data['cep'],
+            'cep' => $data['cep'],
             'state' => $data['state'],
             'city' => $data['city'],
-            'age'=> $data['age'],
+            'age' => $data['age'],
             'phone' => $data['phone'],
             'whatsapp' => $data['whatsapp'],
             'email' => $data['email'],
@@ -66,27 +86,98 @@ class CandidateCurriculumController extends Controller
             'formation' => $data['formation'],
             'institution' => $data['institution'],
             'hiring_type' => $data['hiring_type'],
-            'desired_function' => $data['desired_funcion'],
+            'desired_function' => $data['desired_function'],
             'desired_salary' => $data['desired_salary'],
             'is_handicapped' => $data['is_handicapped'],
             'cnh' => $data['cnh'],
             'additional_considerations' => $data['additional_considerations'],
             'curriculum_photo_url' => $imageName,
-            'is_employes' => $data['is_employed'],
-            'found_us' => $data['found_us'] 
+            'is_employed' => $data['is_employed'],
+            'found_us' => $data['found_us']
         ]);
 
+        foreach ($data['experiences'] as $experience) {
+            ProfessionalExperience::updateOrCreate([
+                'curriculum_id' => $newCurriculum['id'],
+                'name_company' => $experience->name_company,
+                'company_field' => $experience->company_field,
+                'occuppied_job' => $experience->occupied_job,
+                'years' => $experience->years,
+                'months' => $experience->months
+            ]);
+        }
+
+        foreach ($data['courses'] as $course) {
+            Course::updateOrCreate([
+                'name_courses' => $course->name_courses,
+                'school' => $course->school,
+                'hours' => $course->hours
+            ]);
+        }
+
         return $newCurriculum;
-        
     }
 
-    public function getUserCurriculum($user_id)
+    public function getUserCurriculum()
     {
-
-        $curriculum = Curriculum::where('user_id', $user_id)
+        $curriculum = Curriculum::where('user_id', Auth::user()->id)
             ->first();
 
-        return response()->json(['curriculum' => $curriculum], 200);
+        $experiences = ProfessionalExperience::where('curriculum_id', $curriculum->id)
+            ->get();
+
+        $courses = Course::where('curriculum_id', $curriculum->id)
+            ->get();
+
+        return response()->json([
+            'curriculum' => $curriculum,
+            'experiences' => $experiences,
+            'courses' => $courses,
+        ], 200);
+    }
+
+    public function getExperience($experience)
+    {
+        $experience = ProfessionalExperience::where('id', $experience)->first();
+        return response()->json(['experience' => $experience]);
+    }
+
+    public function editExperience(Request $request, $experience)
+    {
+        $experienceUpdate = ProfessionalExperience::where('id', $experience)->update([
+            'name_company' =>  $request->name_company,
+            'company_field' => $request->company_field,
+            'occupied_job' => $request->occupied_job,
+            'years' => $request->years,
+            'months' => $request->months
+        ]);
+
+        if($experienceUpdate){
+            return response()->json(['message' => 'Sucesss', 200]);
+        }else{
+            return;
+        }
+    }
+
+    public function getCourse($course)
+    {
+        $course = Course::where('id', $course)->first();
+        return response()->json(['course' => $course]);
+    }
+
+    public function editCourse(Request $request, $course)
+    {
+        $courseUpdate = Course::where('id' , $course)->update([
+            'name_courses' => $request->name_courses, 
+            'school' => $request->school,
+            'hours' => $request->hours
+        ]);
+
+        if($courseUpdate){
+            return response()->json(['message' => 'Sucesss', 200]);
+        }else{
+            return;
+        }
     }
 
     public function editUserCurriculum(Request $request, $user_id)
