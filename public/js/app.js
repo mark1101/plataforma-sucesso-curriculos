@@ -35251,7 +35251,7 @@ var render = function () {
                     },
                   },
                 },
-                [_vm._v("\n          Editar esperiência\n        ")]
+                [_vm._v("\n          Editar experiência\n        ")]
               ),
             ]
           )

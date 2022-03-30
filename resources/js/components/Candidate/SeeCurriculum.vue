@@ -299,7 +299,7 @@
             style="color: blue; cursor: pointer"
             @click="openModalExperience(experience.id)"
           >
-            Editar esperiência
+            Editar experiência
           </p>
         </div>
       </div>
