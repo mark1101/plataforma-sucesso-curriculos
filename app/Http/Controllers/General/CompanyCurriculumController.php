@@ -10,6 +10,21 @@ use Illuminate\Support\Facades\Auth;
 
 class CompanyCurriculumController extends Controller
 {
+    public function indexSearch(Request $request){
+        $data = $request->all();
+
+        $curriculum = Curriculum::where('hiring_type', $request->hiring)
+        ->orWhere('schooling_level' , $request->schooling)
+        ->orWhere('formation' , $request->formation)
+        ->join('professional_experiences' , 'curriculum.id' , '=' , 'professional_experiences.curriculum.id')
+        ->orWhere('professional_experiences.years', '>=' , $request->years)
+        ->get();
+
+        return view('Search.search-result', [
+            'data' => $curriculum
+        ]);
+    }
+
     public function getListCurriculum()
     {
         $curriculum = Curriculum::where('active', 1)->get();
@@ -27,9 +42,15 @@ class CompanyCurriculumController extends Controller
         return response()->json(['curriculums' => $curriculum], 200);
     }
 
-    public function createDownloadCurriculum($curriculum_id){
+    public function primaryFilterCurriculum (Request $request)
+    {
 
-        
+        $filterCurriculum = Curriculum::where('active' , 1)->get();
+
+    }
+
+
+    public function createDownloadCurriculum($curriculum_id){
 
     }
 }

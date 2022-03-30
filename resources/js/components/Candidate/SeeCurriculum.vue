@@ -452,8 +452,11 @@
 </template>
 
 <script>
+import { VMoney } from "v-money";
 export default {
   name: "see-curriculum",
+
+  directives: { money: VMoney },
 
   data() {
     return {

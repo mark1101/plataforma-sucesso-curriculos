@@ -6497,6 +6497,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! v-money */ "./node_modules/v-money/dist/v-money.js");
+/* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(v_money__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -6950,8 +6952,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "see-curriculum",
+  directives: {
+    money: v_money__WEBPACK_IMPORTED_MODULE_0__.VMoney
+  },
   data: function data() {
     return {
       curriculum: [],
@@ -8229,20 +8235,90 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "primary-filter-curriculum.vue",
   data: function data() {
     return {
+      curriculum: [],
       state: "",
       city: "",
       occupation: "",
       schooling: "",
       time_experience: "",
-      formation: ""
+      formation: "",
+      options_hiring: [{
+        option: "CLT"
+      }, {
+        option: "Pessoa Jurídica (PJ)"
+      }, {
+        option: "Estagiário"
+      }, {
+        option: "Trainee"
+      }, {
+        option: "Jovem Aprendiz"
+      }]
     };
   },
   mounted: function mounted() {
     console.log("componente primario para filtragem de curriculo ok");
+  },
+  methods: {
+    postData: function postData() {
+      var payload = {
+        hiring: this.hiring_type,
+        schooling: this.schooling,
+        years: this.time_experience,
+        formation: this.formation
+      };
+      axios.post("/post-filter-primary", payload).then(function (response) {})["catch"](function (error) {
+        console.log("erro ->", error);
+      });
+    }
   }
 });
 
@@ -38181,9 +38257,9 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("section", { staticClass: "hero__area search-hero " }, [
+    _c("section", { staticClass: "hero__area search-hero" }, [
       _c("div", { staticClass: "container position-relative" }, [
-        _c("div", { staticClass: "row " }, [
+        _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-lg-6 col-md-6" }, [
             _c("div", { staticClass: "support__content__wrapper" }, [
               _vm._m(0),
@@ -38192,7 +38268,7 @@ var render = function () {
                 "div",
                 {
                   staticClass:
-                    "evalutaion__content__wrapper text-start support-content-wrapper",
+                    "\n                evalutaion__content__wrapper\n                text-start\n                support-content-wrapper\n              ",
                 },
                 [
                   _c(
@@ -38326,27 +38402,59 @@ var render = function () {
                               _vm._v(" Função que o candidato exercerá"),
                             ]),
                             _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.occupation,
-                                  expression: "occupation",
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.hiring_type,
+                                    expression: "hiring_type",
+                                  },
+                                ],
+                                staticClass: "form-select",
+                                attrs: {
+                                  "aria-label": "Default select example",
                                 },
-                              ],
-                              staticClass: "form-control",
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.occupation },
-                              on: {
-                                input: function ($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.occupation = $event.target.value
+                                on: {
+                                  change: function ($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call(
+                                        $event.target.options,
+                                        function (o) {
+                                          return o.selected
+                                        }
+                                      )
+                                      .map(function (o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.hiring_type = $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  },
                                 },
                               },
-                            }),
+                              _vm._l(_vm.options_hiring, function (option) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: option.option,
+                                    domProps: { value: option.option },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                          " +
+                                        _vm._s(option.option) +
+                                        "\n                        "
+                                    ),
+                                  ]
+                                )
+                              }),
+                              0
+                            ),
                           ]),
                         ]),
                         _vm._v(" "),
@@ -38395,13 +38503,21 @@ var render = function () {
                                 _c(
                                   "option",
                                   { attrs: { value: "Educacao Infantil" } },
-                                  [_vm._v("Educação Infantil")]
+                                  [
+                                    _vm._v(
+                                      "\n                          Educação Infantil\n                        "
+                                    ),
+                                  ]
                                 ),
                                 _vm._v(" "),
                                 _c(
                                   "option",
                                   { attrs: { value: "Ensino Fundamental" } },
-                                  [_vm._v("Ensino Fundamental")]
+                                  [
+                                    _vm._v(
+                                      "\n                          Ensino Fundamental\n                        "
+                                    ),
+                                  ]
                                 ),
                                 _vm._v(" "),
                                 _c(
@@ -38413,7 +38529,11 @@ var render = function () {
                                 _c(
                                   "option",
                                   { attrs: { value: "Ensino Superior" } },
-                                  [_vm._v("Ensino Superior")]
+                                  [
+                                    _vm._v(
+                                      "\n                          Ensino Superior\n                        "
+                                    ),
+                                  ]
                                 ),
                                 _vm._v(" "),
                                 _c(
@@ -38482,23 +38602,23 @@ var render = function () {
                                   _vm._v("0 - 1 ano"),
                                 ]),
                                 _vm._v(" "),
-                                _c("option", { attrs: { value: "1-3" } }, [
+                                _c("option", { attrs: { value: "3" } }, [
                                   _vm._v("1 - 3 anos"),
                                 ]),
                                 _vm._v(" "),
-                                _c("option", { attrs: { value: "3-5" } }, [
+                                _c("option", { attrs: { value: "5" } }, [
                                   _vm._v("3 - 5 anos"),
                                 ]),
                                 _vm._v(" "),
-                                _c("option", { attrs: { value: "5-7" } }, [
+                                _c("option", { attrs: { value: "7" } }, [
                                   _vm._v("5 - 7 anos"),
                                 ]),
                                 _vm._v(" "),
-                                _c("option", { attrs: { value: "7-9" } }, [
+                                _c("option", { attrs: { value: "9" } }, [
                                   _vm._v("7 - 9 anos"),
                                 ]),
                                 _vm._v(" "),
-                                _c("option", { attrs: { value: "9+" } }, [
+                                _c("option", { attrs: { value: "9" } }, [
                                   _vm._v("Mais de 9 anos"),
                                 ]),
                               ]
@@ -38562,8 +38682,8 @@ var render = function () {
                                 _vm._v(" "),
                                 _c(
                                   "option",
-                                  { attrs: { value: "Tecnologico" } },
-                                  [_vm._v("Tecnológico")]
+                                  { attrs: { value: "Tecnólogo" } },
+                                  [_vm._v("Tecnólogo")]
                                 ),
                                 _vm._v(" "),
                                 _c(
@@ -38575,13 +38695,21 @@ var render = function () {
                                 _c(
                                   "option",
                                   { attrs: { value: "Graduacao Modulada" } },
-                                  [_vm._v("Graduação Modulada")]
+                                  [
+                                    _vm._v(
+                                      "\n                          Graduação Modulada\n                        "
+                                    ),
+                                  ]
                                 ),
                                 _vm._v(" "),
                                 _c(
                                   "option",
                                   { attrs: { value: "Educacao a Distancia" } },
-                                  [_vm._v("Educação à Distância")]
+                                  [
+                                    _vm._v(
+                                      "\n                          Educação à Distância\n                        "
+                                    ),
+                                  ]
                                 ),
                               ]
                             ),
@@ -38609,9 +38737,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h4", [
-      _vm._v("Selecione os filtros e "),
+      _vm._v("\n              Selecione os filtros e "),
       _c("br"),
-      _vm._v("\n                            encontre o candidato de ouro!"),
+      _vm._v("\n              encontre o candidato de ouro!\n            "),
     ])
   },
   function () {
@@ -38620,7 +38748,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "evaluation__content__bottom__btns" }, [
       _c("button", { staticClass: "bg-red", attrs: { type: "submit" } }, [
-        _vm._v(" Enviar"),
+        _vm._v("Enviar"),
       ]),
     ])
   },

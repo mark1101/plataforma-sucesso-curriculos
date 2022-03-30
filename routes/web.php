@@ -71,6 +71,8 @@ Route::middleware(['company-acess'])->group(function () {
     Route::get('/empresa/encontrar-curriculos', [HomeCompanyController::class, 'search']);
     Route::get('/empresa/acessar-curriculos', [HomeCompanyController::class, 'acess']);
     Route::get('/empresa/resultado-busca', [HomeCompanyController::class, 'result']);
+
+    Route::post('/post-filter-primary', [CompanyCurriculumController::class, 'indexSearch']);
 });
 Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
 Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'])->name('register-company');
@@ -87,7 +89,7 @@ Route::middleware(['candidate-acess'])->group(function () {
         return view('Applicant.see-curriculum');
     });
     Route::put('/edit-curriculum' , [CandidateCurriculumController::class, 'editUserCurriculum']);
-    
+
     Route::get('/get-experience/{id}', [CandidateCurriculumController::class, 'getExperience']);
     Route::put('/edit-experience/{id}', [CandidateCurriculumController::class, 'editExperience']);
 
@@ -118,7 +120,7 @@ Route::prefix('curriculos')->group(function () {
     Route::get('/cadastro', function () {
         return view('Applicant.Registration.register-tab');
     });
-    Route::get('/buscar', function () {
+    Route::get('r/busca', function () {
         return view('Search.search');
     });
     Route::get('/resultado', function () {
