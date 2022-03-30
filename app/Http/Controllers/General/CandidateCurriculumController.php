@@ -168,7 +168,7 @@ class CandidateCurriculumController extends Controller
     public function editCourse(Request $request, $course)
     {
         $courseUpdate = Course::where('id' , $course)->update([
-            'name_courses' => $request->name_courses, 
+            'name_courses' => $request->name_courses,
             'school' => $request->school,
             'hours' => $request->hours
         ]);
@@ -180,9 +180,41 @@ class CandidateCurriculumController extends Controller
         }
     }
 
-    public function editUserCurriculum(Request $request, $user_id)
+    public function editUserCurriculum(Request $request)
     {
-        // edita o curriculo do usuario
+        $curriculumUpdate = Curriculum::where('user_id' , Auth::user()->id)->update([
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'age' => $request->age,
+            'email' => $request->email,
+            'address' => $request->address,
+            'cep' => $request->cep,
+            'city' => $request->city,
+            'state' => $request->state,
+            'cnh' => $request->cnh,
+            'schooling_level' => $request->schooling_level,
+            'formation' => $request->formation,
+            'institution' => $request->institution,
+            'is_handicapped' => $request->is_handicapped,
+            'hiring_type' => $request->hiring_type,
+            'is_employed' => $request->is_employed,
+            'whatsapp' => $request->whatsapp,
+            'phone' => $request->phone,
+            'desired_salary' => $request->desired_salary,
+            'desired_function' => $request->desired_function,
+            'additional_considerations' => $request->additional_considerations,
+            'found_us' => $request->found_us,
+        ]);
+
+
+        if($curriculumUpdate){
+            return; //response()->json(['message' => 'Sucess' , 200]);
+        }else{
+            return;
+        }
+
+
+
     }
 
     public function destroyUserCurriculum($curriculum_id)

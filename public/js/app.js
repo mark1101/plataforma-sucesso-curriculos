@@ -6869,6 +6869,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "see-curriculum",
   data: function data() {
@@ -6877,7 +6897,17 @@ __webpack_require__.r(__webpack_exports__);
       experienceUpdate: [],
       courseUpdate: [],
       experiences: [],
-      courses: []
+      courses: [],
+      options_handicapped: [{
+        option: "Sim"
+      }, {
+        option: "Não"
+      }],
+      options_cnh: [{
+        option: "Sim"
+      }, {
+        option: "Não"
+      }]
     };
   },
   mounted: function mounted() {
@@ -6896,16 +6926,50 @@ __webpack_require__.r(__webpack_exports__);
     editData: function editData(experience) {
       axios.put().then(function (response) {})["catch"](function (error) {});
     },
-    openModalExperience: function openModalExperience(experience) {
+    editCurriculum: function editCurriculum() {
       var _this2 = this;
 
+      var payload = {
+        name: this.curriculum.name,
+        address: this.curriculum.address,
+        state: this.curriculum.state,
+        email: this.curriculum.email,
+        age: this.curriculum.age,
+        cep: this.curriculum.cep,
+        city: this.curriculum.city,
+        cnh: this.curriculum.cnh,
+        formation: this.curriculum.formation,
+        gender: this.curriculum.gender,
+        hiring_type: this.curriculum.hiring_type,
+        institution: this.curriculum.institution,
+        is_employed: this.curriculum.is_employed,
+        is_handicapped: this.curriculum.is_handicapped,
+        schooling_level: this.curriculum.schooling_level,
+        whatsapp: this.curriculum.whatsapp,
+        desired_salary: this.curriculum.desired_salary,
+        desired_function: this.curriculum.desired_function,
+        additional_considerations: this.curriculum.additional_considerations,
+        found_us: this.curriculum.found_us,
+        phone: this.curriculum.phone
+      };
+      axios.put("/edit-curriculum", payload).then(function (response) {
+        _this2.$swal("Sucesso!", "Os dados foram atualizados", "success");
+
+        $("#edit-curriculum");
+
+        _this2.getData();
+      })["catch"](function (error) {});
+    },
+    openModalExperience: function openModalExperience(experience) {
+      var _this3 = this;
+
       axios.get("/get-experience/" + experience).then(function (response) {
-        _this2.experienceUpdate = response.data.experience;
+        _this3.experienceUpdate = response.data.experience;
         $("#edit-experience").modal("show");
       })["catch"](function (error) {});
     },
     editExperience: function editExperience() {
-      var _this3 = this;
+      var _this4 = this;
 
       var payload = {
         name_company: this.experienceUpdate.name_company,
@@ -6915,23 +6979,23 @@ __webpack_require__.r(__webpack_exports__);
         months: this.experienceUpdate.months
       };
       axios.put("/edit-experience/" + this.experienceUpdate.id, payload).then(function (response) {
-        _this3.$swal("Sucesso!", "Os dados foram atualizados", "success");
+        _this4.$swal("Sucesso!", "Os dados foram atualizados", "success");
 
         $("#edit-experience").modal("hide");
 
-        _this3.getData();
+        _this4.getData();
       })["catch"](function (error) {});
     },
     openModalCourse: function openModalCourse(course) {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.get("/get-course/" + course).then(function (response) {
-        _this4.courseUpdate = response.data.course;
+        _this5.courseUpdate = response.data.course;
         $("#edit-course").modal("show");
       })["catch"](function (error) {});
     },
     editCourse: function editCourse() {
-      var _this5 = this;
+      var _this6 = this;
 
       var payload = {
         name_courses: this.courseUpdate.name_courses,
@@ -6939,11 +7003,11 @@ __webpack_require__.r(__webpack_exports__);
         hours: this.courseUpdate.hours
       };
       axios.put("/edit-course/" + this.courseUpdate.id, payload).then(function (response) {
-        _this5.$swal("Sucesso!", "Os dados foram atualizados", "success");
+        _this6.$swal("Sucesso!", "Os dados foram atualizados", "success");
 
         $("#edit-course").modal("hide");
 
-        _this5.getData();
+        _this6.getData();
       })["catch"](function (error) {});
     }
   }
@@ -34530,31 +34594,52 @@ var render = function () {
               _vm._v("Possuí Deficiência?"),
             ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.curriculum.is_handicapped,
-                  expression: "curriculum.is_handicapped",
-                },
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.curriculum.is_handicapped },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(
-                    _vm.curriculum,
-                    "is_handicapped",
-                    $event.target.value
-                  )
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.curriculum.is_handicapped,
+                    expression: "curriculum.is_handicapped",
+                  },
+                ],
+                staticClass: "form-select",
+                attrs: { "aria-label": "Default select example" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.curriculum,
+                      "is_handicapped",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
                 },
               },
-            }),
+              _vm._l(_vm.options_handicapped, function (option) {
+                return _c(
+                  "option",
+                  { key: option.option, domProps: { value: option.option } },
+                  [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(option.option) +
+                        "\n            "
+                    ),
+                  ]
+                )
+              }),
+              0
+            ),
           ]),
         ]),
         _vm._v(" "),
@@ -34596,27 +34681,52 @@ var render = function () {
               _vm._v("Possuí CNH?"),
             ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.curriculum.cnh,
-                  expression: "curriculum.cnh",
-                },
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.curriculum.cnh },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.curriculum, "cnh", $event.target.value)
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.curriculum.cnh,
+                    expression: "curriculum.cnh",
+                  },
+                ],
+                staticClass: "form-select",
+                attrs: { "aria-label": "Default select example" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.curriculum,
+                      "cnh",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
                 },
               },
-            }),
+              _vm._l(_vm.options_cnh, function (option) {
+                return _c(
+                  "option",
+                  { key: option.option, domProps: { value: option.option } },
+                  [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(option.option) +
+                        "\n            "
+                    ),
+                  ]
+                )
+              }),
+              0
+            ),
           ]),
         ]),
       ]),
@@ -34720,9 +34830,11 @@ var render = function () {
       _c("div", {}, [
         _c("div", { staticClass: "mt-5" }, [
           _c("div", { staticClass: "evaluation__content__bottom__btns" }, [
-            _c("a", { attrs: { href: "#" }, on: { click: _vm.editData } }, [
-              _vm._v("Atualizar dados"),
-            ]),
+            _c(
+              "button",
+              { staticClass: "btn", on: { click: _vm.editCurriculum } },
+              [_vm._v("Atualizar dados")]
+            ),
           ]),
         ]),
       ]),
@@ -50414,7 +50526,7 @@ Vue.compile = compileToFunctions;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21","name":"axios","escapedName":"axios","rawSpec":"^0.21","saveSpec":null,"fetchSpec":"^0.21"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21","_where":"/Users/agenciaheyimac2015/Desktop/Projetos em desenvolvimento/plataforma-sucesso-empregos","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
 
 /***/ })
 

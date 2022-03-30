@@ -136,11 +136,19 @@
           </div>
           <div class="form-group">
             <label for="formGroupExampleInput2">Possuí Deficiência?</label>
-            <input
-              type="text"
-              class="form-control"
+            <select
+              class="form-select"
+              aria-label="Default select example"
               v-model="curriculum.is_handicapped"
-            />
+            >
+              <option
+                v-for="option in options_handicapped"
+                :value="option.option"
+                :key="option.option"
+              >
+                {{ option.option }}
+              </option>
+            </select>
           </div>
         </div>
         <div class="col-sm-4">
@@ -154,7 +162,19 @@
           </div>
           <div class="form-group">
             <label for="formGroupExampleInput2">Possuí CNH?</label>
-            <input type="text" class="form-control" v-model="curriculum.cnh" />
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              v-model="curriculum.cnh"
+            >
+              <option
+                v-for="option in options_cnh"
+                :value="option.option"
+                :key="option.option"
+              >
+                {{ option.option }}
+              </option>
+            </select>
           </div>
         </div>
       </div>
@@ -196,7 +216,7 @@
       <div class="">
         <div class="mt-5">
           <div class="evaluation__content__bottom__btns">
-            <a href="#" @click="editData">Atualizar dados</a>
+            <button class="btn" @click="editCurriculum">Atualizar dados</button>
           </div>
         </div>
       </div>
@@ -382,6 +402,10 @@ export default {
 
       experiences: [],
       courses: [],
+
+      options_handicapped: [{ option: "Sim" }, { option: "Não" }],
+
+      options_cnh: [{option: "Sim"}, {option: "Não"}],
     };
   },
 
@@ -405,6 +429,40 @@ export default {
       axios
         .put()
         .then((response) => {})
+        .catch((error) => {});
+    },
+
+    editCurriculum() {
+      let payload = {
+        name: this.curriculum.name,
+        address: this.curriculum.address,
+        state: this.curriculum.state,
+        email: this.curriculum.email,
+        age: this.curriculum.age,
+        cep: this.curriculum.cep,
+        city: this.curriculum.city,
+        cnh: this.curriculum.cnh,
+        formation: this.curriculum.formation,
+        gender: this.curriculum.gender,
+        hiring_type: this.curriculum.hiring_type,
+        institution: this.curriculum.institution,
+        is_employed: this.curriculum.is_employed,
+        is_handicapped: this.curriculum.is_handicapped,
+        schooling_level: this.curriculum.schooling_level,
+        whatsapp: this.curriculum.whatsapp,
+        desired_salary: this.curriculum.desired_salary,
+        desired_function: this.curriculum.desired_function,
+        additional_considerations: this.curriculum.additional_considerations,
+        found_us: this.curriculum.found_us,
+        phone: this.curriculum.phone,
+      };
+      axios
+        .put("/edit-curriculum", payload)
+        .then((response) => {
+          this.$swal("Sucesso!", "Os dados foram atualizados", "success");
+          $("#edit-curriculum");
+          this.getData();
+        })
         .catch((error) => {});
     },
 
