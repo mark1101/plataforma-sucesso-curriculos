@@ -226,7 +226,7 @@
                         >
                           <option value="Bacharelado">Bacharelado</option>
                           <option value="Licenciatura">Licenciatura</option>
-                          <option value="Tecnologico">Tecnológico</option>
+                          <option value="Tecnologo">Tecnólogo</option>
                           <option value="Sequencial">Sequencial</option>
                           <option value="Graduacao Modulada">
                             Graduação Modulada

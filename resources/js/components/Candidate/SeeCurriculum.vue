@@ -48,7 +48,12 @@
           </div>
           <div class="form-group">
             <label for="formGroupExampleInput2">Data de Nascimento</label>
-            <input type="text" class="form-control" v-model="curriculum.age" />
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.age"
+              v-mask="'##/##/####'"
+            />
           </div>
         </div>
       </div>
@@ -56,7 +61,12 @@
         <div class="col-sm-4">
           <div class="form-group">
             <label for="formGroupExampleInput">CEP</label>
-            <input type="text" class="form-control" v-model="curriculum.cep" />
+            <input
+              type="text"
+              class="form-control"
+              v-model="curriculum.cep"
+              v-mask="'#####-###'"
+            />
           </div>
           <div class="form-group">
             <label for="formGroupExampleInput2">Telefone</label>
@@ -64,6 +74,7 @@
               type="text"
               class="form-control"
               v-model="curriculum.phone"
+              v-mask="'(##) # ####-####'"
             />
           </div>
         </div>
@@ -74,33 +85,58 @@
               type="text"
               class="form-control"
               v-model="curriculum.whatsapp"
+              v-mask="'(##) # ####-####'"
             />
           </div>
           <div class="form-group">
             <label for="formGroupExampleInput2">Gênero Sexual</label>
-            <input
-              type="text"
-              class="form-control"
+            <select
+              class="form-select"
+              aria-label="Default select example"
               v-model="curriculum.gender"
-            />
+            >
+              <option
+                v-for="option in options_gender"
+                :value="option.option"
+                :key="option.option"
+              >
+                {{ option.option }}
+              </option>
+            </select>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
             <label for="formGroupExampleInput">Nível de Escolaridade</label>
-            <input
-              type="text"
-              class="form-control"
+            <select
+              class="form-select"
+              aria-label="Default select example"
               v-model="curriculum.schooling_level"
-            />
+            >
+              <option
+                v-for="option in options_schooling"
+                :value="option.option"
+                :key="option.option"
+              >
+                {{ option.option }}
+              </option>
+            </select>
           </div>
           <div class="form-group">
             <label for="formGroupExampleInput2">Formação</label>
-            <input
-              type="text"
-              class="form-control"
+            <select
+              class="form-select"
+              aria-label="Default select example"
               v-model="curriculum.formation"
-            />
+            >
+              <option
+                v-for="option in options_formation"
+                :value="option.option"
+                :key="option.option"
+              >
+                {{ option.option }}
+              </option>
+            </select>
           </div>
         </div>
       </div>
@@ -118,11 +154,19 @@
             <label for="formGroupExampleInput2"
               >Tipo de Contratação Desejada</label
             >
-            <input
-              type="text"
-              class="form-control"
+            <select
+              class="form-select"
+              aria-label="Default select example"
               v-model="curriculum.hiring_type"
-            />
+            >
+              <option
+                v-for="option in options_hiring"
+                :value="option.option"
+                :key="option.option"
+              >
+                {{ option.option }}
+              </option>
+            </select>
           </div>
         </div>
         <div class="col-sm-4">
@@ -154,11 +198,12 @@
         <div class="col-sm-4">
           <div class="form-group">
             <label for="formGroupExampleInput">Pretenção Salarial</label>
-            <input
+            <money
               type="text"
               class="form-control"
+              v-bind="money"
               v-model="curriculum.desired_salary"
-            />
+            ></money>
           </div>
           <div class="form-group">
             <label for="formGroupExampleInput2">Possuí CNH?</label>
@@ -194,21 +239,37 @@
             <label for="formGroupExampleInput"
               >Onde Foi Encontrada a Plataforma</label
             >
-            <input
-              type="text"
-              class="form-control"
+            <select
+              class="form-select"
+              aria-label="Default select example"
               v-model="curriculum.found_us"
-            />
+            >
+              <option
+                v-for="option in options_found"
+                :value="option.option"
+                :key="option.option"
+              >
+                {{ option.option }}
+              </option>
+            </select>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
             <label for="formGroupExampleInput2">Está Empregado?</label>
-            <input
-              type="text"
-              class="form-control"
+            <select
+              class="form-select"
+              aria-label="Default select example"
               v-model="curriculum.is_employed"
-            />
+            >
+              <option
+                v-for="option in options_employed"
+                :value="option.option"
+                :key="option.option"
+              >
+                {{ option.option }}
+              </option>
+            </select>
           </div>
         </div>
       </div>
@@ -405,7 +466,53 @@ export default {
 
       options_handicapped: [{ option: "Sim" }, { option: "Não" }],
 
-      options_cnh: [{option: "Sim"}, {option: "Não"}],
+      options_cnh: [{ option: "Sim" }, { option: "Não" }],
+
+      options_employed: [{ option: "Sim" }, { option: "Não" }],
+
+      options_gender: [
+        { option: "Feminino" },
+        { option: "Masculino" },
+        { option: "Outro" },
+      ],
+
+      options_found: [
+        { option: "Indicação" },
+        { option: "Radio" },
+        { option: "Televisão" },
+        { option: "Google" },
+        { option: "Youtube" },
+        { option: "Facebook" },
+        { option: "Instagram" },
+        { option: "Outros" },
+      ],
+
+      options_hiring: [
+        { option: "CLT" },
+        { option: "Pessoa Jurídica (PJ)" },
+        { option: "Estagiário" },
+        { option: "Trainee" },
+        { option: "Jovem Aprendiz" },
+      ],
+
+      options_schooling: [
+        { option: "Educação Infantil" },
+        { option: "Ensino Fundamental" },
+        { option: "Ensino Médio" },
+        { option: "Ensino Superior" },
+        { option: "Pós Graduação" },
+        { option: "Mestrado" },
+        { option: "Doutorado" },
+      ],
+
+      options_formation: [
+        { option: "Bacharelado" },
+        { option: "Licenciatura" },
+        { option: "Tecnólogo" },
+        { option: "Sequencial" },
+        { option: "Graduacao Modulada" },
+        { option: "Educação à Distância" },
+      ],
     };
   },
 

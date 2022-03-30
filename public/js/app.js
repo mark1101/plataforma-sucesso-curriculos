@@ -6889,6 +6889,67 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "see-curriculum",
   data: function data() {
@@ -6907,6 +6968,74 @@ __webpack_require__.r(__webpack_exports__);
         option: "Sim"
       }, {
         option: "Não"
+      }],
+      options_employed: [{
+        option: "Sim"
+      }, {
+        option: "Não"
+      }],
+      options_gender: [{
+        option: "Feminino"
+      }, {
+        option: "Masculino"
+      }, {
+        option: "Outro"
+      }],
+      options_found: [{
+        option: "Indicação"
+      }, {
+        option: "Radio"
+      }, {
+        option: "Televisão"
+      }, {
+        option: "Google"
+      }, {
+        option: "Youtube"
+      }, {
+        option: "Facebook"
+      }, {
+        option: "Instagram"
+      }, {
+        option: "Outros"
+      }],
+      options_hiring: [{
+        option: "CLT"
+      }, {
+        option: "Pessoa Jurídica (PJ)"
+      }, {
+        option: "Estagiário"
+      }, {
+        option: "Trainee"
+      }, {
+        option: "Jovem Aprendiz"
+      }],
+      options_schooling: [{
+        option: "Educação Infantil"
+      }, {
+        option: "Ensino Fundamental"
+      }, {
+        option: "Ensino Médio"
+      }, {
+        option: "Ensino Superior"
+      }, {
+        option: "Pós Graduação"
+      }, {
+        option: "Mestrado"
+      }, {
+        option: "Doutorado"
+      }],
+      options_formation: [{
+        option: "Bacharelado"
+      }, {
+        option: "Licenciatura"
+      }, {
+        option: "Tecnólogo"
+      }, {
+        option: "Sequencial"
+      }, {
+        option: "Graduacao Modulada"
+      }, {
+        option: "Educação à Distância"
       }]
     };
   },
@@ -32015,8 +32144,8 @@ var render = function () {
                                   _vm._v(" "),
                                   _c(
                                     "option",
-                                    { attrs: { value: "Tecnologico" } },
-                                    [_vm._v("Tecnológico")]
+                                    { attrs: { value: "Tecnologo" } },
+                                    [_vm._v("Tecnólogo")]
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -34300,6 +34429,12 @@ var render = function () {
                   value: _vm.curriculum.age,
                   expression: "curriculum.age",
                 },
+                {
+                  name: "mask",
+                  rawName: "v-mask",
+                  value: "##/##/####",
+                  expression: "'##/##/####'",
+                },
               ],
               staticClass: "form-control",
               attrs: { type: "text" },
@@ -34332,6 +34467,12 @@ var render = function () {
                   value: _vm.curriculum.cep,
                   expression: "curriculum.cep",
                 },
+                {
+                  name: "mask",
+                  rawName: "v-mask",
+                  value: "#####-###",
+                  expression: "'#####-###'",
+                },
               ],
               staticClass: "form-control",
               attrs: { type: "text" },
@@ -34359,6 +34500,12 @@ var render = function () {
                   rawName: "v-model",
                   value: _vm.curriculum.phone,
                   expression: "curriculum.phone",
+                },
+                {
+                  name: "mask",
+                  rawName: "v-mask",
+                  value: "(##) # ####-####",
+                  expression: "'(##) # ####-####'",
                 },
               ],
               staticClass: "form-control",
@@ -34390,6 +34537,12 @@ var render = function () {
                   value: _vm.curriculum.whatsapp,
                   expression: "curriculum.whatsapp",
                 },
+                {
+                  name: "mask",
+                  rawName: "v-mask",
+                  value: "(##) # ####-####",
+                  expression: "'(##) # ####-####'",
+                },
               ],
               staticClass: "form-control",
               attrs: { type: "text" },
@@ -34410,27 +34563,52 @@ var render = function () {
               _vm._v("Gênero Sexual"),
             ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.curriculum.gender,
-                  expression: "curriculum.gender",
-                },
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.curriculum.gender },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.curriculum, "gender", $event.target.value)
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.curriculum.gender,
+                    expression: "curriculum.gender",
+                  },
+                ],
+                staticClass: "form-select",
+                attrs: { "aria-label": "Default select example" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.curriculum,
+                      "gender",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
                 },
               },
-            }),
+              _vm._l(_vm.options_gender, function (option) {
+                return _c(
+                  "option",
+                  { key: option.option, domProps: { value: option.option } },
+                  [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(option.option) +
+                        "\n            "
+                    ),
+                  ]
+                )
+              }),
+              0
+            ),
           ]),
         ]),
         _vm._v(" "),
@@ -34440,31 +34618,52 @@ var render = function () {
               _vm._v("Nível de Escolaridade"),
             ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.curriculum.schooling_level,
-                  expression: "curriculum.schooling_level",
-                },
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.curriculum.schooling_level },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(
-                    _vm.curriculum,
-                    "schooling_level",
-                    $event.target.value
-                  )
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.curriculum.schooling_level,
+                    expression: "curriculum.schooling_level",
+                  },
+                ],
+                staticClass: "form-select",
+                attrs: { "aria-label": "Default select example" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.curriculum,
+                      "schooling_level",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
                 },
               },
-            }),
+              _vm._l(_vm.options_schooling, function (option) {
+                return _c(
+                  "option",
+                  { key: option.option, domProps: { value: option.option } },
+                  [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(option.option) +
+                        "\n            "
+                    ),
+                  ]
+                )
+              }),
+              0
+            ),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
@@ -34472,27 +34671,52 @@ var render = function () {
               _vm._v("Formação"),
             ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.curriculum.formation,
-                  expression: "curriculum.formation",
-                },
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.curriculum.formation },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.curriculum, "formation", $event.target.value)
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.curriculum.formation,
+                    expression: "curriculum.formation",
+                  },
+                ],
+                staticClass: "form-select",
+                attrs: { "aria-label": "Default select example" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.curriculum,
+                      "formation",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
                 },
               },
-            }),
+              _vm._l(_vm.options_formation, function (option) {
+                return _c(
+                  "option",
+                  { key: option.option, domProps: { value: option.option } },
+                  [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(option.option) +
+                        "\n            "
+                    ),
+                  ]
+                )
+              }),
+              0
+            ),
           ]),
         ]),
       ]),
@@ -34532,27 +34756,52 @@ var render = function () {
               _vm._v("Tipo de Contratação Desejada"),
             ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.curriculum.hiring_type,
-                  expression: "curriculum.hiring_type",
-                },
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.curriculum.hiring_type },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.curriculum, "hiring_type", $event.target.value)
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.curriculum.hiring_type,
+                    expression: "curriculum.hiring_type",
+                  },
+                ],
+                staticClass: "form-select",
+                attrs: { "aria-label": "Default select example" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.curriculum,
+                      "hiring_type",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
                 },
               },
-            }),
+              _vm._l(_vm.options_hiring, function (option) {
+                return _c(
+                  "option",
+                  { key: option.option, domProps: { value: option.option } },
+                  [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(option.option) +
+                        "\n            "
+                    ),
+                  ]
+                )
+              }),
+              0
+            ),
           ]),
         ]),
         _vm._v(" "),
@@ -34644,37 +34893,36 @@ var render = function () {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-sm-4" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput" } }, [
-              _vm._v("Pretenção Salarial"),
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.curriculum.desired_salary,
-                  expression: "curriculum.desired_salary",
-                },
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.curriculum.desired_salary },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(
-                    _vm.curriculum,
-                    "desired_salary",
-                    $event.target.value
-                  )
-                },
-              },
-            }),
-          ]),
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("label", { attrs: { for: "formGroupExampleInput" } }, [
+                _vm._v("Pretenção Salarial"),
+              ]),
+              _vm._v(" "),
+              _c(
+                "money",
+                _vm._b(
+                  {
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    model: {
+                      value: _vm.curriculum.desired_salary,
+                      callback: function ($$v) {
+                        _vm.$set(_vm.curriculum, "desired_salary", $$v)
+                      },
+                      expression: "curriculum.desired_salary",
+                    },
+                  },
+                  "money",
+                  _vm.money,
+                  false
+                )
+              ),
+            ],
+            1
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
@@ -34772,27 +35020,52 @@ var render = function () {
               _vm._v("Onde Foi Encontrada a Plataforma"),
             ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.curriculum.found_us,
-                  expression: "curriculum.found_us",
-                },
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.curriculum.found_us },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.curriculum, "found_us", $event.target.value)
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.curriculum.found_us,
+                    expression: "curriculum.found_us",
+                  },
+                ],
+                staticClass: "form-select",
+                attrs: { "aria-label": "Default select example" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.curriculum,
+                      "found_us",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
                 },
               },
-            }),
+              _vm._l(_vm.options_found, function (option) {
+                return _c(
+                  "option",
+                  { key: option.option, domProps: { value: option.option } },
+                  [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(option.option) +
+                        "\n            "
+                    ),
+                  ]
+                )
+              }),
+              0
+            ),
           ]),
         ]),
         _vm._v(" "),
@@ -34802,27 +35075,52 @@ var render = function () {
               _vm._v("Está Empregado?"),
             ]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.curriculum.is_employed,
-                  expression: "curriculum.is_employed",
-                },
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.curriculum.is_employed },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.curriculum, "is_employed", $event.target.value)
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.curriculum.is_employed,
+                    expression: "curriculum.is_employed",
+                  },
+                ],
+                staticClass: "form-select",
+                attrs: { "aria-label": "Default select example" },
+                on: {
+                  change: function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.curriculum,
+                      "is_employed",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
                 },
               },
-            }),
+              _vm._l(_vm.options_employed, function (option) {
+                return _c(
+                  "option",
+                  { key: option.option, domProps: { value: option.option } },
+                  [
+                    _vm._v(
+                      "\n              " +
+                        _vm._s(option.option) +
+                        "\n            "
+                    ),
+                  ]
+                )
+              }),
+              0
+            ),
           ]),
         ]),
       ]),
