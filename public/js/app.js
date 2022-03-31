@@ -7105,10 +7105,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "see-curriculum",
@@ -7152,9 +7148,9 @@ __webpack_require__.r(__webpack_exports__);
         option: "Não"
       }],
       options_employed: [{
-        option: "Sim"
+        option: "Empregado"
       }, {
-        option: "Não"
+        option: "Desempregado"
       }],
       options_gender: [{
         option: "Feminino"
@@ -8400,6 +8396,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "filter-curriculum.vue",
   data: function data() {
@@ -8416,12 +8414,17 @@ __webpack_require__.r(__webpack_exports__);
       hiring_type: "",
       cnh: "",
       is_handicapped: "",
-      is_employed: ""
+      is_employed: "",
+      curriculumFilter: []
     };
   },
+  props: {
+    curriculum: Object
+  },
   mounted: function mounted() {
-    console.log("componente para filtragem de curriculo ok");
-  }
+    this.curriculumFilter = this.curriculum;
+  },
+  methods: {}
 });
 
 /***/ }),
@@ -32472,7 +32475,7 @@ var render = function () {
                                 [
                                   _c(
                                     "option",
-                                    { attrs: { value: "Educacao Infantil" } },
+                                    { attrs: { value: "Educação Infantil" } },
                                     [
                                       _vm._v(
                                         "\n                          Educação Infantil\n                        "
@@ -32492,7 +32495,7 @@ var render = function () {
                                   _vm._v(" "),
                                   _c(
                                     "option",
-                                    { attrs: { value: "Ensino Medio" } },
+                                    { attrs: { value: "Ensino Médio" } },
                                     [_vm._v("Ensino Médio")]
                                   ),
                                   _vm._v(" "),
@@ -32508,7 +32511,7 @@ var render = function () {
                                   _vm._v(" "),
                                   _c(
                                     "option",
-                                    { attrs: { value: "Pos-graduacao" } },
+                                    { attrs: { value: "Pós Graduação" } },
                                     [_vm._v("Pós-graduação")]
                                   ),
                                   _vm._v(" "),
@@ -32593,7 +32596,7 @@ var render = function () {
                                   _vm._v(" "),
                                   _c(
                                     "option",
-                                    { attrs: { value: "Tecnologo" } },
+                                    { attrs: { value: "Tecnólogo" } },
                                     [_vm._v("Tecnólogo")]
                                   ),
                                   _vm._v(" "),
@@ -32605,7 +32608,7 @@ var render = function () {
                                   _vm._v(" "),
                                   _c(
                                     "option",
-                                    { attrs: { value: "Graduacao Modulada" } },
+                                    { attrs: { value: "Graduação Modulada" } },
                                     [
                                       _vm._v(
                                         "\n                          Graduação Modulada\n                        "
@@ -32616,7 +32619,7 @@ var render = function () {
                                   _c(
                                     "option",
                                     {
-                                      attrs: { value: "Educacao a Distancia" },
+                                      attrs: { value: "Educação à Distância" },
                                     },
                                     [
                                       _vm._v(
@@ -32719,17 +32722,21 @@ var render = function () {
                                   },
                                 },
                                 [
-                                  _c("option", { attrs: { value: "Clt" } }, [
+                                  _c("option", { attrs: { value: "CLT" } }, [
                                     _vm._v("CLT"),
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("option", { attrs: { value: "Pj" } }, [
-                                    _vm._v("Pessoa Jurídica (PJ)"),
                                   ]),
                                   _vm._v(" "),
                                   _c(
                                     "option",
-                                    { attrs: { value: "Estagiario" } },
+                                    {
+                                      attrs: { value: "Pessoa Jurídica (PJ)" },
+                                    },
+                                    [_vm._v("Pessoa Jurídica (PJ)")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Estagiário" } },
                                     [_vm._v("Estagiário")]
                                   ),
                                   _vm._v(" "),
@@ -32741,7 +32748,7 @@ var render = function () {
                                   _vm._v(" "),
                                   _c(
                                     "option",
-                                    { attrs: { value: "JovemAprendiz" } },
+                                    { attrs: { value: "Jovem Aprendiz" } },
                                     [_vm._v("Jovem Aprendiz")]
                                   ),
                                 ]
@@ -32882,7 +32889,7 @@ var render = function () {
                                   },
                                 },
                                 [
-                                  _c("option", { attrs: { value: "Nao" } }, [
+                                  _c("option", { attrs: { value: "Não" } }, [
                                     _vm._v("Não"),
                                   ]),
                                   _vm._v(" "),
@@ -34722,9 +34729,7 @@ var render = function () {
       _c("div", { staticClass: "row mt-3" }, [
         _c("div", { staticClass: "col-sm-4" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput" } }, [
-              _vm._v("Nome completo"),
-            ]),
+            _c("label", [_vm._v("Nome completo")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -34750,9 +34755,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-              _vm._v("Email"),
-            ]),
+            _c("label", [_vm._v("Email")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -34780,9 +34783,7 @@ var render = function () {
         _vm._v(" "),
         _c("div", { staticClass: "col-sm-4" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput" } }, [
-              _vm._v("Endereço"),
-            ]),
+            _c("label", [_vm._v("Endereço")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -34808,9 +34809,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-              _vm._v("Cidade"),
-            ]),
+            _c("label", [_vm._v("Cidade")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -34838,9 +34837,7 @@ var render = function () {
         _vm._v(" "),
         _c("div", { staticClass: "col-sm-4" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput" } }, [
-              _vm._v("Estado"),
-            ]),
+            _c("label", [_vm._v("Estado")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -34866,9 +34863,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-              _vm._v("Data de Nascimento"),
-            ]),
+            _c("label", [_vm._v("Data de Nascimento")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -34904,9 +34899,7 @@ var render = function () {
       _c("div", { staticClass: "row mt-3" }, [
         _c("div", { staticClass: "col-sm-4" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput" } }, [
-              _vm._v("CEP"),
-            ]),
+            _c("label", [_vm._v("CEP")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -34938,9 +34931,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-              _vm._v("Telefone"),
-            ]),
+            _c("label", [_vm._v("Telefone")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -34974,9 +34965,7 @@ var render = function () {
         _vm._v(" "),
         _c("div", { staticClass: "col-sm-4" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput" } }, [
-              _vm._v("WhatsApp"),
-            ]),
+            _c("label", [_vm._v("WhatsApp")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -35008,9 +34997,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-              _vm._v("Gênero Sexual"),
-            ]),
+            _c("label", [_vm._v("Gênero Sexual")]),
             _vm._v(" "),
             _c(
               "select",
@@ -35063,9 +35050,7 @@ var render = function () {
         _vm._v(" "),
         _c("div", { staticClass: "col-sm-4" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput" } }, [
-              _vm._v("Nível de Escolaridade"),
-            ]),
+            _c("label", [_vm._v("Nível de Escolaridade")]),
             _vm._v(" "),
             _c(
               "select",
@@ -35116,9 +35101,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-              _vm._v("Formação"),
-            ]),
+            _c("label", [_vm._v("Formação")]),
             _vm._v(" "),
             _c(
               "select",
@@ -35173,9 +35156,7 @@ var render = function () {
       _c("div", { staticClass: "row mt-3" }, [
         _c("div", { staticClass: "col-sm-4" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput" } }, [
-              _vm._v("Instituição"),
-            ]),
+            _c("label", [_vm._v("Instituição")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -35201,9 +35182,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-              _vm._v("Tipo de Contratação Desejada"),
-            ]),
+            _c("label", [_vm._v("Tipo de Contratação Desejada")]),
             _vm._v(" "),
             _c(
               "select",
@@ -35256,9 +35235,7 @@ var render = function () {
         _vm._v(" "),
         _c("div", { staticClass: "col-sm-4" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput" } }, [
-              _vm._v("Função Desejada"),
-            ]),
+            _c("label", [_vm._v("Função Desejada")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -35288,9 +35265,7 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-              _vm._v("Possuí Deficiência?"),
-            ]),
+            _c("label", [_vm._v("Possuí Deficiência?")]),
             _vm._v(" "),
             _c(
               "select",
@@ -35346,9 +35321,7 @@ var render = function () {
             "div",
             { staticClass: "form-group" },
             [
-              _c("label", { attrs: { for: "formGroupExampleInput" } }, [
-                _vm._v("Pretenção Salarial"),
-              ]),
+              _c("label", [_vm._v("Pretenção Salarial")]),
               _vm._v(" "),
               _c(
                 "money",
@@ -35374,9 +35347,7 @@ var render = function () {
           ),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-              _vm._v("Possuí CNH?"),
-            ]),
+            _c("label", [_vm._v("Possuí CNH?")]),
             _vm._v(" "),
             _c(
               "select",
@@ -35431,9 +35402,7 @@ var render = function () {
       _c("div", { staticClass: "row mt-3" }, [
         _c("div", { staticClass: "col-sm-4" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput" } }, [
-              _vm._v("Considerações Adicionais"),
-            ]),
+            _c("label", [_vm._v("Considerações Adicionais")]),
             _vm._v(" "),
             _c("input", {
               directives: [
@@ -35465,9 +35434,7 @@ var render = function () {
         _vm._v(" "),
         _c("div", { staticClass: "col-sm-4" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput" } }, [
-              _vm._v("Onde Foi Encontrada a Plataforma"),
-            ]),
+            _c("label", [_vm._v("Onde Foi Encontrada a Plataforma")]),
             _vm._v(" "),
             _c(
               "select",
@@ -35520,9 +35487,7 @@ var render = function () {
         _vm._v(" "),
         _c("div", { staticClass: "col-sm-4" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-              _vm._v("Está Empregado?"),
-            ]),
+            _c("label", [_vm._v("Está Empregado?")]),
             _vm._v(" "),
             _c(
               "select",
@@ -35762,9 +35727,7 @@ var render = function () {
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-                      _vm._v("Nome da empresa"),
-                    ]),
+                    _c("label", [_vm._v("Nome da empresa")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -35794,9 +35757,7 @@ var render = function () {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-                      _vm._v("Ramo da empresa"),
-                    ]),
+                    _c("label", [_vm._v("Ramo da empresa")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -35826,9 +35787,7 @@ var render = function () {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-                      _vm._v("Cargo Ocupado"),
-                    ]),
+                    _c("label", [_vm._v("Cargo Ocupado")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -35858,9 +35817,7 @@ var render = function () {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-                      _vm._v("Anos"),
-                    ]),
+                    _c("label", [_vm._v("Anos")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -35890,9 +35847,7 @@ var render = function () {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-                      _vm._v("Meses"),
-                    ]),
+                    _c("label", [_vm._v("Meses")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -35963,9 +35918,7 @@ var render = function () {
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-                      _vm._v("Nome do Curso"),
-                    ]),
+                    _c("label", [_vm._v("Nome do Curso")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -35995,9 +35948,7 @@ var render = function () {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-                      _vm._v("Escola"),
-                    ]),
+                    _c("label", [_vm._v("Escola")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -36027,9 +35978,7 @@ var render = function () {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "formGroupExampleInput2" } }, [
-                      _vm._v("Horas"),
-                    ]),
+                    _c("label", [_vm._v("Horas")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -36099,9 +36048,7 @@ var render = function () {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                    _vm._v("Nome da Empresa"),
-                  ]),
+                  _c("label", [_vm._v("Nome da Empresa")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -36131,9 +36078,7 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                    _vm._v("Ramo da Empresa"),
-                  ]),
+                  _c("label", [_vm._v("Ramo da Empresa")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -36163,9 +36108,7 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                    _vm._v("Cargo Ocupado"),
-                  ]),
+                  _c("label", [_vm._v("Cargo Ocupado")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -36195,9 +36138,7 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                    _vm._v("Anos de experiência"),
-                  ]),
+                  _c("label", [_vm._v("Anos de experiência")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -36227,9 +36168,7 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                    _vm._v("Meses de Experiência "),
-                  ]),
+                  _c("label", [_vm._v("Meses de Experiência ")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -36305,9 +36244,7 @@ var render = function () {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                    _vm._v("Nome do Curso"),
-                  ]),
+                  _c("label", [_vm._v("Nome do Curso")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -36337,9 +36274,7 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                    _vm._v("Instituição"),
-                  ]),
+                  _c("label", [_vm._v("Instituição")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -36365,9 +36300,7 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                    _vm._v("Horas Empregadas "),
-                  ]),
+                  _c("label", [_vm._v("Horas Empregadas ")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -37581,37 +37514,27 @@ var render = function () {
                                       },
                                     },
                                     [
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "0-1" } },
-                                        [_vm._v("0 - 1 ano")]
-                                      ),
+                                      _c("option", { attrs: { value: "0" } }, [
+                                        _vm._v("0 - 1 ano"),
+                                      ]),
                                       _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "1-3" } },
-                                        [_vm._v("1 - 3 anos")]
-                                      ),
+                                      _c("option", { attrs: { value: "1" } }, [
+                                        _vm._v("1 - 3 anos"),
+                                      ]),
                                       _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "3-5" } },
-                                        [_vm._v("3 - 5 anos")]
-                                      ),
+                                      _c("option", { attrs: { value: "3" } }, [
+                                        _vm._v("3 - 5 anos"),
+                                      ]),
                                       _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "5-7" } },
-                                        [_vm._v("5 - 7 anos")]
-                                      ),
+                                      _c("option", { attrs: { value: "5" } }, [
+                                        _vm._v("5 - 7 anos"),
+                                      ]),
                                       _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "7-9" } },
-                                        [_vm._v("7 - 9 anos")]
-                                      ),
+                                      _c("option", { attrs: { value: "7" } }, [
+                                        _vm._v("7 - 9 anos"),
+                                      ]),
                                       _vm._v(" "),
-                                      _c("option", { attrs: { value: "9+" } }, [
+                                      _c("option", { attrs: { value: "9" } }, [
                                         _vm._v("Mais de 9 anos"),
                                       ]),
                                     ]
@@ -37830,7 +37753,11 @@ var render = function () {
                                             value: "Graduacao Modulada",
                                           },
                                         },
-                                        [_vm._v("Graduação Modulada")]
+                                        [
+                                          _vm._v(
+                                            "Graduação Modulada\n                                                        "
+                                          ),
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       _c(
@@ -37840,7 +37767,11 @@ var render = function () {
                                             value: "Educacao a Distancia",
                                           },
                                         },
-                                        [_vm._v("Educação à Distância")]
+                                        [
+                                          _vm._v(
+                                            "Educação à Distância\n                                                        "
+                                          ),
+                                        ]
                                       ),
                                     ]
                                   ),
@@ -39396,23 +39327,23 @@ var render = function () {
                                 },
                               },
                               [
-                                _c("option", { attrs: { value: "0-1" } }, [
+                                _c("option", { attrs: { value: "0" } }, [
                                   _vm._v("0 - 1 ano"),
                                 ]),
                                 _vm._v(" "),
-                                _c("option", { attrs: { value: "1-3" } }, [
+                                _c("option", { attrs: { value: "1" } }, [
                                   _vm._v("1 - 3 anos"),
                                 ]),
                                 _vm._v(" "),
-                                _c("option", { attrs: { value: "3-5" } }, [
+                                _c("option", { attrs: { value: "3" } }, [
                                   _vm._v("3 - 5 anos"),
                                 ]),
                                 _vm._v(" "),
-                                _c("option", { attrs: { value: "5-7" } }, [
+                                _c("option", { attrs: { value: "5" } }, [
                                   _vm._v("5 - 7 anos"),
                                 ]),
                                 _vm._v(" "),
-                                _c("option", { attrs: { value: "7-9" } }, [
+                                _c("option", { attrs: { value: "7" } }, [
                                   _vm._v("7 - 9 anos"),
                                 ]),
                                 _vm._v(" "),
@@ -39515,7 +39446,21 @@ var render = function () {
                         ]),
                       ]),
                       _vm._v(" "),
-                      _vm._m(1),
+                      _c(
+                        "div",
+                        { staticClass: "evaluation__content__bottom__btns" },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "bg-red",
+                              attrs: { type: "button" },
+                              on: { click: _vm.postData },
+                            },
+                            [_vm._v("Enviar")]
+                          ),
+                        ]
+                      ),
                     ]
                   ),
                 ]
@@ -39525,7 +39470,7 @@ var render = function () {
         ]),
       ]),
       _vm._v(" "),
-      _vm._m(2),
+      _vm._m(1),
     ]),
   ])
 }
@@ -39538,16 +39483,6 @@ var staticRenderFns = [
       _vm._v("\n              Selecione os filtros e "),
       _c("br"),
       _vm._v("\n              encontre o candidato de ouro!\n            "),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "evaluation__content__bottom__btns" }, [
-      _c("button", { staticClass: "bg-red", attrs: { type: "submit" } }, [
-        _vm._v("Enviar"),
-      ]),
     ])
   },
   function () {
@@ -51750,7 +51685,7 @@ Vue.compile = compileToFunctions;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21","name":"axios","escapedName":"axios","rawSpec":"^0.21","saveSpec":null,"fetchSpec":"^0.21"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21","_where":"/Users/agenciaheyimac2015/Desktop/Projetos em desenvolvimento/plataforma-sucesso-empregos","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
+module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
 
 /***/ })
 

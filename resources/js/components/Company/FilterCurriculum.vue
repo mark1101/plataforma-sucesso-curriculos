@@ -130,12 +130,12 @@
                                                             aria-label="Default select example"
                                                             v-model="time_experience"
                                                         >
-                                                            <option value="0-1">0 - 1 ano</option>
-                                                            <option value="1-3">1 - 3 anos</option>
-                                                            <option value="3-5">3 - 5 anos</option>
-                                                            <option value="5-7">5 - 7 anos</option>
-                                                            <option value="7-9">7 - 9 anos</option>
-                                                            <option value="9+">Mais de 9 anos</option>
+                                                            <option value="0">0 - 1 ano</option>
+                                                            <option value="1">1 - 3 anos</option>
+                                                            <option value="3">3 - 5 anos</option>
+                                                            <option value="5">5 - 7 anos</option>
+                                                            <option value="7">7 - 9 anos</option>
+                                                            <option value="9">Mais de 9 anos</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -214,8 +214,10 @@
                                                             <option value="Licenciatura">Licenciatura</option>
                                                             <option value="Tecnologico">Tecnológico</option>
                                                             <option value="Sequencial">Sequencial</option>
-                                                            <option value="Graduacao Modulada">Graduação Modulada</option>
-                                                            <option value="Educacao a Distancia">Educação à Distância</option>
+                                                            <option value="Graduacao Modulada">Graduação Modulada
+                                                            </option>
+                                                            <option value="Educacao a Distancia">Educação à Distância
+                                                            </option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -618,12 +620,23 @@ export default {
             cnh: "",
             is_handicapped: "",
             is_employed: "",
+
+            curriculumFilter: [],
         };
+
+    },
+
+    props:{
+        curriculum: Object,
     },
 
     mounted() {
-        console.log("componente para filtragem de curriculo ok");
+        this.curriculumFilter = this.curriculum
     },
+
+    methods: {
+
+    }
 };
 </script>
 

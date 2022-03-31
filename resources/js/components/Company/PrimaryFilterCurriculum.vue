@@ -98,11 +98,11 @@
                           aria-label="Default select example"
                           v-model="time_experience"
                         >
-                          <option value="0-1">0 - 1 ano</option>
-                          <option value="1-3">1 - 3 anos</option>
-                          <option value="3-5">3 - 5 anos</option>
-                          <option value="5-7">5 - 7 anos</option>
-                          <option value="7-9">7 - 9 anos</option>
+                          <option value="0">0 - 1 ano</option>
+                          <option value="1">1 - 3 anos</option>
+                          <option value="3">3 - 5 anos</option>
+                          <option value="5">5 - 7 anos</option>
+                          <option value="7">7 - 9 anos</option>
                           <option value="9">Mais de 9 anos</option>
                         </select>
                       </div>
@@ -130,7 +130,7 @@
                     </div>
                   </div>
                   <div class="evaluation__content__bottom__btns">
-                    <button type="submit" class="bg-red">Enviar</button>
+                    <button type="button" @click="postData" class="bg-red">Enviar</button>
                   </div>
                 </form>
               </div>
