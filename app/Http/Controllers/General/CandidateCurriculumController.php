@@ -124,9 +124,11 @@ class CandidateCurriculumController extends Controller
             ->first();
 
         $experiences = ProfessionalExperience::where('curriculum_id', $curriculum->id)
+            ->orderByDesc('id')
             ->get();
 
         $courses = Course::where('curriculum_id', $curriculum->id)
+            ->orderByDesc('id')
             ->get();
 
         return response()->json([
@@ -134,6 +136,22 @@ class CandidateCurriculumController extends Controller
             'experiences' => $experiences,
             'courses' => $courses,
         ], 200);
+    }
+
+    public function createExperience(Request $request)
+    {
+        $curriculum = Curriculum::where('user_id', Auth::user()->id)->first();
+
+        $newExperience = ProfessionalExperience::create([
+            'curriculum_id' => $curriculum->id,
+            'name_company' => $request->name_company,
+            'company_field' => $request->company_field,
+            'occupied_job' => $request->occupied_job,
+            'years' => $request->years,
+            'months' => $request->months
+        ]);
+
+        return $newExperience;
     }
 
     public function getExperience($experience)
@@ -152,11 +170,30 @@ class CandidateCurriculumController extends Controller
             'months' => $request->months
         ]);
 
-        if($experienceUpdate){
+        if ($experienceUpdate) {
             return response()->json(['message' => 'Sucesss', 200]);
-        }else{
+        } else {
             return;
         }
+    }
+
+    public function deleteExperience($experience_id){
+        ProfessionalExperience::where('id', $experience_id)->delete();
+        return;
+    }
+
+    public function createCourse(Request $request)
+    {
+        $curriculum = Curriculum::where('user_id', Auth::user()->id)->first();
+
+        $newCourse = Course::create([
+            'curriculum_id' => $curriculum->id,
+            'name_courses' => $request->name_courses,
+            'school' => $request->school,
+            'hours' => $request->hours
+        ]);
+
+        return $newCourse;
     }
 
     public function getCourse($course)
@@ -167,22 +204,27 @@ class CandidateCurriculumController extends Controller
 
     public function editCourse(Request $request, $course)
     {
-        $courseUpdate = Course::where('id' , $course)->update([
+        $courseUpdate = Course::where('id', $course)->update([
             'name_courses' => $request->name_courses,
             'school' => $request->school,
             'hours' => $request->hours
         ]);
 
-        if($courseUpdate){
+        if ($courseUpdate) {
             return response()->json(['message' => 'Sucesss', 200]);
-        }else{
+        } else {
             return;
         }
     }
 
+    public function deleteCourse($course_id){
+        Course::where('id', $course_id)->delete();
+        return;
+    }
+
     public function editUserCurriculum(Request $request)
     {
-        $curriculumUpdate = Curriculum::where('user_id' , Auth::user()->id)->update([
+        $curriculumUpdate = Curriculum::where('user_id', Auth::user()->id)->update([
             'name' => $request->name,
             'gender' => $request->gender,
             'age' => $request->age,
@@ -207,14 +249,11 @@ class CandidateCurriculumController extends Controller
         ]);
 
 
-        if($curriculumUpdate){
+        if ($curriculumUpdate) {
             return; //response()->json(['message' => 'Sucess' , 200]);
-        }else{
+        } else {
             return;
         }
-
-
-
     }
 
     public function destroyUserCurriculum($curriculum_id)
