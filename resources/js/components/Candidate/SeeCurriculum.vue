@@ -286,7 +286,7 @@
       <h3>Experiências Profissionais</h3>
       <div class="row mb-3">
         <div
-          class="col-sm-6"
+          class="col-sm-4"
           v-for="experience in experiences"
           :key="experience.experience"
         >
@@ -302,14 +302,28 @@
             Editar esperiência
           </p>
         </div>
+        <div class="col-sm-4">
+          <div class="mt-5">
+            <div class="evaluation__content__bottom__btns">
+              <!-- Button trigger modal -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="openModalExperience"
+              >
+                Launch demo modal
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="container mb-5 mt-5">
       <h3>Cursos</h3>
-      <div class="row mb-3">
+      <div class="row">
         <div
-          class="col-sm-6"
+          class="col-sm-4"
           v-for="course in courses"
           :key="course.name_courses"
         >
@@ -322,6 +336,20 @@
           >
             Editar curso
           </p>
+        </div>
+        <div class="col-sm-4">
+          <div class="mt-5">
+            <div class="evaluation__content__bottom__btns">
+              <button
+                class="btn"
+                type="button"
+                data-toggle="modal"
+                data-target="#create-course"
+              >
+                Cadastrar novo curso
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -448,18 +476,117 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal Create Experience -->
+    <div
+      class="modal fade"
+      id="create-experience"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Adicionar nova experiência
+            </h5>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Nome da Empresa</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Ramo da Empresa</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Cargo Ocupado</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Anos de experiência</label>
+              <input type="number" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Meses de Experiência </label>
+            <input type="number" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" @click="createExperience">
+          Cadastrar
+        </button>
+      </div>
+    </div>
+
+    <!-- Modal Create Course -->
+    <div
+      class="modal fade"
+      id="create-course"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Adicionar novo Curso
+            </h5>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Nome do Curso</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Instituição</label>
+              <input type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Horas Empregadas </label>
+              <input type="number" class="form-control" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" @click="createCourse">
+          Cadastrar
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { VMoney } from "v-money";
+
 export default {
   name: "see-curriculum",
+
+  directives: { money: VMoney },
 
   data() {
     return {
       curriculum: [],
       experienceUpdate: [],
       courseUpdate: [],
+
+      money: {
+        decimal: ",",
+        thousands: ".",
+        prefix: "",
+        suffix: "",
+        precision: 2,
+        masked: false,
+      },
 
       experiences: [],
       courses: [],
@@ -627,9 +754,69 @@ export default {
         })
         .catch((error) => {});
     },
+
+    openModalExperience() {
+      $("#create-experience").modal("show");
+    },
+
+    createExperience() {
+      this.$swal({
+        toast: true,
+        position: "bottom-end",
+        timerProgressBar: false,
+        icon: "error",
+        timer: 5000,
+        title: "Os campos precisam ser todos preenchidos!",
+        showConfirmButton: false,
+        cancelButtonText: "ok",
+        allowEscapeKey: true,
+      });
+      let payload = {};
+
+      axios
+        .post("", payload)
+        .then((response) => {
+          this.$swal("Sucesso!", "Experiência cadastrada", "success");
+          this.getData();
+          $("#create-experience").modal("hide");
+        })
+        .catch((error) => {});
+    },
+
+    openModalCourse() {
+      $("#create-course").modal("show");
+    },
+
+    createCourse() {
+      this.$swal({
+        toast: true,
+        position: "bottom-end",
+        timerProgressBar: false,
+        icon: "error",
+        timer: 5000,
+        title: "Os campos precisam ser todos preenchidos!",
+        showConfirmButton: false,
+        cancelButtonText: "ok",
+        allowEscapeKey: true,
+      });
+
+      let payload = {};
+
+      axios
+        .post("", payload)
+        .then((response) => {
+          this.$swal("Sucesso!", "Curso cadastrado", "success");
+          this.getData();
+          $("#create-course").modal("hide");
+        })
+        .catch((error) => {});
+    },
   },
 };
 </script>
 
 <style>
+.col {
+  align-self: self-end !important;
+}
 </style>
