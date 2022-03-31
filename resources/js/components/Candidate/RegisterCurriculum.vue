@@ -198,17 +198,17 @@
                           aria-label="Default select example"
                           v-model="schooling_level"
                         >
-                          <option value="Educacao Infantil">
+                          <option value="Educação Infantil">
                             Educação Infantil
                           </option>
                           <option value="Ensino Fundamental">
                             Ensino Fundamental
                           </option>
-                          <option value="Ensino Medio">Ensino Médio</option>
+                          <option value="Ensino Médio">Ensino Médio</option>
                           <option value="Ensino Superior">
                             Ensino Superior
                           </option>
-                          <option value="Pos-graduacao">Pós-graduação</option>
+                          <option value="Pós Graduação">Pós-graduação</option>
                           <option value="Mestrado">Mestrado</option>
                           <option value="Doutorado">Doutorado</option>
                         </select>
@@ -226,12 +226,12 @@
                         >
                           <option value="Bacharelado">Bacharelado</option>
                           <option value="Licenciatura">Licenciatura</option>
-                          <option value="Tecnologo">Tecnólogo</option>
+                          <option value="Tecnólogo">Tecnólogo</option>
                           <option value="Sequencial">Sequencial</option>
-                          <option value="Graduacao Modulada">
+                          <option value="Graduação Modulada">
                             Graduação Modulada
                           </option>
-                          <option value="Educacao a Distancia">
+                          <option value="Educação à Distância">
                             Educação à Distância
                           </option>
                         </select>
@@ -259,11 +259,11 @@
                           aria-label="Default select example"
                           v-model="hiring_type"
                         >
-                          <option value="Clt">CLT</option>
-                          <option value="Pj">Pessoa Jurídica (PJ)</option>
-                          <option value="Estagiario">Estagiário</option>
+                          <option value="CLT">CLT</option>
+                          <option value="Pessoa Jurídica (PJ)">Pessoa Jurídica (PJ)</option>
+                          <option value="Estagiário">Estagiário</option>
                           <option value="Trainee">Trainee</option>
-                          <option value="JovemAprendiz">Jovem Aprendiz</option>
+                          <option value="Jovem Aprendiz">Jovem Aprendiz</option>
                         </select>
                       </div>
                     </div>
@@ -302,7 +302,7 @@
                           aria-label="Default select example"
                           v-model="is_handicapped"
                         >
-                          <option value="Nao">Não</option>
+                          <option value="Não">Não</option>
                           <option value="Sim">Sim</option>
                         </select>
                       </div>

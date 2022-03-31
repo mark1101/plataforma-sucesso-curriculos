@@ -33,17 +33,15 @@ class CompanyCurriculumController extends Controller
 
     public function indexSearch(Request $request)
     {
-        $data = $request->all();
-
         $curriculum = Curriculum::where('hiring_type', $request->hiring)
             ->orWhere('schooling_level', $request->schooling)
             ->orWhere('formation', $request->formation)
-            ->join('professional_experiences', 'curriculum.id', '=', 'professional_experiences.curriculum.id')
+            ->join('professional_experiences', 'curriculum.id', '=', 'professional_experiences.curriculum_id')
             ->orWhere('professional_experiences.years', '>=', $request->years)
             ->get();
 
-        return view('Search.search-result', [
-            'data' => $curriculum
+        return redirect()->route('primary-filter', [
+            'curriculum' => $curriculum
         ]);
     }
 }
