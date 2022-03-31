@@ -6499,10 +6499,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! v-money */ "./node_modules/v-money/dist/v-money.js");
 /* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(v_money__WEBPACK_IMPORTED_MODULE_0__);
-var _methods;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7089,6 +7128,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         precision: 2,
         masked: false
       },
+      newExperience: {
+        name_company: null,
+        company_field: null,
+        years: null,
+        months: null
+      },
+      newCourse: {
+        name_courses: null,
+        school: null,
+        hours: null
+      },
       experiences: [],
       courses: [],
       options_handicapped: [{
@@ -7174,7 +7224,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     this.getData();
   },
-  methods: (_methods = {
+  methods: {
     getData: function getData() {
       var _this = this;
 
@@ -7183,9 +7233,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.experiences = response.data.experiences;
         _this.courses = response.data.courses;
       })["catch"](function (error) {});
-    },
-    editData: function editData(experience) {
-      axios.put().then(function (response) {})["catch"](function (error) {});
     },
     editCurriculum: function editCurriculum() {
       var _this2 = this;
@@ -7224,6 +7271,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     openModalExperience: function openModalExperience(experience) {
       var _this3 = this;
 
+      console.log("aaaaaa");
       axios.get("/get-experience/" + experience).then(function (response) {
         _this3.experienceUpdate = response.data.experience;
         $("#edit-experience").modal("show");
@@ -7247,16 +7295,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this4.getData();
       })["catch"](function (error) {});
     },
-    openModalCourse: function openModalCourse(course) {
+    deleteExperience: function deleteExperience(experience) {
       var _this5 = this;
 
+      this.$swal({
+        title: "Deletar informação?",
+        text: "Se apagado o mesmo não podera ser recuperado!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Sim, Apagar agora!"
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          axios["delete"]("/delete-experience/" + experience).then(function (response) {
+            _this5.$swal("Sucesso!", "Curso deletado", "success");
+
+            _this5.getData();
+          })["catch"](function (error) {
+            _this5.$swal("Ops...!", "Erro ao apagar", "error");
+          });
+        }
+      });
+    },
+    openModalCourse: function openModalCourse(course) {
+      var _this6 = this;
+
       axios.get("/get-course/" + course).then(function (response) {
-        _this5.courseUpdate = response.data.course;
+        _this6.courseUpdate = response.data.course;
         $("#edit-course").modal("show");
       })["catch"](function (error) {});
     },
     editCourse: function editCourse() {
-      var _this6 = this;
+      var _this7 = this;
 
       var payload = {
         name_courses: this.courseUpdate.name_courses,
@@ -7264,62 +7336,120 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         hours: this.courseUpdate.hours
       };
       axios.put("/edit-course/" + this.courseUpdate.id, payload).then(function (response) {
-        _this6.$swal("Sucesso!", "Os dados foram atualizados", "success");
+        _this7.$swal("Sucesso!", "Os dados foram atualizados", "success");
 
         $("#edit-course").modal("hide");
 
-        _this6.getData();
+        _this7.getData();
       })["catch"](function (error) {});
+    },
+    deleteCourse: function deleteCourse(course) {
+      var _this8 = this;
+
+      this.$swal({
+        title: "Deletar informação?",
+        text: "Se apagado o mesmo não podera ser recuperado!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Sim, Apagar agora!"
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          axios["delete"]("/delete-course/" + course).then(function (response) {
+            _this8.$swal("Sucesso!", "Experiência deletada", "success");
+
+            _this8.getData();
+          })["catch"](function (error) {
+            _this8.$swal("Ops...!", "Erro ao apagar", "error");
+          });
+        }
+      });
+    },
+    openModalExperienceCreate: function openModalExperienceCreate() {
+      $("#create-experience").modal("show");
+    },
+    createExperience: function createExperience() {
+      var _this9 = this;
+
+      if (this.newExperience.name_company === null || this.newExperience.company_field === null || this.newExperience.occupied_job === null || this.newExperience.years === null || this.newExperience.months === null) {
+        this.$swal({
+          toast: true,
+          position: "bottom-end",
+          timerProgressBar: false,
+          icon: "error",
+          timer: 5000,
+          title: "Os campos precisam ser todos preenchidos!",
+          showConfirmButton: false,
+          cancelButtonText: "ok",
+          allowEscapeKey: true
+        });
+      } else {
+        var payload = {
+          name_company: this.newExperience.name_company,
+          company_field: this.newExperience.company_field,
+          occupied_job: this.newExperience.occupied_job,
+          years: this.newExperience.years,
+          months: this.newExperience.months
+        };
+        axios.post("/create-new-experience", payload).then(function (response) {
+          _this9.$swal("Sucesso!", "Experiência cadastrada", "success");
+
+          _this9.getData();
+
+          _this9.clear();
+
+          $("#create-experience").modal("hide");
+        })["catch"](function (error) {});
+      }
+    },
+    openModalCourseCreate: function openModalCourseCreate() {
+      $("#create-course").modal("show");
+    },
+    createCourse: function createCourse() {
+      var _this10 = this;
+
+      if (this.newCourse.name_courses === null || this.newCourse.school === null || this.newCourse.hours === null) {
+        this.$swal({
+          toast: true,
+          position: "bottom-end",
+          timerProgressBar: false,
+          icon: "error",
+          timer: 5000,
+          title: "Os campos precisam ser todos preenchidos!",
+          showConfirmButton: false,
+          cancelButtonText: "ok",
+          allowEscapeKey: true
+        });
+      } else {
+        var payload = {
+          name_courses: this.newCourse.name_courses,
+          school: this.newCourse.school,
+          hours: this.newCourse.hours
+        };
+        axios.post("/create-new-course", payload).then(function (response) {
+          _this10.$swal("Sucesso!", "Curso cadastrado", "success");
+
+          _this10.getData();
+
+          _this10.clear();
+
+          $("#create-course").modal("hide");
+        })["catch"](function (error) {});
+      }
+    },
+    clear: function clear() {
+      this.newExperience.name_company = null;
+      this.newExperience.company_field = null;
+      this.newExperience.occupied_job = null;
+      this.newExperience.years = null;
+      this.newExperience.months = null;
+      this.newCourse.name_courses = null;
+      this.newExperience.school = null;
+      this.newExperience.hours = null;
     }
-  }, _defineProperty(_methods, "openModalExperience", function openModalExperience() {
-    $("#create-experience").modal("show");
-  }), _defineProperty(_methods, "createExperience", function createExperience() {
-    var _this7 = this;
-
-    this.$swal({
-      toast: true,
-      position: "bottom-end",
-      timerProgressBar: false,
-      icon: "error",
-      timer: 5000,
-      title: "Os campos precisam ser todos preenchidos!",
-      showConfirmButton: false,
-      cancelButtonText: "ok",
-      allowEscapeKey: true
-    });
-    var payload = {};
-    axios.post("", payload).then(function (response) {
-      _this7.$swal("Sucesso!", "Experiência cadastrada", "success");
-
-      _this7.getData();
-
-      $("#create-experience").modal("hide");
-    })["catch"](function (error) {});
-  }), _defineProperty(_methods, "openModalCourse", function openModalCourse() {
-    $("#create-course").modal("show");
-  }), _defineProperty(_methods, "createCourse", function createCourse() {
-    var _this8 = this;
-
-    this.$swal({
-      toast: true,
-      position: "bottom-end",
-      timerProgressBar: false,
-      icon: "error",
-      timer: 5000,
-      title: "Os campos precisam ser todos preenchidos!",
-      showConfirmButton: false,
-      cancelButtonText: "ok",
-      allowEscapeKey: true
-    });
-    var payload = {};
-    axios.post("", payload).then(function (response) {
-      _this8.$swal("Sucesso!", "Curso cadastrado", "success");
-
-      _this8.getData();
-
-      $("#create-course").modal("hide");
-    })["catch"](function (error) {});
-  }), _methods)
+  }
 });
 
 /***/ }),
@@ -8409,20 +8539,90 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "primary-filter-curriculum.vue",
   data: function data() {
     return {
+      curriculum: [],
       state: "",
       city: "",
       occupation: "",
       schooling: "",
       time_experience: "",
-      formation: ""
+      formation: "",
+      options_hiring: [{
+        option: "CLT"
+      }, {
+        option: "Pessoa Jurídica (PJ)"
+      }, {
+        option: "Estagiário"
+      }, {
+        option: "Trainee"
+      }, {
+        option: "Jovem Aprendiz"
+      }]
     };
   },
   mounted: function mounted() {
     console.log("componente primario para filtragem de curriculo ok");
+  },
+  methods: {
+    postData: function postData() {
+      var payload = {
+        hiring: this.hiring_type,
+        schooling: this.schooling,
+        years: this.time_experience,
+        formation: this.formation
+      };
+      axios.post("/post-filter-primary", payload).then(function (response) {})["catch"](function (error) {
+        console.log("erro ->", error);
+      });
+    }
   }
 });
 
@@ -35427,7 +35627,20 @@ var render = function () {
                       },
                     },
                   },
-                  [_vm._v("\n          Editar esperiência\n        ")]
+                  [_vm._v("\n          Editar experiência\n        ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticStyle: { color: "red", cursor: "pointer" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.deleteExperience(experience.id)
+                      },
+                    },
+                  },
+                  [_vm._v("\n          Apagar experiência\n        ")]
                 ),
               ]
             )
@@ -35441,9 +35654,13 @@ var render = function () {
                   {
                     staticClass: "btn btn-primary",
                     attrs: { type: "button" },
-                    on: { click: _vm.openModalExperience },
+                    on: { click: _vm.openModalExperienceCreate },
                   },
-                  [_vm._v("\n              Launch demo modal\n            ")]
+                  [
+                    _vm._v(
+                      "\n              Cadastrar Experiência\n            "
+                    ),
+                  ]
                 ),
               ]),
             ]),
@@ -35485,11 +35702,38 @@ var render = function () {
                   },
                   [_vm._v("\n          Editar curso\n        ")]
                 ),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticStyle: { color: "red", cursor: "pointer" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.deleteCourse(course.id)
+                      },
+                    },
+                  },
+                  [_vm._v("\n          Apagar Curso\n        ")]
+                ),
               ]
             )
           }),
           _vm._v(" "),
-          _vm._m(1),
+          _c("div", { staticClass: "col-sm-4" }, [
+            _c("div", { staticClass: "mt-5" }, [
+              _c("div", { staticClass: "evaluation__content__bottom__btns" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn",
+                    attrs: { type: "button" },
+                    on: { click: _vm.openModalCourseCreate },
+                  },
+                  [_vm._v("\n              Cadastrar novo curso\n            ")]
+                ),
+              ]),
+            ]),
+          ]),
         ],
         2
       ),
@@ -35513,7 +35757,7 @@ var render = function () {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "row" }, [
@@ -35714,7 +35958,7 @@ var render = function () {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "row" }, [
@@ -35846,19 +36090,196 @@ var render = function () {
         },
       },
       [
-        _vm._m(4),
-        _vm._v(" "),
-        _c("div", { staticClass: "modal-footer" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { type: "button" },
-              on: { click: _vm.createExperience },
-            },
-            [_vm._v("\n        Cadastrar\n      ")]
-          ),
-        ]),
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                    _vm._v("Nome da Empresa"),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newExperience.name_company,
+                        expression: "newExperience.name_company",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.newExperience.name_company },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.newExperience,
+                          "name_company",
+                          $event.target.value
+                        )
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                    _vm._v("Ramo da Empresa"),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newExperience.company_field,
+                        expression: "newExperience.company_field",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.newExperience.company_field },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.newExperience,
+                          "company_field",
+                          $event.target.value
+                        )
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                    _vm._v("Cargo Ocupado"),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newExperience.occupied_job,
+                        expression: "newExperience.occupied_job",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.newExperience.occupied_job },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.newExperience,
+                          "occupied_job",
+                          $event.target.value
+                        )
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                    _vm._v("Anos de experiência"),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newExperience.years,
+                        expression: "newExperience.years",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.newExperience.years },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.newExperience,
+                          "years",
+                          $event.target.value
+                        )
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                    _vm._v("Meses de Experiência "),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newExperience.months,
+                        expression: "newExperience.months",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.newExperience.months },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.newExperience,
+                          "months",
+                          $event.target.value
+                        )
+                      },
+                    },
+                  }),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "modal-footer",
+                  staticStyle: { "background-color": "white" },
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "button" },
+                      on: { click: _vm.createExperience },
+                    },
+                    [_vm._v("\n            Cadastrar\n          ")]
+                  ),
+                ]
+              ),
+            ]),
+          ]
+        ),
       ]
     ),
     _vm._v(" "),
@@ -35875,19 +36296,117 @@ var render = function () {
         },
       },
       [
-        _vm._m(5),
-        _vm._v(" "),
-        _c("div", { staticClass: "modal-footer" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { type: "button" },
-              on: { click: _vm.createCourse },
-            },
-            [_vm._v("\n        Cadastrar\n      ")]
-          ),
-        ]),
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                    _vm._v("Nome do Curso"),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newCourse.name_courses,
+                        expression: "newCourse.name_courses",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.newCourse.name_courses },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.newCourse,
+                          "name_courses",
+                          $event.target.value
+                        )
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                    _vm._v("Instituição"),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newCourse.school,
+                        expression: "newCourse.school",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.newCourse.school },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.newCourse, "school", $event.target.value)
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                    _vm._v("Horas Empregadas "),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newCourse.hours,
+                        expression: "newCourse.hours",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.newCourse.hours },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.newCourse, "hours", $event.target.value)
+                      },
+                    },
+                  }),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.createCourse },
+                  },
+                  [_vm._v("\n            Cadastrar\n          ")]
+                ),
+              ]),
+            ]),
+          ]
+        ),
       ]
     ),
   ])
@@ -35900,29 +36419,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "row mt-3 mb-2" }, [
       _c("div", { staticClass: "col-sm-4" }, [
         _c("img", { attrs: { src: "img/user-image.png", alt: "" } }),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-4" }, [
-      _c("div", { staticClass: "mt-5" }, [
-        _c("div", { staticClass: "evaluation__content__bottom__btns" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn",
-              attrs: {
-                type: "button",
-                "data-toggle": "modal",
-                "data-target": "#create-course",
-              },
-            },
-            [_vm._v("\n              Cadastrar novo curso\n            ")]
-          ),
-        ]),
       ]),
     ])
   },
@@ -35954,139 +36450,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal-dialog", attrs: { role: "document" } },
-      [
-        _c("div", { staticClass: "modal-content" }, [
-          _c("div", { staticClass: "modal-header" }, [
-            _c(
-              "h5",
-              {
-                staticClass: "modal-title",
-                attrs: { id: "exampleModalLabel" },
-              },
-              [_vm._v("\n            Adicionar nova experiência\n          ")]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-body" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                _vm._v("Nome da Empresa"),
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text" },
-              }),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                _vm._v("Ramo da Empresa"),
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text" },
-              }),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                _vm._v("Cargo Ocupado"),
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text" },
-              }),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                _vm._v("Anos de experiência"),
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "number" },
-              }),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-              _vm._v("Meses de Experiência "),
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "number" },
-            }),
-          ]),
-        ]),
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("\n            Adicionar nova experiência\n          ")]
+      ),
+    ])
   },
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "modal-dialog", attrs: { role: "document" } },
-      [
-        _c("div", { staticClass: "modal-content" }, [
-          _c("div", { staticClass: "modal-header" }, [
-            _c(
-              "h5",
-              {
-                staticClass: "modal-title",
-                attrs: { id: "exampleModalLabel" },
-              },
-              [_vm._v("\n            Adicionar novo Curso\n          ")]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "modal-body" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                _vm._v("Nome do Curso"),
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text" },
-              }),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                _vm._v("Instituição"),
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text" },
-              }),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "exampleInputEmail1" } }, [
-                _vm._v("Horas Empregadas "),
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "number" },
-              }),
-            ]),
-          ]),
-        ]),
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("\n            Adicionar novo Curso\n          ")]
+      ),
+    ])
   },
 ]
 render._withStripped = true
@@ -38673,9 +39055,9 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("section", { staticClass: "hero__area search-hero " }, [
+    _c("section", { staticClass: "hero__area search-hero" }, [
       _c("div", { staticClass: "container position-relative" }, [
-        _c("div", { staticClass: "row " }, [
+        _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-lg-6 col-md-6" }, [
             _c("div", { staticClass: "support__content__wrapper" }, [
               _vm._m(0),
@@ -38684,7 +39066,7 @@ var render = function () {
                 "div",
                 {
                   staticClass:
-                    "evalutaion__content__wrapper text-start support-content-wrapper",
+                    "\n                evalutaion__content__wrapper\n                text-start\n                support-content-wrapper\n              ",
                 },
                 [
                   _c(
@@ -38818,27 +39200,59 @@ var render = function () {
                               _vm._v(" Função que o candidato exercerá"),
                             ]),
                             _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.occupation,
-                                  expression: "occupation",
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.hiring_type,
+                                    expression: "hiring_type",
+                                  },
+                                ],
+                                staticClass: "form-select",
+                                attrs: {
+                                  "aria-label": "Default select example",
                                 },
-                              ],
-                              staticClass: "form-control",
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.occupation },
-                              on: {
-                                input: function ($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.occupation = $event.target.value
+                                on: {
+                                  change: function ($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call(
+                                        $event.target.options,
+                                        function (o) {
+                                          return o.selected
+                                        }
+                                      )
+                                      .map(function (o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.hiring_type = $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  },
                                 },
                               },
-                            }),
+                              _vm._l(_vm.options_hiring, function (option) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: option.option,
+                                    domProps: { value: option.option },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                          " +
+                                        _vm._s(option.option) +
+                                        "\n                        "
+                                    ),
+                                  ]
+                                )
+                              }),
+                              0
+                            ),
                           ]),
                         ]),
                         _vm._v(" "),
@@ -38887,13 +39301,21 @@ var render = function () {
                                 _c(
                                   "option",
                                   { attrs: { value: "Educacao Infantil" } },
-                                  [_vm._v("Educação Infantil")]
+                                  [
+                                    _vm._v(
+                                      "\n                          Educação Infantil\n                        "
+                                    ),
+                                  ]
                                 ),
                                 _vm._v(" "),
                                 _c(
                                   "option",
                                   { attrs: { value: "Ensino Fundamental" } },
-                                  [_vm._v("Ensino Fundamental")]
+                                  [
+                                    _vm._v(
+                                      "\n                          Ensino Fundamental\n                        "
+                                    ),
+                                  ]
                                 ),
                                 _vm._v(" "),
                                 _c(
@@ -38905,7 +39327,11 @@ var render = function () {
                                 _c(
                                   "option",
                                   { attrs: { value: "Ensino Superior" } },
-                                  [_vm._v("Ensino Superior")]
+                                  [
+                                    _vm._v(
+                                      "\n                          Ensino Superior\n                        "
+                                    ),
+                                  ]
                                 ),
                                 _vm._v(" "),
                                 _c(
@@ -38990,7 +39416,7 @@ var render = function () {
                                   _vm._v("7 - 9 anos"),
                                 ]),
                                 _vm._v(" "),
-                                _c("option", { attrs: { value: "9+" } }, [
+                                _c("option", { attrs: { value: "9" } }, [
                                   _vm._v("Mais de 9 anos"),
                                 ]),
                               ]
@@ -39054,8 +39480,8 @@ var render = function () {
                                 _vm._v(" "),
                                 _c(
                                   "option",
-                                  { attrs: { value: "Tecnologico" } },
-                                  [_vm._v("Tecnológico")]
+                                  { attrs: { value: "Tecnólogo" } },
+                                  [_vm._v("Tecnólogo")]
                                 ),
                                 _vm._v(" "),
                                 _c(
@@ -39067,13 +39493,21 @@ var render = function () {
                                 _c(
                                   "option",
                                   { attrs: { value: "Graduacao Modulada" } },
-                                  [_vm._v("Graduação Modulada")]
+                                  [
+                                    _vm._v(
+                                      "\n                          Graduação Modulada\n                        "
+                                    ),
+                                  ]
                                 ),
                                 _vm._v(" "),
                                 _c(
                                   "option",
                                   { attrs: { value: "Educacao a Distancia" } },
-                                  [_vm._v("Educação à Distância")]
+                                  [
+                                    _vm._v(
+                                      "\n                          Educação à Distância\n                        "
+                                    ),
+                                  ]
                                 ),
                               ]
                             ),
@@ -39101,9 +39535,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h4", [
-      _vm._v("Selecione os filtros e "),
+      _vm._v("\n              Selecione os filtros e "),
       _c("br"),
-      _vm._v("\n                            encontre o candidato de ouro!"),
+      _vm._v("\n              encontre o candidato de ouro!\n            "),
     ])
   },
   function () {
@@ -39112,7 +39546,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "evaluation__content__bottom__btns" }, [
       _c("button", { staticClass: "bg-red", attrs: { type: "submit" } }, [
-        _vm._v(" Enviar"),
+        _vm._v("Enviar"),
       ]),
     ])
   },

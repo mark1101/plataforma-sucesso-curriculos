@@ -71,6 +71,8 @@ Route::middleware(['company-acess'])->group(function () {
     Route::get('/empresa/encontrar-curriculos', [HomeCompanyController::class, 'search']);
     Route::get('/empresa/acessar-curriculos', [HomeCompanyController::class, 'acess']);
     Route::get('/empresa/resultado-busca', [HomeCompanyController::class, 'result']);
+
+    Route::post('/post-filter-primary', [CompanyCurriculumController::class, 'indexSearch']);
 });
 Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
 Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'])->name('register-company');
@@ -93,6 +95,12 @@ Route::middleware(['candidate-acess'])->group(function () {
 
     Route::get('/get-course/{id}' , [CandidateCurriculumController::class, 'getCourse']);
     Route::put('/edit-course/{id}', [CandidateCurriculumController::class, 'editCourse']);
+
+    Route::post('/create-new-experience' , [CandidateCurriculumController::class, 'createExperience']);
+    Route::post('/create-new-course', [CandidateCurriculumController::class, 'createCourse']);
+
+    Route::delete('/delete-experience/{id}', [CandidateCurriculumController::class, 'deleteExperience']);
+    Route::delete('/delete-course/{id}', [CandidateCurriculumController::class, 'deleteCourse']);
 
 
 });

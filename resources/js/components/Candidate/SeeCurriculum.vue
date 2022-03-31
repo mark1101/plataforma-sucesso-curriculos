@@ -299,7 +299,13 @@
             style="color: blue; cursor: pointer"
             @click="openModalExperience(experience.id)"
           >
-            Editar esperiência
+            Editar experiência
+          </p>
+          <p
+            style="color: red; cursor: pointer"
+            @click="deleteExperience(experience.id)"
+          >
+            Apagar experiência
           </p>
         </div>
         <div class="col-sm-4">
@@ -309,9 +315,9 @@
               <button
                 type="button"
                 class="btn btn-primary"
-                @click="openModalExperience"
+                @click="openModalExperienceCreate"
               >
-                Launch demo modal
+                Cadastrar Experiência
               </button>
             </div>
           </div>
@@ -336,16 +342,17 @@
           >
             Editar curso
           </p>
+          <p
+            style="color: red; cursor: pointer"
+            @click="deleteCourse(course.id)"
+          >
+            Apagar Curso
+          </p>
         </div>
         <div class="col-sm-4">
           <div class="mt-5">
             <div class="evaluation__content__bottom__btns">
-              <button
-                class="btn"
-                type="button"
-                data-toggle="modal"
-                data-target="#create-course"
-              >
+              <button class="btn" type="button" @click="openModalCourseCreate">
                 Cadastrar novo curso
               </button>
             </div>
@@ -496,31 +503,55 @@
           <div class="modal-body">
             <div class="form-group">
               <label for="exampleInputEmail1">Nome da Empresa</label>
-              <input type="text" class="form-control" />
+              <input
+                type="text"
+                class="form-control"
+                v-model="newExperience.name_company"
+              />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Ramo da Empresa</label>
-              <input type="text" class="form-control" />
+              <input
+                type="text"
+                class="form-control"
+                v-model="newExperience.company_field"
+              />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Cargo Ocupado</label>
-              <input type="text" class="form-control" />
+              <input
+                type="text"
+                class="form-control"
+                v-model="newExperience.occupied_job"
+              />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Anos de experiência</label>
-              <input type="number" class="form-control" />
+              <input
+                type="number"
+                class="form-control"
+                v-model="newExperience.years"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Meses de Experiência </label>
+              <input
+                type="number"
+                class="form-control"
+                v-model="newExperience.months"
+              />
             </div>
           </div>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Meses de Experiência </label>
-            <input type="number" class="form-control" />
+          <div class="modal-footer" style="background-color: white">
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="createExperience"
+            >
+              Cadastrar
+            </button>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" @click="createExperience">
-          Cadastrar
-        </button>
       </div>
     </div>
 
@@ -543,23 +574,35 @@
           <div class="modal-body">
             <div class="form-group">
               <label for="exampleInputEmail1">Nome do Curso</label>
-              <input type="text" class="form-control" />
+              <input
+                type="text"
+                class="form-control"
+                v-model="newCourse.name_courses"
+              />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Instituição</label>
-              <input type="text" class="form-control" />
+              <input
+                type="text"
+                class="form-control"
+                v-model="newCourse.school"
+              />
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Horas Empregadas </label>
-              <input type="number" class="form-control" />
+              <input
+                type="number"
+                class="form-control"
+                v-model="newCourse.hours"
+              />
             </div>
           </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" @click="createCourse">
+              Cadastrar
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" @click="createCourse">
-          Cadastrar
-        </button>
       </div>
     </div>
   </div>
@@ -586,6 +629,19 @@ export default {
         suffix: "",
         precision: 2,
         masked: false,
+      },
+
+      newExperience: {
+        name_company: null,
+        company_field: null,
+        years: null,
+        months: null,
+      },
+
+      newCourse: {
+        name_courses: null,
+        school: null,
+        hours: null,
       },
 
       experiences: [],
@@ -659,13 +715,6 @@ export default {
         .catch((error) => {});
     },
 
-    editData(experience) {
-      axios
-        .put()
-        .then((response) => {})
-        .catch((error) => {});
-    },
-
     editCurriculum() {
       let payload = {
         name: this.curriculum.name,
@@ -701,6 +750,7 @@ export default {
     },
 
     openModalExperience(experience) {
+      console.log("aaaaaa");
       axios
         .get("/get-experience/" + experience)
         .then((response) => {
@@ -726,6 +776,31 @@ export default {
           this.getData();
         })
         .catch((error) => {});
+    },
+
+    deleteExperience(experience) {
+      this.$swal({
+        title: "Deletar informação?",
+        text: "Se apagado o mesmo não podera ser recuperado!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Sim, Apagar agora!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete("/delete-experience/" + experience)
+            .then((response) => {
+              this.$swal("Sucesso!", "Curso deletado", "success");
+              this.getData();
+            })
+            .catch((error) => {
+              this.$swal("Ops...!", "Erro ao apagar", "error");
+            });
+        }
+      });
     },
 
     openModalCourse(course) {
@@ -755,61 +830,125 @@ export default {
         .catch((error) => {});
     },
 
-    openModalExperience() {
+    deleteCourse(course) {
+      this.$swal({
+        title: "Deletar informação?",
+        text: "Se apagado o mesmo não podera ser recuperado!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Sim, Apagar agora!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete("/delete-course/" + course)
+            .then((response) => {
+              this.$swal("Sucesso!", "Experiência deletada", "success");
+              this.getData();
+            })
+            .catch((error) => {
+              this.$swal("Ops...!", "Erro ao apagar", "error");
+            });
+        }
+      });
+    },
+
+    openModalExperienceCreate() {
       $("#create-experience").modal("show");
     },
 
     createExperience() {
-      this.$swal({
-        toast: true,
-        position: "bottom-end",
-        timerProgressBar: false,
-        icon: "error",
-        timer: 5000,
-        title: "Os campos precisam ser todos preenchidos!",
-        showConfirmButton: false,
-        cancelButtonText: "ok",
-        allowEscapeKey: true,
-      });
-      let payload = {};
+      if (
+        this.newExperience.name_company === null ||
+        this.newExperience.company_field === null ||
+        this.newExperience.occupied_job === null ||
+        this.newExperience.years === null ||
+        this.newExperience.months === null
+      ) {
+        this.$swal({
+          toast: true,
+          position: "bottom-end",
+          timerProgressBar: false,
+          icon: "error",
+          timer: 5000,
+          title: "Os campos precisam ser todos preenchidos!",
+          showConfirmButton: false,
+          cancelButtonText: "ok",
+          allowEscapeKey: true,
+        });
+      } else {
+        let payload = {
+          name_company: this.newExperience.name_company,
+          company_field: this.newExperience.company_field,
+          occupied_job: this.newExperience.occupied_job,
+          years: this.newExperience.years,
+          months: this.newExperience.months,
+        };
 
-      axios
-        .post("", payload)
-        .then((response) => {
-          this.$swal("Sucesso!", "Experiência cadastrada", "success");
-          this.getData();
-          $("#create-experience").modal("hide");
-        })
-        .catch((error) => {});
+        axios
+          .post("/create-new-experience", payload)
+          .then((response) => {
+            this.$swal("Sucesso!", "Experiência cadastrada", "success");
+            this.getData();
+            this.clear();
+            $("#create-experience").modal("hide");
+          })
+          .catch((error) => {});
+      }
     },
 
-    openModalCourse() {
+    openModalCourseCreate() {
       $("#create-course").modal("show");
     },
 
     createCourse() {
-      this.$swal({
-        toast: true,
-        position: "bottom-end",
-        timerProgressBar: false,
-        icon: "error",
-        timer: 5000,
-        title: "Os campos precisam ser todos preenchidos!",
-        showConfirmButton: false,
-        cancelButtonText: "ok",
-        allowEscapeKey: true,
-      });
+      if (
+        this.newCourse.name_courses === null ||
+        this.newCourse.school === null ||
+        this.newCourse.hours === null
+      ) {
+        this.$swal({
+          toast: true,
+          position: "bottom-end",
+          timerProgressBar: false,
+          icon: "error",
+          timer: 5000,
+          title: "Os campos precisam ser todos preenchidos!",
+          showConfirmButton: false,
+          cancelButtonText: "ok",
+          allowEscapeKey: true,
+        });
+      } else {
+        let payload = {
+          name_courses: this.newCourse.name_courses,
+          school: this.newCourse.school,
+          hours: this.newCourse.hours,
+        };
 
-      let payload = {};
+        axios
+          .post("/create-new-course", payload)
+          .then((response) => {
+            this.$swal("Sucesso!", "Curso cadastrado", "success");
+            this.getData();
+            this.clear();
+            $("#create-course").modal("hide");
+          })
+          .catch((error) => {});
+      }
+    },
 
-      axios
-        .post("", payload)
-        .then((response) => {
-          this.$swal("Sucesso!", "Curso cadastrado", "success");
-          this.getData();
-          $("#create-course").modal("hide");
-        })
-        .catch((error) => {});
+    clear() {
+      this.newExperience.name_company = null;
+      this.newExperience.company_field = null;
+      this.newExperience.occupied_job = null;
+      this.newExperience.years = null;
+      this.newExperience.months = null;
+
+      this.newCourse.name_courses = null;
+      this.newExperience.school = null;
+      this.newExperience.hours = null;
     },
   },
 };
