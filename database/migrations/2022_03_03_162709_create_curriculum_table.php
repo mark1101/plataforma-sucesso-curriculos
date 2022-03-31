@@ -24,7 +24,7 @@ class CreateCurriculumTable extends Migration
             $table->string('cep')->nullable();
             $table->string('state')->nullable();
             $table->string('city')->nullable();
-            $table->integer('age')->nullable();
+            $table->string('age')->nullable();
             $table->string('phone')->nullable();
             $table->string('whatsapp')->nullable();
             $table->string('email')->nullable();
@@ -36,12 +36,12 @@ class CreateCurriculumTable extends Migration
             $table->string('hiring_type')->nullable();
             $table->string('desired_function')->nullable();
             $table->decimal('desired_salary')->nullable();
-            $table->boolean('is_handicapped')->nullable();
+            $table->string('is_handicapped')->nullable();
             $table->string('cnh')->nullable();
 
             $table->longText('additional_considerations')->nullable();
             $table->string('curriculum_photo_url')->nullable();
-            $table->boolean('is_employed')->nullable();
+            $table->string('is_employed')->nullable();
             $table->string('found_us')->nullable();
             $table->boolean('active')->default(1);
             $table->timestamps();

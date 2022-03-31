@@ -82,6 +82,19 @@ Route::middleware(['candidate-acess'])->group(function () {
 
     //CURRICULUM
     Route::post('/create-curriculum', [CandidateCurriculumController::class, 'create']);
+    Route::get('/get-my-curriculum' , [CandidateCurriculumController::class, 'getUserCurriculum']);
+    Route::get('/meu-curriculo' , function(){
+        return view('Applicant.see-curriculum');
+    });
+    Route::put('/edit-curriculum' , [CandidateCurriculumController::class, 'editUserCurriculum']);
+    
+    Route::get('/get-experience/{id}', [CandidateCurriculumController::class, 'getExperience']);
+    Route::put('/edit-experience/{id}', [CandidateCurriculumController::class, 'editExperience']);
+
+    Route::get('/get-course/{id}' , [CandidateCurriculumController::class, 'getCourse']);
+    Route::put('/edit-course/{id}', [CandidateCurriculumController::class, 'editCourse']);
+
+
 });
 Route::get('/candidato/registro', [HomeCandidateController::class, 'index']);
 Route::post('/candidato/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');

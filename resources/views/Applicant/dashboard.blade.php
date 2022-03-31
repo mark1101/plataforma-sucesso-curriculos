@@ -27,12 +27,7 @@
                     @else
                         <div class="mt-5">
                             <div class="evaluation__content__bottom__btns">
-                                <a href="{{ url('') }}">Visualizar meu currículo</a>
-                            </div>
-                        </div>
-                        <div class="mt-5">
-                            <div class="evaluation__content__bottom__btns">
-                                <a href="{{ url('') }}">Editar meu currículo</a>
+                                <a href="{{ url('meu-curriculo') }}">Visualizar meu currículo</a>
                             </div>
                         </div>
                     @endif
