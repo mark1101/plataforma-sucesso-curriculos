@@ -69,15 +69,18 @@ Route::middleware(['no-auth'])->group(function () {
 //ROUTES COMPANY
 Route::middleware(['company-acess'])->group(function () {
     Route::get('/empresa/dashboard', [HomeCompanyController::class, 'dashboard'])->name('dashboard.company');
-    Route::get('/empresa/encontrar-curriculos', [HomeCompanyController::class, 'search']);
+    //Route::get('/empresa/encontrar-curriculos', [HomeCompanyController::class, 'search']);
     Route::get('/empresa/acessar-curriculos', [HomeCompanyController::class, 'acess']);
     Route::get('/empresa/resultado-busca', [HomeCompanyController::class, 'result']);
 
-    Route::post('/post-filter-primary', [CompanyCurriculumController::class, 'indexSearch']);
+    //Route::post('/post-filter-primary', [CompanyCurriculumController::class, 'indexSearch']);
 
-    Route::get('/return-primary-filter', function (){
+    Route::get('/empresa/encontrar-curriculos', function (){
             return view('Search.search-result');
-    })->name('primary-filter');
+    });
+
+    Route::get('/get-curriculum-general' , [CompanyCurriculumController::class, 'listCurriculum']);
+    Route::post('/purchase-curriculum' , [CompanyCurriculumController::class, 'purchaseCurriculum']);
 });
 Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
 Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'])->name('register-company');

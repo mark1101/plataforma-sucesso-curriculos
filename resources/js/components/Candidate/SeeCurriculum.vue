@@ -195,7 +195,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label>Pretenção Salarial</label>
+            <label>Pretenção Salarial (R$)</label>
             <money
               type="text"
               class="form-control"
@@ -645,7 +645,14 @@ export default {
 
       options_handicapped: [{ option: "Sim" }, { option: "Não" }],
 
-      options_cnh: [{ option: "Sim" }, { option: "Não" }],
+      options_cnh: [
+        { option: "A" },
+        { option: "B" },
+        { option: "AB" },
+        { option: "C" },
+        { option: "D" },
+        { option: "E" },
+      ],
 
       options_employed: [{ option: "Empregado" }, { option: "Desempregado" }],
 
