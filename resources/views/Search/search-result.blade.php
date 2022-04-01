@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <filter-curriculum>
+    <filter-curriculum >
 
     </filter-curriculum>
 

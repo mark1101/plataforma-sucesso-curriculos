@@ -11,11 +11,11 @@
       <div class="row mt-3">
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="formGroupExampleInput">Nome completo</label>
+            <label>Nome completo</label>
             <input type="text" class="form-control" v-model="curriculum.name" />
           </div>
           <div class="form-group">
-            <label for="formGroupExampleInput2">Email</label>
+            <label>Email</label>
             <input
               type="text"
               class="form-control"
@@ -25,7 +25,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="formGroupExampleInput">Endereço</label>
+            <label>Endereço</label>
             <input
               type="text"
               class="form-control"
@@ -33,13 +33,13 @@
             />
           </div>
           <div class="form-group">
-            <label for="formGroupExampleInput2">Cidade</label>
+            <label>Cidade</label>
             <input type="text" class="form-control" v-model="curriculum.city" />
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="formGroupExampleInput">Estado</label>
+            <label>Estado</label>
             <input
               type="text"
               class="form-control"
@@ -47,7 +47,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="formGroupExampleInput2">Data de Nascimento</label>
+            <label>Data de Nascimento</label>
             <input
               type="text"
               class="form-control"
@@ -60,7 +60,7 @@
       <div class="row mt-3">
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="formGroupExampleInput">CEP</label>
+            <label>CEP</label>
             <input
               type="text"
               class="form-control"
@@ -69,7 +69,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="formGroupExampleInput2">Telefone</label>
+            <label>Telefone</label>
             <input
               type="text"
               class="form-control"
@@ -80,7 +80,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="formGroupExampleInput">WhatsApp</label>
+            <label>WhatsApp</label>
             <input
               type="text"
               class="form-control"
@@ -89,7 +89,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="formGroupExampleInput2">Gênero Sexual</label>
+            <label>Gênero Sexual</label>
             <select
               class="form-select"
               aria-label="Default select example"
@@ -107,7 +107,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="formGroupExampleInput">Nível de Escolaridade</label>
+            <label>Nível de Escolaridade</label>
             <select
               class="form-select"
               aria-label="Default select example"
@@ -123,7 +123,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="formGroupExampleInput2">Formação</label>
+            <label>Formação</label>
             <select
               class="form-select"
               aria-label="Default select example"
@@ -143,7 +143,7 @@
       <div class="row mt-3">
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="formGroupExampleInput">Instituição</label>
+            <label>Instituição</label>
             <input
               type="text"
               class="form-control"
@@ -151,9 +151,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="formGroupExampleInput2"
-              >Tipo de Contratação Desejada</label
-            >
+            <label>Tipo de Contratação Desejada</label>
             <select
               class="form-select"
               aria-label="Default select example"
@@ -171,7 +169,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="formGroupExampleInput">Função Desejada</label>
+            <label>Função Desejada</label>
             <input
               type="text"
               class="form-control"
@@ -179,7 +177,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="formGroupExampleInput2">Possuí Deficiência?</label>
+            <label>Possuí Deficiência?</label>
             <select
               class="form-select"
               aria-label="Default select example"
@@ -197,7 +195,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="formGroupExampleInput">Pretenção Salarial</label>
+            <label>Pretenção Salarial</label>
             <money
               type="text"
               class="form-control"
@@ -206,7 +204,7 @@
             ></money>
           </div>
           <div class="form-group">
-            <label for="formGroupExampleInput2">Possuí CNH?</label>
+            <label>Possuí CNH?</label>
             <select
               class="form-select"
               aria-label="Default select example"
@@ -226,7 +224,7 @@
       <div class="row mt-3">
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="formGroupExampleInput">Considerações Adicionais</label>
+            <label>Considerações Adicionais</label>
             <input
               type="text"
               class="form-control"
@@ -236,9 +234,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="formGroupExampleInput"
-              >Onde Foi Encontrada a Plataforma</label
-            >
+            <label>Onde Foi Encontrada a Plataforma</label>
             <select
               class="form-select"
               aria-label="Default select example"
@@ -256,7 +252,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="formGroupExampleInput2">Está Empregado?</label>
+            <label>Está Empregado?</label>
             <select
               class="form-select"
               aria-label="Default select example"
@@ -380,7 +376,7 @@
           <div class="modal-body">
             <div class="row">
               <div class="form-group">
-                <label for="formGroupExampleInput2">Nome da empresa</label>
+                <label>Nome da empresa</label>
                 <input
                   type="text"
                   class="form-control"
@@ -388,7 +384,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="formGroupExampleInput2">Ramo da empresa</label>
+                <label>Ramo da empresa</label>
                 <input
                   type="text"
                   class="form-control"
@@ -396,7 +392,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="formGroupExampleInput2">Cargo Ocupado</label>
+                <label>Cargo Ocupado</label>
                 <input
                   type="text"
                   class="form-control"
@@ -404,7 +400,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="formGroupExampleInput2">Anos</label>
+                <label>Anos</label>
                 <input
                   type="text"
                   class="form-control"
@@ -412,7 +408,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="formGroupExampleInput2">Meses</label>
+                <label>Meses</label>
                 <input
                   type="text"
                   class="form-control"
@@ -450,7 +446,7 @@
           <div class="modal-body">
             <div class="row">
               <div class="form-group">
-                <label for="formGroupExampleInput2">Nome do Curso</label>
+                <label>Nome do Curso</label>
                 <input
                   type="text"
                   class="form-control"
@@ -458,7 +454,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="formGroupExampleInput2">Escola</label>
+                <label>Escola</label>
                 <input
                   type="text"
                   class="form-control"
@@ -466,7 +462,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="formGroupExampleInput2">Horas</label>
+                <label>Horas</label>
                 <input
                   type="text"
                   class="form-control"
@@ -502,7 +498,7 @@
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <label for="exampleInputEmail1">Nome da Empresa</label>
+              <label>Nome da Empresa</label>
               <input
                 type="text"
                 class="form-control"
@@ -510,7 +506,7 @@
               />
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Ramo da Empresa</label>
+              <label>Ramo da Empresa</label>
               <input
                 type="text"
                 class="form-control"
@@ -518,7 +514,7 @@
               />
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Cargo Ocupado</label>
+              <label>Cargo Ocupado</label>
               <input
                 type="text"
                 class="form-control"
@@ -526,7 +522,7 @@
               />
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Anos de experiência</label>
+              <label>Anos de experiência</label>
               <input
                 type="number"
                 class="form-control"
@@ -534,7 +530,7 @@
               />
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Meses de Experiência </label>
+              <label>Meses de Experiência </label>
               <input
                 type="number"
                 class="form-control"
@@ -573,7 +569,7 @@
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <label for="exampleInputEmail1">Nome do Curso</label>
+              <label>Nome do Curso</label>
               <input
                 type="text"
                 class="form-control"
@@ -581,7 +577,7 @@
               />
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Instituição</label>
+              <label>Instituição</label>
               <input
                 type="text"
                 class="form-control"
@@ -589,7 +585,7 @@
               />
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Horas Empregadas </label>
+              <label>Horas Empregadas </label>
               <input
                 type="number"
                 class="form-control"
@@ -651,7 +647,7 @@ export default {
 
       options_cnh: [{ option: "Sim" }, { option: "Não" }],
 
-      options_employed: [{ option: "Sim" }, { option: "Não" }],
+      options_employed: [{ option: "Empregado" }, { option: "Desempregado" }],
 
       options_gender: [
         { option: "Feminino" },

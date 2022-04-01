@@ -10,6 +10,7 @@ use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\Company;
 use App\Http\Controllers\General\CandidateCurriculumController;
+use App\Http\Controllers\General\CompanyCurriculumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +74,10 @@ Route::middleware(['company-acess'])->group(function () {
     Route::get('/empresa/resultado-busca', [HomeCompanyController::class, 'result']);
 
     Route::post('/post-filter-primary', [CompanyCurriculumController::class, 'indexSearch']);
+
+    Route::get('/return-primary-filter', function (){
+            return view('Search.search-result');
+    })->name('primary-filter');
 });
 Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
 Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'])->name('register-company');
@@ -89,7 +94,7 @@ Route::middleware(['candidate-acess'])->group(function () {
         return view('Applicant.see-curriculum');
     });
     Route::put('/edit-curriculum' , [CandidateCurriculumController::class, 'editUserCurriculum']);
-    
+
     Route::get('/get-experience/{id}', [CandidateCurriculumController::class, 'getExperience']);
     Route::put('/edit-experience/{id}', [CandidateCurriculumController::class, 'editExperience']);
 
