@@ -10,6 +10,7 @@ use App\Models\Curriculum;
 use App\Models\CurriculumCompany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class CompanyCurriculumController extends Controller
 {
@@ -73,14 +74,19 @@ class CompanyCurriculumController extends Controller
         return;
     }
 
-    public function getDownloadCurriculum()
+    public function getDownloadCurriculum($curriculumId)
     {
 
-        $curriculum = CurriculumCompany::where('company_id', Auth::user()->id)
-            ->with(['company'])
-            ->get();
+        $curriculum = Curriculum::where('id', $curriculumId)->first();
 
-        return response()->json(['curriculums' => $curriculum], 200);
+        $data = [
+            'title' => 'SucessoEmpregos Curriculo' . $curriculum->name,
+            'date' => date('d/m/Y'),
+            'curriculum' => $curriculum
+        ];
+
+        $pdf = ::loadView('myPdf', $data);
+        return $pdf->download('curriculo.pdf');
     }
 
     public function indexSearch(Request $request)

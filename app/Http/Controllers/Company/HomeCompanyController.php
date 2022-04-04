@@ -37,11 +37,14 @@ class HomeCompanyController extends Controller
         $user = Auth::user();
         $company = Company::where('user_id' , $user->id)->first();
 
+        $plan = CompanyCurriculumQuantity::where('company_id', $company->id)->first();
+
         return view('Company.dashboard', [
             'name' => $company->name,
             'cnpj' => $company->name,
             'status' => $company->status,
             'address' => $company->address,
+            'credit' => $plan->quantity,
         ]);
     }
 

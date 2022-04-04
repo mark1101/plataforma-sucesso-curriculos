@@ -7779,19 +7779,82 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+Vue.filter("formatNumber", function (value) {
+  var multiply = value;
+  var formatter = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+    minimumFractionDigits: 2
+  });
+  return formatter.format(multiply);
+});
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "acess-curriculum.vue",
   data: function data() {
     return {
-      time_experience: "",
-      schooling: "",
-      age: "",
-      desired_salary: ""
+      name: "",
+      time_experience: null,
+      schooling: null,
+      age: null,
+      desired_salary: null,
+      formation: null,
+      gender: null,
+      hiring_type: null,
+      is_employed: null,
+      curriculumMe: []
     };
   },
+  computed: {
+    curriculumFilterSearch: function curriculumFilterSearch() {
+      var _this = this;
+
+      var items = this.curriculumMe;
+      items = this.curriculumMe.filter(function (item) {
+        return item.name.toLowerCase().indexOf(_this.name.toLowerCase()) > -1;
+      });
+      items = items.filter(function (item) {
+        if (_this.schooling == null) return item;
+        return item.schooling_level === _this.schooling;
+      });
+      items = items.filter(function (item) {
+        if (_this.formation == null) return item;
+        return item.formation === _this.formation;
+      });
+      items = items.filter(function (item) {
+        if (_this.gender == null) return item;
+        return item.gender === _this.gender;
+      });
+      items = items.filter(function (item) {
+        if (_this.hiring_type == null) return item;
+        return item.hiring_type === _this.hiring_type;
+      });
+      items = items.filter(function (item) {
+        if (_this.is_employed == null) return item;
+        return item.is_employed === _this.is_employed;
+      });
+      return items;
+    }
+  },
   mounted: function mounted() {
-    console.log("componente para filtragem de curriculo ok");
-  }
+    var _this2 = this;
+
+    axios.get("/get-curriculum-general").then(function (response) {
+      _this2.curriculumMe = response.data.curriculumMe;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
+  created: function created() {}
 });
 
 /***/ }),
@@ -36677,7 +36740,33 @@ var render = function () {
           _c("div", { staticClass: "col-md-3" }, [
             _c("div", { staticClass: "results__filter__area" }, [
               _c("form", { attrs: { action: "" } }, [
-                _vm._m(0),
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "single__input__item mb-0" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.name,
+                          expression: "name",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", placeholder: "Busca por Nome" },
+                      domProps: { value: _vm.name },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.name = $event.target.value
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _vm._m(0),
+                  ]),
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card p-0 pb-2" }, [
                   _c("h4", [_vm._v("Filtros")]),
@@ -36691,107 +36780,6 @@ var render = function () {
                     [
                       _c("div", { staticClass: "accordion-item" }, [
                         _vm._m(1),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "accordion-collapse collapse",
-                            attrs: {
-                              id: "collapseThree",
-                              "aria-labelledby": "headingThree",
-                              "data-bs-parent": "#accordionExample",
-                            },
-                          },
-                          [
-                            _c("div", { staticClass: "accordion-body" }, [
-                              _c(
-                                "div",
-                                { staticClass: "single__input__item" },
-                                [
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.time_experience,
-                                          expression: "time_experience",
-                                        },
-                                      ],
-                                      staticClass: "form-select",
-                                      attrs: {
-                                        "aria-label": "Default select example",
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          var $$selectedVal =
-                                            Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function (o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function (o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                          _vm.time_experience = $event.target
-                                            .multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "0-1" } },
-                                        [_vm._v("0 - 1 ano")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "1-3" } },
-                                        [_vm._v("1 - 3 anos")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "3-5" } },
-                                        [_vm._v("3 - 5 anos")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "5-7" } },
-                                        [_vm._v("5 - 7 anos")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "7-9" } },
-                                        [_vm._v("7 - 9 anos")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "9+" } }, [
-                                        _vm._v("Mais de 9 anos"),
-                                      ]),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(2),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -36853,7 +36841,11 @@ var render = function () {
                                         {
                                           attrs: { value: "Educacao Infantil" },
                                         },
-                                        [_vm._v("Educação Infantil")]
+                                        [
+                                          _vm._v(
+                                            "\n                              Educação Infantil\n                            "
+                                          ),
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       _c(
@@ -36865,7 +36857,7 @@ var render = function () {
                                         },
                                         [
                                           _vm._v(
-                                            "Ensino Fundamental\n                                                        "
+                                            "\n                              Ensino Fundamental\n                            "
                                           ),
                                         ]
                                       ),
@@ -36879,13 +36871,21 @@ var render = function () {
                                       _c(
                                         "option",
                                         { attrs: { value: "Ensino Superior" } },
-                                        [_vm._v("Ensino Superior")]
+                                        [
+                                          _vm._v(
+                                            "\n                              Ensino Superior\n                            "
+                                          ),
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
                                         { attrs: { value: "Pos-graduacao" } },
-                                        [_vm._v("Pós-graduação")]
+                                        [
+                                          _vm._v(
+                                            "\n                              Pós-graduação\n                            "
+                                          ),
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       _c(
@@ -36909,15 +36909,15 @@ var render = function () {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(3),
+                        _vm._m(2),
                         _vm._v(" "),
                         _c(
                           "div",
                           {
                             staticClass: "accordion-collapse collapse",
                             attrs: {
-                              id: "collapseSeven",
-                              "aria-labelledby": "headingSeven",
+                              id: "collapseFive",
+                              "aria-labelledby": "headingFive",
                               "data-bs-parent": "#accordionExample",
                             },
                           },
@@ -36934,8 +36934,8 @@ var render = function () {
                                         {
                                           name: "model",
                                           rawName: "v-model",
-                                          value: _vm.age,
-                                          expression: "age",
+                                          value: _vm.formation,
+                                          expression: "formation",
                                         },
                                       ],
                                       staticClass: "form-select",
@@ -36959,7 +36959,7 @@ var render = function () {
                                                     : o.value
                                                 return val
                                               })
-                                          _vm.age = $event.target.multiple
+                                          _vm.formation = $event.target.multiple
                                             ? $$selectedVal
                                             : $$selectedVal[0]
                                         },
@@ -36968,44 +36968,138 @@ var render = function () {
                                     [
                                       _c(
                                         "option",
-                                        { attrs: { value: "16-20" } },
-                                        [_vm._v("16 - 20 anos")]
+                                        { attrs: { value: "Bacharelado" } },
+                                        [_vm._v("Bacharelado")]
                                       ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
-                                        { attrs: { value: "20-25" } },
-                                        [_vm._v("20 - 25 anos")]
+                                        { attrs: { value: "Licenciatura" } },
+                                        [_vm._v("Licenciatura")]
                                       ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
-                                        { attrs: { value: "25-30" } },
-                                        [_vm._v("25 - 30 anos")]
+                                        { attrs: { value: "Tecnologico" } },
+                                        [_vm._v("Tecnológico")]
                                       ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
-                                        { attrs: { value: "30-40" } },
-                                        [_vm._v("30 - 40 anos")]
+                                        { attrs: { value: "Sequencial" } },
+                                        [_vm._v("Sequencial")]
                                       ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
-                                        { attrs: { value: "40-50" } },
-                                        [_vm._v("40 - 50 anos")]
+                                        {
+                                          attrs: {
+                                            value: "Graduacao Modulada",
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                              Graduação Modulada\n                            "
+                                          ),
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
-                                        { attrs: { value: "50-60" } },
-                                        [_vm._v("50 - 60 anos")]
+                                        {
+                                          attrs: {
+                                            value: "Educacao a Distancia",
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                              Educação à Distância\n                            "
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ]),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "accordion-item" }, [
+                        _vm._m(3),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "accordion-collapse collapse",
+                            attrs: {
+                              id: "collapseSix",
+                              "aria-labelledby": "headingSix",
+                              "data-bs-parent": "#accordionExample",
+                            },
+                          },
+                          [
+                            _c("div", { staticClass: "accordion-body" }, [
+                              _c(
+                                "div",
+                                { staticClass: "single__input__item" },
+                                [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.gender,
+                                          expression: "gender",
+                                        },
+                                      ],
+                                      staticClass: "form-select",
+                                      attrs: {
+                                        "aria-label": "Default select example",
+                                      },
+                                      on: {
+                                        change: function ($event) {
+                                          var $$selectedVal =
+                                            Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function (o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function (o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                          _vm.gender = $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Feminino" } },
+                                        [_vm._v("Feminino")]
                                       ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
-                                        { attrs: { value: "60+" } },
-                                        [_vm._v("Mais de 60 anos")]
+                                        { attrs: { value: "Masculino" } },
+                                        [_vm._v("Masculino")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Outro" } },
+                                        [_vm._v("Outro")]
                                       ),
                                     ]
                                   ),
@@ -37024,8 +37118,8 @@ var render = function () {
                           {
                             staticClass: "accordion-collapse collapse",
                             attrs: {
-                              id: "collapseEight",
-                              "aria-labelledby": "headingEight",
+                              id: "collapseNine",
+                              "aria-labelledby": "headingNine",
                               "data-bs-parent": "#accordionExample",
                             },
                           },
@@ -37042,8 +37136,8 @@ var render = function () {
                                         {
                                           name: "model",
                                           rawName: "v-model",
-                                          value: _vm.desired_salary,
-                                          expression: "desired_salary",
+                                          value: _vm.hiring_type,
+                                          expression: "hiring_type",
                                         },
                                       ],
                                       staticClass: "form-select",
@@ -37067,7 +37161,7 @@ var render = function () {
                                                     : o.value
                                                 return val
                                               })
-                                          _vm.desired_salary = $event.target
+                                          _vm.hiring_type = $event.target
                                             .multiple
                                             ? $$selectedVal
                                             : $$selectedVal[0]
@@ -37077,26 +37171,123 @@ var render = function () {
                                     [
                                       _c(
                                         "option",
-                                        { attrs: { value: "Ate 1000" } },
-                                        [_vm._v("Até R$1.000,00")]
+                                        { attrs: { value: "CLT" } },
+                                        [_vm._v("CLT")]
                                       ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
-                                        { attrs: { value: "Ate 3000" } },
-                                        [_vm._v("Até R$3.000,00")]
+                                        {
+                                          attrs: {
+                                            value: "Pessoa Jurídica (PJ)",
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                              Pessoa Jurídica (PJ)\n                            "
+                                          ),
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
-                                        { attrs: { value: "Ate 5000" } },
-                                        [_vm._v("Até R$5.000,00")]
+                                        { attrs: { value: "Estagiário" } },
+                                        [_vm._v("Estagiário")]
                                       ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
-                                        { attrs: { value: "Mais de 5000" } },
-                                        [_vm._v("Mais de R$5.000,00")]
+                                        { attrs: { value: "Trainee" } },
+                                        [_vm._v("Trainee")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Jovem Aprendiz" } },
+                                        [
+                                          _vm._v(
+                                            "\n                              Jovem Aprendiz\n                            "
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ]),
+                          ]
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "accordion-item" }, [
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "accordion-collapse collapse",
+                            attrs: {
+                              id: "collapseTwelve",
+                              "aria-labelledby": "headingTwelve",
+                              "data-bs-parent": "#accordionExample",
+                            },
+                          },
+                          [
+                            _c("div", { staticClass: "accordion-body" }, [
+                              _c(
+                                "div",
+                                { staticClass: "single__input__item" },
+                                [
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.is_employed,
+                                          expression: "is_employed",
+                                        },
+                                      ],
+                                      staticClass: "form-select",
+                                      attrs: {
+                                        "aria-label": "Default select example",
+                                      },
+                                      on: {
+                                        change: function ($event) {
+                                          var $$selectedVal =
+                                            Array.prototype.filter
+                                              .call(
+                                                $event.target.options,
+                                                function (o) {
+                                                  return o.selected
+                                                }
+                                              )
+                                              .map(function (o) {
+                                                var val =
+                                                  "_value" in o
+                                                    ? o._value
+                                                    : o.value
+                                                return val
+                                              })
+                                          _vm.is_employed = $event.target
+                                            .multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        },
+                                      },
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Desempregado" } },
+                                        [_vm._v("Desempregado")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        { attrs: { value: "Empregado" } },
+                                        [_vm._v("Empregado")]
                                       ),
                                     ]
                                   ),
@@ -37113,7 +37304,140 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _vm._m(5),
+          _c("div", { staticClass: "col-md-9" }, [
+            _c("div", { staticClass: "result__area__right__wrapper" }, [
+              _vm._m(6),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "result__items__wrapper" },
+                _vm._l(_vm.curriculumFilterSearch, function (curriculum) {
+                  return _c(
+                    "div",
+                    { key: curriculum.id, staticClass: "single__result__item" },
+                    [
+                      _c("div", { staticClass: "single__result__item__top" }, [
+                        _c("p", [
+                          _vm._v(
+                            "Nome do Candidato: " + _vm._s(curriculum.name)
+                          ),
+                        ]),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "single__result__item__body" }, [
+                        _c(
+                          "div",
+                          { staticClass: "row" },
+                          [
+                            _vm._l(
+                              curriculum.experience,
+                              function (experience) {
+                                return _c(
+                                  "div",
+                                  { key: experience.id, staticClass: "col" },
+                                  [
+                                    _c("p", [
+                                      _vm._v(
+                                        "\n                        Função que Atuou: "
+                                      ),
+                                      _c("b", [
+                                        _vm._v(_vm._s(experience.occupied_job)),
+                                      ]),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _vm._v(
+                                        "\n                        Tempo de Experiência:\n                        "
+                                      ),
+                                      _c("b", [
+                                        _vm._v(
+                                          "\n                          " +
+                                            _vm._s(experience.years) +
+                                            " anos e\n                          " +
+                                            _vm._s(experience.months) +
+                                            " meses"
+                                        ),
+                                      ]),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _vm._v(
+                                        "\n                        Ramo da Empresa que Atuou:\n                        "
+                                      ),
+                                      _c("b", [
+                                        _vm._v(
+                                          _vm._s(experience.company_field)
+                                        ),
+                                      ]),
+                                    ]),
+                                  ]
+                                )
+                              }
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col" }, [
+                              _c("p", [
+                                _vm._v(
+                                  "\n                        Escolaridade: "
+                                ),
+                                _c("b", [
+                                  _vm._v(_vm._s(curriculum.schooling_level)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [
+                                _vm._v(
+                                  "\n                        Formação:\n                        "
+                                ),
+                                _c("b", [_vm._v(_vm._s(curriculum.formation))]),
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [
+                                _vm._v(
+                                  "\n                        Salário Pretendido:"
+                                ),
+                                _c("b", [
+                                  _vm._v(
+                                    "\n                          " +
+                                      _vm._s(
+                                        _vm._f("formatNumber")(
+                                          curriculum.desired_salary
+                                        )
+                                      )
+                                  ),
+                                ]),
+                              ]),
+                            ]),
+                          ],
+                          2
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "single__result__item__bottom" },
+                        [
+                          _c("p", [
+                            _vm._m(7, true),
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(curriculum.city) +
+                                " / " +
+                                _vm._s(curriculum.state) +
+                                "\n                  "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(8, true),
+                        ]
+                      ),
+                    ]
+                  )
+                }),
+                0
+              ),
+            ]),
+          ]),
         ]),
       ]),
     ]),
@@ -37124,49 +37448,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "single__input__item mb-0" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "Busca por ID" },
-        }),
-        _vm._v(" "),
-        _c("button", { staticClass: "src-btn" }, [
-          _c("i", { staticClass: "far fa-search" }),
-        ]),
-      ]),
+    return _c("button", { staticClass: "src-btn" }, [
+      _c("i", { staticClass: "far fa-search" }),
     ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h2",
-      { staticClass: "accordion-header", attrs: { id: "headingThree" } },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "accordion-button collapsed",
-            attrs: {
-              type: "button",
-              "data-bs-toggle": "collapse",
-              "data-bs-target": "#collapseThree",
-              "aria-expanded": "false",
-              "aria-controls": "collapseThree",
-            },
-          },
-          [
-            _c("span", [_c("i", { staticClass: "far fa-check" })]),
-            _vm._v(
-              "\n                                                Tempo de Experiência\n                                                "
-            ),
-            _c("i", { staticClass: "far fa-chevron-down" }),
-          ]
-        ),
-      ]
-    )
   },
   function () {
     var _vm = this
@@ -37191,7 +37475,7 @@ var staticRenderFns = [
           [
             _c("span", [_c("i", { staticClass: "far fa-check" })]),
             _vm._v(
-              "\n                                                Escolaridade\n                                                "
+              "\n                        Escolaridade\n                        "
             ),
             _c("i", { staticClass: "far fa-chevron-down" }),
           ]
@@ -37205,7 +37489,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "h2",
-      { staticClass: "accordion-header", attrs: { id: "headingSeven" } },
+      { staticClass: "accordion-header", attrs: { id: "headingFive" } },
       [
         _c(
           "button",
@@ -37214,15 +37498,15 @@ var staticRenderFns = [
             attrs: {
               type: "button",
               "data-bs-toggle": "collapse",
-              "data-bs-target": "#collapseSeven",
+              "data-bs-target": "#collapseFive",
               "aria-expanded": "false",
-              "aria-controls": "collapseSeven",
+              "aria-controls": "collapseFive",
             },
           },
           [
             _c("span", [_c("i", { staticClass: "far fa-check" })]),
             _vm._v(
-              "\n                                                Faixa Etária\n                                                "
+              "\n                        Formação\n                        "
             ),
             _c("i", { staticClass: "far fa-chevron-down" }),
           ]
@@ -37236,7 +37520,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "h2",
-      { staticClass: "accordion-header", attrs: { id: "headingEight" } },
+      { staticClass: "accordion-header", attrs: { id: "headingSix" } },
       [
         _c(
           "button",
@@ -37245,15 +37529,15 @@ var staticRenderFns = [
             attrs: {
               type: "button",
               "data-bs-toggle": "collapse",
-              "data-bs-target": "#collapseEight",
+              "data-bs-target": "#collapseSix",
               "aria-expanded": "false",
-              "aria-controls": "collapseEight",
+              "aria-controls": "collapseSix",
             },
           },
           [
             _c("span", [_c("i", { staticClass: "far fa-check" })]),
             _vm._v(
-              "\n                                                Pretenção Salarial\n                                                "
+              "\n                        Gênero\n                        "
             ),
             _c("i", { staticClass: "far fa-chevron-down" }),
           ]
@@ -37265,184 +37549,88 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-9" }, [
-      _c("div", { staticClass: "result__area__right__wrapper" }, [
-        _c("div", { staticClass: "result__are__title" }, [
-          _c("h3", [_vm._v("Meus Currículos")]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "result__items__wrapper" }, [
-          _c("div", { staticClass: "single__result__item" }, [
-            _c("div", { staticClass: "single__result__item__top" }, [
-              _c("p", [_vm._v("ID do currículo: 123456")]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "single__result__item__body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Função que Atuou: "),
-                    _c("b", [_vm._v("Vendedor")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Escolaridade: "),
-                    _c("b", [_vm._v("Superior Completo")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Tempo de Experiência:\n                                                "
-                    ),
-                    _c("b", [_vm._v(" 4 anos e 6 meses")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Formação:\n                                                "
-                    ),
-                    _c("b", [_vm._v("Administração")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Ramo da Empresa que Atuou: "),
-                    _c("b", [_vm._v("Automóveis")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Salário Pretendido:"
-                    ),
-                    _c("b", [_vm._v(" R$4.000,00 - R$6.000,00")]),
-                  ]),
-                ]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "single__result__item__bottom" }, [
-              _c("p", [
-                _c("span", [_c("i", { staticClass: "fas fa-map-marker-alt" })]),
-                _vm._v(
-                  "\n                                        Guarapuava/Paraná\n                                    "
-                ),
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "single__result__item__bottom__right" },
-                [
-                  _c("div", { staticClass: "add__to__favourite" }, [
-                    _vm._v(
-                      "\n                                            Adicionar aos favoritos\n                                            "
-                    ),
-                    _c("span", { staticClass: "favourite__btn" }, [
-                      _c("i", { staticClass: "far fa-star" }),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "add__cart__btn" }, [
-                    _c("button", [_vm._v("Baixar")]),
-                  ]),
-                ]
-              ),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "single__result__item" }, [
-            _c("div", { staticClass: "single__result__item__top" }, [
-              _c("p", [_vm._v("ID do currículo: 123456")]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "single__result__item__body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Função que Atuou: "),
-                    _c("b", [_vm._v("Vendedor")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Escolaridade: "),
-                    _c("b", [_vm._v("Superior Completo")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Tempo de Experiência:\n                                                "
-                    ),
-                    _c("b", [_vm._v(" 4 anos e 6 meses")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Formação:\n                                                "
-                    ),
-                    _c("b", [_vm._v("Administração")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Ramo da Empresa que Atuou: "),
-                    _c("b", [_vm._v("Automóveis")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Salário Pretendido:"
-                    ),
-                    _c("b", [_vm._v(" R$4.000,00 - R$6.000,00")]),
-                  ]),
-                ]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "single__result__item__bottom" }, [
-              _c("p", [
-                _c("span", [_c("i", { staticClass: "fas fa-map-marker-alt" })]),
-                _vm._v(
-                  "\n                                        Guarapuava/Paraná\n                                    "
-                ),
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "single__result__item__bottom__right" },
-                [
-                  _c("div", { staticClass: "add__to__favourite" }, [
-                    _vm._v(
-                      "\n                                            Adicionar aos favoritos\n                                            "
-                    ),
-                    _c("span", { staticClass: "favourite__btn" }, [
-                      _c("i", { staticClass: "far fa-star" }),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "add__cart__btn" }, [
-                    _c("button", [_vm._v("Baixar")]),
-                  ]),
-                ]
-              ),
-            ]),
-          ]),
+    return _c(
+      "h2",
+      { staticClass: "accordion-header", attrs: { id: "headingNine" } },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "accordion-button collapsed",
+            attrs: {
+              type: "button",
+              "data-bs-toggle": "collapse",
+              "data-bs-target": "#collapseNine",
+              "aria-expanded": "false",
+              "aria-controls": "collapseNine",
+            },
+          },
+          [
+            _c("span", [_c("i", { staticClass: "far fa-check" })]),
+            _vm._v(
+              "\n                        Tipo de Contratação\n                        "
+            ),
+            _c("i", { staticClass: "far fa-chevron-down" }),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h2",
+      { staticClass: "accordion-header", attrs: { id: "headingTwelve" } },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "accordion-button collapsed",
+            attrs: {
+              type: "button",
+              "data-bs-toggle": "collapse",
+              "data-bs-target": "#collapseTwelve",
+              "aria-expanded": "false",
+              "aria-controls": "collapseTwelve",
+            },
+          },
+          [
+            _c("span", [_c("i", { staticClass: "far fa-check" })]),
+            _vm._v(
+              "\n                        Situação Empregatícia\n                        "
+            ),
+            _c("i", { staticClass: "far fa-chevron-down" }),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "result__are__title" }, [
+      _c("h3", [_vm._v("Meus Currículos")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("i", { staticClass: "fas fa-map-marker-alt" })])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "single__result__item__bottom__right" }, [
+      _c("div", [
+        _c("button", { staticClass: "btn btn-danger rounded-pill" }, [
+          _vm._v(
+            "\n                        Baixar Currículo\n                      "
+          ),
         ]),
       ]),
     ])
@@ -38682,17 +38870,15 @@ var render = function () {
                   [_vm._v("\n            FECHAR\n          ")]
                 ),
                 _vm._v(" "),
-                _vm.car.length === 2
-                  ? _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "button" },
-                        on: { click: _vm.purchaseCurriculum },
-                      },
-                      [_vm._v("\n            ADQUIRIR CURRÍCULOS\n          ")]
-                    )
-                  : _vm._e(),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.purchaseCurriculum },
+                  },
+                  [_vm._v("\n            ADQUIRIR CURRÍCULOS\n          ")]
+                ),
               ]),
             ]),
           ]

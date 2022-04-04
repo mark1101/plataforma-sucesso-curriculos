@@ -628,7 +628,7 @@
             >
               FECHAR
             </button>
-            <button type="button" class="btn btn-primary" @click="purchaseCurriculum" v-if="car.length === 2">
+            <button type="button" class="btn btn-primary" @click="purchaseCurriculum">
               ADQUIRIR CURRÍCULOS
             </button>
           </div>
