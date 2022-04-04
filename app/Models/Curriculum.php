@@ -39,4 +39,11 @@ class Curriculum extends Model
         'active',
     ];
 
+    public function experience(){
+        return $this->belongsToMany(ProfessionalExperience::class);
+    }
+
+    public function course(){
+        return $this->belongsToMany(Course::class);
+    }
 }

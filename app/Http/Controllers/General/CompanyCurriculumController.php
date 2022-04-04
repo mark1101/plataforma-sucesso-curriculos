@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\General;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CurriculumListResource;
+use App\Models\Company;
+use App\Models\CompanyCurriculumQuantity;
 use App\Models\Curriculum;
 use App\Models\CurriculumCompany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class CompanyCurriculumController extends Controller
 {
@@ -17,18 +21,72 @@ class CompanyCurriculumController extends Controller
         return response()->json(['curriculums' => $curriculum], 200);
     }
 
-    public function getDownloadCurriculum()
+    public function listCurriculum()
     {
+        $user = Auth::user();
 
-        $curriculum = CurriculumCompany::where('company_id', Auth::user()->id)
-            ->with(['company'])
+        $companyId = Company::where('user_id', Auth::user()->id)->first();
+
+        $curricumDownload = CurriculumCompany::where('company_id', $companyId->id)
             ->get();
 
-        return response()->json(['curriculums' => $curriculum], 200);
+        $curriculumId = [];
+        foreach ($curricumDownload as $item) {
+            $curriculumId[] = $item['curriculum_id'];
+        }
+
+        $quantityCurriculum = CompanyCurriculumQuantity::where('company_id' , $companyId->id)
+        ->first();
+
+        $curriculum = CurriculumListResource::collection(Curriculum::whereNotIn('id', $curriculumId)
+            ->get());
+
+        $curriculumMe = CurriculumListResource::collection(Curriculum::whereIn('id', $curriculumId)
+            ->get());
+
+        return response()->json([
+            'user' => $user,
+            'curriculumList' => $curriculum,
+            'curriculumMe' => $curriculumMe,
+            'quantity' => $quantityCurriculum->quantity
+        ]);
     }
 
-    public function createDownloadCurriculum($curriculum_id)
+    public function purchaseCurriculum(Request $request)
     {
+        $data = $request->all();
+        $company = Company::where('user_id' , Auth::user()->id)->first();
+
+        $calc = CompanyCurriculumQuantity::where('company_id' , $company->id)->first();
+
+        $sub = $calc->quantity - count($data);
+
+        CompanyCurriculumQuantity::where('company_id' , $company->id)->update([
+            'quantity' => $sub,
+        ]);
+
+        foreach($data as $item){
+            CurriculumCompany::create([
+                'curriculum_id' => $item["id"],
+                'company_id' => $company->id
+            ]);
+        }
+        return;
+    }
+
+    public function getDownloadCurriculum($curriculumId)
+    {
+
+        $curriculum = Curriculum::where('id', $curriculumId)->first();
+
+        $data = [
+            'title' => 'SucessoEmpregos Curriculo' . $curriculum->name,
+            'date' => date('d/m/Y'),
+            'curriculum' => $curriculum
+        ];
+
+        $pdf = ::loadView('myPdf', $data);
+        return $pdf->download('curriculo.pdf');
     }
 
     public function indexSearch(Request $request)
@@ -40,8 +98,6 @@ class CompanyCurriculumController extends Controller
             ->orWhere('professional_experiences.years', '>=', $request->years)
             ->get();
 
-        return redirect()->route('primary-filter', [
-            'curriculum' => $curriculum
-        ]);
+        return;
     }
 }
