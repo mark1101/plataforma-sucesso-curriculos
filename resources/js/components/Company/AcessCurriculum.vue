@@ -297,7 +297,7 @@
                         ></span>
                       </div> -->
                       <div>
-                        <button class="btn btn-danger rounded-pill">
+                        <button class="btn btn-danger rounded-pill" @click="createCurriculum(curriculum.id)">
                           Baixar Currículo
                         </button>
                       </div>
@@ -390,6 +390,16 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+  },
+
+  methods:{
+      createCurriculum(curriculum){
+          axios.get('/create-curriculum-download/' + curriculum).then(response => {
+
+          }).catch(error => {
+
+          })
+      }
   },
 
   created() {},
