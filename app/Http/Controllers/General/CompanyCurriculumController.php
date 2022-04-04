@@ -10,7 +10,7 @@ use App\Models\Curriculum;
 use App\Models\CurriculumCompany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class CompanyCurriculumController extends Controller
 {
@@ -77,6 +77,7 @@ class CompanyCurriculumController extends Controller
     public function getDownloadCurriculum($curriculumId)
     {
 
+
         $curriculum = Curriculum::where('id', $curriculumId)->first();
 
         $data = [
@@ -85,8 +86,10 @@ class CompanyCurriculumController extends Controller
             'curriculum' => $curriculum
         ];
 
-        $pdf = PDF::loadView('Company.myPdf', $data);
-        return $pdf->download('curriculo.pdf');
+
+        $pdf = PDF::loadView('Company.myPdf', 'data');
+        return $pdf->setPaper('a4')->stream('Currículo.pdf');
+        //return $pdf->download('curriculo.pdf');
     }
 
     public function indexSearch(Request $request)
