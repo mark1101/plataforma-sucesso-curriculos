@@ -6295,6 +6295,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "register-curriculum.vue",
@@ -7143,9 +7147,17 @@ __webpack_require__.r(__webpack_exports__);
         option: "Não"
       }],
       options_cnh: [{
-        option: "Sim"
+        option: "A"
       }, {
-        option: "Não"
+        option: "B"
+      }, {
+        option: "AB"
+      }, {
+        option: "C"
+      }, {
+        option: "D"
+      }, {
+        option: "E"
       }],
       options_employed: [{
         option: "Empregado"
@@ -7767,19 +7779,82 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+Vue.filter("formatNumber", function (value) {
+  var multiply = value;
+  var formatter = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+    minimumFractionDigits: 2
+  });
+  return formatter.format(multiply);
+});
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "acess-curriculum.vue",
   data: function data() {
     return {
-      time_experience: "",
-      schooling: "",
-      age: "",
-      desired_salary: ""
+      name: "",
+      time_experience: null,
+      schooling: null,
+      age: null,
+      desired_salary: null,
+      formation: null,
+      gender: null,
+      hiring_type: null,
+      is_employed: null,
+      curriculumMe: []
     };
   },
+  computed: {
+    curriculumFilterSearch: function curriculumFilterSearch() {
+      var _this = this;
+
+      var items = this.curriculumMe;
+      items = this.curriculumMe.filter(function (item) {
+        return item.name.toLowerCase().indexOf(_this.name.toLowerCase()) > -1;
+      });
+      items = items.filter(function (item) {
+        if (_this.schooling == null) return item;
+        return item.schooling_level === _this.schooling;
+      });
+      items = items.filter(function (item) {
+        if (_this.formation == null) return item;
+        return item.formation === _this.formation;
+      });
+      items = items.filter(function (item) {
+        if (_this.gender == null) return item;
+        return item.gender === _this.gender;
+      });
+      items = items.filter(function (item) {
+        if (_this.hiring_type == null) return item;
+        return item.hiring_type === _this.hiring_type;
+      });
+      items = items.filter(function (item) {
+        if (_this.is_employed == null) return item;
+        return item.is_employed === _this.is_employed;
+      });
+      return items;
+    }
+  },
   mounted: function mounted() {
-    console.log("componente para filtragem de curriculo ok");
-  }
+    var _this2 = this;
+
+    axios.get("/get-curriculum-general").then(function (response) {
+      _this2.curriculumMe = response.data.curriculumMe;
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
+  created: function created() {}
 });
 
 /***/ }),
@@ -8398,33 +8473,180 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+Vue.filter("formatNumber", function (value) {
+  var multiply = value;
+  var formatter = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+    minimumFractionDigits: 2
+  });
+  return formatter.format(multiply);
+});
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "filter-curriculum.vue",
   data: function data() {
     return {
+      name: "",
       state: "",
       city: "",
       occupation: "",
-      time_experience: "",
-      schooling: "",
-      formation: "",
-      gender: "",
-      age: "",
-      desired_salary: "",
-      hiring_type: "",
-      cnh: "",
-      is_handicapped: "",
-      is_employed: "",
-      curriculumFilter: []
+      time_experience: null,
+      schooling: null,
+      formation: null,
+      gender: null,
+      age: null,
+      desired_salary: null,
+      hiring_type: null,
+      cnh: null,
+      is_handicapped: null,
+      is_employed: null,
+      curriculumFilter: [],
+      curriculumMe: [],
+      user: [],
+      quantity: 0,
+      car: []
     };
   },
-  props: {
-    curriculum: Object
+  computed: {
+    curriculumFilterSearch: function curriculumFilterSearch() {
+      var _this = this;
+
+      var items = this.curriculumFilter;
+      items = this.curriculumFilter.filter(function (item) {
+        return item.name.toLowerCase().indexOf(_this.name.toLowerCase()) > -1;
+      });
+      items = items.filter(function (item) {
+        if (_this.schooling == null) return item;
+        return item.schooling_level === _this.schooling;
+      });
+      items = items.filter(function (item) {
+        if (_this.formation == null) return item;
+        return item.formation === _this.formation;
+      });
+      items = items.filter(function (item) {
+        if (_this.gender == null) return item;
+        return item.gender === _this.gender;
+      });
+      items = items.filter(function (item) {
+        if (_this.hiring_type == null) return item;
+        return item.hiring_type === _this.hiring_type;
+      });
+      items = items.filter(function (item) {
+        if (_this.cnh == null) return item;
+        return item.cnh === _this.cnh;
+      });
+      items = items.filter(function (item) {
+        if (_this.is_handicapped == null) return item;
+        return item.is_handicapped === _this.is_handicapped;
+      });
+      items = items.filter(function (item) {
+        if (_this.is_employed == null) return item;
+        return item.is_employed === _this.is_employed;
+      });
+      return items;
+    }
   },
-  mounted: function mounted() {
-    this.curriculumFilter = this.curriculum;
+  created: function created() {
+    this.getCurriculum();
   },
-  methods: {}
+  mounted: function mounted() {},
+  methods: {
+    getCurriculum: function getCurriculum() {
+      var _this2 = this;
+
+      axios.get("/get-curriculum-general").then(function (response) {
+        _this2.curriculumFilter = response.data.curriculumList;
+        _this2.curriculumMe = response.data.curriculumMe, _this2.user = response.data.user;
+        _this2.quantity = response.data.quantity;
+      })["catch"](function (error) {});
+    },
+    carContains: function carContains(curriculum_id) {
+      if (this.car.some(function (car) {
+        return car.id === curriculum_id;
+      })) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    addToCar: function addToCar(curriculum_id, name_candidade, salary) {
+      this.car.push({
+        id: curriculum_id,
+        name_candidade: name_candidade,
+        salary: salary
+      });
+    },
+    removeToCar: function removeToCar(curriculum_id) {
+      this.car = this.car.filter(function (item) {
+        return item.id != curriculum_id;
+      });
+    },
+    openModalCar: function openModalCar() {
+      $("#modal-car").modal("show");
+    },
+    closeModalCar: function closeModalCar() {
+      $("#modal-car").modal("hide");
+    },
+    purchaseCurriculum: function purchaseCurriculum() {
+      var _this3 = this;
+
+      if (this.car.length > this.quantity) {
+        this.$swal("Oops...", "Você não tem créditos de download suficiente!", "error");
+        return;
+      }
+
+      axios.post('/purchase-curriculum', this.car).then(function (response) {
+        _this3.$swal("Sucesso!", "Currículos adicionados a sua lista!", "success");
+
+        _this3.getCurriculum();
+
+        _this3.clear();
+      })["catch"](function (error) {
+        _this3.$swal("Oops...", "Erro ao adquirir currículos!", "error");
+      });
+    },
+    clear: function clear() {
+      this.car = [];
+      this.closeModalCar();
+    }
+  }
 });
 
 /***/ }),
@@ -13793,6 +14015,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.col {\n  align-self: self-end !important;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn{\n    text-transform: uppercase;\n    font-weight: bold;\n}\n.btn-blue{\n    background-color: #0c63e4;\n    color: white;\n}\n.car-number{\n    background-color: white;\n    color: black;\n    font-weight: bold;\n    font-size: 12px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -31354,6 +31600,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterCurriculum_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FilterCurriculum.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterCurriculum_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterCurriculum_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -31775,15 +32051,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _FilterCurriculum_vue_vue_type_template_id_233de630___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FilterCurriculum.vue?vue&type=template&id=233de630& */ "./resources/js/components/Company/FilterCurriculum.vue?vue&type=template&id=233de630&");
 /* harmony import */ var _FilterCurriculum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FilterCurriculum.vue?vue&type=script&lang=js& */ "./resources/js/components/Company/FilterCurriculum.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _FilterCurriculum_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FilterCurriculum.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Company/FilterCurriculum.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _FilterCurriculum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _FilterCurriculum_vue_vue_type_template_id_233de630___WEBPACK_IMPORTED_MODULE_0__.render,
   _FilterCurriculum_vue_vue_type_template_id_233de630___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
@@ -31929,6 +32207,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SeeCurriculum_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SeeCurriculum.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Candidate/SeeCurriculum.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Company/FilterCurriculum.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/Company/FilterCurriculum.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterCurriculum_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader/dist/cjs.js!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FilterCurriculum.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=style&index=0&lang=css&");
 
 
 /***/ }),
@@ -32952,12 +33243,28 @@ var render = function () {
                                   },
                                 },
                                 [
-                                  _c("option", { attrs: { value: "Nao" } }, [
-                                    _vm._v("Não"),
+                                  _c("option", { attrs: { value: "A" } }, [
+                                    _vm._v("A"),
                                   ]),
                                   _vm._v(" "),
-                                  _c("option", { attrs: { value: "Sim" } }, [
-                                    _vm._v("Sim"),
+                                  _c("option", { attrs: { value: "B" } }, [
+                                    _vm._v("B"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "AB" } }, [
+                                    _vm._v("A e B"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "C" } }, [
+                                    _vm._v("C"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "D" } }, [
+                                    _vm._v("D"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "E" } }, [
+                                    _vm._v("E"),
                                   ]),
                                 ]
                               ),
@@ -35321,7 +35628,7 @@ var render = function () {
             "div",
             { staticClass: "form-group" },
             [
-              _c("label", [_vm._v("Pretenção Salarial")]),
+              _c("label", [_vm._v("Pretenção Salarial (R$)")]),
               _vm._v(" "),
               _c(
                 "money",
@@ -36433,7 +36740,33 @@ var render = function () {
           _c("div", { staticClass: "col-md-3" }, [
             _c("div", { staticClass: "results__filter__area" }, [
               _c("form", { attrs: { action: "" } }, [
-                _vm._m(0),
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "single__input__item mb-0" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.name,
+                          expression: "name",
+                        },
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", placeholder: "Busca por Nome" },
+                      domProps: { value: _vm.name },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.name = $event.target.value
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _vm._m(0),
+                  ]),
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card p-0 pb-2" }, [
                   _c("h4", [_vm._v("Filtros")]),
@@ -36447,107 +36780,6 @@ var render = function () {
                     [
                       _c("div", { staticClass: "accordion-item" }, [
                         _vm._m(1),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "accordion-collapse collapse",
-                            attrs: {
-                              id: "collapseThree",
-                              "aria-labelledby": "headingThree",
-                              "data-bs-parent": "#accordionExample",
-                            },
-                          },
-                          [
-                            _c("div", { staticClass: "accordion-body" }, [
-                              _c(
-                                "div",
-                                { staticClass: "single__input__item" },
-                                [
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.time_experience,
-                                          expression: "time_experience",
-                                        },
-                                      ],
-                                      staticClass: "form-select",
-                                      attrs: {
-                                        "aria-label": "Default select example",
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          var $$selectedVal =
-                                            Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function (o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function (o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                          _vm.time_experience = $event.target
-                                            .multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "0-1" } },
-                                        [_vm._v("0 - 1 ano")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "1-3" } },
-                                        [_vm._v("1 - 3 anos")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "3-5" } },
-                                        [_vm._v("3 - 5 anos")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "5-7" } },
-                                        [_vm._v("5 - 7 anos")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "7-9" } },
-                                        [_vm._v("7 - 9 anos")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "9+" } }, [
-                                        _vm._v("Mais de 9 anos"),
-                                      ]),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(2),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -36609,7 +36841,11 @@ var render = function () {
                                         {
                                           attrs: { value: "Educacao Infantil" },
                                         },
-                                        [_vm._v("Educação Infantil")]
+                                        [
+                                          _vm._v(
+                                            "\n                              Educação Infantil\n                            "
+                                          ),
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       _c(
@@ -36621,7 +36857,7 @@ var render = function () {
                                         },
                                         [
                                           _vm._v(
-                                            "Ensino Fundamental\n                                                        "
+                                            "\n                              Ensino Fundamental\n                            "
                                           ),
                                         ]
                                       ),
@@ -36635,13 +36871,21 @@ var render = function () {
                                       _c(
                                         "option",
                                         { attrs: { value: "Ensino Superior" } },
-                                        [_vm._v("Ensino Superior")]
+                                        [
+                                          _vm._v(
+                                            "\n                              Ensino Superior\n                            "
+                                          ),
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
                                         { attrs: { value: "Pos-graduacao" } },
-                                        [_vm._v("Pós-graduação")]
+                                        [
+                                          _vm._v(
+                                            "\n                              Pós-graduação\n                            "
+                                          ),
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       _c(
@@ -36654,712 +36898,6 @@ var render = function () {
                                         "option",
                                         { attrs: { value: "Doutorado" } },
                                         [_vm._v("Doutorado")]
-                                      ),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(3),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "accordion-collapse collapse",
-                            attrs: {
-                              id: "collapseSeven",
-                              "aria-labelledby": "headingSeven",
-                              "data-bs-parent": "#accordionExample",
-                            },
-                          },
-                          [
-                            _c("div", { staticClass: "accordion-body" }, [
-                              _c(
-                                "div",
-                                { staticClass: "single__input__item" },
-                                [
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.age,
-                                          expression: "age",
-                                        },
-                                      ],
-                                      staticClass: "form-select",
-                                      attrs: {
-                                        "aria-label": "Default select example",
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          var $$selectedVal =
-                                            Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function (o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function (o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                          _vm.age = $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "16-20" } },
-                                        [_vm._v("16 - 20 anos")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "20-25" } },
-                                        [_vm._v("20 - 25 anos")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "25-30" } },
-                                        [_vm._v("25 - 30 anos")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "30-40" } },
-                                        [_vm._v("30 - 40 anos")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "40-50" } },
-                                        [_vm._v("40 - 50 anos")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "50-60" } },
-                                        [_vm._v("50 - 60 anos")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "60+" } },
-                                        [_vm._v("Mais de 60 anos")]
-                                      ),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(4),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "accordion-collapse collapse",
-                            attrs: {
-                              id: "collapseEight",
-                              "aria-labelledby": "headingEight",
-                              "data-bs-parent": "#accordionExample",
-                            },
-                          },
-                          [
-                            _c("div", { staticClass: "accordion-body" }, [
-                              _c(
-                                "div",
-                                { staticClass: "single__input__item" },
-                                [
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.desired_salary,
-                                          expression: "desired_salary",
-                                        },
-                                      ],
-                                      staticClass: "form-select",
-                                      attrs: {
-                                        "aria-label": "Default select example",
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          var $$selectedVal =
-                                            Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function (o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function (o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                          _vm.desired_salary = $event.target
-                                            .multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Ate 1000" } },
-                                        [_vm._v("Até R$1.000,00")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Ate 3000" } },
-                                        [_vm._v("Até R$3.000,00")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Ate 5000" } },
-                                        [_vm._v("Até R$5.000,00")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Mais de 5000" } },
-                                        [_vm._v("Mais de R$5.000,00")]
-                                      ),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                    ]
-                  ),
-                ]),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _vm._m(5),
-        ]),
-      ]),
-    ]),
-  ])
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "single__input__item mb-0" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "Busca por ID" },
-        }),
-        _vm._v(" "),
-        _c("button", { staticClass: "src-btn" }, [
-          _c("i", { staticClass: "far fa-search" }),
-        ]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h2",
-      { staticClass: "accordion-header", attrs: { id: "headingThree" } },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "accordion-button collapsed",
-            attrs: {
-              type: "button",
-              "data-bs-toggle": "collapse",
-              "data-bs-target": "#collapseThree",
-              "aria-expanded": "false",
-              "aria-controls": "collapseThree",
-            },
-          },
-          [
-            _c("span", [_c("i", { staticClass: "far fa-check" })]),
-            _vm._v(
-              "\n                                                Tempo de Experiência\n                                                "
-            ),
-            _c("i", { staticClass: "far fa-chevron-down" }),
-          ]
-        ),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h2",
-      { staticClass: "accordion-header", attrs: { id: "headingFour" } },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "accordion-button collapsed",
-            attrs: {
-              type: "button",
-              "data-bs-toggle": "collapse",
-              "data-bs-target": "#collapseFour",
-              "aria-expanded": "false",
-              "aria-controls": "collapseFour",
-            },
-          },
-          [
-            _c("span", [_c("i", { staticClass: "far fa-check" })]),
-            _vm._v(
-              "\n                                                Escolaridade\n                                                "
-            ),
-            _c("i", { staticClass: "far fa-chevron-down" }),
-          ]
-        ),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h2",
-      { staticClass: "accordion-header", attrs: { id: "headingSeven" } },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "accordion-button collapsed",
-            attrs: {
-              type: "button",
-              "data-bs-toggle": "collapse",
-              "data-bs-target": "#collapseSeven",
-              "aria-expanded": "false",
-              "aria-controls": "collapseSeven",
-            },
-          },
-          [
-            _c("span", [_c("i", { staticClass: "far fa-check" })]),
-            _vm._v(
-              "\n                                                Faixa Etária\n                                                "
-            ),
-            _c("i", { staticClass: "far fa-chevron-down" }),
-          ]
-        ),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h2",
-      { staticClass: "accordion-header", attrs: { id: "headingEight" } },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "accordion-button collapsed",
-            attrs: {
-              type: "button",
-              "data-bs-toggle": "collapse",
-              "data-bs-target": "#collapseEight",
-              "aria-expanded": "false",
-              "aria-controls": "collapseEight",
-            },
-          },
-          [
-            _c("span", [_c("i", { staticClass: "far fa-check" })]),
-            _vm._v(
-              "\n                                                Pretenção Salarial\n                                                "
-            ),
-            _c("i", { staticClass: "far fa-chevron-down" }),
-          ]
-        ),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-9" }, [
-      _c("div", { staticClass: "result__area__right__wrapper" }, [
-        _c("div", { staticClass: "result__are__title" }, [
-          _c("h3", [_vm._v("Meus Currículos")]),
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "result__items__wrapper" }, [
-          _c("div", { staticClass: "single__result__item" }, [
-            _c("div", { staticClass: "single__result__item__top" }, [
-              _c("p", [_vm._v("ID do currículo: 123456")]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "single__result__item__body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Função que Atuou: "),
-                    _c("b", [_vm._v("Vendedor")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Escolaridade: "),
-                    _c("b", [_vm._v("Superior Completo")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Tempo de Experiência:\n                                                "
-                    ),
-                    _c("b", [_vm._v(" 4 anos e 6 meses")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Formação:\n                                                "
-                    ),
-                    _c("b", [_vm._v("Administração")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Ramo da Empresa que Atuou: "),
-                    _c("b", [_vm._v("Automóveis")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Salário Pretendido:"
-                    ),
-                    _c("b", [_vm._v(" R$4.000,00 - R$6.000,00")]),
-                  ]),
-                ]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "single__result__item__bottom" }, [
-              _c("p", [
-                _c("span", [_c("i", { staticClass: "fas fa-map-marker-alt" })]),
-                _vm._v(
-                  "\n                                        Guarapuava/Paraná\n                                    "
-                ),
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "single__result__item__bottom__right" },
-                [
-                  _c("div", { staticClass: "add__to__favourite" }, [
-                    _vm._v(
-                      "\n                                            Adicionar aos favoritos\n                                            "
-                    ),
-                    _c("span", { staticClass: "favourite__btn" }, [
-                      _c("i", { staticClass: "far fa-star" }),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "add__cart__btn" }, [
-                    _c("button", [_vm._v("Baixar")]),
-                  ]),
-                ]
-              ),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "single__result__item" }, [
-            _c("div", { staticClass: "single__result__item__top" }, [
-              _c("p", [_vm._v("ID do currículo: 123456")]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "single__result__item__body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Função que Atuou: "),
-                    _c("b", [_vm._v("Vendedor")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Escolaridade: "),
-                    _c("b", [_vm._v("Superior Completo")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Tempo de Experiência:\n                                                "
-                    ),
-                    _c("b", [_vm._v(" 4 anos e 6 meses")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Formação:\n                                                "
-                    ),
-                    _c("b", [_vm._v("Administração")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Ramo da Empresa que Atuou: "),
-                    _c("b", [_vm._v("Automóveis")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Salário Pretendido:"
-                    ),
-                    _c("b", [_vm._v(" R$4.000,00 - R$6.000,00")]),
-                  ]),
-                ]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "single__result__item__bottom" }, [
-              _c("p", [
-                _c("span", [_c("i", { staticClass: "fas fa-map-marker-alt" })]),
-                _vm._v(
-                  "\n                                        Guarapuava/Paraná\n                                    "
-                ),
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "single__result__item__bottom__right" },
-                [
-                  _c("div", { staticClass: "add__to__favourite" }, [
-                    _vm._v(
-                      "\n                                            Adicionar aos favoritos\n                                            "
-                    ),
-                    _c("span", { staticClass: "favourite__btn" }, [
-                      _c("i", { staticClass: "far fa-star" }),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "add__cart__btn" }, [
-                    _c("button", [_vm._v("Baixar")]),
-                  ]),
-                ]
-              ),
-            ]),
-          ]),
-        ]),
-      ]),
-    ])
-  },
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=template&id=233de630&":
-/*!************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=template&id=233de630& ***!
-  \************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function () {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("section", { staticClass: "result__area" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-3" }, [
-            _c("div", { staticClass: "results__filter__area" }, [
-              _c("form", { attrs: { action: "" } }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("div", { staticClass: "card p-0 pb-2" }, [
-                  _c("h4", [_vm._v("Filtros")]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "accordion",
-                      attrs: { id: "accordionExample" },
-                    },
-                    [
-                      _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(1),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "accordion-collapse collapse show",
-                            attrs: {
-                              id: "collapseOne",
-                              "aria-labelledby": "headingOne",
-                              "data-bs-parent": "#accordionExample",
-                            },
-                          },
-                          [
-                            _c("div", { staticClass: "accordion-body" }, [
-                              _c(
-                                "div",
-                                { staticClass: "single__input__item" },
-                                [
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.state,
-                                          expression: "state",
-                                        },
-                                      ],
-                                      staticClass: "form-select",
-                                      attrs: {
-                                        "aria-label": "Default select example",
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          var $$selectedVal =
-                                            Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function (o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function (o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                          _vm.state = $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c(
-                                        "option",
-                                        { attrs: { selected: "" } },
-                                        [_vm._v("Paraná")]
-                                      ),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { staticClass: "single__input__item mb-0" },
-                                [
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.city,
-                                          expression: "city",
-                                        },
-                                      ],
-                                      staticClass: "form-select",
-                                      attrs: {
-                                        "aria-label": "Default select example",
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          var $$selectedVal =
-                                            Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function (o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function (o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                          _vm.city = $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c(
-                                        "option",
-                                        { attrs: { selected: "" } },
-                                        [_vm._v("Guarapuava")]
                                       ),
                                     ]
                                   ),
@@ -37372,300 +36910,6 @@ var render = function () {
                       _vm._v(" "),
                       _c("div", { staticClass: "accordion-item" }, [
                         _vm._m(2),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "accordion-collapse collapse",
-                            attrs: {
-                              id: "collapseTwo",
-                              "aria-labelledby": "headingTwo",
-                              "data-bs-parent": "#accordionExample",
-                            },
-                          },
-                          [
-                            _c("div", { staticClass: "accordion-body" }, [
-                              _c(
-                                "div",
-                                { staticClass: "single__input__item" },
-                                [
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.occupation,
-                                          expression: "occupation",
-                                        },
-                                      ],
-                                      staticClass: "form-select",
-                                      attrs: {
-                                        "aria-label": "Default select example",
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          var $$selectedVal =
-                                            Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function (o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function (o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                          _vm.occupation = $event.target
-                                            .multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c(
-                                        "option",
-                                        { attrs: { selected: "" } },
-                                        [_vm._v("Paraná")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "1" } }, [
-                                        _vm._v("One"),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "2" } }, [
-                                        _vm._v("Two"),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "3" } }, [
-                                        _vm._v("Three"),
-                                      ]),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(3),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "accordion-collapse collapse",
-                            attrs: {
-                              id: "collapseThree",
-                              "aria-labelledby": "headingThree",
-                              "data-bs-parent": "#accordionExample",
-                            },
-                          },
-                          [
-                            _c("div", { staticClass: "accordion-body" }, [
-                              _c(
-                                "div",
-                                { staticClass: "single__input__item" },
-                                [
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.time_experience,
-                                          expression: "time_experience",
-                                        },
-                                      ],
-                                      staticClass: "form-select",
-                                      attrs: {
-                                        "aria-label": "Default select example",
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          var $$selectedVal =
-                                            Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function (o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function (o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                          _vm.time_experience = $event.target
-                                            .multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c("option", { attrs: { value: "0" } }, [
-                                        _vm._v("0 - 1 ano"),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "1" } }, [
-                                        _vm._v("1 - 3 anos"),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "3" } }, [
-                                        _vm._v("3 - 5 anos"),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "5" } }, [
-                                        _vm._v("5 - 7 anos"),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "7" } }, [
-                                        _vm._v("7 - 9 anos"),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "9" } }, [
-                                        _vm._v("Mais de 9 anos"),
-                                      ]),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(4),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "accordion-collapse collapse",
-                            attrs: {
-                              id: "collapseFour",
-                              "aria-labelledby": "headingFour",
-                              "data-bs-parent": "#accordionExample",
-                            },
-                          },
-                          [
-                            _c("div", { staticClass: "accordion-body" }, [
-                              _c(
-                                "div",
-                                { staticClass: "single__input__item" },
-                                [
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.schooling,
-                                          expression: "schooling",
-                                        },
-                                      ],
-                                      staticClass: "form-select",
-                                      attrs: {
-                                        "aria-label": "Default select example",
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          var $$selectedVal =
-                                            Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function (o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function (o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                          _vm.schooling = $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c(
-                                        "option",
-                                        {
-                                          attrs: { value: "Educacao Infantil" },
-                                        },
-                                        [_vm._v("Educação Infantil")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        {
-                                          attrs: {
-                                            value: "Ensino Fundamental",
-                                          },
-                                        },
-                                        [
-                                          _vm._v(
-                                            "Ensino Fundamental\n                                                        "
-                                          ),
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Ensino Medio" } },
-                                        [_vm._v("Ensino Médio")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Ensino Superior" } },
-                                        [_vm._v("Ensino Superior")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Pos-graduacao" } },
-                                        [_vm._v("Pós-graduação")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Mestrado" } },
-                                        [_vm._v("Mestrado")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Doutorado" } },
-                                        [_vm._v("Doutorado")]
-                                      ),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(5),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -37755,7 +36999,7 @@ var render = function () {
                                         },
                                         [
                                           _vm._v(
-                                            "Graduação Modulada\n                                                        "
+                                            "\n                              Graduação Modulada\n                            "
                                           ),
                                         ]
                                       ),
@@ -37769,7 +37013,7 @@ var render = function () {
                                         },
                                         [
                                           _vm._v(
-                                            "Educação à Distância\n                                                        "
+                                            "\n                              Educação à Distância\n                            "
                                           ),
                                         ]
                                       ),
@@ -37783,7 +37027,7 @@ var render = function () {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(6),
+                        _vm._m(3),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -37867,182 +37111,7 @@ var render = function () {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(7),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "accordion-collapse collapse",
-                            attrs: {
-                              id: "collapseSeven",
-                              "aria-labelledby": "headingSeven",
-                              "data-bs-parent": "#accordionExample",
-                            },
-                          },
-                          [
-                            _c("div", { staticClass: "accordion-body" }, [
-                              _c(
-                                "div",
-                                { staticClass: "single__input__item" },
-                                [
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.age,
-                                          expression: "age",
-                                        },
-                                      ],
-                                      staticClass: "form-select",
-                                      attrs: {
-                                        "aria-label": "Default select example",
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          var $$selectedVal =
-                                            Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function (o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function (o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                          _vm.age = $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c(
-                                        "option",
-                                        { attrs: { selected: "" } },
-                                        [_vm._v("Paraná")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "1" } }, [
-                                        _vm._v("One"),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "2" } }, [
-                                        _vm._v("Two"),
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("option", { attrs: { value: "3" } }, [
-                                        _vm._v("Three"),
-                                      ]),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(8),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "accordion-collapse collapse",
-                            attrs: {
-                              id: "collapseEight",
-                              "aria-labelledby": "headingEight",
-                              "data-bs-parent": "#accordionExample",
-                            },
-                          },
-                          [
-                            _c("div", { staticClass: "accordion-body" }, [
-                              _c(
-                                "div",
-                                { staticClass: "single__input__item" },
-                                [
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.desired_salary,
-                                          expression: "desired_salary",
-                                        },
-                                      ],
-                                      staticClass: "form-select",
-                                      attrs: {
-                                        "aria-label": "Default select example",
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          var $$selectedVal =
-                                            Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function (o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function (o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                          _vm.desired_salary = $event.target
-                                            .multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Ate 1000" } },
-                                        [_vm._v("Até R$1.000,00")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Ate 3000" } },
-                                        [_vm._v("Até R$3.000,00")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Ate 5000" } },
-                                        [_vm._v("Até R$5.000,00")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Mais de 5000" } },
-                                        [_vm._v("Mais de R$5.000,00")]
-                                      ),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(9),
+                        _vm._m(4),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -38102,17 +37171,27 @@ var render = function () {
                                     [
                                       _c(
                                         "option",
-                                        { attrs: { value: "Clt" } },
+                                        { attrs: { value: "CLT" } },
                                         [_vm._v("CLT")]
                                       ),
                                       _vm._v(" "),
-                                      _c("option", { attrs: { value: "Pj" } }, [
-                                        _vm._v("Pessoa Jurídica (PJ)"),
-                                      ]),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: {
+                                            value: "Pessoa Jurídica (PJ)",
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                              Pessoa Jurídica (PJ)\n                            "
+                                          ),
+                                        ]
+                                      ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
-                                        { attrs: { value: "Estagiario" } },
+                                        { attrs: { value: "Estagiário" } },
                                         [_vm._v("Estagiário")]
                                       ),
                                       _vm._v(" "),
@@ -38124,8 +37203,12 @@ var render = function () {
                                       _vm._v(" "),
                                       _c(
                                         "option",
-                                        { attrs: { value: "JovemAprendiz" } },
-                                        [_vm._v("Jovem Aprendiz")]
+                                        { attrs: { value: "Jovem Aprendiz" } },
+                                        [
+                                          _vm._v(
+                                            "\n                              Jovem Aprendiz\n                            "
+                                          ),
+                                        ]
                                       ),
                                     ]
                                   ),
@@ -38137,164 +37220,7 @@ var render = function () {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(10),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "accordion-collapse collapse",
-                            attrs: {
-                              id: "collapseTen",
-                              "aria-labelledby": "headingTen",
-                              "data-bs-parent": "#accordionExample",
-                            },
-                          },
-                          [
-                            _c("div", { staticClass: "accordion-body" }, [
-                              _c(
-                                "div",
-                                { staticClass: "single__input__item" },
-                                [
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.cnh,
-                                          expression: "cnh",
-                                        },
-                                      ],
-                                      staticClass: "form-select",
-                                      attrs: {
-                                        "aria-label": "Default select example",
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          var $$selectedVal =
-                                            Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function (o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function (o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                          _vm.cnh = $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Nao" } },
-                                        [_vm._v("Não")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Sim" } },
-                                        [_vm._v("Sim")]
-                                      ),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(11),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "accordion-collapse collapse",
-                            attrs: {
-                              id: "collapseEleven",
-                              "aria-labelledby": "headingEleven",
-                              "data-bs-parent": "#accordionExample",
-                            },
-                          },
-                          [
-                            _c("div", { staticClass: "accordion-body" }, [
-                              _c(
-                                "div",
-                                { staticClass: "single__input__item" },
-                                [
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.is_handicapped,
-                                          expression: "is_handicapped",
-                                        },
-                                      ],
-                                      staticClass: "form-select",
-                                      attrs: {
-                                        "aria-label": "Default select example",
-                                      },
-                                      on: {
-                                        change: function ($event) {
-                                          var $$selectedVal =
-                                            Array.prototype.filter
-                                              .call(
-                                                $event.target.options,
-                                                function (o) {
-                                                  return o.selected
-                                                }
-                                              )
-                                              .map(function (o) {
-                                                var val =
-                                                  "_value" in o
-                                                    ? o._value
-                                                    : o.value
-                                                return val
-                                              })
-                                          _vm.is_handicapped = $event.target
-                                            .multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        },
-                                      },
-                                    },
-                                    [
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Nao" } },
-                                        [_vm._v("Não")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "option",
-                                        { attrs: { value: "Sim" } },
-                                        [_vm._v("Sim")]
-                                      ),
-                                    ]
-                                  ),
-                                ]
-                              ),
-                            ]),
-                          ]
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "accordion-item" }, [
-                        _vm._m(12),
+                        _vm._m(5),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -38354,14 +37280,14 @@ var render = function () {
                                     [
                                       _c(
                                         "option",
-                                        { attrs: { value: "Nao" } },
-                                        [_vm._v("Não")]
+                                        { attrs: { value: "Desempregado" } },
+                                        [_vm._v("Desempregado")]
                                       ),
                                       _vm._v(" "),
                                       _c(
                                         "option",
-                                        { attrs: { value: "Sim" } },
-                                        [_vm._v("Sim")]
+                                        { attrs: { value: "Empregado" } },
+                                        [_vm._v("Empregado")]
                                       ),
                                     ]
                                   ),
@@ -38378,7 +37304,140 @@ var render = function () {
             ]),
           ]),
           _vm._v(" "),
-          _vm._m(13),
+          _c("div", { staticClass: "col-md-9" }, [
+            _c("div", { staticClass: "result__area__right__wrapper" }, [
+              _vm._m(6),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "result__items__wrapper" },
+                _vm._l(_vm.curriculumFilterSearch, function (curriculum) {
+                  return _c(
+                    "div",
+                    { key: curriculum.id, staticClass: "single__result__item" },
+                    [
+                      _c("div", { staticClass: "single__result__item__top" }, [
+                        _c("p", [
+                          _vm._v(
+                            "Nome do Candidato: " + _vm._s(curriculum.name)
+                          ),
+                        ]),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "single__result__item__body" }, [
+                        _c(
+                          "div",
+                          { staticClass: "row" },
+                          [
+                            _vm._l(
+                              curriculum.experience,
+                              function (experience) {
+                                return _c(
+                                  "div",
+                                  { key: experience.id, staticClass: "col" },
+                                  [
+                                    _c("p", [
+                                      _vm._v(
+                                        "\n                        Função que Atuou: "
+                                      ),
+                                      _c("b", [
+                                        _vm._v(_vm._s(experience.occupied_job)),
+                                      ]),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _vm._v(
+                                        "\n                        Tempo de Experiência:\n                        "
+                                      ),
+                                      _c("b", [
+                                        _vm._v(
+                                          "\n                          " +
+                                            _vm._s(experience.years) +
+                                            " anos e\n                          " +
+                                            _vm._s(experience.months) +
+                                            " meses"
+                                        ),
+                                      ]),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _vm._v(
+                                        "\n                        Ramo da Empresa que Atuou:\n                        "
+                                      ),
+                                      _c("b", [
+                                        _vm._v(
+                                          _vm._s(experience.company_field)
+                                        ),
+                                      ]),
+                                    ]),
+                                  ]
+                                )
+                              }
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col" }, [
+                              _c("p", [
+                                _vm._v(
+                                  "\n                        Escolaridade: "
+                                ),
+                                _c("b", [
+                                  _vm._v(_vm._s(curriculum.schooling_level)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [
+                                _vm._v(
+                                  "\n                        Formação:\n                        "
+                                ),
+                                _c("b", [_vm._v(_vm._s(curriculum.formation))]),
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [
+                                _vm._v(
+                                  "\n                        Salário Pretendido:"
+                                ),
+                                _c("b", [
+                                  _vm._v(
+                                    "\n                          " +
+                                      _vm._s(
+                                        _vm._f("formatNumber")(
+                                          curriculum.desired_salary
+                                        )
+                                      )
+                                  ),
+                                ]),
+                              ]),
+                            ]),
+                          ],
+                          2
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "single__result__item__bottom" },
+                        [
+                          _c("p", [
+                            _vm._m(7, true),
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(curriculum.city) +
+                                " / " +
+                                _vm._s(curriculum.state) +
+                                "\n                  "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(8, true),
+                        ]
+                      ),
+                    ]
+                  )
+                }),
+                0
+              ),
+            ]),
+          ]),
         ]),
       ]),
     ]),
@@ -38389,111 +37448,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "single__input__item mb-0" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "Busca por ID" },
-        }),
-        _vm._v(" "),
-        _c("button", { staticClass: "src-btn" }, [
-          _c("i", { staticClass: "far fa-search" }),
-        ]),
-      ]),
+    return _c("button", { staticClass: "src-btn" }, [
+      _c("i", { staticClass: "far fa-search" }),
     ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h2",
-      { staticClass: "accordion-header", attrs: { id: "headingOne" } },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "accordion-button",
-            attrs: {
-              type: "button",
-              "data-bs-toggle": "collapse",
-              "data-bs-target": "#collapseOne",
-              "aria-expanded": "true",
-              "aria-controls": "collapseOne",
-            },
-          },
-          [
-            _c("span", [_c("i", { staticClass: "far fa-check" })]),
-            _vm._v(
-              "\n                                                Localidade\n                                                "
-            ),
-            _c("i", { staticClass: "far fa-chevron-down" }),
-          ]
-        ),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h2",
-      { staticClass: "accordion-header", attrs: { id: "headingTwo" } },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "accordion-button collapsed",
-            attrs: {
-              type: "button",
-              "data-bs-toggle": "collapse",
-              "data-bs-target": "#collapseTwo",
-              "aria-expanded": "false",
-              "aria-controls": "collapseTwo",
-            },
-          },
-          [
-            _c("span", [_c("i", { staticClass: "far fa-check" })]),
-            _vm._v(
-              "\n                                                Função\n                                                "
-            ),
-            _c("i", { staticClass: "far fa-chevron-down" }),
-          ]
-        ),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h2",
-      { staticClass: "accordion-header", attrs: { id: "headingThree" } },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "accordion-button collapsed",
-            attrs: {
-              type: "button",
-              "data-bs-toggle": "collapse",
-              "data-bs-target": "#collapseThree",
-              "aria-expanded": "false",
-              "aria-controls": "collapseThree",
-            },
-          },
-          [
-            _c("span", [_c("i", { staticClass: "far fa-check" })]),
-            _vm._v(
-              "\n                                                Tempo de Experiência\n                                                "
-            ),
-            _c("i", { staticClass: "far fa-chevron-down" }),
-          ]
-        ),
-      ]
-    )
   },
   function () {
     var _vm = this
@@ -38518,7 +37475,7 @@ var staticRenderFns = [
           [
             _c("span", [_c("i", { staticClass: "far fa-check" })]),
             _vm._v(
-              "\n                                                Escolaridade\n                                                "
+              "\n                        Escolaridade\n                        "
             ),
             _c("i", { staticClass: "far fa-chevron-down" }),
           ]
@@ -38549,7 +37506,7 @@ var staticRenderFns = [
           [
             _c("span", [_c("i", { staticClass: "far fa-check" })]),
             _vm._v(
-              "\n                                                Formação\n                                                "
+              "\n                        Formação\n                        "
             ),
             _c("i", { staticClass: "far fa-chevron-down" }),
           ]
@@ -38580,69 +37537,7 @@ var staticRenderFns = [
           [
             _c("span", [_c("i", { staticClass: "far fa-check" })]),
             _vm._v(
-              "\n                                                Gênero\n                                                "
-            ),
-            _c("i", { staticClass: "far fa-chevron-down" }),
-          ]
-        ),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h2",
-      { staticClass: "accordion-header", attrs: { id: "headingSeven" } },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "accordion-button collapsed",
-            attrs: {
-              type: "button",
-              "data-bs-toggle": "collapse",
-              "data-bs-target": "#collapseSeven",
-              "aria-expanded": "false",
-              "aria-controls": "collapseSeven",
-            },
-          },
-          [
-            _c("span", [_c("i", { staticClass: "far fa-check" })]),
-            _vm._v(
-              "\n                                                Faixa Etária\n                                                "
-            ),
-            _c("i", { staticClass: "far fa-chevron-down" }),
-          ]
-        ),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h2",
-      { staticClass: "accordion-header", attrs: { id: "headingEight" } },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "accordion-button collapsed",
-            attrs: {
-              type: "button",
-              "data-bs-toggle": "collapse",
-              "data-bs-target": "#collapseEight",
-              "aria-expanded": "false",
-              "aria-controls": "collapseEight",
-            },
-          },
-          [
-            _c("span", [_c("i", { staticClass: "far fa-check" })]),
-            _vm._v(
-              "\n                                                Pretenção Salarial\n                                                "
+              "\n                        Gênero\n                        "
             ),
             _c("i", { staticClass: "far fa-chevron-down" }),
           ]
@@ -38673,69 +37568,7 @@ var staticRenderFns = [
           [
             _c("span", [_c("i", { staticClass: "far fa-check" })]),
             _vm._v(
-              "\n                                                Tipo de Contratação\n                                                "
-            ),
-            _c("i", { staticClass: "far fa-chevron-down" }),
-          ]
-        ),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h2",
-      { staticClass: "accordion-header", attrs: { id: "headingTen" } },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "accordion-button collapsed",
-            attrs: {
-              type: "button",
-              "data-bs-toggle": "collapse",
-              "data-bs-target": "#collapseTen",
-              "aria-expanded": "false",
-              "aria-controls": "collapseTen",
-            },
-          },
-          [
-            _c("span", [_c("i", { staticClass: "far fa-check" })]),
-            _vm._v(
-              "\n                                                CNH\n                                                "
-            ),
-            _c("i", { staticClass: "far fa-chevron-down" }),
-          ]
-        ),
-      ]
-    )
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "h2",
-      { staticClass: "accordion-header", attrs: { id: "headingEleven" } },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "accordion-button collapsed",
-            attrs: {
-              type: "button",
-              "data-bs-toggle": "collapse",
-              "data-bs-target": "#collapseEleven",
-              "aria-expanded": "false",
-              "aria-controls": "collapseEleven",
-            },
-          },
-          [
-            _c("span", [_c("i", { staticClass: "far fa-check" })]),
-            _vm._v(
-              "\n                                                Pessoa com Deficiência\n                                                "
+              "\n                        Tipo de Contratação\n                        "
             ),
             _c("i", { staticClass: "far fa-chevron-down" }),
           ]
@@ -38766,7 +37599,7 @@ var staticRenderFns = [
           [
             _c("span", [_c("i", { staticClass: "far fa-check" })]),
             _vm._v(
-              "\n                                                Situação Empregatícia\n                                                "
+              "\n                        Situação Empregatícia\n                        "
             ),
             _c("i", { staticClass: "far fa-chevron-down" }),
           ]
@@ -38778,188 +37611,1615 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-9" }, [
-      _c("div", { staticClass: "result__area__right__wrapper" }, [
-        _c("div", { staticClass: "result__are__title" }, [
-          _c("h3", [_vm._v("resultados da busca")]),
+    return _c("div", { staticClass: "result__are__title" }, [
+      _c("h3", [_vm._v("Meus Currículos")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("i", { staticClass: "fas fa-map-marker-alt" })])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "single__result__item__bottom__right" }, [
+      _c("div", [
+        _c("button", { staticClass: "btn btn-danger rounded-pill" }, [
+          _vm._v(
+            "\n                        Baixar Currículo\n                      "
+          ),
         ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "result__items__wrapper" }, [
-          _c("div", { staticClass: "single__result__item" }, [
-            _c("div", { staticClass: "single__result__item__top" }, [
-              _c("p", [_vm._v("ID do currículo: 123456")]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "single__result__item__body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Função que Atuou: "),
-                    _c("b", [_vm._v("Vendedor")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Escolaridade: "),
-                    _c("b", [_vm._v("Superior Completo")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Tempo de Experiência:\n                                                "
+      ]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=template&id=233de630&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Company/FilterCurriculum.vue?vue&type=template&id=233de630& ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("section", { staticClass: "result__area" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-3" }, [
+            _c("div", { staticClass: "results__filter__area" }, [
+              _c("div", { staticClass: "single__input__item mb-0" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-blue mb-4 rounded-pill",
+                    on: { click: _vm.openModalCar },
+                  },
+                  [
+                    _vm._v("\n              carrinho "),
+                    _c(
+                      "span",
+                      { staticClass: "badge badge-light car-number" },
+                      [_vm._v(_vm._s(_vm.car.length))]
                     ),
-                    _c("b", [_vm._v(" 4 anos e 6 meses")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Formação:\n                                                "
-                    ),
-                    _c("b", [_vm._v("Administração")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Ramo da Empresa que Atuou: "),
-                    _c("b", [_vm._v("Automóveis")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Salário Pretendido:"
-                    ),
-                    _c("b", [_vm._v(" R$4.000,00 - R$6.000,00")]),
-                  ]),
-                ]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "single__result__item__bottom" }, [
-              _c("p", [
-                _c("span", [_c("i", { staticClass: "fas fa-map-marker-alt" })]),
-                _vm._v(
-                  "\n                                        Guarapuava/Paraná\n                                    "
+                  ]
                 ),
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "single__result__item__bottom__right" },
-                [
-                  _c("div", { staticClass: "add__to__favourite" }, [
-                    _vm._v(
-                      "\n                                            Adicionar aos favoritos\n                                            "
-                    ),
-                    _c("span", { staticClass: "favourite__btn" }, [
-                      _c("i", { staticClass: "far fa-star" }),
-                    ]),
-                  ]),
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "single__input__item mb-0" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.name,
+                        expression: "name",
+                      },
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Busca por Nome" },
+                    domProps: { value: _vm.name },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.name = $event.target.value
+                      },
+                    },
+                  }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "already__downloaded__alert" }, [
-                    _vm._v(
-                      "\n                                            Você já baixou este currículo.\n                                        "
-                    ),
-                  ]),
-                ]
-              ),
+                  _vm._m(0),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card p-0 pb-2" }, [
+                _c("h4", [_vm._v("Filtros")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "accordion",
+                    attrs: { id: "accordionExample" },
+                  },
+                  [
+                    _c("div", { staticClass: "accordion-item" }, [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "accordion-collapse collapse show",
+                          attrs: {
+                            id: "collapseOne",
+                            "aria-labelledby": "headingOne",
+                            "data-bs-parent": "#accordionExample",
+                          },
+                        },
+                        [
+                          _c("div", { staticClass: "accordion-body" }, [
+                            _c("div", { staticClass: "single__input__item" }, [
+                              _c("label", [_vm._v("Estado")]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.state,
+                                      expression: "state",
+                                    },
+                                  ],
+                                  staticClass: "form-select",
+                                  attrs: {
+                                    "aria-label": "Default select example",
+                                  },
+                                  on: {
+                                    change: function ($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call(
+                                          $event.target.options,
+                                          function (o) {
+                                            return o.selected
+                                          }
+                                        )
+                                        .map(function (o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.state = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    },
+                                  },
+                                },
+                                [
+                                  _c("option", { attrs: { selected: "" } }, [
+                                    _vm._v("Paraná"),
+                                  ]),
+                                ]
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "single__input__item mb-0" },
+                              [
+                                _c("label", [_vm._v("Cidade")]),
+                                _vm._v(" "),
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.city,
+                                        expression: "city",
+                                      },
+                                    ],
+                                    staticClass: "form-select",
+                                    attrs: {
+                                      "aria-label": "Default select example",
+                                    },
+                                    on: {
+                                      change: function ($event) {
+                                        var $$selectedVal =
+                                          Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function (o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function (o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                        _vm.city = $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _c("option", { attrs: { selected: "" } }, [
+                                      _vm._v("Guarapuava"),
+                                    ]),
+                                  ]
+                                ),
+                              ]
+                            ),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "accordion-item" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "accordion-collapse collapse",
+                          attrs: {
+                            id: "collapseFour",
+                            "aria-labelledby": "headingFour",
+                            "data-bs-parent": "#accordionExample",
+                          },
+                        },
+                        [
+                          _c("div", { staticClass: "accordion-body" }, [
+                            _c("div", { staticClass: "single__input__item" }, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.schooling,
+                                      expression: "schooling",
+                                    },
+                                  ],
+                                  staticClass: "form-select",
+                                  attrs: {
+                                    "aria-label": "Default select example",
+                                  },
+                                  on: {
+                                    change: function ($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call(
+                                          $event.target.options,
+                                          function (o) {
+                                            return o.selected
+                                          }
+                                        )
+                                        .map(function (o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.schooling = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    },
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Educacao Infantil" } },
+                                    [
+                                      _vm._v(
+                                        "\n                            Educação Infantil\n                          "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Ensino Fundamental" } },
+                                    [
+                                      _vm._v(
+                                        "\n                            Ensino Fundamental\n                          "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Ensino Medio" } },
+                                    [_vm._v("Ensino Médio")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Ensino Superior" } },
+                                    [
+                                      _vm._v(
+                                        "\n                            Ensino Superior\n                          "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Pos-graduacao" } },
+                                    [_vm._v("Pós-graduação")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Mestrado" } },
+                                    [_vm._v("Mestrado")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Doutorado" } },
+                                    [_vm._v("Doutorado")]
+                                  ),
+                                ]
+                              ),
+                            ]),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "accordion-item" }, [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "accordion-collapse collapse",
+                          attrs: {
+                            id: "collapseFive",
+                            "aria-labelledby": "headingFive",
+                            "data-bs-parent": "#accordionExample",
+                          },
+                        },
+                        [
+                          _c("div", { staticClass: "accordion-body" }, [
+                            _c("div", { staticClass: "single__input__item" }, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.formation,
+                                      expression: "formation",
+                                    },
+                                  ],
+                                  staticClass: "form-select",
+                                  attrs: {
+                                    "aria-label": "Default select example",
+                                  },
+                                  on: {
+                                    change: function ($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call(
+                                          $event.target.options,
+                                          function (o) {
+                                            return o.selected
+                                          }
+                                        )
+                                        .map(function (o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.formation = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    },
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Bacharelado" } },
+                                    [_vm._v("Bacharelado")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Licenciatura" } },
+                                    [_vm._v("Licenciatura")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Tecnologico" } },
+                                    [_vm._v("Tecnológico")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Sequencial" } },
+                                    [_vm._v("Sequencial")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Graduacao Modulada" } },
+                                    [
+                                      _vm._v(
+                                        "\n                            Graduação Modulada\n                          "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    {
+                                      attrs: { value: "Educacao a Distancia" },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                            Educação à Distância\n                          "
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ]),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "accordion-item" }, [
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "accordion-collapse collapse",
+                          attrs: {
+                            id: "collapseSix",
+                            "aria-labelledby": "headingSix",
+                            "data-bs-parent": "#accordionExample",
+                          },
+                        },
+                        [
+                          _c("div", { staticClass: "accordion-body" }, [
+                            _c("div", { staticClass: "single__input__item" }, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.gender,
+                                      expression: "gender",
+                                    },
+                                  ],
+                                  staticClass: "form-select",
+                                  attrs: {
+                                    "aria-label": "Default select example",
+                                  },
+                                  on: {
+                                    change: function ($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call(
+                                          $event.target.options,
+                                          function (o) {
+                                            return o.selected
+                                          }
+                                        )
+                                        .map(function (o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.gender = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    },
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Feminino" } },
+                                    [_vm._v("Feminino")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Masculino" } },
+                                    [_vm._v("Masculino")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "Outro" } }, [
+                                    _vm._v("Outro"),
+                                  ]),
+                                ]
+                              ),
+                            ]),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "accordion-item" }, [
+                      _vm._m(5),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "accordion-collapse collapse",
+                          attrs: {
+                            id: "collapseSeven",
+                            "aria-labelledby": "headingSeven",
+                            "data-bs-parent": "#accordionExample",
+                          },
+                        },
+                        [
+                          _c("div", { staticClass: "accordion-body" }, [
+                            _c("div", { staticClass: "single__input__item" }, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.age,
+                                      expression: "age",
+                                    },
+                                  ],
+                                  staticClass: "form-select",
+                                  attrs: {
+                                    "aria-label": "Default select example",
+                                  },
+                                  on: {
+                                    change: function ($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call(
+                                          $event.target.options,
+                                          function (o) {
+                                            return o.selected
+                                          }
+                                        )
+                                        .map(function (o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.age = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    },
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    { attrs: { selected: "", value: "16" } },
+                                    [_vm._v("16")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "18" } }, [
+                                    _vm._v("+18"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "20" } }, [
+                                    _vm._v("+20"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "30" } }, [
+                                    _vm._v("+30"),
+                                  ]),
+                                ]
+                              ),
+                            ]),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "accordion-item" }, [
+                      _vm._m(6),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "accordion-collapse collapse",
+                          attrs: {
+                            id: "collapseEight",
+                            "aria-labelledby": "headingEight",
+                            "data-bs-parent": "#accordionExample",
+                          },
+                        },
+                        [
+                          _c("div", { staticClass: "accordion-body" }, [
+                            _c("div", { staticClass: "single__input__item" }, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.desired_salary,
+                                      expression: "desired_salary",
+                                    },
+                                  ],
+                                  staticClass: "form-select",
+                                  attrs: {
+                                    "aria-label": "Default select example",
+                                  },
+                                  on: {
+                                    change: function ($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call(
+                                          $event.target.options,
+                                          function (o) {
+                                            return o.selected
+                                          }
+                                        )
+                                        .map(function (o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.desired_salary = $event.target
+                                        .multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    },
+                                  },
+                                },
+                                [
+                                  _c("option", { attrs: { value: "1000" } }, [
+                                    _vm._v("Até R$1.000,00"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "3000" } }, [
+                                    _vm._v("Até R$3.000,00"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "5000" } }, [
+                                    _vm._v("Até R$5.000,00"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "10000" } }, [
+                                    _vm._v("Mais de R$5.000,00"),
+                                  ]),
+                                ]
+                              ),
+                            ]),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "accordion-item" }, [
+                      _vm._m(7),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "accordion-collapse collapse",
+                          attrs: {
+                            id: "collapseNine",
+                            "aria-labelledby": "headingNine",
+                            "data-bs-parent": "#accordionExample",
+                          },
+                        },
+                        [
+                          _c("div", { staticClass: "accordion-body" }, [
+                            _c("div", { staticClass: "single__input__item" }, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.hiring_type,
+                                      expression: "hiring_type",
+                                    },
+                                  ],
+                                  staticClass: "form-select",
+                                  attrs: {
+                                    "aria-label": "Default select example",
+                                  },
+                                  on: {
+                                    change: function ($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call(
+                                          $event.target.options,
+                                          function (o) {
+                                            return o.selected
+                                          }
+                                        )
+                                        .map(function (o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.hiring_type = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    },
+                                  },
+                                },
+                                [
+                                  _c("option", { attrs: { value: "CLT" } }, [
+                                    _vm._v("CLT"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    {
+                                      attrs: { value: "Pessoa Jurídica (PJ)" },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                            Pessoa Jurídica (PJ)\n                          "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Estagiário" } },
+                                    [_vm._v("Estagiário")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Trainee" } },
+                                    [_vm._v("Trainee")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Jovem Aprendiz" } },
+                                    [
+                                      _vm._v(
+                                        "\n                            Jovem Aprendiz\n                          "
+                                      ),
+                                    ]
+                                  ),
+                                ]
+                              ),
+                            ]),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "accordion-item" }, [
+                      _vm._m(8),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "accordion-collapse collapse",
+                          attrs: {
+                            id: "collapseTen",
+                            "aria-labelledby": "headingTen",
+                            "data-bs-parent": "#accordionExample",
+                          },
+                        },
+                        [
+                          _c("div", { staticClass: "accordion-body" }, [
+                            _c("div", { staticClass: "single__input__item" }, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.cnh,
+                                      expression: "cnh",
+                                    },
+                                  ],
+                                  staticClass: "form-select",
+                                  attrs: {
+                                    "aria-label": "Default select example",
+                                  },
+                                  on: {
+                                    change: function ($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call(
+                                          $event.target.options,
+                                          function (o) {
+                                            return o.selected
+                                          }
+                                        )
+                                        .map(function (o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.cnh = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    },
+                                  },
+                                },
+                                [
+                                  _c("option", { attrs: { value: "A" } }, [
+                                    _vm._v("A"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "B" } }, [
+                                    _vm._v("B"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "AB" } }, [
+                                    _vm._v("AB"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "C" } }, [
+                                    _vm._v("C"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "D" } }, [
+                                    _vm._v("D"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "E" } }, [
+                                    _vm._v("E"),
+                                  ]),
+                                ]
+                              ),
+                            ]),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "accordion-item" }, [
+                      _vm._m(9),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "accordion-collapse collapse",
+                          attrs: {
+                            id: "collapseEleven",
+                            "aria-labelledby": "headingEleven",
+                            "data-bs-parent": "#accordionExample",
+                          },
+                        },
+                        [
+                          _c("div", { staticClass: "accordion-body" }, [
+                            _c("div", { staticClass: "single__input__item" }, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.is_handicapped,
+                                      expression: "is_handicapped",
+                                    },
+                                  ],
+                                  staticClass: "form-select",
+                                  attrs: {
+                                    "aria-label": "Default select example",
+                                  },
+                                  on: {
+                                    change: function ($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call(
+                                          $event.target.options,
+                                          function (o) {
+                                            return o.selected
+                                          }
+                                        )
+                                        .map(function (o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.is_handicapped = $event.target
+                                        .multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    },
+                                  },
+                                },
+                                [
+                                  _c("option", { attrs: { value: "Não" } }, [
+                                    _vm._v("Não"),
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "Sim" } }, [
+                                    _vm._v("Sim"),
+                                  ]),
+                                ]
+                              ),
+                            ]),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "accordion-item" }, [
+                      _vm._m(10),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "accordion-collapse collapse",
+                          attrs: {
+                            id: "collapseTwelve",
+                            "aria-labelledby": "headingTwelve",
+                            "data-bs-parent": "#accordionExample",
+                          },
+                        },
+                        [
+                          _c("div", { staticClass: "accordion-body" }, [
+                            _c("div", { staticClass: "single__input__item" }, [
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.is_employed,
+                                      expression: "is_employed",
+                                    },
+                                  ],
+                                  staticClass: "form-select",
+                                  attrs: {
+                                    "aria-label": "Default select example",
+                                  },
+                                  on: {
+                                    change: function ($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call(
+                                          $event.target.options,
+                                          function (o) {
+                                            return o.selected
+                                          }
+                                        )
+                                        .map(function (o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.is_employed = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    },
+                                  },
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Desempregado" } },
+                                    [_vm._v("Desempregado")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "Empregado" } },
+                                    [_vm._v("Empregado")]
+                                  ),
+                                ]
+                              ),
+                            ]),
+                          ]),
+                        ]
+                      ),
+                    ]),
+                  ]
+                ),
+              ]),
             ]),
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "single__result__item" }, [
-            _c("div", { staticClass: "single__result__item__top" }, [
-              _c("p", [_vm._v("ID do currículo: 123456")]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "single__result__item__body" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Função que Atuou: "),
-                    _c("b", [_vm._v("Vendedor")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Escolaridade: "),
-                    _c("b", [_vm._v("Superior Completo")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Tempo de Experiência:\n                                                "
-                    ),
-                    _c("b", [_vm._v(" 4 anos e 6 meses")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Formação:\n                                                "
-                    ),
-                    _c("b", [_vm._v("Administração")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v("Ramo da Empresa que Atuou: "),
-                    _c("b", [_vm._v("Automóveis")]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-sm-6" }, [
-                  _c("p", [
-                    _vm._v(
-                      "\n                                                Salário Pretendido:"
-                    ),
-                    _c("b", [_vm._v(" R$4.000,00 - R$6.000,00")]),
-                  ]),
-                ]),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "single__result__item__bottom" }, [
-              _c("p", [
-                _c("span", [_c("i", { staticClass: "fas fa-map-marker-alt" })]),
-                _vm._v(
-                  "\n                                        Guarapuava/Paraná\n                                    "
-                ),
-              ]),
+          _c("div", { staticClass: "col-md-9" }, [
+            _c("div", { staticClass: "result__area__right__wrapper" }, [
+              _vm._m(11),
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "single__result__item__bottom__right" },
-                [
-                  _c("div", { staticClass: "add__to__favourite" }, [
-                    _vm._v(
-                      "\n                                            Adicionar aos favoritos\n                                            "
-                    ),
-                    _c("span", { staticClass: "favourite__btn" }, [
-                      _c("i", { staticClass: "far fa-star" }),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "add__cart__btn" }, [
-                    _c("button", [_vm._v("Colocar no carrinho")]),
-                  ]),
-                ]
+                { staticClass: "result__items__wrapper" },
+                _vm._l(_vm.curriculumFilterSearch, function (curriculum) {
+                  return _c(
+                    "div",
+                    { key: curriculum.id, staticClass: "single__result__item" },
+                    [
+                      _c("div", { staticClass: "single__result__item__top" }, [
+                        _c("p", [
+                          _vm._v(
+                            "Nome do Candidato: " + _vm._s(curriculum.name)
+                          ),
+                        ]),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "single__result__item__body" }, [
+                        _c(
+                          "div",
+                          { staticClass: "row" },
+                          [
+                            _vm._l(
+                              curriculum.experience,
+                              function (experience) {
+                                return _c(
+                                  "div",
+                                  { key: experience.id, staticClass: "col" },
+                                  [
+                                    _c("p", [
+                                      _vm._v(
+                                        "\n                        Função que Atuou: "
+                                      ),
+                                      _c("b", [
+                                        _vm._v(_vm._s(experience.occupied_job)),
+                                      ]),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _vm._v(
+                                        "\n                        Tempo de Experiência:\n                        "
+                                      ),
+                                      _c("b", [
+                                        _vm._v(
+                                          "\n                          " +
+                                            _vm._s(experience.years) +
+                                            " anos e\n                          " +
+                                            _vm._s(experience.months) +
+                                            " meses"
+                                        ),
+                                      ]),
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [
+                                      _vm._v(
+                                        "\n                        Ramo da Empresa que Atuou:\n                        "
+                                      ),
+                                      _c("b", [
+                                        _vm._v(
+                                          _vm._s(experience.company_field)
+                                        ),
+                                      ]),
+                                    ]),
+                                  ]
+                                )
+                              }
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col" }, [
+                              _c("p", [
+                                _vm._v(
+                                  "\n                        Escolaridade: "
+                                ),
+                                _c("b", [
+                                  _vm._v(_vm._s(curriculum.schooling_level)),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [
+                                _vm._v(
+                                  "\n                        Formação:\n                        "
+                                ),
+                                _c("b", [_vm._v(_vm._s(curriculum.formation))]),
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [
+                                _vm._v(
+                                  "\n                        Salário Pretendido:"
+                                ),
+                                _c("b", [
+                                  _vm._v(
+                                    "\n                          " +
+                                      _vm._s(
+                                        _vm._f("formatNumber")(
+                                          curriculum.desired_salary
+                                        )
+                                      )
+                                  ),
+                                ]),
+                              ]),
+                            ]),
+                          ],
+                          2
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "single__result__item__bottom" },
+                        [
+                          _c("p", [
+                            _vm._m(12, true),
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(curriculum.city) +
+                                " / " +
+                                _vm._s(curriculum.state) +
+                                "\n                  "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "single__result__item__bottom__right",
+                            },
+                            [
+                              _c("div", [
+                                _vm.carContains(curriculum.id)
+                                  ? _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-danger rounded-pill",
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.removeToCar(
+                                              curriculum.id
+                                            )
+                                          },
+                                        },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                        Remover do carrinho\n                      "
+                                        ),
+                                      ]
+                                    )
+                                  : _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn rounded-pill btn-blue",
+                                        on: {
+                                          click: function ($event) {
+                                            return _vm.addToCar(
+                                              curriculum.id,
+                                              curriculum.name,
+                                              curriculum.desired_salary
+                                            )
+                                          },
+                                        },
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                        Colocar no carrinho\n                      "
+                                        ),
+                                      ]
+                                    ),
+                              ]),
+                            ]
+                          ),
+                        ]
+                      ),
+                    ]
+                  )
+                }),
+                0
               ),
             ]),
           ]),
         ]),
       ]),
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "modal-car",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLongTitle",
+          "aria-hidden": "true",
+        },
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(13),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "modal-body" },
+                _vm._l(_vm.car, function (c) {
+                  return _c(
+                    "div",
+                    {
+                      key: c.id,
+                      staticClass: "alert alert-secondary mb-2",
+                      attrs: { role: "alert" },
+                    },
+                    [
+                      _c("p", [
+                        _vm._v(
+                          "Nome do Candidato: " + _vm._s(c.name_candidade)
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "Pretenção Salarial: " + _vm._s(c.desired_salary)
+                        ),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticStyle: { color: "red", cursor: "pointer" },
+                          on: {
+                            click: function ($event) {
+                              return _vm.removeToCar(c.id)
+                            },
+                          },
+                        },
+                        [_vm._v("Remover")]
+                      ),
+                    ]
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: { click: _vm.closeModalCar },
+                  },
+                  [_vm._v("\n            FECHAR\n          ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.purchaseCurriculum },
+                  },
+                  [_vm._v("\n            ADQUIRIR CURRÍCULOS\n          ")]
+                ),
+              ]),
+            ]),
+          ]
+        ),
+      ]
+    ),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "src-btn" }, [
+      _c("i", { staticClass: "far fa-search" }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h2",
+      { staticClass: "accordion-header", attrs: { id: "headingOne" } },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "accordion-button",
+            attrs: {
+              type: "button",
+              "data-bs-toggle": "collapse",
+              "data-bs-target": "#collapseOne",
+              "aria-expanded": "true",
+              "aria-controls": "collapseOne",
+            },
+          },
+          [
+            _c("span", [_c("i", { staticClass: "far fa-check" })]),
+            _vm._v(
+              "\n                      Localidade\n                      "
+            ),
+            _c("i", { staticClass: "far fa-chevron-down" }),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h2",
+      { staticClass: "accordion-header", attrs: { id: "headingFour" } },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "accordion-button collapsed",
+            attrs: {
+              type: "button",
+              "data-bs-toggle": "collapse",
+              "data-bs-target": "#collapseFour",
+              "aria-expanded": "false",
+              "aria-controls": "collapseFour",
+            },
+          },
+          [
+            _c("span", [_c("i", { staticClass: "far fa-check" })]),
+            _vm._v(
+              "\n                      Escolaridade\n                      "
+            ),
+            _c("i", { staticClass: "far fa-chevron-down" }),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h2",
+      { staticClass: "accordion-header", attrs: { id: "headingFive" } },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "accordion-button collapsed",
+            attrs: {
+              type: "button",
+              "data-bs-toggle": "collapse",
+              "data-bs-target": "#collapseFive",
+              "aria-expanded": "false",
+              "aria-controls": "collapseFive",
+            },
+          },
+          [
+            _c("span", [_c("i", { staticClass: "far fa-check" })]),
+            _vm._v("\n                      Formação\n                      "),
+            _c("i", { staticClass: "far fa-chevron-down" }),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h2",
+      { staticClass: "accordion-header", attrs: { id: "headingSix" } },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "accordion-button collapsed",
+            attrs: {
+              type: "button",
+              "data-bs-toggle": "collapse",
+              "data-bs-target": "#collapseSix",
+              "aria-expanded": "false",
+              "aria-controls": "collapseSix",
+            },
+          },
+          [
+            _c("span", [_c("i", { staticClass: "far fa-check" })]),
+            _vm._v("\n                      Gênero\n                      "),
+            _c("i", { staticClass: "far fa-chevron-down" }),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h2",
+      { staticClass: "accordion-header", attrs: { id: "headingSeven" } },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "accordion-button collapsed",
+            attrs: {
+              type: "button",
+              "data-bs-toggle": "collapse",
+              "data-bs-target": "#collapseSeven",
+              "aria-expanded": "false",
+              "aria-controls": "collapseSeven",
+            },
+          },
+          [
+            _c("span", [_c("i", { staticClass: "far fa-check" })]),
+            _vm._v(
+              "\n                      Faixa Etária\n                      "
+            ),
+            _c("i", { staticClass: "far fa-chevron-down" }),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h2",
+      { staticClass: "accordion-header", attrs: { id: "headingEight" } },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "accordion-button collapsed",
+            attrs: {
+              type: "button",
+              "data-bs-toggle": "collapse",
+              "data-bs-target": "#collapseEight",
+              "aria-expanded": "false",
+              "aria-controls": "collapseEight",
+            },
+          },
+          [
+            _c("span", [_c("i", { staticClass: "far fa-check" })]),
+            _vm._v(
+              "\n                      Pretenção Salarial\n                      "
+            ),
+            _c("i", { staticClass: "far fa-chevron-down" }),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h2",
+      { staticClass: "accordion-header", attrs: { id: "headingNine" } },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "accordion-button collapsed",
+            attrs: {
+              type: "button",
+              "data-bs-toggle": "collapse",
+              "data-bs-target": "#collapseNine",
+              "aria-expanded": "false",
+              "aria-controls": "collapseNine",
+            },
+          },
+          [
+            _c("span", [_c("i", { staticClass: "far fa-check" })]),
+            _vm._v(
+              "\n                      Tipo de Contratação\n                      "
+            ),
+            _c("i", { staticClass: "far fa-chevron-down" }),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h2",
+      { staticClass: "accordion-header", attrs: { id: "headingTen" } },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "accordion-button collapsed",
+            attrs: {
+              type: "button",
+              "data-bs-toggle": "collapse",
+              "data-bs-target": "#collapseTen",
+              "aria-expanded": "false",
+              "aria-controls": "collapseTen",
+            },
+          },
+          [
+            _c("span", [_c("i", { staticClass: "far fa-check" })]),
+            _vm._v("\n                      CNH\n                      "),
+            _c("i", { staticClass: "far fa-chevron-down" }),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h2",
+      { staticClass: "accordion-header", attrs: { id: "headingEleven" } },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "accordion-button collapsed",
+            attrs: {
+              type: "button",
+              "data-bs-toggle": "collapse",
+              "data-bs-target": "#collapseEleven",
+              "aria-expanded": "false",
+              "aria-controls": "collapseEleven",
+            },
+          },
+          [
+            _c("span", [_c("i", { staticClass: "far fa-check" })]),
+            _vm._v(
+              "\n                      Pessoa com Deficiência\n                      "
+            ),
+            _c("i", { staticClass: "far fa-chevron-down" }),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h2",
+      { staticClass: "accordion-header", attrs: { id: "headingTwelve" } },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "accordion-button collapsed",
+            attrs: {
+              type: "button",
+              "data-bs-toggle": "collapse",
+              "data-bs-target": "#collapseTwelve",
+              "aria-expanded": "false",
+              "aria-controls": "collapseTwelve",
+            },
+          },
+          [
+            _c("span", [_c("i", { staticClass: "far fa-check" })]),
+            _vm._v(
+              "\n                      Situação Empregatícia\n                      "
+            ),
+            _c("i", { staticClass: "far fa-chevron-down" }),
+          ]
+        ),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "result__are__title" }, [
+      _c("h3", [_vm._v("resultados da busca")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [_c("i", { staticClass: "fas fa-map-marker-alt" })])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Carrinho")]),
     ])
   },
 ]
@@ -51685,7 +51945,7 @@ Vue.compile = compileToFunctions;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"Promise based HTTP client for the browser and node.js","main":"index.js","scripts":{"test":"grunt test","start":"node ./sandbox/server.js","build":"NODE_ENV=production grunt build","preversion":"npm test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json","postversion":"git push && git push --tags","examples":"node ./examples/server.js","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","fix":"eslint --fix lib/**/*.js"},"repository":{"type":"git","url":"https://github.com/axios/axios.git"},"keywords":["xhr","http","ajax","promise","node"],"author":"Matt Zabriskie","license":"MIT","bugs":{"url":"https://github.com/axios/axios/issues"},"homepage":"https://axios-http.com","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"jsdelivr":"dist/axios.min.js","unpkg":"dist/axios.min.js","typings":"./index.d.ts","dependencies":{"follow-redirects":"^1.14.0"},"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}]}');
+module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBundle":false,"_integrity":"sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==","_location":"/axios","_phantomChildren":{},"_requested":{"type":"range","registry":true,"raw":"axios@^0.21","name":"axios","escapedName":"axios","rawSpec":"^0.21","saveSpec":null,"fetchSpec":"^0.21"},"_requiredBy":["#DEV:/"],"_resolved":"https://registry.npmjs.org/axios/-/axios-0.21.4.tgz","_shasum":"c67b90dc0568e5c1cf2b0b858c43ba28e2eda575","_spec":"axios@^0.21","_where":"/Users/agenciaheyimac2015/Desktop/Projetos em desenvolvimento/plataforma-sucesso-empregos","author":{"name":"Matt Zabriskie"},"browser":{"./lib/adapters/http.js":"./lib/adapters/xhr.js"},"bugs":{"url":"https://github.com/axios/axios/issues"},"bundleDependencies":false,"bundlesize":[{"path":"./dist/axios.min.js","threshold":"5kB"}],"dependencies":{"follow-redirects":"^1.14.0"},"deprecated":false,"description":"Promise based HTTP client for the browser and node.js","devDependencies":{"coveralls":"^3.0.0","es6-promise":"^4.2.4","grunt":"^1.3.0","grunt-banner":"^0.6.0","grunt-cli":"^1.2.0","grunt-contrib-clean":"^1.1.0","grunt-contrib-watch":"^1.0.0","grunt-eslint":"^23.0.0","grunt-karma":"^4.0.0","grunt-mocha-test":"^0.13.3","grunt-ts":"^6.0.0-beta.19","grunt-webpack":"^4.0.2","istanbul-instrumenter-loader":"^1.0.0","jasmine-core":"^2.4.1","karma":"^6.3.2","karma-chrome-launcher":"^3.1.0","karma-firefox-launcher":"^2.1.0","karma-jasmine":"^1.1.1","karma-jasmine-ajax":"^0.1.13","karma-safari-launcher":"^1.0.0","karma-sauce-launcher":"^4.3.6","karma-sinon":"^1.0.5","karma-sourcemap-loader":"^0.3.8","karma-webpack":"^4.0.2","load-grunt-tasks":"^3.5.2","minimist":"^1.2.0","mocha":"^8.2.1","sinon":"^4.5.0","terser-webpack-plugin":"^4.2.3","typescript":"^4.0.5","url-search-params":"^0.10.0","webpack":"^4.44.2","webpack-dev-server":"^3.11.0"},"homepage":"https://axios-http.com","jsdelivr":"dist/axios.min.js","keywords":["xhr","http","ajax","promise","node"],"license":"MIT","main":"index.js","name":"axios","repository":{"type":"git","url":"git+https://github.com/axios/axios.git"},"scripts":{"build":"NODE_ENV=production grunt build","coveralls":"cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js","examples":"node ./examples/server.js","fix":"eslint --fix lib/**/*.js","postversion":"git push && git push --tags","preversion":"npm test","start":"node ./sandbox/server.js","test":"grunt test","version":"npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"},"typings":"./index.d.ts","unpkg":"dist/axios.min.js","version":"0.21.4"}');
 
 /***/ })
 

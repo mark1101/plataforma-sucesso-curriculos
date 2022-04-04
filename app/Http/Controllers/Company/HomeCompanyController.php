@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Models\CompanyCurriculumQuantity;
 use App\Models\Curriculum;
+use App\Models\CurriculumCompany;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -33,14 +34,17 @@ class HomeCompanyController extends Controller
 
     public function dashboard()
     {
-        $userName = Auth::user()->name;
-        //$curriculumUser = Curriculum::where('user_id' , Auth::user()->id)->first();
+        $user = Auth::user();
+        $company = Company::where('user_id' , $user->id)->first();
 
-        return view('Company.dashboard' , [
-            'name' => $userName,
-            'cnpj'=> $userName,
-            'status' => $userName,
-            'address' => $userName,
+        $plan = CompanyCurriculumQuantity::where('company_id', $company->id)->first();
+
+        return view('Company.dashboard', [
+            'name' => $company->name,
+            'cnpj' => $company->name,
+            'status' => $company->status,
+            'address' => $company->address,
+            'credit' => $plan->quantity,
         ]);
     }
 
@@ -58,7 +62,7 @@ class HomeCompanyController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'company'=> 1,
+            'company' => 1,
 
         ]);
 
@@ -73,12 +77,11 @@ class HomeCompanyController extends Controller
             'company_id' => $newCompany['id'],
         ]);
 
-        if($newCompany){
+        if ($newCompany) {
             return view('Company.login-company');
-        }else{
+        } else {
             return view('home-plataform');
         }
-
     }
 
     public function edit(Request $request, $user_id)
@@ -88,6 +91,5 @@ class HomeCompanyController extends Controller
 
     public function destroy($user_id)
     {
-
     }
 }

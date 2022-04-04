@@ -16,7 +16,11 @@
                     <h4 style="text-transform: capitalize">
                         <span>Bem-vindo, {{ $name }} </span>
                     </h4>
-                    <h5>Seu plano expira em:<span> 10 </span> dias</h5>
+                    <h3 style="color:white">Você ainda tem: <span>{{$credit}}</span> créditos</h3>
+                    <h5>Baixe GRÁTIS os
+                        melhores currículos
+                        de Guarapuava<br> e região
+                        e contrate agora mesmo!</h5>
                 </div>
             </div>
 

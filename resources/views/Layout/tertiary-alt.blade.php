@@ -30,10 +30,11 @@
         <div class="offcanvas-menu">
             <div class="main-menu">
                 <ul class="d-block">
+                    <li><a href="{{ url('empresa/dashboard') }}">Início</a></li>
                     <li><a href="{{ url('sugestao/cadastro') }}">Sugestões</a></li>
                     <li><a href="{{ url('faq') }}">FAQ</a></li>
                     <li><a href="{{ url('suporte/cadastro') }}">Suporte</a></li>
-                    <li><a href=""><span><img src="{{ asset('img/cart-btn.png') }}" alt=""></span></a></li>
+                   <!-- <li><a href=""><span><img src="{{ asset('img/cart-btn.png') }}" alt=""></span></a></li> -->
                 </ul>
             </div>
         </div>
@@ -46,15 +47,16 @@
     <header class="header__area position-relative">
         <div class="container">
             <div class="logo__main">
-                <a href="/"><img src="{{ asset('img/logo.svg') }}" alt=""></a>
+                <a href="/empresa/dashboard"><img src="{{ asset('img/logo.svg') }}" alt=""></a>
             </div>
             <div class="header__right">
                 <div class="main__menu red--links">
                     <ul>
+                        <li><a href="{{ url('empresa/dashboard') }}">Início</a></li>
                         <li><a href="{{ url('sugestao/cadastro') }}">Sugestões</a></li>
                         <li><a href="{{ url('faq') }}">FAQ</a></li>
                         <li><a href="{{ url('suporte/cadastro') }}">Suporte</a></li>
-                        <li><a href=""><span><img src="{{ asset('img/cart-btn.png') }}" alt=""></span></a></li>
+                       <!-- <li><a href=""><span><img src="{{ asset('img/cart-btn.png') }}" alt=""></span></a></li> -->
                     </ul>
                 </div>
                 <div class="menu-open">
