@@ -35,8 +35,8 @@ class CompanyCurriculumController extends Controller
             $curriculumId[] = $item['curriculum_id'];
         }
 
-        $quantityCurriculum = CompanyCurriculumQuantity::where('company_id' , $companyId->id)
-        ->first();
+        $quantityCurriculum = CompanyCurriculumQuantity::where('company_id', $companyId->id)
+            ->first();
 
         $curriculum = CurriculumListResource::collection(Curriculum::whereNotIn('id', $curriculumId)
             ->get());
@@ -55,17 +55,17 @@ class CompanyCurriculumController extends Controller
     public function purchaseCurriculum(Request $request)
     {
         $data = $request->all();
-        $company = Company::where('user_id' , Auth::user()->id)->first();
+        $company = Company::where('user_id', Auth::user()->id)->first();
 
-        $calc = CompanyCurriculumQuantity::where('company_id' , $company->id)->first();
+        $calc = CompanyCurriculumQuantity::where('company_id', $company->id)->first();
 
         $sub = $calc->quantity - count($data);
 
-        CompanyCurriculumQuantity::where('company_id' , $company->id)->update([
+        CompanyCurriculumQuantity::where('company_id', $company->id)->update([
             'quantity' => $sub,
         ]);
 
-        foreach($data as $item){
+        foreach ($data as $item) {
             CurriculumCompany::create([
                 'curriculum_id' => $item["id"],
                 'company_id' => $company->id
@@ -77,19 +77,14 @@ class CompanyCurriculumController extends Controller
     public function getDownloadCurriculum($curriculumId)
     {
 
+        $data = Curriculum::where('id', $curriculumId)->first();
 
-        $curriculum = Curriculum::where('id', $curriculumId)->first();
+        $path = public_path() . '/pdf/' . $data->filename . '.pdf';
 
-        $data = [
-            'title' => 'SucessoEmpregos Curriculo' . $curriculum->name,
-            'date' => date('d/m/Y'),
-            'curriculum' => $curriculum
-        ];
+        $pdf = PDF::loadView('Company.myPdf', compact('data'));
+        $pdf->save($path);
 
-
-        $pdf = PDF::loadView('Company.myPdf', 'data');
-        return $pdf->setPaper('a4')->stream('Currículo.pdf');
-        //return $pdf->download('curriculo.pdf');
+        return response()->download($path);
     }
 
     public function indexSearch(Request $request)

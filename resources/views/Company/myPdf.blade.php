@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <title>Sucesso Empregos Currículos</title>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Language" content="pt-br, en, fr, it">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -17,16 +18,16 @@
             <img src="img/user-image.png" alt="" />
         </div>
     </div>
-    <h2>{{ $data->name}}</h2>
+    <h2>{{$data['name']}}</h2>
 
     <label>Considerações Adicionais</label>
-    <p>{{ $data->additional_considerations }}</p>
+    <p>{{ $data['additional_considerations'] }}</p>
 
     <div class="row">
         <div class="col">
             <h3>Informações de contato</h3>
             <label>Email</label>
-            <p>{{ $data->email }}</p>
+            <p>{{ $data['email'] }}</p>
         </div>
     </div>
 
