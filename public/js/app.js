@@ -7854,6 +7854,11 @@ Vue.filter("formatNumber", function (value) {
       console.log(error);
     });
   },
+  methods: {
+    createCurriculum: function createCurriculum(curriculum) {
+      axios.get('/create-curriculum-download/' + curriculum).then(function (response) {})["catch"](function (error) {});
+    }
+  },
   created: function created() {}
 });
 
@@ -37428,7 +37433,35 @@ var render = function () {
                             ),
                           ]),
                           _vm._v(" "),
-                          _vm._m(8, true),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "single__result__item__bottom__right",
+                            },
+                            [
+                              _c("div", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger rounded-pill",
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.createCurriculum(
+                                          curriculum.id
+                                        )
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                        Baixar Currículo\n                      "
+                                    ),
+                                  ]
+                                ),
+                              ]),
+                            ]
+                          ),
                         ]
                       ),
                     ]
@@ -37620,20 +37653,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", [_c("i", { staticClass: "fas fa-map-marker-alt" })])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "single__result__item__bottom__right" }, [
-      _c("div", [
-        _c("button", { staticClass: "btn btn-danger rounded-pill" }, [
-          _vm._v(
-            "\n                        Baixar Currículo\n                      "
-          ),
-        ]),
-      ]),
-    ])
   },
 ]
 render._withStripped = true

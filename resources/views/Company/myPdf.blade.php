@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Sucesso Empregos Currículos</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
+
 <body>
 
-    <h1>{{ $title }}</h1>
+    <div class="row mt-3 mb-2">
+        <div class="col-sm-4">
+            <img src="img/user-image.png" alt="" />
+        </div>
+    </div>
 
-    <p>{{ $date }}</p>
+    <h2>{{ $curriculum->name }}</h2>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua.</p>
-  
-    <table class="table table-bordered">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-        </tr>
-        @foreach($users as $user)
-            <tr>
-                <td>{{ $user->id }}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-            </tr>
-        @endforeach
-    </table>
+    <label>Considerações Adicionais</label>
+    <p>{{ $curriculum->additional_considerations }}</p>
+
+    <div class="row">
+        <div class="col">
+            <h3>Informações de contato</h3>
+            <label>Email</label>
+            <p>{{ $curriculum->email }}</p>
+        </div>
+    </div>
 
 </body>
+
 </html>

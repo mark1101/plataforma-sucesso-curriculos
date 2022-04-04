@@ -10,7 +10,7 @@ use App\Models\Curriculum;
 use App\Models\CurriculumCompany;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Barryvdh\DomPDF\PDF;
+use PDF;
 
 class CompanyCurriculumController extends Controller
 {
@@ -85,7 +85,7 @@ class CompanyCurriculumController extends Controller
             'curriculum' => $curriculum
         ];
 
-        $pdf = PDF::loadView('myPdf', $data);
+        $pdf = PDF::loadView('Company.myPdf', $data);
         return $pdf->download('curriculo.pdf');
     }
 

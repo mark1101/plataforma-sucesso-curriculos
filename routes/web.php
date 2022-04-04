@@ -73,6 +73,8 @@ Route::middleware(['company-acess'])->group(function () {
     Route::get('/empresa/acessar-curriculos', [HomeCompanyController::class, 'acess']);
     Route::get('/empresa/resultado-busca', [HomeCompanyController::class, 'result']);
 
+    Route::get('/create-curriculum-download/{id}', [CompanyCurriculumController::class, 'getDownloadCurriculum']);
+
     //Route::post('/post-filter-primary', [CompanyCurriculumController::class, 'indexSearch']);
 
     Route::get('/empresa/encontrar-curriculos', function (){
