@@ -77,14 +77,20 @@ class CompanyCurriculumController extends Controller
     public function getDownloadCurriculum($curriculumId)
     {
 
-        $data = Curriculum::where('id', $curriculumId)->first();
+        $value = CurriculumListResource::collection(Curriculum::where('id', $curriculumId)
+            ->get());
 
-        $path = public_path() . '/pdf/' . $data->filename . '.pdf';
+        foreach ($value as $item){
+            $data = $item;
+        }
+
+        return $data['whatsapp'];
+
+        $path = public_path() . '/pdf/curriculo' . $data->name . '.pdf';
 
         $pdf = PDF::loadView('Company.myPdf', compact('data'));
         $pdf->save($path);
-
-        return response()->download($path);
+        return $pdf->download($path);
     }
 
     public function indexSearch(Request $request)
