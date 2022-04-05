@@ -38,12 +38,4 @@ class Curriculum extends Model
         'found_us',
         'active',
     ];
-
-    public function experience(){
-        return $this->belongsToMany(ProfessionalExperience::class);
-    }
-
-    public function course(){
-        return $this->belongsToMany(Course::class);
-    }
 }
