@@ -31,6 +31,7 @@ Vue.use(VueSweetalert2);
 Vue.component('filter-curriculum', require('./components/Company/FilterCurriculum.vue').default);
 Vue.component('primary-filter-curriculum', require('./components/Company/PrimaryFilterCurriculum.vue').default);
 Vue.component('acess-curriculum', require('./components/Company/AcessCurriculum.vue').default);
+Vue.component('company-plans', require('./components/Company/Plans.vue').default);
 
 //COMPONENT CANDIDATE
 Vue.component('register-curriculum', require('./components/Candidate/RegisterCurriculum.vue').default);

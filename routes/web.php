@@ -69,20 +69,22 @@ Route::middleware(['no-auth'])->group(function () {
 //ROUTES COMPANY
 Route::middleware(['company-acess'])->group(function () {
     Route::get('/empresa/dashboard', [HomeCompanyController::class, 'dashboard'])->name('dashboard.company');
-    //Route::get('/empresa/encontrar-curriculos', [HomeCompanyController::class, 'search']);
+    Route::get('/planos-empresa' , function(){
+        return view('Company.plans');
+    });
     Route::get('/empresa/acessar-curriculos', [HomeCompanyController::class, 'acess']);
     Route::get('/empresa/resultado-busca', [HomeCompanyController::class, 'result']);
 
     Route::get('/create-curriculum-download/{id}', [CompanyCurriculumController::class, 'getDownloadCurriculum']);
-
-    //Route::post('/post-filter-primary', [CompanyCurriculumController::class, 'indexSearch']);
-
     Route::get('/empresa/encontrar-curriculos', function (){
             return view('Search.search-result');
     });
 
     Route::get('/get-curriculum-general' , [CompanyCurriculumController::class, 'listCurriculum']);
     Route::post('/purchase-curriculum' , [CompanyCurriculumController::class, 'purchaseCurriculum']);
+
+    Route::get('/get-data-company-user' , [HomeCompanyController::class, 'getData']);
+    Route::get('/alter-plan-company/{id}', [HomeCompanyController::class, 'alterPlan']);
 });
 Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
 Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'])->name('register-company');

@@ -499,7 +499,7 @@
           <div class="col-md-9">
             <div class="result__area__right__wrapper">
               <div class="result__are__title">
-                <h3>resultados da busca</h3>
+                <h3>currículos encontrados</h3>
               </div>
               <div class="result__items__wrapper">
                 <div
@@ -615,7 +615,7 @@
               :key="c.id"
             >
               <p>Nome do Candidato: {{ c.name_candidade }}</p>
-              <p>Pretenção Salarial: {{ c.desired_salary }}</p>
+              <p>Pretenção Salarial: {{ c.desired_salary | formatNumber}}</p>
               <p style="color: red ; cursor: pointer" @click="removeToCar(c.id)">Remover</p>
             </div>
           </div>
@@ -756,7 +756,7 @@ export default {
       this.car.push({
         id: curriculum_id,
         name_candidade: name_candidade,
-        salary: salary,
+        desired_salary: salary,
       });
     },
 

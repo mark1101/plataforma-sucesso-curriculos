@@ -47,7 +47,6 @@ class HomeCandidateController extends Controller
         ]);
         if ($newCandidate) {
             return view('Applicant.login-applicant');
-
         }
     }
 
