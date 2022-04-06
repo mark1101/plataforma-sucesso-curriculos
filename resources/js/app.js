@@ -36,6 +36,7 @@ Vue.component('company-plans', require('./components/Company/Plans.vue').default
 //COMPONENT CANDIDATE
 Vue.component('register-curriculum', require('./components/Candidate/RegisterCurriculum.vue').default);
 Vue.component('see-curriculum', require('./components/Candidate/SeeCurriculum').default);
+Vue.component('candidate-plans', require('./components/Candidate/Plans.vue').default);
 
 
 /**

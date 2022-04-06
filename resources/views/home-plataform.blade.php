@@ -25,13 +25,13 @@
                                 <div class="col-sm-6">
                                     <div class="hero__btn__card">
                                         <p>Sou candidato</p>
-                                        <a style="color: white" href="{{ url('/candidato/entrar') }}">CADASTRAR CURRÍCULO</a>
+                                        <a style="color: white" href="{{ url('/candidato/entrar') }}">GERENCIAR CURRÍCULO</a>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="hero__btn__card theme--red">
                                         <p> Sou empresa</p>
-                                        <a style="color: white" href="{{ url('/empresa/entrar') }}"> BAIXAR CURRÍCULO</a>
+                                        <a style="color: white" href="{{ url('/empresa/entrar') }}"> BUSCAR CURRÍCULO</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pb-5">
     <div class="tab" v-if="activePhase === 1">
       <section class="hero__area cadetro-hero pt-5 pb-5">
         <div class="container position-relative">
@@ -260,7 +260,9 @@
                           v-model="hiring_type"
                         >
                           <option value="CLT">CLT</option>
-                          <option value="Pessoa Jurídica (PJ)">Pessoa Jurídica (PJ)</option>
+                          <option value="Pessoa Jurídica (PJ)">
+                            Pessoa Jurídica (PJ)
+                          </option>
                           <option value="Estagiário">Estagiário</option>
                           <option value="Trainee">Trainee</option>
                           <option value="Jovem Aprendiz">Jovem Aprendiz</option>
@@ -322,7 +324,7 @@
                           <option value="AB">A e B</option>
                           <option value="C">C</option>
                           <option value="D">D</option>
-                          <option value="E">E</option> 
+                          <option value="E">E</option>
                         </select>
                       </div>
                     </div>
@@ -796,13 +798,12 @@
                         <option value="Desempregado">Desempregado</option>
                       </select>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" v-if="is_employed === 'Empregado'">
                       <div class="form-check">
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value=""
-                          id="flexCheckDefault"
+                          v-model="blocked"
                         />
                         <label class="form-check-label" for="flexCheckDefault">
                           Não mostre meu currículo para meu atual empregador.
@@ -830,6 +831,7 @@
                               type="text"
                               class="form-control"
                               v-mask="'##.###.###/####-##'"
+                              v-model="cnpj"
                             />
                           </div>
                         </div>
@@ -893,7 +895,7 @@
                         <div class="validity__text">Vigência de 30 dias</div>
                       </div>
                       <div class="pricing__card__bottom">
-                        <a href="">Escolher Plano</a>
+                        <a href="#">Escolher Plano</a>
                       </div>
                     </div>
                   </div>
@@ -917,7 +919,7 @@
                         <div class="validity__text">Vigência de 90 dias</div>
                       </div>
                       <div class="pricing__card__bottom">
-                        <a href="">Escolher Plano</a>
+                        <a href="#">Escolher Plano</a>
                       </div>
                     </div>
                   </div>
@@ -941,7 +943,7 @@
                         <div class="validity__text">Vigência de 180 dias</div>
                       </div>
                       <div class="pricing__card__bottom">
-                        <a href="">Escolher Plano</a>
+                        <a href="#">Escolher Plano</a>
                       </div>
                     </div>
                   </div>
@@ -984,9 +986,9 @@
             </div>
             <div class="col-md-7">
               <div class="hero__form__right">
-                <h4>Seu currículo já está aparecendo nas buscas.</h4>
+                <h4>Após a aprovacao do pagamento, seu curriculo ja estara aparecendo nas buscas</h4>
                 <p class="text-md">
-                  Para aumentar suas chances lembre-se de preencher o máximo de
+                  Dica: para aumentar suas chances lembre-se de preencher o máximo de
                   informações possíveis.
                 </p>
               </div>
@@ -999,7 +1001,7 @@
       <div class="container position-relative">
         <div class="row">
           <div class="col" style="text-align: left">
-            <div class="justify-content-start">
+            <div class="justify-content-start" v-if="activePhase > 1">
               <button type="button" class="return__btn" @click="remove">
                 Voltar
               </button>
@@ -1019,16 +1021,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <!-- Circles which indicates the steps of the form: -->
-    <div style="text-align: center; margin-top: 40px">
-      <span class="step"></span>
-      <span class="step"></span>
-      <span class="step"></span>
-      <span class="step"></span>
-      <span class="step"></span>
-      <span class="step"></span>
-      <span class="step"></span>
     </div>
   </div>
 </template>
@@ -1099,6 +1091,9 @@ export default {
         { name: "Instagram" },
         { name: "Outros" },
       ],
+      blocked: false,
+      payment: false,
+      cnpj: null,
 
       experiences: [],
       courses: [],
@@ -1232,17 +1227,31 @@ export default {
         found_us: this.found_us,
         file: this.file,
         additional_considerations: this.additional_considerations,
+
+        cnpj: this.cnpj,
       };
 
-      axios
-        .post("/create-curriculum", payload)
-        .then((response) => {
-          this.$swal("Sucesso!", "Os dados foram salvos", "success");
-        })
-        .catch((error) => {
-          this.$swal("Oops...", "Erro ao cadastrar!", "error");
-        });
+      if (this.payment) {
+        axios
+          .post("/create-curriculum", payload)
+          .then((response) => {
+            this.$swal("Sucesso!", "Os dados foram salvos", "success");
+          })
+          .catch((error) => {
+            this.$swal("Oops...", "Erro ao cadastrar!", "error");
+          });
+      } else {
+        this.$swal(
+          "Pagamento ainda não reconhecido.",
+          "Para deixar seu curriculo online para outras empresas, o pagamento deverá ser realizado",
+          "error"
+        );
+      }
     },
+
+    payment(){
+      this.payment == true;
+    }
   },
 };
 </script>

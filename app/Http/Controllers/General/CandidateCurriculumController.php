@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\General;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Course;
 use App\Models\Curriculum;
+use App\Models\CurriculumBlock;
 use App\Models\ProfessionalExperience;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +19,15 @@ class CandidateCurriculumController extends Controller
         $data = $request->all();
         $imageName =  null;
 
+        if($request->cnpj != null){
+            $company = Company::where('cnpj' , $request->cnpj)->first();
+            if($company){
+                $blockedCurriculum = CurriculumBlock::updateOrCreate([
+                    'user_id' => Auth::user()->id,
+                    'company_id' => $company->id
+                ]);
+            }
+        }
 
         if ($request->file == []) {
             $newCurriculum = Curriculum::updateOrCreate([
@@ -116,6 +127,21 @@ class CandidateCurriculumController extends Controller
         }
 
         return $newCurriculum;
+    } 
+
+    public function deleteCurriculum($curriculum_id){
+        $delete = Curriculum::where('id' , $curriculum_id)->delete();
+        if($delete){
+            return response()->json([
+                'message' => 'Seu currículo foi deletado com sucesso', 
+                'status' => 'success'
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'Erro ao deletar, tente novamente mais tarde', 
+                'status' => 'error'
+            ]);
+        }
     }
 
     public function getUserCurriculum()

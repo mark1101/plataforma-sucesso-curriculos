@@ -88,20 +88,38 @@ class HomeCompanyController extends Controller
             'plan_id' => $plan
         ]);
 
-        $addCredit = CompanyCurriculumQuantity::where('company_id', $company->id)->update([
-            'quantity' => $sum
-        ]);
-
-        if ($alterPlan && $addCredit) {
-            return response()->json([
-                'message' => 'Pagamento realizado com sucesso!',
-                'status' => 'success'
-            ], 201);
+        if ($alterPlan) {
+            if ($this->addCredit($company->id, $sum)) {
+                return response()->json([
+                    'message' => 'Seu pagamento foi aprovado, plano alterado e crédito adicionado a sua conta!',
+                    'status' => 'success'
+                ], 201);
+            } else {
+                $alterPlan = CompanyPlanRelation::where('company_id', $company->id)->update([
+                    'plan_id' => $companyPlan->plan_id
+                ]);
+                return response()->json([
+                    'message' => 'Erro ao concluir sua requisição, tente novamente mais tarde!',
+                    'status' => 'success'
+                ], 201);
+            }
         } else {
             return response()->json([
                 'message' => 'Erro ao validar seu pagamento',
                 'status' => 'error'
             ], 201);
+        }
+    }
+
+    public function addCredit($companyId, $sum)
+    {
+        $addCredit = CompanyCurriculumQuantity::where('company_id', $companyId)->update([
+            'quantity' => $sum
+        ]);
+        if ($addCredit) {
+            return true;
+        } else {
+            return false;
         }
     }
 

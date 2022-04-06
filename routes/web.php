@@ -101,6 +101,7 @@ Route::middleware(['candidate-acess'])->group(function () {
         return view('Applicant.see-curriculum');
     });
     Route::put('/edit-curriculum' , [CandidateCurriculumController::class, 'editUserCurriculum']);
+    Route::delete('/delete-curriculum/{id}' , [CandidateCurriculumController::class, 'deleteCurriculum']);
 
     Route::get('/get-experience/{id}', [CandidateCurriculumController::class, 'getExperience']);
     Route::put('/edit-experience/{id}', [CandidateCurriculumController::class, 'editExperience']);
@@ -114,6 +115,12 @@ Route::middleware(['candidate-acess'])->group(function () {
     Route::delete('/delete-experience/{id}', [CandidateCurriculumController::class, 'deleteExperience']);
     Route::delete('/delete-course/{id}', [CandidateCurriculumController::class, 'deleteCourse']);
 
+    Route::get('/candidato-planos' , function(){
+        return view('Applicant.plans');
+    });
+
+    Route::get('/candidade-get-data', [HomeCandidateController::class, 'getData']);
+    Route::get('/candidate-alter-plan/{id}' , [HomeCandidateController::class, 'alterPlan']);
 
 });
 Route::get('/candidato/registro', [HomeCandidateController::class, 'index']);
