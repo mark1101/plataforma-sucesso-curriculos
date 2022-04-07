@@ -1253,7 +1253,7 @@ export default {
       }
     },
 
-    payment() {
+    paymentTest() {
       this.payment == true;
     },
   },

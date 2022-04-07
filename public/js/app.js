@@ -6642,7 +6642,7 @@ __webpack_require__.r(__webpack_exports__);
         this.$swal("Pagamento ainda não reconhecido.", "Para deixar seu curriculo online para outras empresas, o pagamento deverá ser realizado", "error");
       }
     },
-    payment: function payment() {
+    paymentTest: function paymentTest() {
       this.payment == true;
     }
   }

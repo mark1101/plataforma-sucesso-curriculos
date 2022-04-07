@@ -25,7 +25,7 @@ use App\Http\Controllers\General\CompanyCurriculumController;
 
 Route::get('/verify-acess', function () {
     if (Auth::user()->candidate == 1) {
-        return redirect()->route('dashboard.candidate');
+        return redirect()->route('candidatedash');
     } else {
         return redirect()->route('dashboard.company');
     }

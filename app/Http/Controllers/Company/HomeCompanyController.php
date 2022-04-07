@@ -38,6 +38,7 @@ class HomeCompanyController extends Controller
     {
         $user = Auth::user();
         $company = Company::where('user_id', $user->id)->first();
+        $curriculumDownload = CurriculumCompany::where('company_id' , $company->id)->count();
 
         $plan = CompanyCurriculumQuantity::where('company_id', $company->id)->first();
 
@@ -47,6 +48,7 @@ class HomeCompanyController extends Controller
             'status' => $company->status,
             'address' => $company->address,
             'credit' => $plan->quantity,
+            'curriculum' => $curriculumDownload
         ]);
     }
 
@@ -78,7 +80,7 @@ class HomeCompanyController extends Controller
             if ($credit->quantity != 0) {
                 return response()->json([
                     'message' => 'Os planos possuem tipos diferentes de qualificações,
-                    você precisa gastar seus planos atuais para alterar o plano!',
+                    você precisa gastar seus créditos atuais para alterar o plano!',
                     'status' => 'error'
                 ], 201);
             }

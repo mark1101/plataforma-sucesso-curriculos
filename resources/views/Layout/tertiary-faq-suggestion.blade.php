@@ -33,7 +33,7 @@
                 <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                 <li><a href="{{url('faq')}}">FAQ</a></li>
                 <li><a href="{{url('suporte/cadastro')}}">Suporte</a></li>
-                <li><a href=""><span><img src="{{asset('img/cart-btn.png')}}" alt=""></span></a></li>
+                <!--<li><a href=""><span><img src="{{asset('img/cart-btn.png')}}" alt=""></span></a></li> -->
             </ul>
         </div>
     </div>
@@ -55,7 +55,7 @@
                     <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                     <li><a href="{{url('faq')}}">FAQ</a></li>
                     <li><a href="{{url('suporte/cadastro')}}">Suporte</a></li>
-                    <li><a href=""><span><img src="{{asset('img/cart-btn.png')}}" alt=""></span></a></li>
+                    <!--<li><a href=""><span><img src="{{asset('img/cart-btn.png')}}" alt=""></span></a></li> -->
                 </ul>
             </div>
             <div class="menu-open">
