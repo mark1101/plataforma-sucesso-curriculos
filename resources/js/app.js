@@ -15,6 +15,12 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import Vue from 'vue';
 Vue.use(VueSweetalert2);
 
+import { ZiggyVue } from 'ziggy';
+import { Ziggy } from './ziggy';
+
+
+Vue.use(ZiggyVue, Ziggy);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

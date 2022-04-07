@@ -31,10 +31,18 @@ class HomeCandidateController extends Controller
             $hoje = date('d/m/Y');
 
             if ($candidateDueDate->due_date < $hoje) {
-                $expiration = 'expirado';
+                $expiration = 'Seu currículo está inativo';
             } else {
                 $data1 = new DateTime($candidateDueDate->due_date);
-                $expiration = date_format($data1, 'd/m/Y');
+                if ($curriculumUser) {
+                    if ($curriculumUser->active == 0) {
+                        $expiration = 'Seu currículo está inativo';
+                    } else {
+                        $expiration = date_format($data1, 'd/m/Y');
+                    }
+                } else {
+                    $expiration = date_format($data1, 'd/m/Y');
+                }
             }
         }
 
@@ -69,25 +77,26 @@ class HomeCandidateController extends Controller
 
         $plan = CandidatePlan::where('id', $plan_id)->first();
         $candidate = Candidate::where('user_id', Auth::user()->id)->first();
-        $planCandidate = CandidatePlanRelation::where('candidate_id' , $candidate->id)->first();
+        $planCandidate = CandidatePlanRelation::where('candidate_id', $candidate->id)->first();
 
         //adicionar metodo de pagamento
 
-        $candidateDate = CandidateDueDate::where('user_id', $candidate->id)->first();
+        //$candidateDate = CandidateDueDate::where('user_id', $candidate->id)->first();
         $days = strval($plan->days);
-        $sumData = date('Y-m-d', strtotime($candidateDate->due_date . " + {$days} days"));
+        $today = date('Y-m-d');
+        $sumData = date('Y-m-d', strtotime($today . " + {$days} days"));
 
         $alterPlan = CandidatePlanRelation::where('candidate_id', $candidate->id)->update([
             'plan_id' => $plan_id
         ]);
 
         if ($alterPlan) {
-            if($this->alterDueDate($sumData)){
+            if ($this->alterDueDate($sumData)) {
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Seu plano foi alterado com sucesso!'
                 ]);
-            }else{
+            } else {
                 $alterPlan = CandidatePlanRelation::where('candidate_id', $candidate->id)->update([
                     'plan_id' => $planCandidate->plan_id
                 ]);
@@ -105,15 +114,15 @@ class HomeCandidateController extends Controller
         }
     }
 
-    public function alterDueDate($dueDate)
+    public function alterDueDate($sumData)
     {
         $candidate = Candidate::where('user_id', Auth::user()->id)->first();
         $alterDueDate = CandidateDueDate::where('user_id', $candidate->id)->update([
-            'due_date' => $dueDate
+            'due_date' => $sumData
         ]);
-        if($alterDueDate){
+        if ($alterDueDate) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="getCurriculumCandidate">
+  <div>
     <h2 align="center">Currículo completo {{ curriculum.name }}</h2>
     <div class="container mb-5 mt-5">
       <div class="row mt-3 mb-2">
@@ -611,11 +611,6 @@
       </div>
     </div>
   </div>
-  <div v-else>
-    <div class="container pt-3 pb-5">
-      <h3>Você não possuí curriculo, cadastre um agora mesmo</h3>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -729,7 +724,9 @@ export default {
           this.curriculum = response.data.curriculum;
           this.experiences = response.data.experiences;
           this.courses = response.data.courses;
-          this.getCurriculumCandidate = true;
+          if (!this.curriculum == null) {
+            this.getCurriculumCandidate = true;
+          }
         })
         .catch((error) => {});
     },
@@ -785,7 +782,9 @@ export default {
             .then((response) => {
               if (response.data.status === "success") {
                 this.$swal("Sucesso!", response.data.message, "success");
-                this.getData();
+                window.setTimeout(function () {
+                  window.location = response.data.redirect;
+                }, 2000);
               } else {
                 this.$swal("Ops...!", response.data.message, "error");
               }

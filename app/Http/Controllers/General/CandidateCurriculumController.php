@@ -76,7 +76,7 @@ class CandidateCurriculumController extends Controller
                 ]);
             }
 
-            return $newCurriculum;
+            return ['redirect' => route('candidatedash')];
         }
 
         $imageName = bin2hex(random_bytes(10)) . time() . '.' . $data['file']->extension();
@@ -126,7 +126,7 @@ class CandidateCurriculumController extends Controller
             ]);
         }
 
-        return $newCurriculum;
+        return ['redirect' => route('candidatedash')];
     } 
 
     public function deleteCurriculum($curriculum_id){
@@ -134,7 +134,8 @@ class CandidateCurriculumController extends Controller
         if($delete){
             return response()->json([
                 'message' => 'Seu currículo foi deletado com sucesso', 
-                'status' => 'success'
+                'status' => 'success',
+                'redirect' => route('candidatedash'),
             ]);
         }else{
             return response()->json([
@@ -149,13 +150,18 @@ class CandidateCurriculumController extends Controller
         $curriculum = Curriculum::where('user_id', Auth::user()->id)
             ->first();
 
-        $experiences = ProfessionalExperience::where('curriculum_id', $curriculum->id)
+        if($curriculum){
+            $experiences = ProfessionalExperience::where('curriculum_id', $curriculum->id)
             ->orderByDesc('id')
             ->get();
 
         $courses = Course::where('curriculum_id', $curriculum->id)
             ->orderByDesc('id')
             ->get();
+        }else{
+            $experiences = [];
+            $courses = [];
+        }
 
         return response()->json([
             'curriculum' => $curriculum,

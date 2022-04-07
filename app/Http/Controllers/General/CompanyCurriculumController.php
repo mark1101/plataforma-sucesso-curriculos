@@ -55,10 +55,12 @@ class CompanyCurriculumController extends Controller
         if ($companyPlan->plan->type == 2) {
             $curriculum = CurriculumListResource::collection(Curriculum::whereNotIn('id', $curriculumId)
                 ->whereIn('id', $cnot)
+                ->where('active' , 1)
                 ->get());
         } else {
             $curriculum = CurriculumListResource::collection(Curriculum::whereNotIn('id', $cnot)
                 ->whereNotIn('id', $curriculumId)
+                ->where('active' , 1)
                 ->get());
         }
 

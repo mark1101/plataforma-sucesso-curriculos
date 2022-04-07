@@ -986,10 +986,13 @@
             </div>
             <div class="col-md-7">
               <div class="hero__form__right">
-                <h4>Após a aprovacao do pagamento, seu curriculo ja estara aparecendo nas buscas</h4>
+                <h4>
+                  Após a aprovacao do pagamento, seu curriculo ja estara
+                  aparecendo nas buscas
+                </h4>
                 <p class="text-md">
-                  Dica: para aumentar suas chances lembre-se de preencher o máximo de
-                  informações possíveis.
+                  Dica: para aumentar suas chances lembre-se de preencher o
+                  máximo de informações possíveis.
                 </p>
               </div>
             </div>
@@ -1173,8 +1176,6 @@ export default {
       this.experiences = this.experiences.filter(function (item) {
         return item.name_company != name;
       });
-
-      //this.experiences.pop();
     },
 
     addCourses() {
@@ -1231,11 +1232,14 @@ export default {
         cnpj: this.cnpj,
       };
 
-      if (this.payment) {
+      if (!this.payment) {
         axios
           .post("/create-curriculum", payload)
           .then((response) => {
             this.$swal("Sucesso!", "Os dados foram salvos", "success");
+            window.setTimeout(function () {
+              window.location = response.data.redirect;
+            }, 2000);
           })
           .catch((error) => {
             this.$swal("Oops...", "Erro ao cadastrar!", "error");
@@ -1249,9 +1253,9 @@ export default {
       }
     },
 
-    payment(){
+    payment() {
       this.payment == true;
-    }
+    },
   },
 };
 </script>

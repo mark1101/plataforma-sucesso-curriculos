@@ -92,14 +92,14 @@ Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'
 
 //ROUTES CANDIDATE
 Route::middleware(['candidate-acess'])->group(function () {
-    Route::get('/candidato/dashboard', [HomeCandidateController::class, 'dashboard'])->name('dashboard.candidate');
+    Route::get('/candidato/dashboard', [HomeCandidateController::class, 'dashboard'])->name('candidatedash');
 
     //CURRICULUM
     Route::post('/create-curriculum', [CandidateCurriculumController::class, 'create']);
     Route::get('/get-my-curriculum' , [CandidateCurriculumController::class, 'getUserCurriculum']);
     Route::get('/meu-curriculo' , function(){
         return view('Applicant.see-curriculum');
-    });
+    })->middleware('see-curriculum');
     Route::put('/edit-curriculum' , [CandidateCurriculumController::class, 'editUserCurriculum']);
     Route::delete('/delete-curriculum/{id}' , [CandidateCurriculumController::class, 'deleteCurriculum']);
 
@@ -144,7 +144,7 @@ Route::prefix('curriculos')->group(function () {
 
     Route::get('/cadastro', function () {
         return view('Applicant.Registration.register-tab');
-    });
+    })->middleware('register-curriculum');
     Route::get('/buscar', function () {
         return view('Search.search');
     });
