@@ -4,6 +4,7 @@ namespace App\Http\Controllers\General;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CurriculumListResource;
+use App\Mail\SendEmailToAdquire;
 use App\Models\Company;
 use App\Models\CompanyCurriculumQuantity;
 use App\Models\CompanyPlanRelation;
@@ -11,9 +12,11 @@ use App\Models\Course;
 use App\Models\Curriculum;
 use App\Models\CurriculumCompany;
 use App\Models\ProfessionalExperience;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Mail;
 
 class CompanyCurriculumController extends Controller
 {
@@ -38,7 +41,7 @@ class CompanyCurriculumController extends Controller
             $curriculumId[] = $item['curriculum_id'];
         }
 
-        $companyPlan = CompanyPlanRelation::where('id', $companyId->id)
+        $companyPlan = CompanyPlanRelation::where('company_id', $companyId->id)
             ->with('plan')
             ->first();
 
@@ -55,12 +58,12 @@ class CompanyCurriculumController extends Controller
         if ($companyPlan->plan->type == 2) {
             $curriculum = CurriculumListResource::collection(Curriculum::whereNotIn('id', $curriculumId)
                 ->whereIn('id', $cnot)
-                ->where('active' , 1)
+                ->where('active', 1)
                 ->get());
         } else {
             $curriculum = CurriculumListResource::collection(Curriculum::whereNotIn('id', $cnot)
                 ->whereNotIn('id', $curriculumId)
-                ->where('active' , 1)
+                ->where('active', 1)
                 ->get());
         }
 
@@ -94,6 +97,9 @@ class CompanyCurriculumController extends Controller
                 'company_id' => $company->id
             ]);
         }
+
+        $user = User::where('id', $company->user_id)->first();
+        Mail::to($user->email)->send(new SendEmailToAdquire($company->name));
         return;
     }
 

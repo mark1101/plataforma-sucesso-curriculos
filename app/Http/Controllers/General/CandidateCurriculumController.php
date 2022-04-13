@@ -19,16 +19,6 @@ class CandidateCurriculumController extends Controller
         $data = $request->all();
         $imageName =  null;
 
-        if($request->cnpj != null){
-            $company = Company::where('cnpj' , $request->cnpj)->first();
-            if($company){
-                $blockedCurriculum = CurriculumBlock::updateOrCreate([
-                    'user_id' => Auth::user()->id,
-                    'company_id' => $company->id
-                ]);
-            }
-        }
-
         if ($request->file == []) {
             $newCurriculum = Curriculum::updateOrCreate([
                 'user_id' => Auth::user()->id,
@@ -126,20 +116,29 @@ class CandidateCurriculumController extends Controller
             ]);
         }
 
-        return ['redirect' => route('candidatedash')];
-    } 
+        $blockedCurriculum = [];
+        if ($data['cnpj'] != null) {
+            $blockedCurriculum = CurriculumBlock::create([
+                'curriculum_id' => $newCurriculum->id,
+                'cnpj' => $request->cnpj,
+            ]);
+        }
 
-    public function deleteCurriculum($curriculum_id){
-        $delete = Curriculum::where('id' , $curriculum_id)->delete();
-        if($delete){
+        return ['redirect' => route('candidatedash')];
+    }
+
+    public function deleteCurriculum($curriculum_id)
+    {
+        $delete = Curriculum::where('id', $curriculum_id)->delete();
+        if ($delete) {
             return response()->json([
-                'message' => 'Seu currículo foi deletado com sucesso', 
+                'message' => 'Seu currículo foi deletado com sucesso',
                 'status' => 'success',
                 'redirect' => route('candidatedash'),
             ]);
-        }else{
+        } else {
             return response()->json([
-                'message' => 'Erro ao deletar, tente novamente mais tarde', 
+                'message' => 'Erro ao deletar, tente novamente mais tarde',
                 'status' => 'error'
             ]);
         }
@@ -150,15 +149,15 @@ class CandidateCurriculumController extends Controller
         $curriculum = Curriculum::where('user_id', Auth::user()->id)
             ->first();
 
-        if($curriculum){
+        if ($curriculum) {
             $experiences = ProfessionalExperience::where('curriculum_id', $curriculum->id)
-            ->orderByDesc('id')
-            ->get();
+                ->orderByDesc('id')
+                ->get();
 
-        $courses = Course::where('curriculum_id', $curriculum->id)
-            ->orderByDesc('id')
-            ->get();
-        }else{
+            $courses = Course::where('curriculum_id', $curriculum->id)
+                ->orderByDesc('id')
+                ->get();
+        } else {
             $experiences = [];
             $courses = [];
         }
@@ -209,7 +208,8 @@ class CandidateCurriculumController extends Controller
         }
     }
 
-    public function deleteExperience($experience_id){
+    public function deleteExperience($experience_id)
+    {
         ProfessionalExperience::where('id', $experience_id)->delete();
         return;
     }
@@ -249,7 +249,8 @@ class CandidateCurriculumController extends Controller
         }
     }
 
-    public function deleteCourse($course_id){
+    public function deleteCourse($course_id)
+    {
         Course::where('id', $course_id)->delete();
         return;
     }
