@@ -10,6 +10,7 @@ use App\Models\CompanyCurriculumQuantity;
 use App\Models\CompanyPlanRelation;
 use App\Models\Course;
 use App\Models\Curriculum;
+use App\Models\CurriculumBlock;
 use App\Models\CurriculumCompany;
 use App\Models\ProfessionalExperience;
 use App\Models\User;
@@ -51,6 +52,15 @@ class CompanyCurriculumController extends Controller
         $curriExpe = Curriculum::join('professional_experiences', 'curriculum.id', '=', 'professional_experiences.curriculum_id')
             ->get();
 
+
+        $cnpjBlocked = CurriculumBlock::where('cnpj', $companyId->cnpj)->get();
+        $idsBlocked = [];
+        if ($cnpjBlocked) {
+            foreach ($cnpjBlocked as $blocked) {
+                $idsBlocked[] = $blocked->curriculum_id;
+            }
+        }
+
         $cnot = [];
         foreach ($curriExpe as $value) {
             $cnot[] = $value['curriculum_id'];
@@ -58,11 +68,13 @@ class CompanyCurriculumController extends Controller
         if ($companyPlan->plan->type == 2) {
             $curriculum = CurriculumListResource::collection(Curriculum::whereNotIn('id', $curriculumId)
                 ->whereIn('id', $cnot)
+                ->whereNotIn('id', $idsBlocked)
                 ->where('active', 1)
                 ->get());
         } else {
             $curriculum = CurriculumListResource::collection(Curriculum::whereNotIn('id', $cnot)
                 ->whereNotIn('id', $curriculumId)
+                ->whereNotIn('id', $idsBlocked)
                 ->where('active', 1)
                 ->get());
         }

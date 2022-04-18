@@ -19,8 +19,7 @@ class SeeCurriculum
      */
     public function handle(Request $request, Closure $next)
     {
-        $candidate = Candidate::where('user_id' , Auth::user()->id)->first();
-        $curriculum = Curriculum::where('user_id', $candidate->id)->first();
+        $curriculum = Curriculum::where('user_id', Auth::user()->id)->first();
         if (!$curriculum) {
             return redirect()->back();
         } else {

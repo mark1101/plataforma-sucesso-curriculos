@@ -17,9 +17,15 @@
                             <span>Bem-vindo, {{ $name }} </span>
                         </h4>
                         <h5>Seu plano expira em:<span> {{ $expiration }} </span></h5>
+                        @if ($blocked != null)
+                            <h5>Currículo bloqueado para o CNPJ:<span> {{ $blocked }} </span></h5>
+                        @else
+                            <h5>Currículo visível para todas empresas da região</h5>
+                        @endif
                     </div>
                     <div class="hero__content__wrapp">
-                        <a class="btn btn-renove" href="{{ url('candidato-planos') }}" style="color: white">Renovar plano ou alterar plano</a>
+                        <a class="btn btn-renove" href="{{ url('candidato-planos') }}" style="color: white">Renovar plano
+                            ou alterar plano</a>
                     </div>
                 </div>
                 <div class="col-md-6 mt-5" style="text-align:center">
@@ -41,14 +47,15 @@
     <!--------- Hero area end --------->
     <style>
         .btn-renove {
-            background-color: #FEBC2C;; 
-            color: white; 
-            text-transform: uppercase; 
+            background-color: #FEBC2C;
+            ;
+            color: white;
+            text-transform: uppercase;
             font-weight: bold;
             border-radius: 20px;
         }
-    
+
     </style>
-    
+
 
 @endsection

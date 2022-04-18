@@ -695,7 +695,12 @@
                     <div class="user__image__upload__wrapper">
                       <div class="user__image__up__btns d-flex">
                         <div class="row">
-                          <input type="file" v-on:change="onChange" />
+                          <input
+                            v-on:change="onChange"
+                            accept="image/*"
+                            type="file"
+                            ref="inputFile"
+                          />
                         </div>
                         <div class="row">
                           <a
@@ -1113,6 +1118,7 @@ export default {
 
     onChange(e) {
       this.file = e.target.files[0];
+      console.log(this.file);
       const teste = e.target.files[0];
       if (this.file.size < 1005222) {
         //console.log(this.file.size);
@@ -1124,7 +1130,7 @@ export default {
           "Imagem com tamanho acima do permitido!",
           "error"
         );
-        this.removeImagem();
+        //this.removeImagem();
       }
     },
 
@@ -1198,43 +1204,49 @@ export default {
       });
     },
 
-    createCurriculum() {
-      let payload = {
-        name: this.name,
-        cep: this.cep,
-        address: this.address,
-        state: this.state,
-        city: this.city,
-        age: this.age,
-        phone: this.phone,
-        whatsapp: this.whatsapp,
-        email: this.email,
-        gender: this.gender,
-
-        schooling_level: this.schooling_level,
-        formation: this.formation,
-        institution: this.institution,
-        hiring_type: this.hiring_type,
-        desired_function: this.desired_function,
-
-        desired_salary: this.desired_salary,
-        is_handicapped: this.is_handicapped,
-        cnh: this.cnh,
-
-        experiences: this.experiences,
-        courses: this.courses,
-
-        is_employed: this.is_employed,
-        found_us: this.found_us,
-        file: this.file,
-        additional_considerations: this.additional_considerations,
-
-        cnpj: this.cnpj,
+    createCurriculum(e) {
+      e.preventDefault();
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       };
+
+      let form = new FormData();
+      form.append("name", this.name);
+      form.append("cep", this.cep);
+      form.append("address", this.address);
+      form.append("state", this.state);
+      form.append("city", this.city);
+      form.append("age", this.age);
+      form.append("phone", this.phone);
+      form.append("whatsapp", this.whatsapp);
+      form.append("email", this.email);
+      form.append("gender", this.gender);
+
+      form.append("schooling_level", this.schooling_level);
+      form.append("formation", this.formation);
+      form.append("institution", this.institution);
+      form.append("hiring_type", this.hiring_type);
+      form.append("desired_function", this.desired_function);
+
+      form.append("desired_salary", this.desired_salary);
+      form.append("is_handicapped", this.is_handicapped);
+      form.append("cnh", this.cnh);
+
+      form.append("experiences", this.experiences);
+      form.append("courses", this.courses);
+
+      form.append("is_employed", this.is_employed);
+      form.append("found_us", this.found_us);
+      form.append("file", this.file);
+      form.append("additional_considerations", this.additional_considerations);
+
+      form.append("cnpj", this.cnpj);
 
       if (!this.payment) {
         axios
-          .post("/create-curriculum", payload)
+          .post("/create-curriculum", form, config)
           .then((response) => {
             this.$swal("Sucesso!", "Os dados foram salvos", "success");
             window.setTimeout(function () {

@@ -19,8 +19,99 @@ class CandidateCurriculumController extends Controller
         $data = $request->all();
         $imageName =  null;
 
-        if ($request->file == []) {
-            $newCurriculum = Curriculum::updateOrCreate([
+        if ($data['file'] == '[object Object]') {
+            $curriculum = Curriculum::where('user_id', Auth::user()->id)->first();
+            if ($curriculum) {
+                $newCurriculum = Curriculum::where('user_id', Auth::user()->id)->update([
+                    'user_id' => Auth::user()->id,
+                    'name' => $data['name'],
+                    'address' => $data['address'],
+                    'cep' => $data['cep'],
+                    'state' => $data['state'],
+                    'city' => $data['city'],
+                    'age' => $data['age'],
+                    'phone' => $data['phone'],
+                    'whatsapp' => $data['whatsapp'],
+                    'email' => $data['email'],
+                    'gender' => $data['gender'],
+                    'schooling_level' => $data['schooling_level'],
+                    'formation' => $data['formation'],
+                    'institution' => $data['institution'],
+                    'hiring_type' => $data['hiring_type'],
+                    'desired_function' => $data['desired_function'],
+                    'desired_salary' => $data['desired_salary'],
+                    'is_handicapped' => $data['is_handicapped'],
+                    'cnh' => $data['cnh'],
+                    'additional_considerations' => $data['additional_considerations'],
+                    'curriculum_photo_url' => $imageName,
+                    'is_employed' => $data['is_employed'],
+                    'found_us' => $data['found_us']
+                ]);
+            } else {
+                $newCurriculum = Curriculum::create([
+                    'user_id' => Auth::user()->id,
+                    'name' => $data['name'],
+                    'address' => $data['address'],
+                    'cep' => $data['cep'],
+                    'state' => $data['state'],
+                    'city' => $data['city'],
+                    'age' => $data['age'],
+                    'phone' => $data['phone'],
+                    'whatsapp' => $data['whatsapp'],
+                    'email' => $data['email'],
+                    'gender' => $data['gender'],
+                    'schooling_level' => $data['schooling_level'],
+                    'formation' => $data['formation'],
+                    'institution' => $data['institution'],
+                    'hiring_type' => $data['hiring_type'],
+                    'desired_function' => $data['desired_function'],
+                    'desired_salary' => $data['desired_salary'],
+                    'is_handicapped' => $data['is_handicapped'],
+                    'cnh' => $data['cnh'],
+                    'additional_considerations' => $data['additional_considerations'],
+                    'curriculum_photo_url' => $imageName,
+                    'is_employed' => $data['is_employed'],
+                    'found_us' => $data['found_us']
+                ]);
+            }
+
+            if ($data['experiences'] != []) {
+                foreach ($data['experiences'] as $experience) {
+                    ProfessionalExperience::updateOrCreate([
+                        'curriculum_id' => $newCurriculum['id'],
+                        'name_company' => $experience->name_company,
+                        'company_field' => $experience->company_field,
+                        'occuppied_job' => $experience->occupied_job,
+                        'years' => $experience->years,
+                        'months' => $experience->months
+                    ]);
+                }
+            }
+            if ($data['courses'] != null) {
+                foreach ($data['courses'] as $course) {
+                    Course::updateOrCreate([
+                        'name_courses' => $course->name_courses,
+                        'school' => $course->school,
+                        'hours' => $course->hours
+                    ]);
+                }
+            }
+
+            if ($data['cnpj'] != null) {
+                $blockedCurriculum = CurriculumBlock::create([
+                    'curriculum_id' => $newCurriculum->id,
+                    'cnpj' => $request->cnpj,
+                ]);
+            }
+
+            return ['redirect' => route('candidatedash')];
+        }
+
+        $imageName = bin2hex(random_bytes(10)) . time() . '.' . $data['file']->extension();
+        $data['file']->move(public_path('images/feed/'), $imageName);
+
+        if ($curriculum = Curriculum::where('user_id', Auth::user()->id)->first()) {
+            $newCurriculum = Curriculum::where('user_id', Auth::user()->id)->update([
                 'user_id' => Auth::user()->id,
                 'name' => $data['name'],
                 'address' => $data['address'],
@@ -45,78 +136,56 @@ class CandidateCurriculumController extends Controller
                 'is_employed' => $data['is_employed'],
                 'found_us' => $data['found_us']
             ]);
+        } else {
+            $newCurriculum = Curriculum::create([
+                'user_id' => Auth::user()->id,
+                'name' => $data['name'],
+                'address' => $data['address'],
+                'cep' => $data['cep'],
+                'state' => $data['state'],
+                'city' => $data['city'],
+                'age' => $data['age'],
+                'phone' => $data['phone'],
+                'whatsapp' => $data['whatsapp'],
+                'email' => $data['email'],
+                'gender' => $data['gender'],
+                'schooling_level' => $data['schooling_level'],
+                'formation' => $data['formation'],
+                'institution' => $data['institution'],
+                'hiring_type' => $data['hiring_type'],
+                'desired_function' => $data['desired_function'],
+                'desired_salary' => $data['desired_salary'],
+                'is_handicapped' => $data['is_handicapped'],
+                'cnh' => $data['cnh'],
+                'additional_considerations' => $data['additional_considerations'],
+                'curriculum_photo_url' => $imageName,
+                'is_employed' => $data['is_employed'],
+                'found_us' => $data['found_us']
+            ]);
+        }
 
+        if ($data['experiences'] != []) {
             foreach ($data['experiences'] as $experience) {
                 ProfessionalExperience::updateOrCreate([
-                    'curriculum_id' => $newCurriculum["id"],
-                    'name_company' => $experience["name_company"],
-                    'company_field' => $experience["company_field"],
-                    'occupied_job' => $experience["occupied_job"],
-                    'years' => $experience["years"],
-                    'months' => $experience["months"]
+                    'curriculum_id' => $newCurriculum['id'],
+                    'name_company' => $experience->name_company,
+                    'company_field' => $experience->company_field,
+                    'occuppied_job' => $experience->occupied_job,
+                    'years' => $experience->years,
+                    'months' => $experience->months
                 ]);
             }
-
+        }
+        if ($data['courses'] != null) {
             foreach ($data['courses'] as $course) {
                 Course::updateOrCreate([
-                    'curriculum_id' => $newCurriculum["id"],
-                    'name_courses' => $course["name_courses"],
-                    'school' => $course["school"],
-                    'hours' => $course["hours"]
+                    'name_courses' => $course->name_courses,
+                    'school' => $course->school,
+                    'hours' => $course->hours
                 ]);
             }
-
-            return ['redirect' => route('candidatedash')];
         }
 
-        $imageName = bin2hex(random_bytes(10)) . time() . '.' . $data['file']->extension();
-        $data['file']->move(public_path('images/feed/'), $imageName);
-
-        $newCurriculum = Curriculum::updateOrCreate([
-            'name' => $data['name'],
-            'address' => $data['address'],
-            'cep' => $data['cep'],
-            'state' => $data['state'],
-            'city' => $data['city'],
-            'age' => $data['age'],
-            'phone' => $data['phone'],
-            'whatsapp' => $data['whatsapp'],
-            'email' => $data['email'],
-            'gender' => $data['gender'],
-            'schooling_level' => $data['schooling_level'],
-            'formation' => $data['formation'],
-            'institution' => $data['institution'],
-            'hiring_type' => $data['hiring_type'],
-            'desired_function' => $data['desired_function'],
-            'desired_salary' => $data['desired_salary'],
-            'is_handicapped' => $data['is_handicapped'],
-            'cnh' => $data['cnh'],
-            'additional_considerations' => $data['additional_considerations'],
-            'curriculum_photo_url' => $imageName,
-            'is_employed' => $data['is_employed'],
-            'found_us' => $data['found_us']
-        ]);
-
-        foreach ($data['experiences'] as $experience) {
-            ProfessionalExperience::updateOrCreate([
-                'curriculum_id' => $newCurriculum['id'],
-                'name_company' => $experience->name_company,
-                'company_field' => $experience->company_field,
-                'occuppied_job' => $experience->occupied_job,
-                'years' => $experience->years,
-                'months' => $experience->months
-            ]);
-        }
-
-        foreach ($data['courses'] as $course) {
-            Course::updateOrCreate([
-                'name_courses' => $course->name_courses,
-                'school' => $course->school,
-                'hours' => $course->hours
-            ]);
-        }
-
-        $blockedCurriculum = [];
         if ($data['cnpj'] != null) {
             $blockedCurriculum = CurriculumBlock::create([
                 'curriculum_id' => $newCurriculum->id,
@@ -129,8 +198,9 @@ class CandidateCurriculumController extends Controller
 
     public function deleteCurriculum($curriculum_id)
     {
-        $delete = Curriculum::where('id', $curriculum_id)->delete();
-        if ($delete) {
+        //$delete = Curriculum::where('id', $curriculum_id)->delete();
+        $userDelete = Curriculum::where('user_id', Auth::user()->id)->delete();
+        if ($userDelete) {
             return response()->json([
                 'message' => 'Seu currículo foi deletado com sucesso',
                 'status' => 'success',

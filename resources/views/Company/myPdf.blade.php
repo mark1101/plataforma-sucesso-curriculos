@@ -16,11 +16,11 @@
 </style>
 
 <body>
-    <h2 align="center">Sucesso Empregos - Currículo</h2>
+    <h2 align="center">Currículo - {{ $data['name'] }} </h2>
     <hr>
     <div class="row">
         <div class="col-sm">
-            <img src="img/user-image.png" alt="" />
+            <img width="20%" src="images/feed/{{$data['curriculum_photo_url']}}" alt="" />
         </div>
         <div class="col-sm">
             <p>Nome Completo: {{ $data['name'] }}</p>

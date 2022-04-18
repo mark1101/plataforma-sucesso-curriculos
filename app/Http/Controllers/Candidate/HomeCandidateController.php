@@ -8,6 +8,7 @@ use App\Models\CandidateDueDate;
 use App\Models\CandidatePlan;
 use App\Models\CandidatePlanRelation;
 use App\Models\Curriculum;
+use App\Models\CurriculumBlock;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
@@ -25,6 +26,12 @@ class HomeCandidateController extends Controller
         $userName = Auth::user()->name;
         $curriculumUser = Curriculum::where('user_id', Auth::user()->id)->first();
         $candidateDueDate = CandidateDueDate::where('user_id', Auth::user()->id)->first();
+        $blocked = CurriculumBlock::where('curriculum_id' , $curriculumUser->id)
+        ->select('cnpj')->first();
+
+        if($blocked != null){
+            $blocked = $blocked->cnpj;
+        }
 
         $expiration = "";
         if ($candidateDueDate) {
@@ -46,10 +53,13 @@ class HomeCandidateController extends Controller
             }
         }
 
+
+
         return view('Applicant.dashboard', [
             'name' => $userName,
             'curriculum' => $curriculumUser,
-            'expiration' => $expiration
+            'expiration' => $expiration,
+            'blocked' => $blocked
         ]);
     }
     public function index()
@@ -76,12 +86,36 @@ class HomeCandidateController extends Controller
     {
 
         $plan = CandidatePlan::where('id', $plan_id)->first();
+
+        if (!$plan) {
+            $createPlan = CandidatePlan::create([
+                'user_id' => Auth::user()->id,
+                'plan_id' => $plan_id
+            ]);
+            if ($createPlan) {
+                $planNew = CandidatePlan::where('id', $plan_id)->first();
+                $today = date('Y-m-d');
+                $sumData = date('Y-m-d', strtotime($today . " + {$planNew->days} days"));
+                if ($this->alterDueDate($sumData)) {
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => 'Seu plano iniciado com sucesso!'
+                    ]);
+                }else{
+                    CandidatePlan::where('user_id' , Auth::user()->id)->delete();
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Erro ao adicionar plano, tente novamente mais tarde ou contate-nos pelo email'
+                    ]);
+                }
+                
+            }
+        }
         $candidate = Candidate::where('user_id', Auth::user()->id)->first();
         $planCandidate = CandidatePlanRelation::where('candidate_id', $candidate->id)->first();
 
         //adicionar metodo de pagamento
 
-        //$candidateDate = CandidateDueDate::where('user_id', $candidate->id)->first();
         $days = strval($plan->days);
         $today = date('Y-m-d');
         $sumData = date('Y-m-d', strtotime($today . " + {$days} days"));
@@ -117,12 +151,12 @@ class HomeCandidateController extends Controller
     public function alterDueDate($sumData)
     {
         $candidate = Candidate::where('user_id', Auth::user()->id)->first();
-        $alterDueDate = CandidateDueDate::where('user_id', $candidate->id)->update([
+        $alterDueDate = CandidateDueDate::where('user_id', $candidate->user_id)->update([
             'due_date' => $sumData
         ]);
-        if ($alterDueDate) {
+        if($alterDueDate){
             return true;
-        } else {
+        }else{
             return false;
         }
     }

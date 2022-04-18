@@ -4,7 +4,7 @@
     <div class="container mb-5 mt-5">
       <div class="row mt-3 mb-2">
         <div class="col-sm-4">
-          <img src="img/user-image.png" alt="" />
+          <img width="50%" :src="'images/feed/' + curriculum.curriculum_photo_url" alt="" />
         </div>
       </div>
       <h3>Dados Pessoais</h3>

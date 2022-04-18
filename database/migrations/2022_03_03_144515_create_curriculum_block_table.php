@@ -18,7 +18,7 @@ class CreateCurriculumBlockTable extends Migration
             $table->bigInteger('curriculum_id')->unsigned();
             $table->foreign('curriculum_id')->references('id')
             ->on('curriculum')->onDelete('cascade');
-            $table->foreignId('cnpj')->nullable();
+            $table->string('cnpj')->nullable();
             $table->timestamps();
             //colocar aqui o on delete cascade
         });

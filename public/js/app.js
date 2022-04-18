@@ -6443,6 +6443,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "register-curriculum.vue",
@@ -6526,6 +6531,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     onChange: function onChange(e) {
       this.file = e.target.files[0];
+      console.log(this.file);
       var teste = e.target.files[0];
 
       if (this.file.size < 1005222) {
@@ -6533,8 +6539,7 @@ __webpack_require__.r(__webpack_exports__);
         this.subi = this.file.name;
         this.curriculum_photo = URL.createObjectURL(teste);
       } else {
-        this.$swal("Oops...", "Imagem com tamanho acima do permitido!", "error");
-        this.removeImagem();
+        this.$swal("Oops...", "Imagem com tamanho acima do permitido!", "error"); //this.removeImagem();
       }
     },
     removeImagem: function removeImagem() {
@@ -6597,39 +6602,44 @@ __webpack_require__.r(__webpack_exports__);
         return item.name_courses != name;
       });
     },
-    createCurriculum: function createCurriculum() {
+    createCurriculum: function createCurriculum(e) {
       var _this = this;
 
-      var payload = {
-        name: this.name,
-        cep: this.cep,
-        address: this.address,
-        state: this.state,
-        city: this.city,
-        age: this.age,
-        phone: this.phone,
-        whatsapp: this.whatsapp,
-        email: this.email,
-        gender: this.gender,
-        schooling_level: this.schooling_level,
-        formation: this.formation,
-        institution: this.institution,
-        hiring_type: this.hiring_type,
-        desired_function: this.desired_function,
-        desired_salary: this.desired_salary,
-        is_handicapped: this.is_handicapped,
-        cnh: this.cnh,
-        experiences: this.experiences,
-        courses: this.courses,
-        is_employed: this.is_employed,
-        found_us: this.found_us,
-        file: this.file,
-        additional_considerations: this.additional_considerations,
-        cnpj: this.cnpj
+      e.preventDefault();
+      var config = {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
       };
+      var form = new FormData();
+      form.append("name", this.name);
+      form.append("cep", this.cep);
+      form.append("address", this.address);
+      form.append("state", this.state);
+      form.append("city", this.city);
+      form.append("age", this.age);
+      form.append("phone", this.phone);
+      form.append("whatsapp", this.whatsapp);
+      form.append("email", this.email);
+      form.append("gender", this.gender);
+      form.append("schooling_level", this.schooling_level);
+      form.append("formation", this.formation);
+      form.append("institution", this.institution);
+      form.append("hiring_type", this.hiring_type);
+      form.append("desired_function", this.desired_function);
+      form.append("desired_salary", this.desired_salary);
+      form.append("is_handicapped", this.is_handicapped);
+      form.append("cnh", this.cnh);
+      form.append("experiences", this.experiences);
+      form.append("courses", this.courses);
+      form.append("is_employed", this.is_employed);
+      form.append("found_us", this.found_us);
+      form.append("file", this.file);
+      form.append("additional_considerations", this.additional_considerations);
+      form.append("cnpj", this.cnpj);
 
       if (!this.payment) {
-        axios.post("/create-curriculum", payload).then(function (response) {
+        axios.post("/create-curriculum", form, config).then(function (response) {
           _this.$swal("Sucesso!", "Os dados foram salvos", "success");
 
           window.setTimeout(function () {
@@ -8733,6 +8743,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 Vue.filter("formatNumber", function (value) {
   var multiply = value;
   var formatter = new Intl.NumberFormat("pt-BR", {
@@ -8855,7 +8874,7 @@ Vue.filter("formatNumber", function (value) {
         return;
       }
 
-      axios.post('/purchase-curriculum', this.car).then(function (response) {
+      axios.post("/purchase-curriculum", this.car).then(function (response) {
         _this3.$swal("Sucesso!", "Currículos adicionados a sua lista!", "success");
 
         _this3.getCurriculum();
@@ -15250,7 +15269,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn{\n    text-transform: uppercase;\n    font-weight: bold;\n}\n.btn-blue{\n    background-color: #0c63e4;\n    color: white;\n}\n.car-number{\n    background-color: white;\n    color: black;\n    font-weight: bold;\n    font-size: 12px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn {\n  text-transform: uppercase;\n  font-weight: bold;\n}\n.btn-blue {\n  background-color: #0c63e4;\n  color: white;\n}\n.car-number {\n  background-color: white;\n  color: black;\n  font-weight: bold;\n  font-size: 12px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -35733,7 +35752,8 @@ var render = function () {
                               [
                                 _c("div", { staticClass: "row" }, [
                                   _c("input", {
-                                    attrs: { type: "file" },
+                                    ref: "inputFile",
+                                    attrs: { accept: "image/*", type: "file" },
                                     on: { change: _vm.onChange },
                                   }),
                                 ]),
@@ -36636,7 +36656,17 @@ var render = function () {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "container mb-5 mt-5" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "row mt-3 mb-2" }, [
+        _c("div", { staticClass: "col-sm-4" }, [
+          _c("img", {
+            attrs: {
+              width: "50%",
+              src: "images/feed/" + _vm.curriculum.curriculum_photo_url,
+              alt: "",
+            },
+          }),
+        ]),
+      ]),
       _vm._v(" "),
       _c("h3", [_vm._v("Dados Pessoais")]),
       _vm._v(" "),
@@ -37654,7 +37684,7 @@ var render = function () {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
+              _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "row" }, [
@@ -37845,7 +37875,7 @@ var render = function () {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "row" }, [
@@ -37976,7 +38006,7 @@ var render = function () {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group" }, [
@@ -38172,7 +38202,7 @@ var render = function () {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(4),
+              _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group" }, [
@@ -38277,16 +38307,6 @@ var render = function () {
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mt-3 mb-2" }, [
-      _c("div", { staticClass: "col-sm-4" }, [
-        _c("img", { attrs: { src: "img/user-image.png", alt: "" } }),
-      ]),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -39309,7 +39329,7 @@ var render = function () {
                     on: { click: _vm.openModalCar },
                   },
                   [
-                    _vm._v("\n              carrinho "),
+                    _vm._v("\n                carrinho\n                "),
                     _c(
                       "span",
                       { staticClass: "badge badge-light car-number" },
@@ -40489,7 +40509,7 @@ var render = function () {
                             },
                           },
                         },
-                        [_vm._v("Remover")]
+                        [_vm._v("\n              Remover\n            ")]
                       ),
                     ]
                   )

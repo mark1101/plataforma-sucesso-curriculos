@@ -11,7 +11,10 @@
                   class="btn btn-blue mb-4 rounded-pill"
                   @click="openModalCar"
                 >
-                carrinho <span class="badge badge-light car-number">{{ car.length }}</span>
+                  carrinho
+                  <span class="badge badge-light car-number">{{
+                    car.length
+                  }}</span>
                 </button>
               </div>
               <div class="card">
@@ -615,8 +618,10 @@
               :key="c.id"
             >
               <p>Nome do Candidato: {{ c.name_candidade }}</p>
-              <p>Pretenção Salarial: {{ c.desired_salary | formatNumber}}</p>
-              <p style="color: red ; cursor: pointer" @click="removeToCar(c.id)">Remover</p>
+              <p>Pretenção Salarial: {{ c.desired_salary | formatNumber }}</p>
+              <p style="color: red; cursor: pointer" @click="removeToCar(c.id)">
+                Remover
+              </p>
             </div>
           </div>
           <div class="modal-footer">
@@ -628,7 +633,11 @@
             >
               FECHAR
             </button>
-            <button type="button" class="btn btn-primary" @click="purchaseCurriculum">
+            <button
+              type="button"
+              class="btn btn-primary"
+              @click="purchaseCurriculum"
+            >
               ADQUIRIR CURRÍCULOS
             </button>
           </div>
@@ -739,7 +748,7 @@ export default {
           this.curriculumFilter = response.data.curriculumList;
           (this.curriculumMe = response.data.curriculumMe),
             (this.user = response.data.user);
-            this.quantity = response.data.quantity
+          this.quantity = response.data.quantity;
         })
         .catch((error) => {});
     },
@@ -774,45 +783,54 @@ export default {
       $("#modal-car").modal("hide");
     },
 
-    purchaseCurriculum(){
-
-        if(this.car.length > this.quantity){
-             this.$swal("Oops...", "Você não tem créditos de download suficiente!", "error");
-             return;
-        }
-
-        axios.post('/purchase-curriculum', this.car).then(response => {
-            this.$swal("Sucesso!", "Currículos adicionados a sua lista!", "success");
-            this.getCurriculum();
-            this.clear();
-        }).catch(error => {
-            this.$swal("Oops...", "Erro ao adquirir currículos!", "error");
-        }) 
+    purchaseCurriculum() {
+      if (this.car.length > this.quantity) {
+        this.$swal(
+          "Oops...",
+          "Você não tem créditos de download suficiente!",
+          "error"
+        );
+        return;
+      }
+      axios
+        .post("/purchase-curriculum", this.car)
+        .then((response) => {
+          this.$swal(
+            "Sucesso!",
+            "Currículos adicionados a sua lista!",
+            "success"
+          );
+          this.getCurriculum();
+          this.clear();
+        })
+        .catch((error) => {
+          this.$swal("Oops...", "Erro ao adquirir currículos!", "error");
+        });
     },
 
-    clear(){
-        this.car = [];
-        this.closeModalCar();
-    }
+    clear() {
+      this.car = [];
+      this.closeModalCar();
+    },
   },
 };
 </script>
 
 <style>
-.btn{
-    text-transform: uppercase;
-    font-weight: bold;
+.btn {
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
-.btn-blue{
-    background-color: #0c63e4;
-    color: white;
+.btn-blue {
+  background-color: #0c63e4;
+  color: white;
 }
 
-.car-number{
-    background-color: white;
-    color: black;
-    font-weight: bold;
-    font-size: 12px;
+.car-number {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  font-size: 12px;
 }
 </style>
