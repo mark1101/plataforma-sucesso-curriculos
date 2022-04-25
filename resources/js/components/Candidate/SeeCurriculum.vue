@@ -3,8 +3,36 @@
     <h2 align="center">Currículo completo {{ curriculum.name }}</h2>
     <div class="container mb-5 mt-5">
       <div class="row mt-3 mb-2">
-        <div class="col-sm-4">
-          <img width="50%" :src="'images/feed/' + curriculum.curriculum_photo_url" alt="" />
+        <div class="col-sm-12" style="text-align: right">
+          <div class="col" v-if="curriculum.curriculum_photo_url != null">
+            <img
+              width="150px"
+              :src="'images/feed/' + curriculum.curriculum_photo_url"
+              alt=""
+            />
+            <label class="custom-file-upload">
+              <input
+                type="file"
+                accept="image/*"
+                ref="file-update"
+                name="alter-image-profile"
+                v-on:change="alterPhoto"
+              />
+              <i class="fa fa-cloud-upload"></i> Alterar imagem
+            </label>
+          </div>
+          <div v-else class="">
+            <label for=""
+              >Adicione agora mesmo uma imagem em seu currículo</label
+            >
+            <input
+              type="file"
+              accept="image/*"
+              ref="file-register"
+              name="add-image-profile"
+              v-on:change="createPhoto"
+            />
+          </div>
         </div>
       </div>
       <h3>Dados Pessoais</h3>
@@ -709,6 +737,10 @@ export default {
         { option: "Graduacao Modulada" },
         { option: "Educação à Distância" },
       ],
+
+      file: {},
+      subi: null,
+      curriculum_photo: null,
     };
   },
 
@@ -729,6 +761,111 @@ export default {
           }
         })
         .catch((error) => {});
+    },
+
+    createPhoto(e) {
+      e.preventDefault();
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      this.file = e.target.files[0];
+      const teste = e.target.files[0];
+      if (this.file.size < 1005222) {
+        this.subi = this.file.name;
+        this.curriculum_photo = URL.createObjectURL(teste);
+        this.$swal({
+          title: "Adicionar imagem?",
+          text: "Adicionar imagem ao seu currículo",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Sim, Adicionar",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            let form = new FormData();
+            form.append("file", this.file);
+            axios
+              .post("/create-image-curriculum", form, config)
+              .then((response) => {
+                this.$swal(
+                  "Sucesso",
+                  "A imagem foi adicionada ao seu currículo!",
+                  "success"
+                );
+                this.getData();
+              })
+              .catch((error) => {
+                this.$swal(
+                  "Oops...",
+                  "Algo deu errado, tente novamente em instantes!",
+                  "error"
+                );
+              });
+          }
+        });
+      } else {
+        this.$swal(
+          "Oops...",
+          "Imagem com tamanho acima do permitido!",
+          "error"
+        );
+      }
+    },
+
+    alterPhoto(e) {
+      e.preventDefault();
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      this.file = e.target.files[0];
+      const teste = e.target.files[0];
+      if (this.file.size < 1005222) {
+        this.subi = this.file.name;
+        this.curriculum_photo = URL.createObjectURL(teste);
+        this.$swal({
+          title: "Alterar imagem?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Sim, Alterar",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            let form = new FormData();
+            form.append("file", this.file);
+            axios
+              .post("/create-image-curriculum", form, config)
+              .then((response) => {
+                this.$swal(
+                  "Sucesso",
+                  "A imagem foi adicionada ao seu currículo!",
+                  "success"
+                );
+                this.getData();
+              })
+              .catch((error) => {
+                this.$swal(
+                  "Oops...",
+                  "Algo deu errado, tente novamente em instantes!",
+                  "error"
+                );
+              });
+          }
+        });
+      } else {
+        this.$swal(
+          "Oops...",
+          "Imagem com tamanho acima do permitido, utilize imagens abaixo de 1MB",
+          "error"
+        );
+      }
     },
 
     editCurriculum() {
@@ -797,7 +934,6 @@ export default {
     },
 
     openModalExperience(experience) {
-      console.log("aaaaaa");
       axios
         .get("/get-experience/" + experience)
         .then((response) => {
@@ -1004,5 +1140,15 @@ export default {
 <style>
 .col {
   align-self: self-end !important;
+}
+
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
 }
 </style>

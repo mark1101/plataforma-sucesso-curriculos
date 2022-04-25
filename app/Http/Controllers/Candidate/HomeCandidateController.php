@@ -26,16 +26,20 @@ class HomeCandidateController extends Controller
         $userName = Auth::user()->name;
         $curriculumUser = Curriculum::where('user_id', Auth::user()->id)->first();
         $candidateDueDate = CandidateDueDate::where('user_id', Auth::user()->id)->first();
-        $blocked = CurriculumBlock::where('curriculum_id' , $curriculumUser->id)
-        ->select('cnpj')->first();
+        if ($curriculumUser) {
+            $blocked = CurriculumBlock::where('curriculum_id', $curriculumUser->id)
+                ->select('cnpj')->first();
+        }else{
+            $blocked = null;
+        }
 
-        if($blocked != null){
+        if ($blocked != null) {
             $blocked = $blocked->cnpj;
         }
 
         $expiration = "";
         if ($candidateDueDate) {
-            $hoje = date('d/m/Y');
+            $hoje = date('Y-m-d');
 
             if ($candidateDueDate->due_date < $hoje) {
                 $expiration = 'Seu currículo está inativo';
@@ -52,8 +56,6 @@ class HomeCandidateController extends Controller
                 }
             }
         }
-
-
 
         return view('Applicant.dashboard', [
             'name' => $userName,
@@ -101,14 +103,13 @@ class HomeCandidateController extends Controller
                         'status' => 'success',
                         'message' => 'Seu plano iniciado com sucesso!'
                     ]);
-                }else{
-                    CandidatePlan::where('user_id' , Auth::user()->id)->delete();
+                } else {
+                    CandidatePlan::where('user_id', Auth::user()->id)->delete();
                     return response()->json([
                         'status' => 'error',
                         'message' => 'Erro ao adicionar plano, tente novamente mais tarde ou contate-nos pelo email'
                     ]);
                 }
-                
             }
         }
         $candidate = Candidate::where('user_id', Auth::user()->id)->first();
@@ -154,9 +155,9 @@ class HomeCandidateController extends Controller
         $alterDueDate = CandidateDueDate::where('user_id', $candidate->user_id)->update([
             'due_date' => $sumData
         ]);
-        if($alterDueDate){
+        if ($alterDueDate) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

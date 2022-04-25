@@ -408,6 +408,12 @@ export default {
         link.setAttribute("download", curriculum.name+".pdf");
         document.body.appendChild(link);
         link.click();
+      }).catch(error => {
+          this.$swal(
+          "Erro ao baixar currículo.",
+          "Tente novamente em instantes",
+          "error"
+        );
       });
     },
   },

@@ -196,6 +196,27 @@ class CandidateCurriculumController extends Controller
         return ['redirect' => route('candidatedash')];
     }
 
+    public function addImage(Request $request)
+    {
+        $data = $request->all();
+        if ($request->file != '[Object Object]') {
+            $imageName = bin2hex(random_bytes(10)) . time() . '.' . $data['file']->extension();
+            $data['file']->move(public_path('images/feed/'), $imageName);
+
+            $curriculum = Curriculum::where('user_id', Auth::user()->id)->update(
+                [
+                    'curriculum_photo_url' => $imageName
+                ]
+            );
+        }
+
+        if ($curriculum) {
+            return response()->json(['status' => 'success', 'message' => 'Imagem adicionada com sucesos!']);
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'Erro ao adicionar imagem']);
+        }
+    }
+
     public function deleteCurriculum($curriculum_id)
     {
         //$delete = Curriculum::where('id', $curriculum_id)->delete();

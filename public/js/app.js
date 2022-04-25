@@ -7288,6 +7288,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "see-curriculum",
@@ -7406,7 +7434,10 @@ __webpack_require__.r(__webpack_exports__);
         option: "Graduacao Modulada"
       }, {
         option: "Educação à Distância"
-      }]
+      }],
+      file: {},
+      subi: null,
+      curriculum_photo: null
     };
   },
   mounted: function mounted() {
@@ -7426,8 +7457,87 @@ __webpack_require__.r(__webpack_exports__);
         }
       })["catch"](function (error) {});
     },
-    editCurriculum: function editCurriculum() {
+    createPhoto: function createPhoto(e) {
       var _this2 = this;
+
+      e.preventDefault();
+      var config = {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      };
+      this.file = e.target.files[0];
+      var teste = e.target.files[0];
+
+      if (this.file.size < 1005222) {
+        this.subi = this.file.name;
+        this.curriculum_photo = URL.createObjectURL(teste);
+        this.$swal({
+          title: "Adicionar imagem?",
+          text: "Adicionar imagem ao seu currículo",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Sim, Adicionar"
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            var form = new FormData();
+            form.append("file", _this2.file);
+            axios.post("/create-image-curriculum", form, config).then(function (response) {
+              _this2.$swal("Sucesso", "A imagem foi adicionada ao seu currículo!", "success");
+
+              _this2.getData();
+            })["catch"](function (error) {
+              _this2.$swal("Oops...", "Algo deu errado, tente novamente em instantes!", "error");
+            });
+          }
+        });
+      } else {
+        this.$swal("Oops...", "Imagem com tamanho acima do permitido!", "error");
+      }
+    },
+    alterPhoto: function alterPhoto(e) {
+      var _this3 = this;
+
+      e.preventDefault();
+      var config = {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      };
+      this.file = e.target.files[0];
+      var teste = e.target.files[0];
+
+      if (this.file.size < 1005222) {
+        this.subi = this.file.name;
+        this.curriculum_photo = URL.createObjectURL(teste);
+        this.$swal({
+          title: "Alterar imagem?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Sim, Alterar"
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            var form = new FormData();
+            form.append("file", _this3.file);
+            axios.post("/create-image-curriculum", form, config).then(function (response) {
+              _this3.$swal("Sucesso", "A imagem foi adicionada ao seu currículo!", "success");
+
+              _this3.getData();
+            })["catch"](function (error) {
+              _this3.$swal("Oops...", "Algo deu errado, tente novamente em instantes!", "error");
+            });
+          }
+        });
+      } else {
+        this.$swal("Oops...", "Imagem com tamanho acima do permitido, utilize imagens abaixo de 1MB", "error");
+      }
+    },
+    editCurriculum: function editCurriculum() {
+      var _this4 = this;
 
       var payload = {
         name: this.curriculum.name,
@@ -7453,15 +7563,15 @@ __webpack_require__.r(__webpack_exports__);
         phone: this.curriculum.phone
       };
       axios.put("/edit-curriculum", payload).then(function (response) {
-        _this2.$swal("Sucesso!", "Os dados foram atualizados", "success");
+        _this4.$swal("Sucesso!", "Os dados foram atualizados", "success");
 
         $("#edit-curriculum");
 
-        _this2.getData();
+        _this4.getData();
       })["catch"](function (error) {});
     },
     deleteCurriculum: function deleteCurriculum(curriculum) {
-      var _this3 = this;
+      var _this5 = this;
 
       this.$swal({
         title: "Deletar Currículo?",
@@ -7476,31 +7586,30 @@ __webpack_require__.r(__webpack_exports__);
         if (result.isConfirmed) {
           axios["delete"]("/delete-curriculum/" + curriculum).then(function (response) {
             if (response.data.status === "success") {
-              _this3.$swal("Sucesso!", response.data.message, "success");
+              _this5.$swal("Sucesso!", response.data.message, "success");
 
               window.setTimeout(function () {
                 window.location = response.data.redirect;
               }, 2000);
             } else {
-              _this3.$swal("Ops...!", response.data.message, "error");
+              _this5.$swal("Ops...!", response.data.message, "error");
             }
           })["catch"](function (error) {
-            _this3.$swal("Ops...!", "Algo deu errado ao apagar", "error");
+            _this5.$swal("Ops...!", "Algo deu errado ao apagar", "error");
           });
         }
       });
     },
     openModalExperience: function openModalExperience(experience) {
-      var _this4 = this;
+      var _this6 = this;
 
-      console.log("aaaaaa");
       axios.get("/get-experience/" + experience).then(function (response) {
-        _this4.experienceUpdate = response.data.experience;
+        _this6.experienceUpdate = response.data.experience;
         $("#edit-experience").modal("show");
       })["catch"](function (error) {});
     },
     editExperience: function editExperience() {
-      var _this5 = this;
+      var _this7 = this;
 
       var payload = {
         name_company: this.experienceUpdate.name_company,
@@ -7510,15 +7619,15 @@ __webpack_require__.r(__webpack_exports__);
         months: this.experienceUpdate.months
       };
       axios.put("/edit-experience/" + this.experienceUpdate.id, payload).then(function (response) {
-        _this5.$swal("Sucesso!", "Os dados foram atualizados", "success");
+        _this7.$swal("Sucesso!", "Os dados foram atualizados", "success");
 
         $("#edit-experience").modal("hide");
 
-        _this5.getData();
+        _this7.getData();
       })["catch"](function (error) {});
     },
     deleteExperience: function deleteExperience(experience) {
-      var _this6 = this;
+      var _this8 = this;
 
       this.$swal({
         title: "Deletar informação?",
@@ -7532,25 +7641,25 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.isConfirmed) {
           axios["delete"]("/delete-experience/" + experience).then(function (response) {
-            _this6.$swal("Sucesso!", "Curso deletado", "success");
+            _this8.$swal("Sucesso!", "Curso deletado", "success");
 
-            _this6.getData();
+            _this8.getData();
           })["catch"](function (error) {
-            _this6.$swal("Ops...!", "Erro ao apagar", "error");
+            _this8.$swal("Ops...!", "Erro ao apagar", "error");
           });
         }
       });
     },
     openModalCourse: function openModalCourse(course) {
-      var _this7 = this;
+      var _this9 = this;
 
       axios.get("/get-course/" + course).then(function (response) {
-        _this7.courseUpdate = response.data.course;
+        _this9.courseUpdate = response.data.course;
         $("#edit-course").modal("show");
       })["catch"](function (error) {});
     },
     editCourse: function editCourse() {
-      var _this8 = this;
+      var _this10 = this;
 
       var payload = {
         name_courses: this.courseUpdate.name_courses,
@@ -7558,15 +7667,15 @@ __webpack_require__.r(__webpack_exports__);
         hours: this.courseUpdate.hours
       };
       axios.put("/edit-course/" + this.courseUpdate.id, payload).then(function (response) {
-        _this8.$swal("Sucesso!", "Os dados foram atualizados", "success");
+        _this10.$swal("Sucesso!", "Os dados foram atualizados", "success");
 
         $("#edit-course").modal("hide");
 
-        _this8.getData();
+        _this10.getData();
       })["catch"](function (error) {});
     },
     deleteCourse: function deleteCourse(course) {
-      var _this9 = this;
+      var _this11 = this;
 
       this.$swal({
         title: "Deletar informação?",
@@ -7580,11 +7689,11 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.isConfirmed) {
           axios["delete"]("/delete-course/" + course).then(function (response) {
-            _this9.$swal("Sucesso!", "Experiência deletada", "success");
+            _this11.$swal("Sucesso!", "Experiência deletada", "success");
 
-            _this9.getData();
+            _this11.getData();
           })["catch"](function (error) {
-            _this9.$swal("Ops...!", "Erro ao apagar", "error");
+            _this11.$swal("Ops...!", "Erro ao apagar", "error");
           });
         }
       });
@@ -7593,7 +7702,7 @@ __webpack_require__.r(__webpack_exports__);
       $("#create-experience").modal("show");
     },
     createExperience: function createExperience() {
-      var _this10 = this;
+      var _this12 = this;
 
       if (this.newExperience.name_company === null || this.newExperience.company_field === null || this.newExperience.occupied_job === null || this.newExperience.years === null || this.newExperience.months === null) {
         this.$swal({
@@ -7616,11 +7725,11 @@ __webpack_require__.r(__webpack_exports__);
           months: this.newExperience.months
         };
         axios.post("/create-new-experience", payload).then(function (response) {
-          _this10.$swal("Sucesso!", "Experiência cadastrada", "success");
+          _this12.$swal("Sucesso!", "Experiência cadastrada", "success");
 
-          _this10.getData();
+          _this12.getData();
 
-          _this10.clear();
+          _this12.clear();
 
           $("#create-experience").modal("hide");
         })["catch"](function (error) {});
@@ -7630,7 +7739,7 @@ __webpack_require__.r(__webpack_exports__);
       $("#create-course").modal("show");
     },
     createCourse: function createCourse() {
-      var _this11 = this;
+      var _this13 = this;
 
       if (this.newCourse.name_courses === null || this.newCourse.school === null || this.newCourse.hours === null) {
         this.$swal({
@@ -7651,11 +7760,11 @@ __webpack_require__.r(__webpack_exports__);
           hours: this.newCourse.hours
         };
         axios.post("/create-new-course", payload).then(function (response) {
-          _this11.$swal("Sucesso!", "Curso cadastrado", "success");
+          _this13.$swal("Sucesso!", "Curso cadastrado", "success");
 
-          _this11.getData();
+          _this13.getData();
 
-          _this11.clear();
+          _this13.clear();
 
           $("#create-course").modal("hide");
         })["catch"](function (error) {});
@@ -8073,6 +8182,8 @@ Vue.filter("formatNumber", function (value) {
   },
   methods: {
     createCurriculum: function createCurriculum(curriculum) {
+      var _this3 = this;
+
       axios({
         url: "/create-curriculum-download/" + curriculum.id,
         method: "GET",
@@ -8084,6 +8195,8 @@ Vue.filter("formatNumber", function (value) {
         link.setAttribute("download", curriculum.name + ".pdf");
         document.body.appendChild(link);
         link.click();
+      })["catch"](function (error) {
+        _this3.$swal("Erro ao baixar currículo.", "Tente novamente em instantes", "error");
       });
     }
   },
@@ -15245,7 +15358,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.col {\n  align-self: self-end !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.col {\n  align-self: self-end !important;\n}\ninput[type=\"file\"] {\n  display: none;\n}\n.custom-file-upload {\n  border: 1px solid #ccc;\n  display: inline-block;\n  padding: 6px 12px;\n  cursor: pointer;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36657,15 +36770,52 @@ var render = function () {
     _vm._v(" "),
     _c("div", { staticClass: "container mb-5 mt-5" }, [
       _c("div", { staticClass: "row mt-3 mb-2" }, [
-        _c("div", { staticClass: "col-sm-4" }, [
-          _c("img", {
-            attrs: {
-              width: "50%",
-              src: "images/feed/" + _vm.curriculum.curriculum_photo_url,
-              alt: "",
-            },
-          }),
-        ]),
+        _c(
+          "div",
+          { staticClass: "col-sm-12", staticStyle: { "text-align": "right" } },
+          [
+            _vm.curriculum.curriculum_photo_url != null
+              ? _c("div", { staticClass: "col" }, [
+                  _c("img", {
+                    attrs: {
+                      width: "150px",
+                      src: "images/feed/" + _vm.curriculum.curriculum_photo_url,
+                      alt: "",
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "custom-file-upload" }, [
+                    _c("input", {
+                      ref: "file-update",
+                      attrs: {
+                        type: "file",
+                        accept: "image/*",
+                        name: "alter-image-profile",
+                      },
+                      on: { change: _vm.alterPhoto },
+                    }),
+                    _vm._v(" "),
+                    _c("i", { staticClass: "fa fa-cloud-upload" }),
+                    _vm._v(" Alterar imagem\n          "),
+                  ]),
+                ])
+              : _c("div", {}, [
+                  _c("label", { attrs: { for: "" } }, [
+                    _vm._v("Adicione agora mesmo uma imagem em seu currículo"),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    ref: "file-register",
+                    attrs: {
+                      type: "file",
+                      accept: "image/*",
+                      name: "add-image-profile",
+                    },
+                    on: { change: _vm.createPhoto },
+                  }),
+                ]),
+          ]
+        ),
       ]),
       _vm._v(" "),
       _c("h3", [_vm._v("Dados Pessoais")]),
