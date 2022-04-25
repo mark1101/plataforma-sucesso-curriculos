@@ -13,6 +13,7 @@
     <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" type="imagex/png" href="/img/icone-aba.png">
 
     <title>@yield('title')</title>
 </head>
@@ -32,12 +33,14 @@
                     <li><a href="{{ url('suporte/cadastro') }}">Suporte</a></li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="text-transform: capitalize">
-                            {{Auth::user()->name }}
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre
+                            style="text-transform: capitalize">
+                            {{ Auth::user()->name }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Meu Plano</a>
+                            <a class="dropdown-item" href="{{url('/planos-empresa')}}">Acessar Planos</a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                                 {{ __('Sair') }}
@@ -81,6 +84,7 @@
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Meu Plano</a>
+                                <a class="dropdown-item" href="{{url('/planos-empresa')}}">Acessar Planos</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                     {{ __('Sair') }}

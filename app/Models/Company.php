@@ -24,4 +24,12 @@ class Company extends Model
     public function curriculumDownload(){
         return $this->belongsTo(CurriculumCompany::class, 'company_id' , 'id');
     }
+
+    public function experience(){
+        return $this->hasMany(ProfessionalExperience::class, 'curriculum_id' , 'id');
+    }
+
+    public function courses(){
+        return $this->hasMany(Course::class, 'curriculum_id' , 'id');
+    }
 }

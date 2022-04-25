@@ -15,8 +15,14 @@ class CreateCurriculumCompanyRelationTable extends Migration
     {
         Schema::create('curriculum_company_relation', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->nullable()->constrained('company');
-            $table->foreignId('curriculum_id')->nullable()->constrained('curriculum');
+            $table->bigInteger('company_id')->unsigned();
+            $table->foreign('company_id')
+            ->references('id')->on('company')
+            ->onDelete('cascade');
+            $table->bigInteger('curriculum_id')->unsigned();
+            $table->foreign('curriculum_id')
+            ->references('id')->on('curriculum')
+            ->onDelete('cascade');
             $table->timestamps();
             //colocar aqui o on delete cascade
         });

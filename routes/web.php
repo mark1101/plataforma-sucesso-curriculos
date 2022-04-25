@@ -25,7 +25,7 @@ use App\Http\Controllers\General\CompanyCurriculumController;
 
 Route::get('/verify-acess', function () {
     if (Auth::user()->candidate == 1) {
-        return redirect()->route('dashboard.candidate');
+        return redirect()->route('candidatedash');
     } else {
         return redirect()->route('dashboard.company');
     }
@@ -69,20 +69,22 @@ Route::middleware(['no-auth'])->group(function () {
 //ROUTES COMPANY
 Route::middleware(['company-acess'])->group(function () {
     Route::get('/empresa/dashboard', [HomeCompanyController::class, 'dashboard'])->name('dashboard.company');
-    //Route::get('/empresa/encontrar-curriculos', [HomeCompanyController::class, 'search']);
+    Route::get('/planos-empresa' , function(){
+        return view('Company.plans');
+    });
     Route::get('/empresa/acessar-curriculos', [HomeCompanyController::class, 'acess']);
     Route::get('/empresa/resultado-busca', [HomeCompanyController::class, 'result']);
 
     Route::get('/create-curriculum-download/{id}', [CompanyCurriculumController::class, 'getDownloadCurriculum']);
-
-    //Route::post('/post-filter-primary', [CompanyCurriculumController::class, 'indexSearch']);
-
     Route::get('/empresa/encontrar-curriculos', function (){
             return view('Search.search-result');
     });
 
     Route::get('/get-curriculum-general' , [CompanyCurriculumController::class, 'listCurriculum']);
     Route::post('/purchase-curriculum' , [CompanyCurriculumController::class, 'purchaseCurriculum']);
+
+    Route::get('/get-data-company-user' , [HomeCompanyController::class, 'getData']);
+    Route::get('/alter-plan-company/{id}', [HomeCompanyController::class, 'alterPlan']);
 });
 Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
 Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'])->name('register-company');
@@ -90,15 +92,16 @@ Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'
 
 //ROUTES CANDIDATE
 Route::middleware(['candidate-acess'])->group(function () {
-    Route::get('/candidato/dashboard', [HomeCandidateController::class, 'dashboard'])->name('dashboard.candidate');
+    Route::get('/candidato/dashboard', [HomeCandidateController::class, 'dashboard'])->name('candidatedash');
 
     //CURRICULUM
     Route::post('/create-curriculum', [CandidateCurriculumController::class, 'create']);
     Route::get('/get-my-curriculum' , [CandidateCurriculumController::class, 'getUserCurriculum']);
     Route::get('/meu-curriculo' , function(){
         return view('Applicant.see-curriculum');
-    });
+    })->middleware('see-curriculum');
     Route::put('/edit-curriculum' , [CandidateCurriculumController::class, 'editUserCurriculum']);
+    Route::delete('/delete-curriculum/{id}' , [CandidateCurriculumController::class, 'deleteCurriculum']);
 
     Route::get('/get-experience/{id}', [CandidateCurriculumController::class, 'getExperience']);
     Route::put('/edit-experience/{id}', [CandidateCurriculumController::class, 'editExperience']);
@@ -112,6 +115,12 @@ Route::middleware(['candidate-acess'])->group(function () {
     Route::delete('/delete-experience/{id}', [CandidateCurriculumController::class, 'deleteExperience']);
     Route::delete('/delete-course/{id}', [CandidateCurriculumController::class, 'deleteCourse']);
 
+    Route::get('/candidato-planos' , function(){
+        return view('Applicant.plans');
+    });
+
+    Route::get('/candidade-get-data', [HomeCandidateController::class, 'getData']);
+    Route::get('/candidate-alter-plan/{id}' , [HomeCandidateController::class, 'alterPlan']);
 
 });
 Route::get('/candidato/registro', [HomeCandidateController::class, 'index']);
@@ -135,7 +144,7 @@ Route::prefix('curriculos')->group(function () {
 
     Route::get('/cadastro', function () {
         return view('Applicant.Registration.register-tab');
-    });
+    })->middleware('register-curriculum');
     Route::get('/buscar', function () {
         return view('Search.search');
     });

@@ -13,6 +13,7 @@
     <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" type="imagex/png" href="/img/icone-aba.png">
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
 
@@ -30,7 +31,7 @@
         <div class="offcanvas-menu">
             <div class="main-menu">
                 <ul class="d-block">
-                    <li><a href="{{ url('empresa/dashboard') }}">Início</a></li>
+                    <li><a href="{{ url('empresa/dashboard') }}">Dashboard</a></li>
                     <li><a href="{{ url('sugestao/cadastro') }}">Sugestões</a></li>
                     <li><a href="{{ url('faq') }}">FAQ</a></li>
                     <li><a href="{{ url('suporte/cadastro') }}">Suporte</a></li>
@@ -52,7 +53,7 @@
             <div class="header__right">
                 <div class="main__menu red--links">
                     <ul>
-                        <li><a href="{{ url('empresa/dashboard') }}">Início</a></li>
+                        <li><a href="{{ url('empresa/dashboard') }}">Dashboard</a></li>
                         <li><a href="{{ url('sugestao/cadastro') }}">Sugestões</a></li>
                         <li><a href="{{ url('faq') }}">FAQ</a></li>
                         <li><a href="{{ url('suporte/cadastro') }}">Suporte</a></li>

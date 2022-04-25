@@ -8,16 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class CurriculumBlock extends Model
 {
     use HasFactory;
+    protected $table = 'curriculum_block';
     protected $fillable = [
-        'user_id',
-        'company_id',
+        'curriculum_id',
+        'cnpj',
     ];
 
-    public function user(){
-        return $this->hasOne(User::class, 'user_id' , 'id');
-    }
-
-    public function company(){
-        return $this->hasOne(Company::class, 'company_id' , 'id');
+    public function curriculum(){
+        return $this->hasOne(Curriculum::class, 'curriculum_id' , 'id');
     }
 }

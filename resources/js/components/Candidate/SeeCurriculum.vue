@@ -4,7 +4,7 @@
     <div class="container mb-5 mt-5">
       <div class="row mt-3 mb-2">
         <div class="col-sm-4">
-          <img src="img/user-image.png" alt="" />
+          <img width="50%" :src="'images/feed/' + curriculum.curriculum_photo_url" alt="" />
         </div>
       </div>
       <h3>Dados Pessoais</h3>
@@ -273,7 +273,16 @@
       <div class="">
         <div class="mt-5">
           <div class="evaluation__content__bottom__btns">
-            <button class="btn" @click="editCurriculum">Atualizar dados</button>
+            <button style="color: white" class="btn" @click="editCurriculum">
+              Atualizar dados cadastrados
+            </button>
+            <button
+              style="color: white; background-color: red"
+              class="btn"
+              @click="deleteCurriculum(curriculum.id)"
+            >
+              Apagar currículo
+            </button>
           </div>
         </div>
       </div>
@@ -313,7 +322,7 @@
                 class="btn btn-primary"
                 @click="openModalExperienceCreate"
               >
-                Cadastrar Experiência
+                Cadastrar nova Experiência
               </button>
             </div>
           </div>
@@ -614,6 +623,7 @@ export default {
 
   data() {
     return {
+      getCurriculumCandidate: false,
       curriculum: [],
       experienceUpdate: [],
       courseUpdate: [],
@@ -714,6 +724,9 @@ export default {
           this.curriculum = response.data.curriculum;
           this.experiences = response.data.experiences;
           this.courses = response.data.courses;
+          if (!this.curriculum == null) {
+            this.getCurriculumCandidate = true;
+          }
         })
         .catch((error) => {});
     },
@@ -750,6 +763,37 @@ export default {
           this.getData();
         })
         .catch((error) => {});
+    },
+
+    deleteCurriculum(curriculum) {
+      this.$swal({
+        title: "Deletar Currículo?",
+        text: "Um novo deverá ser criado, pois os mesmos dados não poderão ser recuperados!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "Sim, Apagar agora!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete("/delete-curriculum/" + curriculum)
+            .then((response) => {
+              if (response.data.status === "success") {
+                this.$swal("Sucesso!", response.data.message, "success");
+                window.setTimeout(function () {
+                  window.location = response.data.redirect;
+                }, 2000);
+              } else {
+                this.$swal("Ops...!", response.data.message, "error");
+              }
+            })
+            .catch((error) => {
+              this.$swal("Ops...!", "Algo deu errado ao apagar", "error");
+            });
+        }
+      });
     },
 
     openModalExperience(experience) {

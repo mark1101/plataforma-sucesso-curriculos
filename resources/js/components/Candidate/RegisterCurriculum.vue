@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pb-5">
     <div class="tab" v-if="activePhase === 1">
       <section class="hero__area cadetro-hero pt-5 pb-5">
         <div class="container position-relative">
@@ -260,7 +260,9 @@
                           v-model="hiring_type"
                         >
                           <option value="CLT">CLT</option>
-                          <option value="Pessoa Jurídica (PJ)">Pessoa Jurídica (PJ)</option>
+                          <option value="Pessoa Jurídica (PJ)">
+                            Pessoa Jurídica (PJ)
+                          </option>
                           <option value="Estagiário">Estagiário</option>
                           <option value="Trainee">Trainee</option>
                           <option value="Jovem Aprendiz">Jovem Aprendiz</option>
@@ -322,7 +324,7 @@
                           <option value="AB">A e B</option>
                           <option value="C">C</option>
                           <option value="D">D</option>
-                          <option value="E">E</option> 
+                          <option value="E">E</option>
                         </select>
                       </div>
                     </div>
@@ -693,7 +695,12 @@
                     <div class="user__image__upload__wrapper">
                       <div class="user__image__up__btns d-flex">
                         <div class="row">
-                          <input type="file" v-on:change="onChange" />
+                          <input
+                            v-on:change="onChange"
+                            accept="image/*"
+                            type="file"
+                            ref="inputFile"
+                          />
                         </div>
                         <div class="row">
                           <a
@@ -796,13 +803,12 @@
                         <option value="Desempregado">Desempregado</option>
                       </select>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" v-if="is_employed === 'Empregado'">
                       <div class="form-check">
                         <input
                           class="form-check-input"
                           type="checkbox"
-                          value=""
-                          id="flexCheckDefault"
+                          v-model="blocked"
                         />
                         <label class="form-check-label" for="flexCheckDefault">
                           Não mostre meu currículo para meu atual empregador.
@@ -830,6 +836,7 @@
                               type="text"
                               class="form-control"
                               v-mask="'##.###.###/####-##'"
+                              v-model="cnpj"
                             />
                           </div>
                         </div>
@@ -893,7 +900,7 @@
                         <div class="validity__text">Vigência de 30 dias</div>
                       </div>
                       <div class="pricing__card__bottom">
-                        <a href="">Escolher Plano</a>
+                        <a href="#">Escolher Plano</a>
                       </div>
                     </div>
                   </div>
@@ -917,7 +924,7 @@
                         <div class="validity__text">Vigência de 90 dias</div>
                       </div>
                       <div class="pricing__card__bottom">
-                        <a href="">Escolher Plano</a>
+                        <a href="#">Escolher Plano</a>
                       </div>
                     </div>
                   </div>
@@ -941,7 +948,7 @@
                         <div class="validity__text">Vigência de 180 dias</div>
                       </div>
                       <div class="pricing__card__bottom">
-                        <a href="">Escolher Plano</a>
+                        <a href="#">Escolher Plano</a>
                       </div>
                     </div>
                   </div>
@@ -984,10 +991,13 @@
             </div>
             <div class="col-md-7">
               <div class="hero__form__right">
-                <h4>Seu currículo já está aparecendo nas buscas.</h4>
+                <h4>
+                  Após a aprovacao do pagamento, seu curriculo ja estara
+                  aparecendo nas buscas
+                </h4>
                 <p class="text-md">
-                  Para aumentar suas chances lembre-se de preencher o máximo de
-                  informações possíveis.
+                  Dica: para aumentar suas chances lembre-se de preencher o
+                  máximo de informações possíveis.
                 </p>
               </div>
             </div>
@@ -999,7 +1009,7 @@
       <div class="container position-relative">
         <div class="row">
           <div class="col" style="text-align: left">
-            <div class="justify-content-start">
+            <div class="justify-content-start" v-if="activePhase > 1">
               <button type="button" class="return__btn" @click="remove">
                 Voltar
               </button>
@@ -1019,16 +1029,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <!-- Circles which indicates the steps of the form: -->
-    <div style="text-align: center; margin-top: 40px">
-      <span class="step"></span>
-      <span class="step"></span>
-      <span class="step"></span>
-      <span class="step"></span>
-      <span class="step"></span>
-      <span class="step"></span>
-      <span class="step"></span>
     </div>
   </div>
 </template>
@@ -1099,6 +1099,9 @@ export default {
         { name: "Instagram" },
         { name: "Outros" },
       ],
+      blocked: false,
+      payment: false,
+      cnpj: null,
 
       experiences: [],
       courses: [],
@@ -1115,6 +1118,7 @@ export default {
 
     onChange(e) {
       this.file = e.target.files[0];
+      console.log(this.file);
       const teste = e.target.files[0];
       if (this.file.size < 1005222) {
         //console.log(this.file.size);
@@ -1126,7 +1130,7 @@ export default {
           "Imagem com tamanho acima do permitido!",
           "error"
         );
-        this.removeImagem();
+        //this.removeImagem();
       }
     },
 
@@ -1178,8 +1182,6 @@ export default {
       this.experiences = this.experiences.filter(function (item) {
         return item.name_company != name;
       });
-
-      //this.experiences.pop();
     },
 
     addCourses() {
@@ -1202,46 +1204,69 @@ export default {
       });
     },
 
-    createCurriculum() {
-      let payload = {
-        name: this.name,
-        cep: this.cep,
-        address: this.address,
-        state: this.state,
-        city: this.city,
-        age: this.age,
-        phone: this.phone,
-        whatsapp: this.whatsapp,
-        email: this.email,
-        gender: this.gender,
-
-        schooling_level: this.schooling_level,
-        formation: this.formation,
-        institution: this.institution,
-        hiring_type: this.hiring_type,
-        desired_function: this.desired_function,
-
-        desired_salary: this.desired_salary,
-        is_handicapped: this.is_handicapped,
-        cnh: this.cnh,
-
-        experiences: this.experiences,
-        courses: this.courses,
-
-        is_employed: this.is_employed,
-        found_us: this.found_us,
-        file: this.file,
-        additional_considerations: this.additional_considerations,
+    createCurriculum(e) {
+      e.preventDefault();
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       };
 
-      axios
-        .post("/create-curriculum", payload)
-        .then((response) => {
-          this.$swal("Sucesso!", "Os dados foram salvos", "success");
-        })
-        .catch((error) => {
-          this.$swal("Oops...", "Erro ao cadastrar!", "error");
-        });
+      let form = new FormData();
+      form.append("name", this.name);
+      form.append("cep", this.cep);
+      form.append("address", this.address);
+      form.append("state", this.state);
+      form.append("city", this.city);
+      form.append("age", this.age);
+      form.append("phone", this.phone);
+      form.append("whatsapp", this.whatsapp);
+      form.append("email", this.email);
+      form.append("gender", this.gender);
+
+      form.append("schooling_level", this.schooling_level);
+      form.append("formation", this.formation);
+      form.append("institution", this.institution);
+      form.append("hiring_type", this.hiring_type);
+      form.append("desired_function", this.desired_function);
+
+      form.append("desired_salary", this.desired_salary);
+      form.append("is_handicapped", this.is_handicapped);
+      form.append("cnh", this.cnh);
+
+      form.append("experiences", this.experiences);
+      form.append("courses", this.courses);
+
+      form.append("is_employed", this.is_employed);
+      form.append("found_us", this.found_us);
+      form.append("file", this.file);
+      form.append("additional_considerations", this.additional_considerations);
+
+      form.append("cnpj", this.cnpj);
+
+      if (!this.payment) {
+        axios
+          .post("/create-curriculum", form, config)
+          .then((response) => {
+            this.$swal("Sucesso!", "Os dados foram salvos", "success");
+            window.setTimeout(function () {
+              window.location = response.data.redirect;
+            }, 2000);
+          })
+          .catch((error) => {
+            this.$swal("Oops...", "Erro ao cadastrar!", "error");
+          });
+      } else {
+        this.$swal(
+          "Pagamento ainda não reconhecido.",
+          "Para deixar seu curriculo online para outras empresas, o pagamento deverá ser realizado",
+          "error"
+        );
+      }
+    },
+
+    paymentTest() {
+      this.payment == true;
     },
   },
 };

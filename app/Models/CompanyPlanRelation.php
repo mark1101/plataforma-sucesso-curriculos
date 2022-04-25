@@ -8,18 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class CompanyPlanRelation extends Model
 {
     use HasFactory;
+
+    protected $table = "company_plan_relation";
     protected $fillable = [
         'company_id',
         'plan_id',
-        'quantity',
     ];
 
 
     public function company(){
-        return $this->hasOne(Company::class, 'company_id' , 'id');
+        return $this->hasOne(Company::class, 'id' , 'company_id');
     }
 
     public function plan(){
-        return $this->hasOne(CompanyPlan::class, 'plan_id' , 'id');
+        return $this->hasOne(CompanyPlan::class, 'id' , 'plan_id');
     }
 }

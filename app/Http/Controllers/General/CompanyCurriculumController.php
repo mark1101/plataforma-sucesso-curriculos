@@ -4,13 +4,20 @@ namespace App\Http\Controllers\General;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CurriculumListResource;
+use App\Mail\SendEmailToAdquire;
 use App\Models\Company;
 use App\Models\CompanyCurriculumQuantity;
+use App\Models\CompanyPlanRelation;
+use App\Models\Course;
 use App\Models\Curriculum;
+use App\Models\CurriculumBlock;
 use App\Models\CurriculumCompany;
+use App\Models\ProfessionalExperience;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Mail;
 
 class CompanyCurriculumController extends Controller
 {
@@ -35,11 +42,42 @@ class CompanyCurriculumController extends Controller
             $curriculumId[] = $item['curriculum_id'];
         }
 
+        $companyPlan = CompanyPlanRelation::where('company_id', $companyId->id)
+            ->with('plan')
+            ->first();
+
         $quantityCurriculum = CompanyCurriculumQuantity::where('company_id', $companyId->id)
             ->first();
 
-        $curriculum = CurriculumListResource::collection(Curriculum::whereNotIn('id', $curriculumId)
-            ->get());
+        $curriExpe = Curriculum::join('professional_experiences', 'curriculum.id', '=', 'professional_experiences.curriculum_id')
+            ->get();
+
+
+        $cnpjBlocked = CurriculumBlock::where('cnpj', $companyId->cnpj)->get();
+        $idsBlocked = [];
+        if ($cnpjBlocked) {
+            foreach ($cnpjBlocked as $blocked) {
+                $idsBlocked[] = $blocked->curriculum_id;
+            }
+        }
+
+        $cnot = [];
+        foreach ($curriExpe as $value) {
+            $cnot[] = $value['curriculum_id'];
+        }
+        if ($companyPlan->plan->type == 2) {
+            $curriculum = CurriculumListResource::collection(Curriculum::whereNotIn('id', $curriculumId)
+                ->whereIn('id', $cnot)
+                ->whereNotIn('id', $idsBlocked)
+                ->where('active', 1)
+                ->get());
+        } else {
+            $curriculum = CurriculumListResource::collection(Curriculum::whereNotIn('id', $cnot)
+                ->whereNotIn('id', $curriculumId)
+                ->whereNotIn('id', $idsBlocked)
+                ->where('active', 1)
+                ->get());
+        }
 
         $curriculumMe = CurriculumListResource::collection(Curriculum::whereIn('id', $curriculumId)
             ->get());
@@ -71,24 +109,22 @@ class CompanyCurriculumController extends Controller
                 'company_id' => $company->id
             ]);
         }
+
+        $user = User::where('id', $company->user_id)->first();
+        Mail::to($user->email)->send(new SendEmailToAdquire($company->name));
         return;
     }
 
     public function getDownloadCurriculum($curriculumId)
     {
 
-        $value = CurriculumListResource::collection(Curriculum::where('id', $curriculumId)
-            ->get());
+        $data = Curriculum::where('id', $curriculumId)->first();
+        $experiences = ProfessionalExperience::where('curriculum_id', $data->id)->get();
+        $courses = Course::where('curriculum_id', $data->id)->get();
 
-        foreach ($value as $item){
-            $data = $item;
-        }
+        $path = public_path() . '/pdf/curriculo.pdf';
 
-        return $data['whatsapp'];
-
-        $path = public_path() . '/pdf/curriculo' . $data->name . '.pdf';
-
-        $pdf = PDF::loadView('Company.myPdf', compact('data'));
+        $pdf = PDF::loadView('Company.myPdf', compact('data', 'experiences', 'courses'));
         $pdf->save($path);
         return $pdf->download($path);
     }

@@ -5,6 +5,8 @@ namespace App\Http;
 use App\Http\Middleware\CandidateAcess;
 use App\Http\Middleware\CompanyAcess;
 use App\Http\Middleware\GuestAcess;
+use App\Http\Middleware\RegisterCurriculum;
+use App\Http\Middleware\SeeCurriculum;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -69,5 +71,7 @@ class Kernel extends HttpKernel
         'candidate-acess' => CandidateAcess::class,
         'company-acess' => CompanyAcess::class,
         'no-auth' => GuestAcess::class,
+        'register-curriculum' => RegisterCurriculum::class,
+        'see-curriculum' => SeeCurriculum::class,
     ];
 }

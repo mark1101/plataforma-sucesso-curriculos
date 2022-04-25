@@ -299,7 +299,7 @@
                       <div>
                         <button
                           class="btn btn-danger rounded-pill"
-                          @click="createCurriculum(curriculum.id)"
+                          @click="createCurriculum(curriculum)"
                         >
                           Baixar Currículo
                         </button>
@@ -398,14 +398,14 @@ export default {
   methods: {
     createCurriculum(curriculum) {
       axios({
-        url: "/create-curriculum-download/" + curriculum,
+        url: "/create-curriculum-download/" + curriculum.id,
         method: "GET",
         responseType: "blob",
       }).then((response) => {
         const url = window.URL.createObjectURL(new Blob([response.data]));
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", "file.pdf");
+        link.setAttribute("download", curriculum.name+".pdf");
         document.body.appendChild(link);
         link.click();
       });
