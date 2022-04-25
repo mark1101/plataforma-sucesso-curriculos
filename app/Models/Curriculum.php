@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Curriculum extends Model
 {
     use HasFactory;
+
     protected $table = "curriculum";
     protected $fillable = [
         'user_id',
         'name',
         'address',
+        'cep',
         'state',
         'city',
         'age',
@@ -20,20 +22,20 @@ class Curriculum extends Model
         'whatsapp',
         'email',
         'gender',
-        'is_employed',
-        'is_handicapped',
-        'cnh',
-        'desired_salary',
-        'hiring_type',
-        'desired_function',
+
         'schooling_level',
         'formation',
-        'occupied_job',
-        'experience_time',
-        'company_field',
-        'courses',
+        'institution',
+        'hiring_type',
+        'desired_function',
+        'desired_salary',
+        'is_handicapped',
+        'cnh',
+
         'additional_considerations',
         'curriculum_photo_url',
+        'is_employed',
         'found_us',
+        'active',
     ];
 }

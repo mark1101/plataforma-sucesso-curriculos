@@ -13,6 +13,7 @@
     <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" type="imagex/png" href="/img/icone-aba.png">
 
     <title>@yield('title')</title>
 </head>
@@ -26,19 +27,20 @@
         <div class="offcanvas-menu">
             <div class="main-menu">
                 <ul class="d-block">
-                    <!--<li><a href="{{ url('candidato/entrar') }}">Sou Candidato</a></li>
-                    <li><a href="{{ url('empresa/entrar') }}">Sou Empresa</a></li> -->
+                    <li><a href="{{ url('empresa/dashboard') }}">Início</a></li>
                     <li><a href="{{ url('sugestao/cadastro') }}">Sugestões</a></li>
                     <li><a href="{{ url('faq') }}">FAQ</a></li>
                     <li><a href="{{ url('suporte/cadastro') }}">Suporte</a></li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="text-transform: capitalize">
-                            {{Auth::user()->name }}
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre
+                            style="text-transform: capitalize">
+                            {{ Auth::user()->name }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Meu Plano</a>
+                            <a class="dropdown-item" href="{{url('/planos-empresa')}}">Acessar Planos</a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                                 {{ __('Sair') }}
@@ -63,7 +65,7 @@
     <header class="header__area">
         <div class="container">
             <div class="logo__main">
-                <a href="/"><img src="{{ asset('img/logo-white.png') }}" alt=""></a>
+                <a href="/empresa/dashboard"><img src="{{ asset('img/logo-white.png') }}" alt=""></a>
             </div>
             <div class="header__right">
                 <div class="main__menu red--links">
@@ -82,6 +84,7 @@
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Meu Plano</a>
+                                <a class="dropdown-item" href="{{url('/planos-empresa')}}">Acessar Planos</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                     {{ __('Sair') }}

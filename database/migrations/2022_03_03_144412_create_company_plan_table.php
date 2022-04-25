@@ -18,6 +18,7 @@ class CreateCompanyPlanTable extends Migration
             $table->string('name');
             $table->decimal('price');
             $table->integer('quantity');
+            $table->integer('type');
             $table->timestamps();
         });
     }

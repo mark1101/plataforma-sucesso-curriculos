@@ -13,6 +13,7 @@
     <link href="{{asset('css/owl.carousel.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <link href="{{asset('css/responsive.css')}}" rel="stylesheet">
+    <link rel="shortcut icon" type="imagex/png" href="/img/icone-aba.png">
 
     <title>@yield('title')</title>
 </head>
@@ -28,12 +29,11 @@
     <div class="offcanvas-menu">
         <div class="main-menu">
             <ul class="d-block">
-                <li><a href="{{url('candidato/entrar')}}">Sou Candidato</a></li>
-                <li><a href="{{url('empresa/entrar')}}">Sou Empresa</a></li>
+                <li><a href="{{url('/')}}">Início</a></li>
                 <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                 <li><a href="{{url('faq')}}">FAQ</a></li>
                 <li><a href="{{url('suporte/cadastro')}}">Suporte</a></li>
-                <li><a href=""><span><img src="{{asset('img/cart-btn.png')}}" alt=""></span></a></li>
+               <!-- <li><a href=""><span><img src="{{asset('img/cart-btn.png')}}" alt=""></span></a></li> -->
             </ul>
         </div>
     </div>
@@ -51,12 +51,11 @@
         <div class="header__right">
             <div class="main__menu">
                 <ul>
-                    <li class="red--links"><a href="{{url('candidato/entrar')}}">Sou Candidato</a></li>
-                    <li class="red--links"><a href="{{url('empresa/entrar')}}">Sou Empresa</a></li>
+                    <li><a href="{{url('/')}}">Início</a></li>
                     <li><a href="{{url('sugestao/cadastro')}}">Sugestões</a></li>
                     <li><a href="{{url('faq')}}">FAQ</a></li>
                     <li><a href="{{url('suporte/cadastro')}}">Suporte</a></li>
-                    <li><a href=""><span><img src="{{asset('img/cart-btn.png')}}" alt=""></span></a></li>
+                   <!-- <li><a href=""><span><img src="{{asset('img/cart-btn.png')}}" alt=""></span></a></li> -->
                 </ul>
             </div>
             <div class="menu-open">
