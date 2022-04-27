@@ -32,8 +32,11 @@
               </div>
               <div class="card p-0 pb-2">
                 <h4>Filtros</h4>
+                <h4 style="color: red; cursor: pointer" @click="removeFilter">
+                  Remover Filtros
+                </h4>
                 <div class="accordion" id="accordionExample">
-                  <div class="accordion-item">
+                  <!-- <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
                       <button
                         class="accordion-button"
@@ -77,7 +80,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- <div class="accordion-item">
                     <h2 class="accordion-header" id="headingTwo">
                       <button
@@ -299,9 +302,9 @@
                             v-model="age"
                           >
                             <option selected value="16">16</option>
-                            <option value="18">+18</option>
-                            <option value="20">+20</option>
-                            <option value="30">+30</option>
+                            <option :value="18">+18</option>
+                            <option :value="20">+20</option>
+                            <option :value="30">+30</option>
                           </select>
                         </div>
                       </div>
@@ -335,10 +338,10 @@
                             aria-label="Default select example"
                             v-model="desired_salary"
                           >
-                            <option value="1000">Até R$1.000,00</option>
-                            <option value="3000">Até R$3.000,00</option>
-                            <option value="5000">Até R$5.000,00</option>
-                            <option value="10000">Mais de R$5.000,00</option>
+                            <option :value="1000">Até R$1.000,00</option>
+                            <option :value="3000">Até R$3.000,00</option>
+                            <option :value="5000">Até R$5.000,00</option>
+                            <option :value="10000">Mais de R$5.000,00</option>
                           </select>
                         </div>
                       </div>
@@ -535,6 +538,8 @@
                           <b>{{ experience.company_field }}</b>
                         </p>
                       </div>
+                    </div>
+                    <div class="row">
                       <div class="col">
                         <p>
                           Escolaridade: <b>{{ curriculum.schooling_level }}</b>
@@ -730,6 +735,16 @@ export default {
         return item.is_employed === this.is_employed;
       });
 
+      items = items.filter((item) => {
+        if (this.age == null) return item;
+        return item.age >= this.age;
+      });
+
+      items = items.filter((item) => {
+        if (this.desired_salary == null) return item;
+        return item.desired_salary >= this.desired_salary;
+      });
+
       return items;
     },
   },
@@ -812,6 +827,19 @@ export default {
       this.car = [];
       this.closeModalCar();
     },
+
+    removeFilter() {
+      this.age = null;
+      this.name = "";
+      this.schooling = null;
+      this.formation = null;
+      this.gender = null;
+      this.hiring_type = null;
+      this.cnh = null;
+      this.is_handicapped = null;
+      this.is_employed = null;
+      this.desired_salary = null;
+    },
   },
 };
 </script>
@@ -833,4 +861,5 @@ export default {
   font-weight: bold;
   font-size: 12px;
 }
+
 </style>

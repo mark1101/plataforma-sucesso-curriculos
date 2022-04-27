@@ -27,5 +27,9 @@ class Candidate extends Model
         return $this->belongsTo(Curriculum::class, 'user_id', 'id');
     }
 
+    public function dueDate(){
+        return $this->belongsTo(CandidateDueDate::class, 'user_id' , 'user_id');
+    }
+
 
 }

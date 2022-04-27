@@ -22,6 +22,7 @@
                 </div>
                 <div class="card p-0 pb-2">
                   <h4>Filtros</h4>
+                  <h4 style="cursor: pointer; color: red" @click="removeFilter">Remover Filtros</h4>
                   <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                       <h2 class="accordion-header" id="headingFour">
@@ -416,6 +417,15 @@ export default {
         );
       });
     },
+
+    removeFilter(){
+      this.name = "";
+      this.schooling = null; 
+      this.formation = null; 
+      this.gender = null; 
+      this.hiring_type = null; 
+      this.is_employed = null; 
+    }
   },
 
   created() {},

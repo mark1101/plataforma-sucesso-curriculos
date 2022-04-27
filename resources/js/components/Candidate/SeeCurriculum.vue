@@ -350,7 +350,7 @@
                 class="btn btn-primary"
                 @click="openModalExperienceCreate"
               >
-                Cadastrar nova Experiência
+                + Nova Experiência
               </button>
             </div>
           </div>
@@ -386,7 +386,7 @@
           <div class="mt-5">
             <div class="evaluation__content__bottom__btns">
               <button class="btn" type="button" @click="openModalCourseCreate">
-                Cadastrar novo curso
+                + Novo Curso
               </button>
             </div>
           </div>
@@ -1147,8 +1147,8 @@ input[type="file"] {
 }
 .custom-file-upload {
   border: 1px solid #ccc;
-  display: inline-block;
   padding: 6px 12px;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 </style>

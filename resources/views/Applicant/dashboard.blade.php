@@ -17,7 +17,7 @@
                             <span>Bem-vindo, {{ $name }} </span>
                         </h4>
                         <h5>Seu plano expira em:<span> {{ $expiration }} </span></h5>
-                        @if ($blocked != null)
+                        @if ($blocked != 'null')
                             <h5>Currículo bloqueado para o CNPJ:<span> {{ $blocked }} </span></h5>
                         @else
                             <h5>Currículo visível para todas empresas da região</h5>

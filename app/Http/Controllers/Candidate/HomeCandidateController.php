@@ -29,7 +29,7 @@ class HomeCandidateController extends Controller
         if ($curriculumUser) {
             $blocked = CurriculumBlock::where('curriculum_id', $curriculumUser->id)
                 ->select('cnpj')->first();
-        }else{
+        } else {
             $blocked = null;
         }
 
@@ -87,24 +87,26 @@ class HomeCandidateController extends Controller
     public function alterPlan($plan_id)
     {
 
-        $plan = CandidatePlan::where('id', $plan_id)->first();
+        $plan = null;
+        $candidate = Candidate::where('user_id', Auth::user()->id)->first();
+        $plan = CandidatePlanRelation::where('candidate_id', $candidate->id)->first();
 
-        if (!$plan) {
-            $createPlan = CandidatePlan::create([
-                'user_id' => Auth::user()->id,
-                'plan_id' => $plan_id
+        if ($plan == null) {
+            $createPlan = CandidatePlanRelation::create([
+                'candidate_id' => $candidate->id,
+                'plan_id' => (int) $plan_id
             ]);
             if ($createPlan) {
                 $planNew = CandidatePlan::where('id', $plan_id)->first();
                 $today = date('Y-m-d');
-                $sumData = date('Y-m-d', strtotime($today . " + {$planNew->days} days"));
-                if ($this->alterDueDate($sumData)) {
+                $sumData = date('Y-m-d', strtotime($today . "+ {$planNew->days} days"));
+                if ($this->alterDueDate($today)) {
                     return response()->json([
                         'status' => 'success',
                         'message' => 'Seu plano iniciado com sucesso!'
                     ]);
                 } else {
-                    CandidatePlan::where('user_id', Auth::user()->id)->delete();
+                    CandidatePlanRelation::where('candidate_id', $candidate->id)->delete();
                     return response()->json([
                         'status' => 'error',
                         'message' => 'Erro ao adicionar plano, tente novamente mais tarde ou contate-nos pelo email'
@@ -112,14 +114,20 @@ class HomeCandidateController extends Controller
                 }
             }
         }
-        $candidate = Candidate::where('user_id', Auth::user()->id)->first();
+
+        // Funcoes que irao rodar caso o cliente já estiver em um plano
+
+        $candidate = Candidate::where('user_id', Auth::user()->id)
+        ->with('dueDate')
+        ->first();
         $planCandidate = CandidatePlanRelation::where('candidate_id', $candidate->id)->first();
+        $planCandidadeEdit = CandidatePlan::where('id', $plan_id)->first();
 
         //adicionar metodo de pagamento
 
-        $days = strval($plan->days);
-        $today = date('Y-m-d');
-        $sumData = date('Y-m-d', strtotime($today . " + {$days} days"));
+        $days = strval($planCandidadeEdit->days);
+        $dateContrated = $candidate->dueDate->due_date;
+        $sumData = date('Y-m-d', strtotime($dateContrated . " + {$days} days"));
 
         $alterPlan = CandidatePlanRelation::where('candidate_id', $candidate->id)->update([
             'plan_id' => $plan_id
@@ -152,9 +160,18 @@ class HomeCandidateController extends Controller
     public function alterDueDate($sumData)
     {
         $candidate = Candidate::where('user_id', Auth::user()->id)->first();
-        $alterDueDate = CandidateDueDate::where('user_id', $candidate->user_id)->update([
-            'due_date' => $sumData
-        ]);
+        $date = CandidateDueDate::where('user_id', Auth::user()->id)->first();
+        if ($date) {
+            $alterDueDate = CandidateDueDate::where('user_id', $candidate->user_id)->update([
+                'due_date' => $sumData
+            ]);
+        } else {
+            $alterDueDate = CandidateDueDate::create([
+                'user_id' => Auth::user()->id,
+                'due_date' => $sumData
+            ]);
+        }
+
         if ($alterDueDate) {
             return true;
         } else {
@@ -177,6 +194,14 @@ class HomeCandidateController extends Controller
             'user_id' => $newUser['id'],
             'name' => $newUser['name'],
         ]);
+
+
+        $today = date('Y-m-d');
+        CandidateDueDate::create([
+            'due_date' => $today,
+            'user_id' => $newUser['id']
+        ]);
+
         if ($newCandidate) {
             return view('Applicant.login-applicant');
         }
