@@ -1,37 +1,56 @@
 <template>
   <div>
-    <h2 align="center">Currículo completo {{ curriculum.name }}</h2>
+    <h2 align="center">Currículo Completo</h2>
     <div class="container mb-5 mt-5">
       <div class="row mt-3 mb-2">
-        <div class="col-sm-12" style="text-align: right">
+        <div class="col-sm-6" style="align-self: center">
+          <h4>
+            <span
+              >DICA 1: Mantenha sempre seu currículo atualizado, assim ficará
+              sempre a frente dos outros candidatos.
+            </span>
+          </h4>
+          <h4>
+            <span>
+              DICA 2: Seja objetivo, e lembre-se de que toda experiência é
+              válida.
+            </span>
+          </h4>
+        </div>
+        <div
+          class="col-sm-6 col-img"
+          style="text-align: center; align-self: center"
+        >
           <div class="col" v-if="curriculum.curriculum_photo_url != null">
             <img
               width="150px"
               :src="'images/feed/' + curriculum.curriculum_photo_url"
               alt=""
             />
+            <p>
+              <label class="custom-file-upload mt-2">
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref="file-update"
+                  name="alter-image-profile"
+                  v-on:change="alterPhoto"
+                />
+                <i class="fa fa-cloud-upload"></i> Alterar imagem
+              </label>
+            </p>
+          </div>
+          <div v-else>
             <label class="custom-file-upload">
               <input
                 type="file"
                 accept="image/*"
-                ref="file-update"
-                name="alter-image-profile"
-                v-on:change="alterPhoto"
+                ref="file-register"
+                name="add-image-profile"
+                v-on:change="createPhoto"
               />
-              <i class="fa fa-cloud-upload"></i> Alterar imagem
+              <i class="fa fa-cloud-upload"></i> Adicionar Imagem
             </label>
-          </div>
-          <div v-else class="">
-            <label for=""
-              >Adicione agora mesmo uma imagem em seu currículo</label
-            >
-            <input
-              type="file"
-              accept="image/*"
-              ref="file-register"
-              name="add-image-profile"
-              v-on:change="createPhoto"
-            />
           </div>
         </div>
       </div>
@@ -1150,5 +1169,11 @@ input[type="file"] {
   padding: 6px 12px;
   cursor: pointer;
   margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .col-img {
+    text-align: center !important;
+  }
 }
 </style>

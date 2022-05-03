@@ -33,7 +33,7 @@ Route::get('/verify-acess', function () {
 
 Route::get('/', function () {
     return view('home-plataform');
-});
+})->middleware('no-auth');
 
 Auth::routes();
 

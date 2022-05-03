@@ -7313,6 +7313,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "see-curriculum",
@@ -15413,7 +15432,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.col {\n  align-self: self-end !important;\n}\ninput[type=\"file\"] {\n  display: none;\n}\n.custom-file-upload {\n  border: 1px solid #ccc;\n  padding: 6px 12px;\n  cursor: pointer;\n  margin-bottom: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.col {\n  align-self: self-end !important;\n}\ninput[type=\"file\"] {\n  display: none;\n}\n.custom-file-upload {\n  border: 1px solid #ccc;\n  padding: 6px 12px;\n  cursor: pointer;\n  margin-bottom: 10px;\n}\n@media only screen and (max-width: 600px) {\n.col-img {\n    text-align: center !important;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36869,15 +36888,18 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h2", { attrs: { align: "center" } }, [
-      _vm._v("Currículo completo " + _vm._s(_vm.curriculum.name)),
-    ]),
+    _c("h2", { attrs: { align: "center" } }, [_vm._v("Currículo Completo")]),
     _vm._v(" "),
     _c("div", { staticClass: "container mb-5 mt-5" }, [
       _c("div", { staticClass: "row mt-3 mb-2" }, [
+        _vm._m(0),
+        _vm._v(" "),
         _c(
           "div",
-          { staticClass: "col-sm-12", staticStyle: { "text-align": "right" } },
+          {
+            staticClass: "col-sm-6 col-img",
+            staticStyle: { "text-align": "center", "align-self": "center" },
+          },
           [
             _vm.curriculum.curriculum_photo_url != null
               ? _c("div", { staticClass: "col" }, [
@@ -36889,35 +36911,38 @@ var render = function () {
                     },
                   }),
                   _vm._v(" "),
+                  _c("p", [
+                    _c("label", { staticClass: "custom-file-upload mt-2" }, [
+                      _c("input", {
+                        ref: "file-update",
+                        attrs: {
+                          type: "file",
+                          accept: "image/*",
+                          name: "alter-image-profile",
+                        },
+                        on: { change: _vm.alterPhoto },
+                      }),
+                      _vm._v(" "),
+                      _c("i", { staticClass: "fa fa-cloud-upload" }),
+                      _vm._v(" Alterar imagem\n            "),
+                    ]),
+                  ]),
+                ])
+              : _c("div", [
                   _c("label", { staticClass: "custom-file-upload" }, [
                     _c("input", {
-                      ref: "file-update",
+                      ref: "file-register",
                       attrs: {
                         type: "file",
                         accept: "image/*",
-                        name: "alter-image-profile",
+                        name: "add-image-profile",
                       },
-                      on: { change: _vm.alterPhoto },
+                      on: { change: _vm.createPhoto },
                     }),
                     _vm._v(" "),
                     _c("i", { staticClass: "fa fa-cloud-upload" }),
-                    _vm._v(" Alterar imagem\n          "),
+                    _vm._v(" Adicionar Imagem\n          "),
                   ]),
-                ])
-              : _c("div", {}, [
-                  _c("label", { attrs: { for: "" } }, [
-                    _vm._v("Adicione agora mesmo uma imagem em seu currículo"),
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    ref: "file-register",
-                    attrs: {
-                      type: "file",
-                      accept: "image/*",
-                      name: "add-image-profile",
-                    },
-                    on: { change: _vm.createPhoto },
-                  }),
                 ]),
           ]
         ),
@@ -37935,7 +37960,7 @@ var render = function () {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "row" }, [
@@ -38126,7 +38151,7 @@ var render = function () {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "row" }, [
@@ -38257,7 +38282,7 @@ var render = function () {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group" }, [
@@ -38453,7 +38478,7 @@ var render = function () {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _vm._m(4),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group" }, [
@@ -38558,6 +38583,32 @@ var render = function () {
   ])
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-sm-6", staticStyle: { "align-self": "center" } },
+      [
+        _c("h4", [
+          _c("span", [
+            _vm._v(
+              "DICA 1: Mantenha sempre seu currículo atualizado, assim ficará\n            sempre a frente dos outros candidatos.\n          "
+            ),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("h4", [
+          _c("span", [
+            _vm._v(
+              "\n            DICA 2: Seja objetivo, e lembre-se de que toda experiência é\n            válida.\n          "
+            ),
+          ]),
+        ]),
+      ]
+    )
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

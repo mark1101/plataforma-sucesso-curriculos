@@ -10,8 +10,8 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="hero__content__wrapper">
-                        <h3><span>Guarapuava </span> <br>
-                            e região!</h3>
+                        <h3><span><b>Guarapuava </span> <br>
+                            e região!</b></h3>
                         <p class="has-limit">Somos mais que uma plataforma de empregos. Representamos a união de
                             Candidatos e Empresas que
                             realmente precisam se encontrar. Somos o verdadeiro ponto de encontro entre vagas e
