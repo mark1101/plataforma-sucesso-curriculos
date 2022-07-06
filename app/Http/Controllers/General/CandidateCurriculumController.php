@@ -10,6 +10,7 @@ use App\Models\CurriculumBlock;
 use App\Models\ProfessionalExperience;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class CandidateCurriculumController extends Controller
 {
@@ -74,22 +75,24 @@ class CandidateCurriculumController extends Controller
                     'found_us' => $data['found_us']
                 ]);
             }
+            $curriculum = Curriculum::where('user_id', Auth::user()->id)->first();
 
-            if ($data['experiences'] != []) {
-                foreach ($data['experiences'] as $experience) {
+            if ($data['experiences'] != null) {
+                foreach (json_decode($data['experiences']) as $experience) {
                     ProfessionalExperience::updateOrCreate([
-                        'curriculum_id' => $newCurriculum['id'],
+                        'curriculum_id' => $curriculum->id,
                         'name_company' => $experience->name_company,
                         'company_field' => $experience->company_field,
-                        'occuppied_job' => $experience->occupied_job,
+                        'occupied_job' => $experience->occupied_job,
                         'years' => $experience->years,
                         'months' => $experience->months
                     ]);
                 }
             }
             if ($data['courses'] != null) {
-                foreach ($data['courses'] as $course) {
+                foreach (json_decode($data['courses']) as $course) {
                     Course::updateOrCreate([
+                        'curriculum_id' => $curriculum->id,
                         'name_courses' => $course->name_courses,
                         'school' => $course->school,
                         'hours' => $course->hours
@@ -98,8 +101,8 @@ class CandidateCurriculumController extends Controller
             }
 
             if ($data['cnpj'] != null) {
-                $blockedCurriculum = CurriculumBlock::create([
-                    'curriculum_id' => $newCurriculum->id,
+                CurriculumBlock::create([
+                    'curriculum_id' => $curriculum->id,
                     'cnpj' => $request->cnpj,
                 ]);
             }
@@ -110,7 +113,8 @@ class CandidateCurriculumController extends Controller
         $imageName = bin2hex(random_bytes(10)) . time() . '.' . $data['file']->extension();
         $data['file']->move(public_path('images/feed/'), $imageName);
 
-        if ($curriculum = Curriculum::where('user_id', Auth::user()->id)->first()) {
+        $curriculum = Curriculum::where('user_id', Auth::user()->id)->first();
+        if ($curriculum) {
             $newCurriculum = Curriculum::where('user_id', Auth::user()->id)->update([
                 'user_id' => Auth::user()->id,
                 'name' => $data['name'],
@@ -163,22 +167,24 @@ class CandidateCurriculumController extends Controller
                 'found_us' => $data['found_us']
             ]);
         }
+        $curriculum = Curriculum::where('user_id', Auth::user()->id)->first();
 
         if ($data['experiences'] != []) {
-            foreach ($data['experiences'] as $experience) {
+            foreach (json_decode($data['experiences']) as $experience) {
                 ProfessionalExperience::updateOrCreate([
-                    'curriculum_id' => $newCurriculum['id'],
+                    'curriculum_id' => $curriculum->id,
                     'name_company' => $experience->name_company,
                     'company_field' => $experience->company_field,
-                    'occuppied_job' => $experience->occupied_job,
+                    'occupied_job' => $experience->occupied_job,
                     'years' => $experience->years,
                     'months' => $experience->months
                 ]);
             }
         }
         if ($data['courses'] != null) {
-            foreach ($data['courses'] as $course) {
+            foreach (json_decode($data['courses']) as $course) {
                 Course::updateOrCreate([
+                    'curriculum_id' => $curriculum->id,
                     'name_courses' => $course->name_courses,
                     'school' => $course->school,
                     'hours' => $course->hours
@@ -187,8 +193,8 @@ class CandidateCurriculumController extends Controller
         }
 
         if ($data['cnpj'] != null) {
-            $blockedCurriculum = CurriculumBlock::create([
-                'curriculum_id' => $newCurriculum->id,
+            CurriculumBlock::create([
+                'curriculum_id' => $curriculum->id,
                 'cnpj' => $request->cnpj,
             ]);
         }
@@ -196,9 +202,29 @@ class CandidateCurriculumController extends Controller
         return ['redirect' => route('candidatedash')];
     }
 
+    public function addImage(Request $request)
+    {
+        $data = $request->all();
+        if ($request->file != '[Object Object]') {
+            $imageName = bin2hex(random_bytes(10)) . time() . '.' . $data['file']->extension();
+            $data['file']->move(public_path('images/feed/'), $imageName);
+
+            $curriculum = Curriculum::where('user_id', Auth::user()->id)->update(
+                [
+                    'curriculum_photo_url' => $imageName
+                ]
+            );
+        }
+
+        if ($curriculum) {
+            return response()->json(['status' => 'success', 'message' => 'Imagem adicionada com sucesos!']);
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'Erro ao adicionar imagem']);
+        }
+    }
+
     public function deleteCurriculum($curriculum_id)
     {
-        //$delete = Curriculum::where('id', $curriculum_id)->delete();
         $userDelete = Curriculum::where('user_id', Auth::user()->id)->delete();
         if ($userDelete) {
             return response()->json([

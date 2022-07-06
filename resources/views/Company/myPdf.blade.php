@@ -10,9 +10,10 @@
 </head>
 
 <style>
-*{
-    font-family: 'Nunito', sans-serif; 
-}
+    * {
+        font-family: 'Nunito', sans-serif;
+    }
+
 </style>
 
 <body>
@@ -20,7 +21,9 @@
     <hr>
     <div class="row">
         <div class="col-sm">
-            <img width="20%" src="images/feed/{{$data['curriculum_photo_url']}}" alt="" />
+            @if ($data['curriculum_photo_url'] != null)
+                <img width="20%" src="images/feed/{{ $data['curriculum_photo_url'] }}" alt="" />
+            @endif
         </div>
         <div class="col-sm">
             <p>Nome Completo: {{ $data['name'] }}</p>

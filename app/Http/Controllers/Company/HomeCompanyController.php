@@ -154,6 +154,12 @@ class HomeCompanyController extends Controller
             'company_id' => $newCompany['id'],
         ]);
 
+        $plan = CompanyPlan::where('type' , 1)->first();
+        CompanyPlanRelation::create([
+            'company_id' => $newCompany['id'],
+            'plan_id' => $plan->id 
+        ]);
+
         if ($newCompany) {
             return view('Company.login-company');
         } else {

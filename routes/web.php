@@ -33,7 +33,7 @@ Route::get('/verify-acess', function () {
 
 Route::get('/', function () {
     return view('home-plataform');
-});
+})->middleware('no-auth');
 
 Auth::routes();
 
@@ -101,6 +101,7 @@ Route::middleware(['candidate-acess'])->group(function () {
         return view('Applicant.see-curriculum');
     })->middleware('see-curriculum');
     Route::put('/edit-curriculum' , [CandidateCurriculumController::class, 'editUserCurriculum']);
+    Route::post('/create-image-curriculum' , [CandidateCurriculumController::class, 'addImage']);
     Route::delete('/delete-curriculum/{id}' , [CandidateCurriculumController::class, 'deleteCurriculum']);
 
     Route::get('/get-experience/{id}', [CandidateCurriculumController::class, 'getExperience']);

@@ -690,61 +690,59 @@
             <div class="col-md-7">
               <div class="hero__form__right">
                 <h4>foto de perfil</h4>
-                <form action="">
-                  <div class="form__card">
-                    <div class="user__image__upload__wrapper">
-                      <div class="user__image__up__btns d-flex">
-                        <div class="row">
-                          <input
-                            v-on:change="onChange"
-                            accept="image/*"
-                            type="file"
-                            ref="inputFile"
-                          />
-                        </div>
-                        <div class="row">
-                          <a
-                            v-if="curriculum_photo"
-                            style="cursor: pointer"
-                            @click="removeImagem"
-                            >Remover foto</a
-                          >
-                        </div>
-                      </div>
-                      <div class="user__image">
-                        <img
-                          :src="curriculum_photo"
-                          v-if="curriculum_photo"
-                          alt=""
+                <div class="form__card">
+                  <div class="user__image__up__btns d-flex">
+                    <div class="row">
+                      <label class="custom-file-upload" v-if="subi == null" >
+                        <input
+                          v-on:change="onChange"
+                          accept="image/*"
+                          type="file"
+                          ref="inputFile"
                         />
-                      </div>
+                        <i class="fa fa-cloud-upload"></i> Adicionar Imagem
+                      </label>
                     </div>
                   </div>
-                  <h4>Considerações adicionais</h4>
-                  <div class="additional__form__wrapper">
-                    <div class="single__input__item">
-                      <textarea
-                        name=""
-                        id=""
-                        class="form-control"
-                        v-model="additional_considerations"
-                      ></textarea>
-                    </div>
-                    <div class="additional__checkboxes">
-                      <label for="">Como conheceu nosso site?</label>
-                      <div class="row">
-                        <select class="form-control" v-model="found_us">
-                          <option
-                            v-for="option in options"
-                            :value="option.name"
-                          >
-                            {{ option.name }}
-                          </option>
-                        </select>
-                      </div>
+                  <div class="user__image">
+                    <a
+                        v-if="curriculum_photo"
+                        style="cursor: pointer"
+                        @click="removeImagem"
+                        >Remover foto</a
+                      >
+                    <img
+                      :src="curriculum_photo"
+                      v-if="curriculum_photo"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <h4>Considerações adicionais</h4>
+                <div class="additional__form__wrapper">
+                  <div class="single__input__item">
+                    <textarea
+                      name=""
+                      id=""
+                      class="form-control"
+                      v-model="additional_considerations"
+                    ></textarea>
+                  </div>
+                  <div class="additional__checkboxes">
+                    <label for="">Como conheceu nosso site?</label>
+                    <div class="row">
+                      <select class="form-control" v-model="found_us">
+                        <option
+                          v-for="option in options"
+                          :value="option.name"
+                          :key="option.id"
+                        >
+                          {{ option.name }}
+                        </option>
+                      </select>
                     </div>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>
@@ -1118,7 +1116,6 @@ export default {
 
     onChange(e) {
       this.file = e.target.files[0];
-      console.log(this.file);
       const teste = e.target.files[0];
       if (this.file.size < 1005222) {
         //console.log(this.file.size);
@@ -1234,8 +1231,8 @@ export default {
       form.append("is_handicapped", this.is_handicapped);
       form.append("cnh", this.cnh);
 
-      form.append("experiences", this.experiences);
-      form.append("courses", this.courses);
+      form.append("experiences", JSON.stringify(this.experiences));
+      form.append("courses", JSON.stringify(this.courses));
 
       form.append("is_employed", this.is_employed);
       form.append("found_us", this.found_us);
@@ -1274,4 +1271,13 @@ export default {
 
 
 <style>
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
 </style>
