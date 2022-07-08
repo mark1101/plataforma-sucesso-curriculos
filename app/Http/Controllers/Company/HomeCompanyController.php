@@ -128,12 +128,12 @@ class HomeCompanyController extends Controller
     public function index()
     {
         return view('Company.create-account');
-        // return view de cadastro da empresa
     }
 
     public function create(Request $request)
     {
         $data = $request->all();
+        $plan = CompanyPlan::where('type' , 1)->first();
 
         $newUser =  User::create([
             'name' => $data['name'],
@@ -152,12 +152,12 @@ class HomeCompanyController extends Controller
 
         CompanyCurriculumQuantity::create([
             'company_id' => $newCompany['id'],
+            'quantity' => $plan->quantity
         ]);
 
-        $plan = CompanyPlan::where('type' , 1)->first();
         CompanyPlanRelation::create([
             'company_id' => $newCompany['id'],
-            'plan_id' => $plan->id 
+            'plan_id' => $plan->id,
         ]);
 
         if ($newCompany) {
