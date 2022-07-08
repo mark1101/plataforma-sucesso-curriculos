@@ -30,7 +30,7 @@ class SendEmailToAdquire extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.reports.curriculumadquire', [
+        return $this->subject('Currículos em sua Dashboard')->markdown('emails.reports.curriculumadquire', [
             'name' => $this->name
         ]);
     }

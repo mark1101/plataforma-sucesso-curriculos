@@ -16,8 +16,8 @@ class CreateCurriculumBlockTable extends Migration
         Schema::create('curriculum_block', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('curriculum_id')->unsigned();
-            $table->foreign('curriculum_id')->references('id')
-            ->on('curriculum')->onDelete('cascade');
+            //$table->foreign('curriculum_id')->references('id')
+            //->on('curriculum')->onDelete('cascade');
             $table->string('cnpj')->nullable();
             $table->timestamps();
             //colocar aqui o on delete cascade
