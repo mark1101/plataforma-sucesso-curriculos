@@ -175,4 +175,13 @@ class HomeCompanyController extends Controller
     public function destroy($user_id)
     {
     }
+
+    public function plansCompany(){
+
+        $plans = CompanyPlan::all();
+        return view('Company.plans' , [
+            'plans' => $plans
+        ]);
+
+    }
 }

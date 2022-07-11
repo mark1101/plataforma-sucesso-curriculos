@@ -69,9 +69,7 @@ Route::middleware(['no-auth'])->group(function () {
 //ROUTES COMPANY
 Route::middleware(['company-acess'])->group(function () {
     Route::get('/empresa/dashboard', [HomeCompanyController::class, 'dashboard'])->name('dashboard.company');
-    Route::get('/planos-empresa' , function(){
-        return view('Company.plans');
-    });
+    Route::get('/planos-empresa' , [HomeCompanyController::class, 'plansCompany']);
     Route::get('/empresa/acessar-curriculos', [HomeCompanyController::class, 'acess']);
     Route::get('/empresa/resultado-busca', [HomeCompanyController::class, 'result']);
 

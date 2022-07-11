@@ -13,6 +13,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "mercadopago/dx-php": "^2.4",
         "tightenco/ziggy": "^1.4"
     },
     "require-dev": {

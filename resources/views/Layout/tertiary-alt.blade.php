@@ -22,7 +22,7 @@
 
 <body style="background-color: #F2F2F2;">
 
-
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
     <!--------- Offcanvas area start --------->
     <div class="offcanvas-area">
         <div class="menu-close">
@@ -35,7 +35,7 @@
                     <li><a href="{{ url('sugestao/cadastro') }}">Sugestões</a></li>
                     <li><a href="{{ url('faq') }}">FAQ</a></li>
                     <li><a href="{{ url('suporte/cadastro') }}">Suporte</a></li>
-                   <!-- <li><a href=""><span><img src="{{ asset('img/cart-btn.png') }}" alt=""></span></a></li> -->
+                    <!-- <li><a href=""><span><img src="{{ asset('img/cart-btn.png') }}" alt=""></span></a></li> -->
                 </ul>
             </div>
         </div>
@@ -57,7 +57,7 @@
                         <li><a href="{{ url('sugestao/cadastro') }}">Sugestões</a></li>
                         <li><a href="{{ url('faq') }}">FAQ</a></li>
                         <li><a href="{{ url('suporte/cadastro') }}">Suporte</a></li>
-                       <!-- <li><a href=""><span><img src="{{ asset('img/cart-btn.png') }}" alt=""></span></a></li> -->
+                        <!-- <li><a href=""><span><img src="{{ asset('img/cart-btn.png') }}" alt=""></span></a></li> -->
                     </ul>
                 </div>
                 <div class="menu-open">
@@ -84,7 +84,6 @@
     </footer>
     <!--------- Footer area end --------->
 
-
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/popper.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -92,6 +91,8 @@
     <script src="{{ asset('js/main.js') }}"></script>
 
     <script src="{{ mix('js/app.js') }}"></script>
+
+
 
 </body>
 

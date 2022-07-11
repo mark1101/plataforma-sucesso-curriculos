@@ -13,16 +13,17 @@
     <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="shortcut icon" type="imagex/png" href="/img/icone-aba.png">
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
 
     <title>@yield('title')</title>
+
 </head>
 
 <body>
-
     <!--------- Offcanvas area start MOBILE--------->
     <div class="offcanvas-area">
         <div class="menu-close">
@@ -84,7 +85,7 @@
     </footer>
     <!--------- Footer area end --------->
 
-
+    
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/popper.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -92,11 +93,7 @@
     <script src="{{ asset('js/main.js') }}"></script>
 
     <script src="{{ mix('js/app.js') }}"></script>
-    <script>
-
-    </script>
-
-
+   
 </body>
 
 </html>

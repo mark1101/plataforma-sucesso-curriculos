@@ -693,7 +693,7 @@
                 <div class="form__card">
                   <div class="user__image__up__btns d-flex">
                     <div class="row">
-                      <label class="custom-file-upload" v-if="subi == null" >
+                      <label class="custom-file-upload" v-if="subi == null">
                         <input
                           v-on:change="onChange"
                           accept="image/*"
@@ -706,11 +706,11 @@
                   </div>
                   <div class="user__image">
                     <a
-                        v-if="curriculum_photo"
-                        style="cursor: pointer"
-                        @click="removeImagem"
-                        >Remover foto</a
-                      >
+                      v-if="curriculum_photo"
+                      style="cursor: pointer"
+                      @click="removeImagem"
+                      >Remover foto</a
+                    >
                     <img
                       :src="curriculum_photo"
                       v-if="curriculum_photo"
@@ -1031,8 +1031,13 @@
   </div>
 </template>
 
+// SDK MercadoPago.js V2
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+
 <script>
 import { VMoney } from "v-money";
+//import * as mercadopago from 'mercadopago'
+
 
 export default {
   name: "register-curriculum.vue",
@@ -1264,6 +1269,10 @@ export default {
 
     paymentTest() {
       this.payment == true;
+    },
+
+    createPayment() {
+      
     },
   },
 };
