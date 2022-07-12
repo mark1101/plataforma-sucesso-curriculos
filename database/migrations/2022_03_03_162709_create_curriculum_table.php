@@ -43,7 +43,7 @@ class CreateCurriculumTable extends Migration
             $table->string('curriculum_photo_url')->nullable();
             $table->string('is_employed')->nullable();
             $table->string('found_us')->nullable();
-            $table->boolean('active')->default(1);
+            $table->boolean('active')->default(0);
             $table->timestamps();
         });
     }

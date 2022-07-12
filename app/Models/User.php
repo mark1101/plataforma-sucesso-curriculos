@@ -27,6 +27,7 @@ class User extends Authenticatable
         'entry_date',
     ];
 
+  
     public function curriculumUser()
     {
         return $this->belongsTo(Curriculum::class, 'user_id', 'id');

@@ -20,31 +20,8 @@
     <title>Planos Empresa</title>
 </head>
 
-<?php
-// SDK do Mercado Pago
-require base_path('vendor/autoload.php');
-// Adicione as credenciais
-MercadoPago\SDK::setAccessToken('TEST-8029478245666882-071110-79e2eccaa2db9bc7b40d21ee3ee81d82-1150003921');
-
-// Cria um objeto de preferência
-$preference = new MercadoPago\Preference();
-
-foreach ($plans as $product) {
-    $item = new MercadoPago\Item();
-    $item->title = $product->name;
-    $item->quantity = 1;
-    $item->unit_price = $product->price;
-
-    $products[] = $item;
-}
-
-$preference->items = $products;
-$preference->save();
-?>
-
 <body style="background-color: #F2F2F2;">
 
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
     <!--------- Offcanvas area start --------->
     <div class="offcanvas-area">
         <div class="menu-close">
@@ -78,7 +55,6 @@ $preference->save();
                         <li><a href="{{ url('sugestao/cadastro') }}">Sugestões</a></li>
                         <li><a href="{{ url('faq') }}">FAQ</a></li>
                         <li><a href="{{ url('suporte/cadastro') }}">Suporte</a></li>
-                        <!-- <li><a href=""><span><img src="{{ asset('img/cart-btn.png') }}" alt=""></span></a></li> -->
                     </ul>
                 </div>
                 <div class="menu-open">
@@ -119,14 +95,8 @@ $preference->save();
                                         <div class="validity__text">30 currículos</div>
                                     </div>
                                     <div class="pricing__card__bottom">
-                                        <a style="cursor: pointer; color: white"> Plano atual</a>
-                                    </div>
-                                    <!-- <div class="pricing__card__bottom">
-                                            <a style="cursor: pointer">
-                                                comprar agora</a>
-                                        </div> -->
-                                    <div class="cho-container">
-
+                                        <a href="{{ url('/carrinho-empresa', ['id' => 1]) }}"
+                                            style="cursor: pointer; color: white"> Grátis</a>
                                     </div>
                                 </div>
                             </div>
@@ -151,15 +121,9 @@ $preference->save();
                                         <div class="validity__text">10 currículos</div>
                                     </div>
                                     <div class="pricing__card__bottom">
-                                        <a style="cursor: pointer; color: white"> Plano atual</a>
+                                        <a href="{{ url('/carrinho-empresa', ['id' => 2]) }}"
+                                            style="cursor: pointer; color: white"> Comprar agora</a>
                                     </div>
-                                    <div class="cho-container">
-
-                                    </div>
-                                    <!--  <div class="pricing__card__bottom">
-                                            <a style="cursor: pointer; color: white">
-                                                comprar agora</a>
-                                        </div> -->
                                 </div>
                             </div>
                             <div class="col-md-4 col-sm-6">
@@ -186,15 +150,8 @@ $preference->save();
                                         <div class="validity__text">30 currículos</div>
                                     </div>
                                     <div class="pricing__card__bottom">
-                                        <a style="cursor: pointer; color: white"> Plano atual</a>
-                                    </div>
-                                    <!--<div class="pricing__card__bottom">
-                                                <a style="cursor: pointer; color: white">
-                                                    comprar agora</a>
-                                            </div> -->
-
-                                    <div class="cho-container">
-
+                                        <a href="{{ url('/carrinho-empresa', ['id' => 3]) }}"
+                                            style="cursor: pointer; color: white"> Comprar agora</a>
                                     </div>
                                 </div>
                             </div>
@@ -223,25 +180,6 @@ $preference->save();
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-
-    // SDK MercadoPago.js V2
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
-    <script>
-        const mp = new MercadoPago('TEST-e03da535-2b92-422b-be7d-476682200051', {
-            locale: 'pt-BR'
-        });
-
-        // Inicialize o checkout
-        mp.checkout({
-            preference: {
-                id: '{{ $preference->id }}'
-            },
-            render: {
-                container: '.cho-container', // Indique o nome da class onde será exibido o botão de pagamento
-                label: 'Comprar Agora', // Muda o texto do botão de pagamento (opcional)
-            }
-        });
-    </script>
 
 </body>
 

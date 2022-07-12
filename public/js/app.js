@@ -6446,10 +6446,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
- //import * as mercadopago from 'mercadopago'
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "register-curriculum.vue",
@@ -6655,8 +6651,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     paymentTest: function paymentTest() {
       this.payment == true;
-    },
-    createPayment: function createPayment() {}
+    }
   }
 });
 
@@ -9072,8 +9067,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
 //
 //
 //
@@ -36303,10 +36296,6 @@ var render = function () {
       ? _c("div", { staticClass: "tab" }, [_vm._m(8)])
       : _vm._e(),
     _vm._v(" "),
-    _vm.activePhase === 7
-      ? _c("div", { staticClass: "tab" }, [_vm._m(9)])
-      : _vm._e(),
-    _vm._v(" "),
     _c("div", { staticClass: "col-sm-12" }, [
       _c("div", { staticClass: "container position-relative" }, [
         _c("div", { staticClass: "row" }, [
@@ -36330,7 +36319,7 @@ var render = function () {
             ]
           ),
           _vm._v(" "),
-          _vm.activePhase === 7
+          _vm.activePhase === 6
             ? _c(
                 "div",
                 { staticClass: "col", staticStyle: { "text-align": "right" } },
@@ -36617,196 +36606,6 @@ var staticRenderFns = [
     return _c("section", { staticClass: "hero__area cadetro-hero pt-5 pb-5" }, [
       _c("div", { staticClass: "container position-relative" }, [
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-4" }, [
-            _c("div", { staticClass: "cadestro__content__wrap" }, [
-              _c("h4", [_vm._v("Escolha o plano ideal para você")]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  "\n                Escolha o plano mais adequado a sua necessidade e boa sorte na\n                sua jornada!\n              "
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "hero__progress" }, [
-                _c("div", { staticClass: "progress__top" }, [
-                  _c("p", [_vm._v("Progresso")]),
-                  _vm._v(" "),
-                  _c("h5", [_vm._v("86%")]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "progress" }, [
-                  _c("div", {
-                    staticClass: "progress-bar",
-                    staticStyle: { width: "86%" },
-                    attrs: {
-                      role: "progressbar",
-                      "aria-valuenow": "86",
-                      "aria-valuemin": "0",
-                      "aria-valuemax": "100",
-                    },
-                  }),
-                ]),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-8" }, [
-            _c("div", { staticClass: "pricing__wrapper" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-4 col-sm-6" }, [
-                  _c("div", { staticClass: "pricing__single__card" }, [
-                    _c("div", { staticClass: "pricing__card__body" }, [
-                      _c("div", { staticClass: "pricing__card__title" }, [
-                        _c("p", [_vm._v("plano")]),
-                        _vm._v(" "),
-                        _c("h5", [_vm._v("Mensal")]),
-                      ]),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "pricing__card__price" }, [
-                        _c("div", { staticClass: "rate--count" }, [
-                          _vm._v("1x"),
-                        ]),
-                        _vm._v(" "),
-                        _c("span", [
-                          _vm._v("R$"),
-                          _c("b", [_vm._v("15")]),
-                          _vm._v(",90"),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "p" }, [
-                        _vm._v("ou seja "),
-                        _c("b", [_vm._v(" R$0,53/dia")]),
-                      ]),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "validity__text" }, [
-                        _vm._v("Vigência de 30 dias"),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "pricing__card__bottom" }, [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("Escolher Plano"),
-                      ]),
-                    ]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4 col-sm-6" }, [
-                  _c(
-                    "div",
-                    { staticClass: "pricing__single__card card-sky-blue" },
-                    [
-                      _c("div", { staticClass: "pricing__card__body" }, [
-                        _c("div", { staticClass: "b-1" }, [
-                          _c("img", { attrs: { src: "img/b-1.svg", alt: "" } }),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "pricing__card__title" }, [
-                          _c("p", [_vm._v("plano")]),
-                          _vm._v(" "),
-                          _c("h5", [_vm._v("Trimestral")]),
-                        ]),
-                        _vm._v(" "),
-                        _c("hr"),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "pricing__card__price" }, [
-                          _c("div", { staticClass: "rate--count" }, [
-                            _vm._v("3x"),
-                          ]),
-                          _vm._v(" "),
-                          _c("span", [
-                            _vm._v("R$"),
-                            _c("b", [_vm._v("12")]),
-                            _vm._v(",90"),
-                          ]),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "p" }, [
-                          _vm._v("ou seja "),
-                          _c("b", [_vm._v(" R$0,43/dia")]),
-                        ]),
-                        _vm._v(" "),
-                        _c("hr"),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "validity__text" }, [
-                          _vm._v("Vigência de 90 dias"),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "pricing__card__bottom" }, [
-                        _c("a", { attrs: { href: "#" } }, [
-                          _vm._v("Escolher Plano"),
-                        ]),
-                      ]),
-                    ]
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4 col-sm-6" }, [
-                  _c("div", { staticClass: "pricing__single__card card-sky" }, [
-                    _c("div", { staticClass: "b-1" }, [
-                      _c("img", { attrs: { src: "img/b-2.svg", alt: "" } }),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "pricing__card__body" }, [
-                      _c("div", { staticClass: "pricing__card__title" }, [
-                        _c("p", [_vm._v("plano")]),
-                        _vm._v(" "),
-                        _c("h5", [_vm._v("semestral")]),
-                      ]),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "pricing__card__price" }, [
-                        _c("div", { staticClass: "rate--count" }, [
-                          _vm._v("1x"),
-                        ]),
-                        _vm._v(" "),
-                        _c("span", [
-                          _vm._v("R$"),
-                          _c("b", [_vm._v("9")]),
-                          _vm._v(",90"),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "p" }, [
-                        _vm._v("ou seja "),
-                        _c("b", [_vm._v(" R$0,33/dia")]),
-                      ]),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "validity__text" }, [
-                        _vm._v("Vigência de 180 dias"),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "pricing__card__bottom" }, [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("Escolher Plano"),
-                      ]),
-                    ]),
-                  ]),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "hero__area cadetro-hero pt-5 pb-5" }, [
-      _c("div", { staticClass: "container position-relative" }, [
-        _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-5" }, [
             _c("div", { staticClass: "cadestro__content__wrap" }, [
               _c("h4", [_vm._v("Parabéns!")]),
@@ -36844,7 +36643,7 @@ var staticRenderFns = [
             _c("div", { staticClass: "hero__form__right" }, [
               _c("h4", [
                 _vm._v(
-                  "\n                Após a aprovacao do pagamento, seu curriculo ja estara\n                aparecendo nas buscas\n              "
+                  "\n                Após a realização do pagamento, seu curriculo ja estará\n                aparecendo nas buscas\n              "
                 ),
               ]),
               _vm._v(" "),

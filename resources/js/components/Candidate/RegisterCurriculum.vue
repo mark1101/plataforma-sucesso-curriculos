@@ -849,7 +849,7 @@
       </section>
     </div>
 
-    <div class="tab" v-if="activePhase === 6">
+   <!-- <div class="tab" v-if="activePhase === 6">
       <section class="hero__area cadetro-hero pt-5 pb-5">
         <div class="container position-relative">
           <div class="row">
@@ -956,9 +956,9 @@
           </div>
         </div>
       </section>
-    </div>
+    </div> -->
 
-    <div class="tab" v-if="activePhase === 7">
+    <div class="tab" v-if="activePhase === 6">
       <section class="hero__area cadetro-hero pt-5 pb-5">
         <div class="container position-relative">
           <div class="row">
@@ -990,7 +990,7 @@
             <div class="col-md-7">
               <div class="hero__form__right">
                 <h4>
-                  Após a aprovacao do pagamento, seu curriculo ja estara
+                  Após a realização do pagamento, seu curriculo ja estará
                   aparecendo nas buscas
                 </h4>
                 <p class="text-md">
@@ -1013,7 +1013,7 @@
               </button>
             </div>
           </div>
-          <div v-if="activePhase === 7" class="col" style="text-align: right">
+          <div v-if="activePhase === 6" class="col" style="text-align: right">
             <div class="form__button justify-content-end">
               <button type="submit" @click="createCurriculum">
                 Salvar Dados
@@ -1031,13 +1031,8 @@
   </div>
 </template>
 
-// SDK MercadoPago.js V2
-<script src="https://sdk.mercadopago.com/js/v2"></script>
-
 <script>
 import { VMoney } from "v-money";
-//import * as mercadopago from 'mercadopago'
-
 
 export default {
   name: "register-curriculum.vue",
@@ -1269,10 +1264,6 @@ export default {
 
     paymentTest() {
       this.payment == true;
-    },
-
-    createPayment() {
-      
     },
   },
 };

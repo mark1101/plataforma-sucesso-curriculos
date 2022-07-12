@@ -15,9 +15,9 @@ class PlanCandidateSeeder extends Seeder
     public function run()
     {
         $plans = [
-            ['name' => 'Plano 1' , 'price' => 10.0 , 'days' => 30, 'recurrence' => 'Mensal'],
-            ['name' => 'Plano 2' , 'price' => 20.0 , 'days' => 60, 'recurrence' => 'Trimestral'],
-            ['name' => 'Plano 3' , 'price' => 30.0 , 'days' => 120, 'recurrence' => 'Semestral']
+            ['name' => 'Plano Mensal' , 'price' => 15.90 , 'days' => 30, 'recurrence' => 'Mensal'],
+            ['name' => 'Plano Trimestral' , 'price' => 12.90 , 'days' => 90, 'recurrence' => 'Trimestral'],
+            ['name' => 'Plano Semestral' , 'price' => 9.90 , 'days' => 180, 'recurrence' => 'Semestral']
         ];
 
         CandidatePlan::insert($plans);
