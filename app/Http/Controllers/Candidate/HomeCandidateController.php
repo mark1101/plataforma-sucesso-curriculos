@@ -9,6 +9,7 @@ use App\Models\CandidatePlan;
 use App\Models\CandidatePlanRelation;
 use App\Models\Curriculum;
 use App\Models\CurriculumBlock;
+use App\Models\Payments;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
@@ -216,5 +217,12 @@ class HomeCandidateController extends Controller
     public function destroy($user_id)
     {
         // deleta o candidato
+    }
+
+    public function payments(){
+        $payments = Payments::where('user_id' , Auth::id());
+        return view('Applicant.payments' , [
+            'payments' => $payments->get()
+        ]);
     }
 }

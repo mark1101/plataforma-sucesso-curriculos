@@ -87,6 +87,7 @@ Route::middleware(['company-acess'])->group(function () {
     Route::get('/alter-plan-company/{id}', [HomeCompanyController::class, 'alterPlan']);
 
     Route::get('/carrinho-empresa/{id}', [CompanyPaymentController::class, 'returnCart']);
+    Route::get('/pagamentos/empresa', [HomeCompanyController::class, 'payments']);
 });
 Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
 Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'])->name('register-company');
@@ -96,6 +97,7 @@ Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'
 Route::middleware(['candidate-acess'])->group(function () {
     Route::get('/candidato/dashboard', [HomeCandidateController::class, 'dashboard'])->name('candidatedash');
     Route::get('/carrinho-candidado/{id}', [CandidadePaymentController::class, 'returnCart']);
+    Route::get('/pagamentos/candidato' , [HomeCandidateController::class, 'payments']);
 
     //CURRICULUM
     Route::post('/create-curriculum', [CandidateCurriculumController::class, 'create']);

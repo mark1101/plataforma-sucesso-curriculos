@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymentsTable extends Migration
+class CreateNfsControlsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreatePaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('nfs_controls', function (Blueprint $table) {
             $table->id();
-            $table->string('payment_id')->nullable();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')
             ->onDelete('cascade');
-            $table->string('product');
-            $table->boolean('type');
-            $table->float('price');
-            $table->string('status');
+            $table->string('uuid');
+            $table->bigInteger('payment_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -34,6 +31,6 @@ class CreatePaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('nfs_controls');
     }
 }

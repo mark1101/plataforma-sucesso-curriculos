@@ -20,30 +20,6 @@
     <title>@yield('title')</title>
 </head>
 
-<?php
-// SDK do Mercado Pago
-require base_path('vendor/autoload.php');
-
-MercadoPago\SDK::setAccessToken(config('app.mp_acess_token'));
-
-$preference = new MercadoPago\Preference();
-
-$item = new MercadoPago\Item();
-$item->title = $plan->name;
-$item->quantity = 1;
-$item->unit_price = $plan->price;
-
-$preference->items = [$item];
-$preference->save();
-
-$preference->back_urls = [
-    'success' => route('payment.success.candidade'),
-    'failure' => url('payment/failure'),
-    'pending' => url('payment/pending'),
-];
-$preference->auto_return = 'approved';
-?>
-
 <body>
     <!--------- Offcanvas area start --------->
     <div class="offcanvas-area">
@@ -92,7 +68,7 @@ $preference->auto_return = 'approved';
         <div class="container">
             <div class="col card">
                 <div class="card-header">
-                    Carrinho
+                    Compras Realizadas
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -101,27 +77,25 @@ $preference->auto_return = 'approved';
                                 <th scope="col">#</th>
                                 <th scope="col">Nome do Produto</th>
                                 <th scope="col">Valor</th>
-                                <th scope="col">Dias</th>
-                                <th scope="col">Recorrência</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Data de Criação</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>{{ $plan->name }}</td>
-                                <td>R$ {{ $plan->price }}</td>
-                                <td>{{ $plan->days }}</td>
-                                <td>{{ $plan->recurrence }}</td>
-                            </tr>
+                            @foreach ($payments as $p)
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>{{ $p->product }}</td>
+                                    <td>R$ {{ $p->price }}</td>
+                                    <td>{{ $p->status }}</td>
+                                    <td>{{ $p->created_at }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
                 <div class="card-footer" style="text-align: right;">
-                    <div class="row">
-                        <h3>Total: R$ {{ $plan->price }}</h3>
-                    </div>
-                    <div class="cho-container">
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -132,24 +106,6 @@ $preference->auto_return = 'approved';
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
-    <script>
-        const mp = new MercadoPago("{{config('app.mp_public_key')}}", {
-            locale: 'pt-BR'
-        });
-
-        // Inicialize o checkout
-        mp.checkout({
-            preference: {
-                id: '{{ $preference->id }}'
-            },
-            render: {
-                container: '.cho-container', // Indique o nome da class onde será exibido o botão de pagamento
-                label: 'Ir para pagamento', // Muda o texto do botão de pagamento (opcional)
-            }
-        });
-    </script>
 
 </body>
 

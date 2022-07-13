@@ -24,7 +24,7 @@
 // SDK do Mercado Pago
 require base_path('vendor/autoload.php');
 
-MercadoPago\SDK::setAccessToken('TEST-8029478245666882-071110-79e2eccaa2db9bc7b40d21ee3ee81d82-1150003921');
+MercadoPago\SDK::setAccessToken(config('app.mp_acess_token'));
 
 $preference = new MercadoPago\Preference();
 
@@ -131,7 +131,7 @@ $preference->auto_return = 'approved';
 
     <script src="https://sdk.mercadopago.com/js/v2"></script>
     <script>
-        const mp = new MercadoPago('TEST-e03da535-2b92-422b-be7d-476682200051', {
+        const mp = new MercadoPago("{{config('app.mp_public_key')}}", {
             locale: 'pt-BR'
         });
 

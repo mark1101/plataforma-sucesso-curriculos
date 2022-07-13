@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PaymentsCompanyResource;
 use App\Models\Company;
 use App\Models\CompanyCurriculumQuantity;
 use App\Models\CompanyPlan;
 use App\Models\CompanyPlanRelation;
 use App\Models\Curriculum;
 use App\Models\CurriculumCompany;
+use App\Models\Payments;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -38,7 +40,7 @@ class HomeCompanyController extends Controller
     {
         $user = Auth::user();
         $company = Company::where('user_id', $user->id)->first();
-        $curriculumDownload = CurriculumCompany::where('company_id' , $company->id)->count();
+        $curriculumDownload = CurriculumCompany::where('company_id', $company->id)->count();
 
         $plan = CompanyCurriculumQuantity::where('company_id', $company->id)->first();
 
@@ -133,7 +135,7 @@ class HomeCompanyController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
-        $plan = CompanyPlan::where('type' , 1)->first();
+        $plan = CompanyPlan::where('type', 1)->first();
 
         $newUser =  User::create([
             'name' => $data['name'],
@@ -176,12 +178,23 @@ class HomeCompanyController extends Controller
     {
     }
 
-    public function plansCompany(){
+    public function plansCompany()
+    {
 
         $plans = CompanyPlan::all();
-        return view('Company.plans' , [
+        return view('Company.plans', [
             'plans' => $plans
         ]);
+    }
 
+    public function payments()
+    {
+        $payments = PaymentsCompanyResource::collection(Payments::where('user_id', Auth::id())
+            ->get());
+
+        dd($payments);
+        return view('Company.payments', [
+            'payments' => $payments
+        ]);
     }
 }

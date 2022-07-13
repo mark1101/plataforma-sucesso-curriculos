@@ -8,6 +8,7 @@ use App\Models\CandidateDueDate;
 use App\Models\CandidatePlan;
 use App\Models\CandidatePlanRelation;
 use App\Models\Curriculum;
+use App\Models\Payments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -37,7 +38,7 @@ class CandidadePaymentController extends Controller
     }
 
     public function pay(Request $request)
-    { 
+    {
         //http://127.0.0.1:8000/payment/success/candidade
         //{"payment_id": "23951350354"}
 
@@ -79,6 +80,14 @@ class CandidadePaymentController extends Controller
                     $sumData = date('Y-m-d', strtotime($today . "+ {$planNew->days} days"));
                     if ($this->alterDueDate($today, $candidate)) {
                         Curriculum::where('user_id', 4)->update(['active' => 1]);
+                        Payments::create([
+                            'payment_id' => $payment_id,
+                            'user_id' => 4, //Auth::id();
+                            'product' => $plan->name,
+                            'type' => 0,
+                            'price' => $plan->price,
+                            'status' => 'approved',
+                        ]);
                         return response()->json([
                             'status' => 'success',
                             'message' => 'Seu plano iniciado com sucesso!'
@@ -111,6 +120,14 @@ class CandidadePaymentController extends Controller
             if ($alterPlan) {
                 if ($this->alterDueDate($sumData, $candidate)) {
                     Curriculum::where('user_id', 4)->update(['active' => 1]);
+                    Payments::create([
+                        'payment_id' => $payment_id,
+                        'user_id' => 4, //Auth::id();
+                        'product' => $plan->name,
+                        'type' => 0,
+                        'price' => $plan->price,
+                        'status' => 'approved',
+                    ]);
                     return response()->json([
                         'status' => 'success',
                         'message' => 'Seu plano foi alterado com sucesso!'

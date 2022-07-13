@@ -7,6 +7,8 @@ use App\Models\Company;
 use App\Models\CompanyCurriculumQuantity;
 use App\Models\CompanyPlan;
 use App\Models\CompanyPlanRelation;
+use App\Models\NfsControl;
+use App\Models\Payments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -116,5 +118,58 @@ class CompanyPaymentController extends Controller
         } else {
             return false;
         }
+    }
+
+    public function createNfs(Request $request, $payment_id)
+    {
+        if (NfsControl::where('payment_id', $payment_id)->exists()) {
+            $nfs = NfsControl::where('payment_id', $payment_id)->first();
+            $response =  Http::withHeaders([
+                'Authorization' =>  'Bearer ' . config('app.nfs_token'),
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json'
+            ])
+                ->withBody(json_encode($request->all()), 'application/json')
+                ->post('https://api.webmaniabr.com/2/nfse/consulta', [
+                    'uuid' => $nfs->uuid
+                ]);
+
+            if ($response->failed()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Algo deu errado na requisição, tente novamente mais tarde'
+                ]);
+            }
+
+            $request = json_decode($request->body);
+            return $request->xml;
+        }
+
+        $payment = Payments::where('id' , $payment_id)->get();
+        
+        $response =  Http::withHeaders([
+            'Authorization' =>  'Bearer ' . config('app.nfs_token'),
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
+        ])
+            ->withBody(json_encode($request->all()), 'application/json')
+            ->post('https://api.webmaniabr.com/2/nfse/emissao');
+
+        dd($request);
+        if ($response) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Algo deu errado na requisição, tente novamente mais tarde'
+            ]);
+        }
+
+        $request = json_decode($request->body);
+        NfsControl::create([
+            'user_id' => Auth::id(),
+            'uuid' => $response->uuid,
+            'payment_id' => $payment_id
+        ]);
+
+        return $request->xml;
     }
 }
