@@ -13,16 +13,14 @@
     <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
-    <link rel="shortcut icon" type="imagex/png" href="/img/icone-aba.png">
 
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="shortcut icon" type="imagex/png" href="/img/icone-aba.png">
 
     <title>@yield('title')</title>
 </head>
 
-<body style="background-color: #F2F2F2;">
-
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
+<body>
     <!--------- Offcanvas area start --------->
     <div class="offcanvas-area">
         <div class="menu-close">
@@ -31,15 +29,15 @@
         <div class="offcanvas-menu">
             <div class="main-menu">
                 <ul class="d-block">
-                    <li><a href="{{ url('empresa/dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ url('candidato/dashboard') }}">Dashboard</a></li>
                     <li><a href="{{ url('sugestao/cadastro') }}">Sugestões</a></li>
                     <li><a href="{{ url('faq') }}">FAQ</a></li>
-                    <li><a href="{{ url('suporte/cadastro') }}">Suporte</a></li>
-                    <!-- <li><a href=""><span><img src="{{ asset('img/cart-btn.png') }}" alt=""></span></a></li> -->
+                </ul>
                 </ul>
             </div>
         </div>
     </div>
+
     <div class="offcanvas-overlay"></div>
     <!--------- Offcanvas area end --------->
 
@@ -48,16 +46,15 @@
     <header class="header__area position-relative">
         <div class="container">
             <div class="logo__main">
-                <a href="/empresa/dashboard"><img src="{{ asset('img/logo.svg') }}" alt=""></a>
+                <a href="/candidato/dashboard"><img src="{{ asset('img/logo-main.png') }}" alt=""></a>
             </div>
             <div class="header__right">
-                <div class="main__menu red--links">
+                <div class="main__menu blue--links">
                     <ul>
-                        <li><a href="{{ url('empresa/dashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ url('candidato/dashboard') }}">Dashboard</a></li>
                         <li><a href="{{ url('sugestao/cadastro') }}">Sugestões</a></li>
                         <li><a href="{{ url('faq') }}">FAQ</a></li>
                         <li><a href="{{ url('suporte/cadastro') }}">Suporte</a></li>
-                        <!-- <li><a href=""><span><img src="{{ asset('img/cart-btn.png') }}" alt=""></span></a></li> -->
                     </ul>
                 </div>
                 <div class="menu-open">
@@ -67,32 +64,43 @@
         </div>
     </header>
     <!--------- Header area end --------->
-    <div id="app">
-        @yield('content')
-    </div>
-
-    <!--------- Footer area start --------->
-    <footer class="footer__area">
+    <div>
         <div class="container">
-            <div class="footer__wrapper">
-                <div class="footer__logo">
-                    <a href="/"><img src="{{ asset('img/footer-logo.png') }}" alt=""></a>
+            <div class="col card">
+                <div class="card-header">
+                    Compras Realizadas
                 </div>
-                <p>Sucesso Empregos 2022 © Copyright. Todos os direitos reservados.</p>
+                <div class="card-body">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Nome do Plano</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Data da Compra</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($payments as $p)
+                                <tr>
+                                    <td>{{ $p->product }}</td>
+                                    <td>R$ {{ $p->price }}</td>
+                                    <td>{{ $p->status }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($p->created_at)->format('d/m/Y') }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </footer>
-    <!--------- Footer area end --------->
+    </div>
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/popper.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-
-    <script src="{{ mix('js/app.js') }}"></script>
-
-
 
 </body>
 

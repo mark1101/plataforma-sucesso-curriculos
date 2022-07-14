@@ -17,12 +17,10 @@
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
 
-    <title>@yield('title')</title>
+    <title>Planos Empresa</title>
 </head>
 
 <body style="background-color: #F2F2F2;">
-
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
     <!--------- Offcanvas area start --------->
     <div class="offcanvas-area">
         <div class="menu-close">
@@ -43,7 +41,6 @@
     <div class="offcanvas-overlay"></div>
     <!--------- Offcanvas area end --------->
 
-
     <!--------- Header area start --------->
     <header class="header__area position-relative">
         <div class="container">
@@ -57,7 +54,6 @@
                         <li><a href="{{ url('sugestao/cadastro') }}">Sugestões</a></li>
                         <li><a href="{{ url('faq') }}">FAQ</a></li>
                         <li><a href="{{ url('suporte/cadastro') }}">Suporte</a></li>
-                        <!-- <li><a href=""><span><img src="{{ asset('img/cart-btn.png') }}" alt=""></span></a></li> -->
                     </ul>
                 </div>
                 <div class="menu-open">
@@ -66,33 +62,60 @@
             </div>
         </div>
     </header>
-    <!--------- Header area end --------->
-    <div id="app">
-        @yield('content')
-    </div>
 
-    <!--------- Footer area start --------->
-    <footer class="footer__area">
+
+    <div>
         <div class="container">
-            <div class="footer__wrapper">
-                <div class="footer__logo">
-                    <a href="/"><img src="{{ asset('img/footer-logo.png') }}" alt=""></a>
+            <div class="col card">
+                <div class="card-header">
+                    Compras Realizadas
                 </div>
-                <p>Sucesso Empregos 2022 © Copyright. Todos os direitos reservados.</p>
+                <div class="card-body">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Nome do Plano</th>
+                                <th scope="col">Valor</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Data de Compra</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($payments as $p)
+                                <tr>
+                                    <td>{{ $p->product }}</td>
+                                    <td>R$ {{ $p->price }}</td>
+                                    <td>{{ $p->status }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($p->created_at)->format('d/m/Y') }}</td>
+                                    @if ($p->nfs != null)
+                                        <td><a href="{{ url('api/nfs/create', ['payment' => $p->id]) }}">Ver nota</a>
+                                        </td>
+                                    @else
+                                        <td><a href="{{ url('api/nfs/create', ['payment' => $p->id]) }}">Gerar
+                                                Nota</a></td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-header">
+                    @if ($errors->count() > 0)
+                        <div class="alert alert-danger">
+                           opa
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
-    </footer>
-    <!--------- Footer area end --------->
+    </div>
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/popper.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-
-    <script src="{{ mix('js/app.js') }}"></script>
-
-
 
 </body>
 

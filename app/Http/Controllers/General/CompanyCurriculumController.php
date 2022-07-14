@@ -110,8 +110,8 @@ class CompanyCurriculumController extends Controller
             ]);
         }
 
-        $user = User::where('id', $company->user_id)->first();
-        Mail::to($user->email)->send(new SendEmailToAdquire($company->name));
+        //$user = User::where('id', $company->user_id)->first();
+        //Mail::to($user->email)->send(new SendEmailToAdquire($company->name));
         return;
     }
 

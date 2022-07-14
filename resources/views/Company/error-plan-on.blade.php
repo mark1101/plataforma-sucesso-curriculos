@@ -17,12 +17,11 @@
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
 
-    <title>@yield('title')</title>
+    <title>Planos Empresa</title>
 </head>
 
-<body style="background-color: #F2F2F2;">
 
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
+<body style="background-color: #F2F2F2;">
     <!--------- Offcanvas area start --------->
     <div class="offcanvas-area">
         <div class="menu-close">
@@ -43,7 +42,6 @@
     <div class="offcanvas-overlay"></div>
     <!--------- Offcanvas area end --------->
 
-
     <!--------- Header area start --------->
     <header class="header__area position-relative">
         <div class="container">
@@ -57,7 +55,6 @@
                         <li><a href="{{ url('sugestao/cadastro') }}">Sugestões</a></li>
                         <li><a href="{{ url('faq') }}">FAQ</a></li>
                         <li><a href="{{ url('suporte/cadastro') }}">Suporte</a></li>
-                        <!-- <li><a href=""><span><img src="{{ asset('img/cart-btn.png') }}" alt=""></span></a></li> -->
                     </ul>
                 </div>
                 <div class="menu-open">
@@ -66,33 +63,18 @@
             </div>
         </div>
     </header>
-    <!--------- Header area end --------->
-    <div id="app">
-        @yield('content')
-    </div>
 
-    <!--------- Footer area start --------->
-    <footer class="footer__area">
-        <div class="container">
-            <div class="footer__wrapper">
-                <div class="footer__logo">
-                    <a href="/"><img src="{{ asset('img/footer-logo.png') }}" alt=""></a>
-                </div>
-                <p>Sucesso Empregos 2022 © Copyright. Todos os direitos reservados.</p>
-            </div>
-        </div>
-    </footer>
-    <!--------- Footer area end --------->
+
+    <div class="container p-5">
+        <h2>{{$message}}</h2>
+        <a href="{{ url('planos-empresa') }}" class="btn btn-danger">Voltar aos Planos</a>
+    </div>
 
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/popper.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-
-    <script src="{{ mix('js/app.js') }}"></script>
-
-
 
 </body>
 

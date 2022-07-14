@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('home-plataform');
     }
-}
+
+
+    public function generateUser(){
+           
+    }
+

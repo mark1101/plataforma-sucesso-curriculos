@@ -41,7 +41,7 @@
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Meu Plano</a>
                             <a class="dropdown-item" href="{{url('/planos-empresa')}}">Acessar Planos</a>
-                            <a class="dropdown-item" href="#">Pagamentos</a>
+                            <a class="dropdown-item" href="{{url('pagamentos/empresa')}}">Pagamentos</a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
                                 {{ __('Sair') }}
@@ -86,7 +86,7 @@
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Meu Plano</a>
                                 <a class="dropdown-item" href="{{url('/planos-empresa')}}">Acessar Planos</a>
-                                <a class="dropdown-item" href="#">Pagamentos</a>
+                                <a class="dropdown-item" href="{{url('pagamentos/empresa')}}">Pagamentos</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                     {{ __('Sair') }}
