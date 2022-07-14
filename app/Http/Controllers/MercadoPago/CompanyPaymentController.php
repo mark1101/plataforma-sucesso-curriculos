@@ -12,6 +12,9 @@ use App\Models\Payments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+use stdClass;
 
 class CompanyPaymentController extends Controller
 {
@@ -120,56 +123,71 @@ class CompanyPaymentController extends Controller
         }
     }
 
+    public function peding(Request $request)
+    {
+    }
+
     public function createNfs(Request $request, $payment_id)
     {
         if (NfsControl::where('payment_id', $payment_id)->exists()) {
             $nfs = NfsControl::where('payment_id', $payment_id)->first();
-            $response =  Http::withHeaders([
-                'Authorization' =>  'Bearer ' . config('app.nfs_token'),
+            $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
-                'Accept' => 'application/json'
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer' . config('app.nfs_token'),
             ])
-                ->withBody(json_encode($request->all()), 'application/json')
-                ->post('https://api.webmaniabr.com/2/nfse/consulta', [
+                ->get('https://api.webmaniabr.com/2/nfse/consulta', [
                     'uuid' => $nfs->uuid
-                ]);
-
-            if ($response->failed()) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Algo deu errado na requisição, tente novamente mais tarde'
-                ]);
-            }
-
-            $request = json_decode($request->body);
-            return $request->xml;
+                ])
+                ->json();
+            return $response;
         }
 
-        $payment = Payments::where('id' , $payment_id)->get();
-        
-        $response =  Http::withHeaders([
-            'Authorization' =>  'Bearer ' . config('app.nfs_token'),
+        $payment = Payments::where('id', $payment_id)->first();
+        $myarray = array(
+            "ambiente" => 2,
+            "reps" => [array(
+                "natureza_operacao" => 3,
+                "servico" => array(
+                    "valor_servicos" => (string) $payment->price,
+                    "codigo_cnae" => "69.20-6-01",
+                    "codigo_servico" => "21719",
+                    "discriminacao" => "Prestação de Serviço referente ao plano" . $payment->product,
+                    "impostos" => array(
+                        "iss" => "2.01",
+                        "pis" => "0.00",
+                        "cofins" => "0.00",
+                        "csll" => "0.00",
+                        "ir" => "0.00",
+                        "inss" => "0.00"
+                    )
+                ),
+                "tomador" => array(
+                    "cnpj" => "00.000.000/0000-00",
+                    "razao_social" => "Empresa 1",
+                    "endereco" => "Av. Brg. Faria Lima",
+                    "complemento" => "Escritório",
+                    "numero" => 1000,
+                    "bairro" => "Itaim Bibi",
+                    "cidade" => "São Paulo",
+                    "uf" => "SP",
+                    "cep" => "00000-000",
+                    "telefone" => "(00) 0000-0000",
+                    "email" => "nome@email.com"
+                )
+            )],
+        );
+
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
             'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
+            'Authorization' => 'Bearer' . config('app.nfs_token'),
         ])
-            ->withBody(json_encode($request->all()), 'application/json')
-            ->post('https://api.webmaniabr.com/2/nfse/emissao');
+            ->get('https://api.webmaniabr.com/2/nfse/emissao', [
+                json_encode($myarray)
+            ])
+            ->json();
 
-        dd($request);
-        if ($response) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Algo deu errado na requisição, tente novamente mais tarde'
-            ]);
-        }
-
-        $request = json_decode($request->body);
-        NfsControl::create([
-            'user_id' => Auth::id(),
-            'uuid' => $response->uuid,
-            'payment_id' => $payment_id
-        ]);
-
-        return $request->xml;
+        return $response;
     }
 }

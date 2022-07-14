@@ -49,7 +49,7 @@
     <header class="header__area">
         <div class="container">
             <div class="logo__main">
-                <a href="/"><img src="{{ asset('img/logo-main.png') }}" alt=""></a>
+                <a href="/"><img src="{{ asset('img/sucesso_logo.png') }}" alt=""></a>
             </div>
             <div class="header__right">
                 <div class="main__menu">

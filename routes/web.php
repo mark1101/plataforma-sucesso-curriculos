@@ -87,7 +87,7 @@ Route::middleware(['company-acess'])->group(function () {
     Route::get('/alter-plan-company/{id}', [HomeCompanyController::class, 'alterPlan']);
 
     Route::get('/carrinho-empresa/{id}', [CompanyPaymentController::class, 'returnCart']);
-    Route::get('/pagamentos/empresa', [HomeCompanyController::class, 'payments']);
+    Route::get('/pagamentos/empresa', [HomeCompanyController::class, 'payments'])->name('payments.company');
 });
 Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
 Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'])->name('register-company');
@@ -178,3 +178,7 @@ Route::get('/payment/success/company', [CompanyPaymentController::class, 'pay'])
 
 Route::get('/payment/success/candidade', [CandidadePaymentController::class, 'pay'])
 ->name('payment.success.candidade');
+
+Route::get('/nota/servico/falha' , function(){
+    return view('Returns.error');
+});

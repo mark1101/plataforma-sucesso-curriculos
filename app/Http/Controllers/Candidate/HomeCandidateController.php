@@ -15,6 +15,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use MercadoPago\Plan;
 
 class HomeCandidateController extends Controller
 {
@@ -58,11 +59,17 @@ class HomeCandidateController extends Controller
             }
         }
 
+        $candidate = Candidate::where('user_id', Auth::id())->first();
+        $planUser = CandidatePlanRelation::where('candidate_id', $candidate->id)
+        ->first();
+        $plan = CandidatePlan::where('id' , $planUser->id)->first();
+        
         return view('Applicant.dashboard', [
             'name' => $userName,
             'curriculum' => $curriculumUser,
             'expiration' => $expiration,
-            'blocked' => $blocked
+            'blocked' => $blocked,
+            'plano' => $plan
         ]);
     }
     public function index()

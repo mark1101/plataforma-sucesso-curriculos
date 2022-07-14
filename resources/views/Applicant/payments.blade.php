@@ -74,28 +74,23 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nome do Produto</th>
+                                <th scope="col">Nome do Plano</th>
                                 <th scope="col">Valor</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Data de Criação</th>
+                                <th scope="col">Data da Compra</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($payments as $p)
                                 <tr>
-                                    <th scope="row">1</th>
                                     <td>{{ $p->product }}</td>
                                     <td>R$ {{ $p->price }}</td>
                                     <td>{{ $p->status }}</td>
-                                    <td>{{ $p->created_at }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($p->created_at)->format('d/m/Y') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                </div>
-                <div class="card-footer" style="text-align: right;">
-
                 </div>
             </div>
         </div>

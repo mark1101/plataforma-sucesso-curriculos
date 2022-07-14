@@ -16,8 +16,8 @@
                     <h4 style="text-transform: capitalize">
                         <span>Bem-vindo, {{ $name }} </span>
                     </h4>
-                    <h3 class="text" style="color:white">Você ainda tem: <span>{{ $credit }}</span> créditos</h3>
-                    <h3 class="text" style="color:white"><span>{{ $curriculum }}</span> Currículos adquiridos</h3>
+                    <h3 style="color:white">Você ainda tem: <span>{{ $credit }}</span> créditos</h3>
+                    <h3 style="color:white">Quantidade adquirida: <span>{{ $curriculum }}</span> currículos</h3>
                     <h5>Baixe GRÁTIS os
                         melhores currículos
                         de Guarapuava<br> e região

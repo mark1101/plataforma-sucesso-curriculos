@@ -10,6 +10,7 @@ use App\Models\CompanyPlan;
 use App\Models\CompanyPlanRelation;
 use App\Models\Curriculum;
 use App\Models\CurriculumCompany;
+use App\Models\NfsControl;
 use App\Models\Payments;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -189,12 +190,19 @@ class HomeCompanyController extends Controller
 
     public function payments()
     {
-        $payments = PaymentsCompanyResource::collection(Payments::where('user_id', Auth::id())
-            ->get());
+        $payments = Payments::where('user_id', Auth::id())->get();
+        $payments->map(function($payments){
+            $payments->nfs = $this->getPayments($payments->id);
+        });
 
-        dd($payments);
         return view('Company.payments', [
-            'payments' => $payments
+            'payments' => $payments,
+            'error' => null
         ]);
+    }
+
+    public function getPayments($payment_id){
+        $nfs = NfsControl::where('payment_id' , $payment_id)->get();
+        return $nfs;
     }
 }
