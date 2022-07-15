@@ -27,8 +27,6 @@
                         @else
                             <h5>Você não tem nenhum plano ativo no momento, seu currículo estará inativo.</h5>
                         @endif
-                    </div>
-                    <div class="hero__content__wrapp">
                         <a class="btn btn-renove" href="{{ url('candidato-planos') }}" style="color: white">Gerenciar
                             Planos</a>
                     </div>
@@ -58,6 +56,16 @@
             text-transform: uppercase;
             font-weight: bold;
             border-radius: 20px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .btn-renove {
+                width: 100% !important;
+            }
+            .evaluation__content__bottom__btns, evaluation__content__bottom__btns{
+                width: 100% !important;
+                display: contents;
+            }
         }
     </style>
 
