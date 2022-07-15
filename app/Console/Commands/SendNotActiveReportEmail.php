@@ -43,7 +43,7 @@ class SendNotActiveReportEmail extends Command
     {
         //$curriculum = Curriculum::where('active', 0)->get();
         //foreach ($curriculum as $item) {
-            Mail::to('markgeffer@hotmail.com')->send(new CurriculumNotActive);
+            //Mail::to('markgeffer@hotmail.com')->send(new CurriculumNotActive);
         //}
     }
 }

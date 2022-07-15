@@ -95,8 +95,7 @@
                                         <div class="validity__text">30 currículos</div>
                                     </div>
                                     <div class="pricing__card__bottom">
-                                        <a href="{{ url('/carrinho-empresa', ['id' => 1]) }}"
-                                            style="cursor: pointer; color: white"> Grátis</a>
+                                        <a style="cursor: pointer; color: white"> Inicial</a>
                                     </div>
                                 </div>
                             </div>
