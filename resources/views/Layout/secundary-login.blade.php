@@ -13,7 +13,7 @@
     <link href="{{asset('css/owl.carousel.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <link href="{{asset('css/responsive.css')}}" rel="stylesheet">
-    <link rel="shortcut icon" type="imagex/png" href="/img/icone-aba.png">
+    <link rel="shortcut icon" type="imagex/png" href="/img/logo-white.png"> <!-- href="/img/icone-aba.png" -->
 
     <title>@yield('title')</title>
 </head>

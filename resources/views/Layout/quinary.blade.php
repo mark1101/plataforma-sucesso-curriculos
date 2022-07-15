@@ -15,8 +15,8 @@
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link rel="shortcut icon" type="imagex/png" href="/img/icone-aba.png">
-
+    <link rel="shortcut icon" type="imagex/png" href="/img/logo-white.png"> <!-- href="/img/icone-aba.png" -->
+    
     <title>@yield('title')</title>
 </head>
 

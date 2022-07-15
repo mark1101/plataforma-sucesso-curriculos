@@ -15,7 +15,7 @@
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link rel="shortcut icon" type="imagex/png" href="/img/icone-aba.png">
+    <link rel="shortcut icon" type="imagex/png" href="/img/logo-white.png"> <!-- href="/img/icone-aba.png" -->
 
     <title>@yield('title')</title>
 </head>
@@ -34,14 +34,14 @@ $item->quantity = 1;
 $item->unit_price = $plan->price;
 
 $preference->items = [$item];
-$preference->save();
 
 $preference->back_urls = [
     'success' => route('payment.success.candidade'),
-    'failure' => url('payment/failure'),
-    'pending' => url('payment/pending'),
+    'failure' => route('payment.failure'),
+    'pending' => route('payment.pending'),
 ];
 $preference->auto_return = 'approved';
+$preference->save();
 ?>
 
 <body>
@@ -135,7 +135,7 @@ $preference->auto_return = 'approved';
 
     <script src="https://sdk.mercadopago.com/js/v2"></script>
     <script>
-        const mp = new MercadoPago("{{config('app.mp_public_key')}}", {
+        const mp = new MercadoPago("{{ config('app.mp_public_key') }}", {
             locale: 'pt-BR'
         });
 

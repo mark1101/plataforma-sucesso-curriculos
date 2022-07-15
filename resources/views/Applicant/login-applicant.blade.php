@@ -1,6 +1,6 @@
 @extends('Layout.secundary-login')
 
-@section('title', 'Sucesso Empregos - Login Candidato')
+@section('title', 'Login Candidato')
 
 @section('content')
 
@@ -14,10 +14,10 @@
                 <div class="col-md-6">
                     <div class="hero__content__wrapp">
                         <p>
-                            Procurar emprego de forma tradicional toma tempo, custa caro e tem abrangência muito 
+                            Procurar emprego de forma tradicional toma tempo, custa caro e tem abrangência muito
                             menor. Considere gastos com transporte, alimentação, impressões de curriculo e internet móvel.
                             Curriculos por e-mail então vão direto para lixeira ou nem são vistos. Esteja presente onde as empresas
-                            procuram, esse lugar é aqui. Pague R% 9,90 e fique disponível para 100% das empresas de Guarapuava e Região. 
+                            procuram, esse lugar é aqui. Pague R% 9,90 e fique disponível para 100% das empresas de Guarapuava e Região.
                         </p>
                     </div>
                 </div>
