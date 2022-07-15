@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!--------- Hero area start --------->
     <section class="hero__area">
       <div class="hero-shape-2">
         <img src="img/shapes/shape-3.png" alt="" />
@@ -120,7 +119,6 @@
         </div>
       </div>
     </section>
-    <!--------- Hero area end --------->
   </div>
 </template>
 

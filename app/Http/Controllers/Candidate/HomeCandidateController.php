@@ -9,11 +9,13 @@ use App\Models\CandidatePlan;
 use App\Models\CandidatePlanRelation;
 use App\Models\Curriculum;
 use App\Models\CurriculumBlock;
+use App\Models\Payments;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use MercadoPago\Plan;
 
 class HomeCandidateController extends Controller
 {
@@ -57,11 +59,21 @@ class HomeCandidateController extends Controller
             }
         }
 
+        $candidate = Candidate::where('user_id', Auth::id())->first();
+        $planUser = CandidatePlanRelation::where('candidate_id', $candidate->id)
+            ->first();
+        if (CandidatePlanRelation::where('candidate_id', $candidate->id)->exists()) {
+            $plan = CandidatePlan::where('id', $planUser->id)->first();
+        } else {
+            $plan = null;
+        }
+
         return view('Applicant.dashboard', [
             'name' => $userName,
             'curriculum' => $curriculumUser,
             'expiration' => $expiration,
-            'blocked' => $blocked
+            'blocked' => $blocked,
+            'plano' => $plan
         ]);
     }
     public function index()
@@ -118,8 +130,8 @@ class HomeCandidateController extends Controller
         // Funcoes que irao rodar caso o cliente já estiver em um plano
 
         $candidate = Candidate::where('user_id', Auth::user()->id)
-        ->with('dueDate')
-        ->first();
+            ->with('dueDate')
+            ->first();
         $planCandidate = CandidatePlanRelation::where('candidate_id', $candidate->id)->first();
         $planCandidadeEdit = CandidatePlan::where('id', $plan_id)->first();
 
@@ -216,5 +228,13 @@ class HomeCandidateController extends Controller
     public function destroy($user_id)
     {
         // deleta o candidato
+    }
+
+    public function payments()
+    {
+        $payments = Payments::where('user_id', Auth::id());
+        return view('Applicant.payments', [
+            'payments' => $payments->get()
+        ]);
     }
 }

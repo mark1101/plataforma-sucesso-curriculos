@@ -693,7 +693,7 @@
                 <div class="form__card">
                   <div class="user__image__up__btns d-flex">
                     <div class="row">
-                      <label class="custom-file-upload" v-if="subi == null" >
+                      <label class="custom-file-upload" v-if="subi == null">
                         <input
                           v-on:change="onChange"
                           accept="image/*"
@@ -706,11 +706,11 @@
                   </div>
                   <div class="user__image">
                     <a
-                        v-if="curriculum_photo"
-                        style="cursor: pointer"
-                        @click="removeImagem"
-                        >Remover foto</a
-                      >
+                      v-if="curriculum_photo"
+                      style="cursor: pointer"
+                      @click="removeImagem"
+                      >Remover foto</a
+                    >
                     <img
                       :src="curriculum_photo"
                       v-if="curriculum_photo"
@@ -849,7 +849,7 @@
       </section>
     </div>
 
-    <div class="tab" v-if="activePhase === 6">
+   <!-- <div class="tab" v-if="activePhase === 6">
       <section class="hero__area cadetro-hero pt-5 pb-5">
         <div class="container position-relative">
           <div class="row">
@@ -956,9 +956,9 @@
           </div>
         </div>
       </section>
-    </div>
+    </div> -->
 
-    <div class="tab" v-if="activePhase === 7">
+    <div class="tab" v-if="activePhase === 6">
       <section class="hero__area cadetro-hero pt-5 pb-5">
         <div class="container position-relative">
           <div class="row">
@@ -990,7 +990,7 @@
             <div class="col-md-7">
               <div class="hero__form__right">
                 <h4>
-                  Após a aprovacao do pagamento, seu curriculo ja estara
+                  Após a realização do pagamento, seu curriculo ja estará
                   aparecendo nas buscas
                 </h4>
                 <p class="text-md">
@@ -1013,7 +1013,7 @@
               </button>
             </div>
           </div>
-          <div v-if="activePhase === 7" class="col" style="text-align: right">
+          <div v-if="activePhase === 6" class="col" style="text-align: right">
             <div class="form__button justify-content-end">
               <button type="submit" @click="createCurriculum">
                 Salvar Dados

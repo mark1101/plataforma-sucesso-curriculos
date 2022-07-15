@@ -1,6 +1,6 @@
 @extends('Layout.secundary-login')
 
-@section('title', 'Sucesso Empregos - Login Candidato')
+@section('title', 'Login Candidato')
 
 @section('content')
 
@@ -13,18 +13,12 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="hero__content__wrapp">
-                        <h4>Você sabia que procurar <br>
-                            emprego de forma tradicional custa
-                            <span> mais caro e tem pouca eficiência?</span>
-                        </h4>
-                        <p>Procurar emprego de forma tradicional custa 10x mais caro do que usar nossa plataforma.
-                            Considere os gastos com transporte, alimentação, impressões de currículo e internet móvel,
-                            você gastará muito mais tempo e dinheiro, com uma abrangência muito menor. Enviar currículo
-                            por e-mail para as empresas é pior ainda, são quase 100% das vezes descartados.</p>
-                        <h5>Pague <span>R$9,90</span> por mês e fique disponível <br> para 100% das empresas de
-                            Guarapuava <br> e região!</h5>
-                       <!--  <a href="{{ url('curriculos/cadastro') }}">Preencha seu currículo!</a> -->
-
+                        <p>
+                            Procurar emprego de forma tradicional toma tempo, custa caro e tem abrangência muito
+                            menor. Considere gastos com transporte, alimentação, impressões de curriculo e internet móvel.
+                            Curriculos por e-mail então vão direto para lixeira ou nem são vistos. Esteja presente onde as empresas
+                            procuram, esse lugar é aqui. Pague R% 9,90 e fique disponível para 100% das empresas de Guarapuava e Região.
+                        </p>
                     </div>
                 </div>
                 <div class="note-thumb">

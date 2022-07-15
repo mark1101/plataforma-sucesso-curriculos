@@ -10,12 +10,14 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="hero__content__wrapper">
-                        <h3><span><b>Guarapuava </span> <br>
-                            e região!</b></h3>
-                        <p class="has-limit">Somos mais que uma plataforma de empregos. Representamos a união de
-                            Candidatos e Empresas que
-                            realmente precisam se encontrar. Somos o verdadeiro ponto de encontro entre vagas e
-                            candidatos.</p>
+                       <!-- <h3><span><b>Guarapuava </span> <br>
+                            e região!</b></h3> -->
+                        <p class="has-limit">Somos mais que um site de empregos, 
+                            representamos a união de candidatos e 
+                            empresas que precisam realmente se
+                            encontrar. Somos o verdadeiro ponto de 
+                            encontro entre vagas e candidatos.
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -25,7 +27,7 @@
                                 <div class="col-sm-6">
                                     <div class="hero__btn__card">
                                         <p>Sou candidato</p>
-                                        <a style="color: white" href="{{ url('/candidato/entrar') }}">GERENCIAR CURRÍCULO</a>
+                                        <a style="color: white" href="{{ url('/candidato/entrar') }}">CADASTRAR CURRÍCULO</a>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">

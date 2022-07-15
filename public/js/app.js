@@ -9191,8 +9191,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "company-plans.vue",
   data: function data() {
@@ -9473,17 +9471,7 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].use((vue_the_mask__WEBPACK_IMPORTED_
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].use((vue_sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()));
 
 
-vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(ziggy__WEBPACK_IMPORTED_MODULE_4__.ZiggyVue, _ziggy__WEBPACK_IMPORTED_MODULE_5__.Ziggy);
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-//COMPONENT COMPANY
+vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(ziggy__WEBPACK_IMPORTED_MODULE_4__.ZiggyVue, _ziggy__WEBPACK_IMPORTED_MODULE_5__.Ziggy); //COMPONENT COMPANY
 
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('filter-curriculum', (__webpack_require__(/*! ./components/Company/FilterCurriculum.vue */ "./resources/js/components/Company/FilterCurriculum.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('primary-filter-curriculum', (__webpack_require__(/*! ./components/Company/PrimaryFilterCurriculum.vue */ "./resources/js/components/Company/PrimaryFilterCurriculum.vue")["default"]));
@@ -9597,6 +9585,10 @@ var Ziggy = {
       "uri": "empresa\/dashboard",
       "methods": ["GET", "HEAD"]
     },
+    "payments.company": {
+      "uri": "pagamentos\/empresa",
+      "methods": ["GET", "HEAD"]
+    },
     "register-company": {
       "uri": "empresa\/register-company",
       "methods": ["POST"]
@@ -9608,6 +9600,18 @@ var Ziggy = {
     "register-candidate": {
       "uri": "candidato\/register-candidate",
       "methods": ["POST"]
+    },
+    "company.payment": {
+      "uri": "payment\/success",
+      "methods": ["GET", "HEAD"]
+    },
+    "payment.success.company": {
+      "uri": "payment\/success\/company",
+      "methods": ["GET", "HEAD"]
+    },
+    "payment.success.candidade": {
+      "uri": "payment\/success\/candidade",
+      "methods": ["GET", "HEAD"]
     }
   }
 };
@@ -10100,7 +10104,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
       return n.length ? this.template.replace(/{([^}?]+)(\??)}/g, function (e, o, i) {
         var u, f, a;
         if (!i && [null, void 0].includes(t[o])) throw new Error("Ziggy error: '" + o + "' parameter is required for route '" + r.name + "'.");
-        if (n[n.length - 1].name === o && ".*" === r.wheres[o]) return encodeURIComponent(null != (a = t[o]) ? a : "").replaceAll("%2F", "/");
+        if (n[n.length - 1].name === o && ".*" === r.wheres[o]) return encodeURIComponent(null != (a = t[o]) ? a : "").replace(/%2F/g, "/");
         if (r.wheres[o] && !new RegExp("^" + (i ? "(" + r.wheres[o] + ")?" : r.wheres[o]) + "$").test(null != (u = t[o]) ? u : "")) throw new Error("Ziggy error: '" + o + "' parameter does not match required format '" + r.wheres[o] + "' for route '" + r.name + "'.");
         return encodeURIComponent(null != (f = t[o]) ? f : "");
       }).replace(/\/+$/, "") : this.template;
@@ -36308,10 +36312,6 @@ var render = function () {
       ? _c("div", { staticClass: "tab" }, [_vm._m(8)])
       : _vm._e(),
     _vm._v(" "),
-    _vm.activePhase === 7
-      ? _c("div", { staticClass: "tab" }, [_vm._m(9)])
-      : _vm._e(),
-    _vm._v(" "),
     _c("div", { staticClass: "col-sm-12" }, [
       _c("div", { staticClass: "container position-relative" }, [
         _c("div", { staticClass: "row" }, [
@@ -36335,7 +36335,7 @@ var render = function () {
             ]
           ),
           _vm._v(" "),
-          _vm.activePhase === 7
+          _vm.activePhase === 6
             ? _c(
                 "div",
                 { staticClass: "col", staticStyle: { "text-align": "right" } },
@@ -36622,196 +36622,6 @@ var staticRenderFns = [
     return _c("section", { staticClass: "hero__area cadetro-hero pt-5 pb-5" }, [
       _c("div", { staticClass: "container position-relative" }, [
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-4" }, [
-            _c("div", { staticClass: "cadestro__content__wrap" }, [
-              _c("h4", [_vm._v("Escolha o plano ideal para você")]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  "\n                Escolha o plano mais adequado a sua necessidade e boa sorte na\n                sua jornada!\n              "
-                ),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "hero__progress" }, [
-                _c("div", { staticClass: "progress__top" }, [
-                  _c("p", [_vm._v("Progresso")]),
-                  _vm._v(" "),
-                  _c("h5", [_vm._v("86%")]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "progress" }, [
-                  _c("div", {
-                    staticClass: "progress-bar",
-                    staticStyle: { width: "86%" },
-                    attrs: {
-                      role: "progressbar",
-                      "aria-valuenow": "86",
-                      "aria-valuemin": "0",
-                      "aria-valuemax": "100",
-                    },
-                  }),
-                ]),
-              ]),
-            ]),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-8" }, [
-            _c("div", { staticClass: "pricing__wrapper" }, [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-4 col-sm-6" }, [
-                  _c("div", { staticClass: "pricing__single__card" }, [
-                    _c("div", { staticClass: "pricing__card__body" }, [
-                      _c("div", { staticClass: "pricing__card__title" }, [
-                        _c("p", [_vm._v("plano")]),
-                        _vm._v(" "),
-                        _c("h5", [_vm._v("Mensal")]),
-                      ]),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "pricing__card__price" }, [
-                        _c("div", { staticClass: "rate--count" }, [
-                          _vm._v("1x"),
-                        ]),
-                        _vm._v(" "),
-                        _c("span", [
-                          _vm._v("R$"),
-                          _c("b", [_vm._v("15")]),
-                          _vm._v(",90"),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "p" }, [
-                        _vm._v("ou seja "),
-                        _c("b", [_vm._v(" R$0,53/dia")]),
-                      ]),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "validity__text" }, [
-                        _vm._v("Vigência de 30 dias"),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "pricing__card__bottom" }, [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("Escolher Plano"),
-                      ]),
-                    ]),
-                  ]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4 col-sm-6" }, [
-                  _c(
-                    "div",
-                    { staticClass: "pricing__single__card card-sky-blue" },
-                    [
-                      _c("div", { staticClass: "pricing__card__body" }, [
-                        _c("div", { staticClass: "b-1" }, [
-                          _c("img", { attrs: { src: "img/b-1.svg", alt: "" } }),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "pricing__card__title" }, [
-                          _c("p", [_vm._v("plano")]),
-                          _vm._v(" "),
-                          _c("h5", [_vm._v("Trimestral")]),
-                        ]),
-                        _vm._v(" "),
-                        _c("hr"),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "pricing__card__price" }, [
-                          _c("div", { staticClass: "rate--count" }, [
-                            _vm._v("3x"),
-                          ]),
-                          _vm._v(" "),
-                          _c("span", [
-                            _vm._v("R$"),
-                            _c("b", [_vm._v("12")]),
-                            _vm._v(",90"),
-                          ]),
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "p" }, [
-                          _vm._v("ou seja "),
-                          _c("b", [_vm._v(" R$0,43/dia")]),
-                        ]),
-                        _vm._v(" "),
-                        _c("hr"),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "validity__text" }, [
-                          _vm._v("Vigência de 90 dias"),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "pricing__card__bottom" }, [
-                        _c("a", { attrs: { href: "#" } }, [
-                          _vm._v("Escolher Plano"),
-                        ]),
-                      ]),
-                    ]
-                  ),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4 col-sm-6" }, [
-                  _c("div", { staticClass: "pricing__single__card card-sky" }, [
-                    _c("div", { staticClass: "b-1" }, [
-                      _c("img", { attrs: { src: "img/b-2.svg", alt: "" } }),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "pricing__card__body" }, [
-                      _c("div", { staticClass: "pricing__card__title" }, [
-                        _c("p", [_vm._v("plano")]),
-                        _vm._v(" "),
-                        _c("h5", [_vm._v("semestral")]),
-                      ]),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "pricing__card__price" }, [
-                        _c("div", { staticClass: "rate--count" }, [
-                          _vm._v("1x"),
-                        ]),
-                        _vm._v(" "),
-                        _c("span", [
-                          _vm._v("R$"),
-                          _c("b", [_vm._v("9")]),
-                          _vm._v(",90"),
-                        ]),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "p" }, [
-                        _vm._v("ou seja "),
-                        _c("b", [_vm._v(" R$0,33/dia")]),
-                      ]),
-                      _vm._v(" "),
-                      _c("hr"),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "validity__text" }, [
-                        _vm._v("Vigência de 180 dias"),
-                      ]),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "pricing__card__bottom" }, [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v("Escolher Plano"),
-                      ]),
-                    ]),
-                  ]),
-                ]),
-              ]),
-            ]),
-          ]),
-        ]),
-      ]),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "hero__area cadetro-hero pt-5 pb-5" }, [
-      _c("div", { staticClass: "container position-relative" }, [
-        _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-5" }, [
             _c("div", { staticClass: "cadestro__content__wrap" }, [
               _c("h4", [_vm._v("Parabéns!")]),
@@ -36849,7 +36659,7 @@ var staticRenderFns = [
             _c("div", { staticClass: "hero__form__right" }, [
               _c("h4", [
                 _vm._v(
-                  "\n                Após a aprovacao do pagamento, seu curriculo ja estara\n                aparecendo nas buscas\n              "
+                  "\n                Após a realização do pagamento, seu curriculo ja estará\n                aparecendo nas buscas\n              "
                 ),
               ]),
               _vm._v(" "),

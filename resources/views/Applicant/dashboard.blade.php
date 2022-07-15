@@ -16,22 +16,27 @@
                         <h4>
                             <span>Bem-vindo, {{ $name }} </span>
                         </h4>
-                        <h5>Seu plano expira em:<span> {{ $expiration }} </span></h5>
-                        @if ($blocked != 'null')
-                            <h5>Currículo bloqueado para o CNPJ:<span> {{ $blocked }} </span></h5>
+                        @if ($plano != null)
+                            <h5>Plano ativo: <span>{{ $plano->name }}</span></h5>
+                            <h5>Seu plano expira em:<span> {{ $expiration }} </span></h5>
+                            @if ($blocked != 'null')
+                                <h5>Currículo bloqueado para o CNPJ:<span> {{ $blocked }} </span></h5>
+                            @else
+                                <h5>Nenhum CNPJ bloqueado</h5>
+                            @endif
                         @else
-                            <h5>Currículo visível para todas empresas da região</h5>
+                            <h5>Você não tem nenhum plano ativo no momento, seu currículo estará inativo.</h5>
                         @endif
                     </div>
                     <div class="hero__content__wrapp">
-                        <a class="btn btn-renove" href="{{ url('candidato-planos') }}" style="color: white">Renovar plano
-                            ou alterar plano</a>
+                        <a class="btn btn-renove" href="{{ url('candidato-planos') }}" style="color: white">Gerenciar
+                            Planos</a>
                     </div>
                 </div>
                 <div class="col-md-6 mt-5" style="text-align:center">
                     @if ($curriculum == null)
                         <div class="evaluation__content__bottom__btns">
-                            <a href="{{ url('curriculos/cadastro') }}">Criar agora meu currículo!</a>
+                            <a href="{{ url('curriculos/cadastro') }}">Cadastrar meu currículo!</a>
                         </div>
                     @else
                         <div class="mt-5">
@@ -54,7 +59,6 @@
             font-weight: bold;
             border-radius: 20px;
         }
-
     </style>
 
 

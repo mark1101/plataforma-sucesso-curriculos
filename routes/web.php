@@ -11,6 +11,9 @@ use App\Http\Controllers\SupportController;
 use App\Http\Controllers\Company;
 use App\Http\Controllers\General\CandidateCurriculumController;
 use App\Http\Controllers\General\CompanyCurriculumController;
+use App\Http\Controllers\MercadoPago\CandidadePaymentController;
+use App\Http\Controllers\MercadoPago\CompanyPaymentController;
+use App\Http\Controllers\MercadoPago\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,22 +72,23 @@ Route::middleware(['no-auth'])->group(function () {
 //ROUTES COMPANY
 Route::middleware(['company-acess'])->group(function () {
     Route::get('/empresa/dashboard', [HomeCompanyController::class, 'dashboard'])->name('dashboard.company');
-    Route::get('/planos-empresa' , function(){
-        return view('Company.plans');
-    });
+    Route::get('/planos-empresa', [HomeCompanyController::class, 'plansCompany']);
     Route::get('/empresa/acessar-curriculos', [HomeCompanyController::class, 'acess']);
     Route::get('/empresa/resultado-busca', [HomeCompanyController::class, 'result']);
 
     Route::get('/create-curriculum-download/{id}', [CompanyCurriculumController::class, 'getDownloadCurriculum']);
-    Route::get('/empresa/encontrar-curriculos', function (){
-            return view('Search.search-result');
+    Route::get('/empresa/encontrar-curriculos', function () {
+        return view('Search.search-result');
     });
 
-    Route::get('/get-curriculum-general' , [CompanyCurriculumController::class, 'listCurriculum']);
-    Route::post('/purchase-curriculum' , [CompanyCurriculumController::class, 'purchaseCurriculum']);
+    Route::get('/get-curriculum-general', [CompanyCurriculumController::class, 'listCurriculum']);
+    Route::post('/purchase-curriculum', [CompanyCurriculumController::class, 'purchaseCurriculum']);
 
-    Route::get('/get-data-company-user' , [HomeCompanyController::class, 'getData']);
+    Route::get('/get-data-company-user', [HomeCompanyController::class, 'getData']);
     Route::get('/alter-plan-company/{id}', [HomeCompanyController::class, 'alterPlan']);
+
+    Route::get('/carrinho-empresa/{id}', [CompanyPaymentController::class, 'returnCart']);
+    Route::get('/pagamentos/empresa', [HomeCompanyController::class, 'payments'])->name('payments.company');
 });
 Route::get('/empresa/registro', [HomeCompanyController::class, 'index']);
 Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'])->name('register-company');
@@ -93,36 +97,37 @@ Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'
 //ROUTES CANDIDATE
 Route::middleware(['candidate-acess'])->group(function () {
     Route::get('/candidato/dashboard', [HomeCandidateController::class, 'dashboard'])->name('candidatedash');
+    Route::get('/carrinho-candidado/{id}', [CandidadePaymentController::class, 'returnCart']);
+    Route::get('/pagamentos/candidato' , [HomeCandidateController::class, 'payments']);
 
     //CURRICULUM
     Route::post('/create-curriculum', [CandidateCurriculumController::class, 'create']);
-    Route::get('/get-my-curriculum' , [CandidateCurriculumController::class, 'getUserCurriculum']);
-    Route::get('/meu-curriculo' , function(){
+    Route::get('/get-my-curriculum', [CandidateCurriculumController::class, 'getUserCurriculum']);
+    Route::get('/meu-curriculo', function () {
         return view('Applicant.see-curriculum');
     })->middleware('see-curriculum');
-    Route::put('/edit-curriculum' , [CandidateCurriculumController::class, 'editUserCurriculum']);
-    Route::post('/create-image-curriculum' , [CandidateCurriculumController::class, 'addImage']);
-    Route::delete('/delete-curriculum/{id}' , [CandidateCurriculumController::class, 'deleteCurriculum']);
+    Route::put('/edit-curriculum', [CandidateCurriculumController::class, 'editUserCurriculum']);
+    Route::post('/create-image-curriculum', [CandidateCurriculumController::class, 'addImage']);
+    Route::delete('/delete-curriculum/{id}', [CandidateCurriculumController::class, 'deleteCurriculum']);
 
     Route::get('/get-experience/{id}', [CandidateCurriculumController::class, 'getExperience']);
     Route::put('/edit-experience/{id}', [CandidateCurriculumController::class, 'editExperience']);
 
-    Route::get('/get-course/{id}' , [CandidateCurriculumController::class, 'getCourse']);
+    Route::get('/get-course/{id}', [CandidateCurriculumController::class, 'getCourse']);
     Route::put('/edit-course/{id}', [CandidateCurriculumController::class, 'editCourse']);
 
-    Route::post('/create-new-experience' , [CandidateCurriculumController::class, 'createExperience']);
+    Route::post('/create-new-experience', [CandidateCurriculumController::class, 'createExperience']);
     Route::post('/create-new-course', [CandidateCurriculumController::class, 'createCourse']);
 
     Route::delete('/delete-experience/{id}', [CandidateCurriculumController::class, 'deleteExperience']);
     Route::delete('/delete-course/{id}', [CandidateCurriculumController::class, 'deleteCourse']);
 
-    Route::get('/candidato-planos' , function(){
+    Route::get('/candidato-planos', function () {
         return view('Applicant.plans');
     });
 
     Route::get('/candidade-get-data', [HomeCandidateController::class, 'getData']);
-    Route::get('/candidate-alter-plan/{id}' , [HomeCandidateController::class, 'alterPlan']);
-
+    Route::get('/candidate-alter-plan/{id}', [HomeCandidateController::class, 'alterPlan']);
 });
 Route::get('/candidato/registro', [HomeCandidateController::class, 'index']);
 Route::post('/candidato/register-candidate', [HomeCandidateController::class, 'create'])->name('register-candidate');
@@ -158,3 +163,27 @@ Route::get('/planos', function () {
     return view('plans');
 });
 
+Route::get('/payment/success', [CompanyPaymentController::class, 'payment'])->name('company.payment');
+
+Route::get('/payment/pending', function () {
+    return view('Payment.pending');
+});
+
+Route::get('/payment/failure', function () {
+    return view('Payment.failure');
+});
+
+Route::get('/payment/pending' , [HomeController::class, 'paymentPending'])->name('payment.pending');
+Route::get('/payment/failure', function () {
+    return view('Payment.failure');
+})->name('payment.failure');
+
+Route::get('/payment/success/company', [CompanyPaymentController::class, 'pay'])
+->name('payment.success.company');
+
+Route::get('/payment/success/candidade', [CandidadePaymentController::class, 'pay'])
+->name('payment.success.candidade');
+
+Route::get('/nota/servico/falha' , function(){
+    return view('Returns.error');
+});
