@@ -202,9 +202,11 @@ class HomeCandidateController extends Controller
             'candidate' => 1,
         ]);
 
+        $createDate = new DateTime();
+
         $newCandidate = Candidate::create([
-            'user_id' => $newUser['id'],
-            'name' => $newUser['name'],
+            'user_id' => $newUser->id,
+            'name' => $newUser->name
         ]);
 
 
