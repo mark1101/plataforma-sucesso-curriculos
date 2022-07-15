@@ -16,19 +16,19 @@
                     <h4 style="text-transform: capitalize">
                         <span>Bem-vindo, {{ $name }} </span>
                     </h4>
-                    <h3 style="color:white">Plano ativo: <span>{{ $plan->name }}</span></h3>
-                    <h3 style="color:white">Você ainda tem: <span>{{ $credit }}</span> créditos</h3>
-                    <h3 style="color:white">Quantidade adquirida: <span>{{ $curriculum }}</span> currículos</h3>
+                    <h3 class="textt" style="color:white">Plano ativo: <span>{{ $plan->name }}</span></h3>
+                    <h3 class="textt" style="color:white">Você ainda tem: <span>{{ $credit }}</span> créditos</h3>
+                    <h3 class="textt" style="color:white">Quantidade adquirida: <span>{{ $curriculum }}</span> currículos</h3>
                 </div>
             </div>
 
             <div class="col-md-6 mt-5" style="text-align:-webkit-center">
 
-                <div class="evaluation__content__bottom__btns-red" style="max-width: 50%">
+                <div class="evaluation__content__bottom__btns-red button_action" >
                     <a href="{{ url('/empresa/encontrar-curriculos') }}">Encontrar Currículos</a>
                 </div>
 
-                <div class="evaluation__content__bottom__btns-red mt-3" style="max-width: 50%">
+                <div class="evaluation__content__bottom__btns-red mt-3 button_action" >
                     <a href="{{ url('/empresa/acessar-curriculos') }}">acessar meus currículos</a>
                 </div>
 
@@ -39,9 +39,15 @@
     <!--------- Hero area end --------->
 
     <style>
+
+        .text{
+            font-size: 25px;
+        }
+
         @media only screen and (max-width: 600px) {
-            .text {
-                color: black !important;
+            .textt {
+                color: #707070 !important;
+                font-size: 20px !important;
             }
         }
 
@@ -50,6 +56,17 @@
                 padding-left: 146.5px !important;
             }
         }
+
+        .button_action{
+            max-width: 50%;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .button_action {
+                max-width: 100%;
+            }
+        }
+
     </style>
 
 
