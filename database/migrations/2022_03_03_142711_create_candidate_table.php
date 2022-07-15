@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateCandidateTable extends Migration
@@ -22,7 +23,7 @@ class CreateCandidateTable extends Migration
             $table->string('name');
             //$table->string('access_control');
             $table->boolean('status')->default(0)->nullable();
-            $table->timestamp('entry_date');
+            $table->timestamp('entry_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
         });
     }
