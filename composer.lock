@@ -1957,16 +1957,16 @@
         },
         {
             "name": "league/commonmark",
-            "version": "2.3.3",
+            "version": "2.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "0da1dca5781dd3cfddbe328224d9a7a62571addc"
+                "reference": "155ec1c95626b16fda0889cf15904d24890a60d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/0da1dca5781dd3cfddbe328224d9a7a62571addc",
-                "reference": "0da1dca5781dd3cfddbe328224d9a7a62571addc",
+                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/155ec1c95626b16fda0889cf15904d24890a60d5",
+                "reference": "155ec1c95626b16fda0889cf15904d24890a60d5",
                 "shasum": ""
             },
             "require": {
@@ -2059,7 +2059,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-07T21:28:26+00:00"
+            "time": "2022-07-17T16:25:47+00:00"
         },
         {
             "name": "league/config",
@@ -2295,16 +2295,16 @@
         },
         {
             "name": "mercadopago/dx-php",
-            "version": "2.4.8",
+            "version": "2.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mercadopago/sdk-php.git",
-                "reference": "3ff7ba8527b726c13703880ed1382cb0fdab4a99"
+                "reference": "8389608ab859e5f9394910ec1bd74d603d7c17a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mercadopago/sdk-php/zipball/3ff7ba8527b726c13703880ed1382cb0fdab4a99",
-                "reference": "3ff7ba8527b726c13703880ed1382cb0fdab4a99",
+                "url": "https://api.github.com/repos/mercadopago/sdk-php/zipball/8389608ab859e5f9394910ec1bd74d603d7c17a6",
+                "reference": "8389608ab859e5f9394910ec1bd74d603d7c17a6",
                 "shasum": ""
             },
             "require": {
@@ -2314,9 +2314,8 @@
             },
             "require-dev": {
                 "doctrine/orm": "~2.3",
-                "phpdocumentor/phpdocumentor": "^2.0",
                 "phpmd/phpmd": "@stable",
-                "phpunit/phpunit": "^5",
+                "phpunit/phpunit": "^7",
                 "sebastian/phpcpd": "*",
                 "squizlabs/php_codesniffer": "2.8.1",
                 "symfony/yaml": "~2.5",
@@ -2341,9 +2340,9 @@
             "description": "Mercado Pago PHP SDK",
             "homepage": "https://github.com/mercadopago/sdk-php",
             "support": {
-                "source": "https://github.com/mercadopago/sdk-php/tree/2.4.8"
+                "source": "https://github.com/mercadopago/sdk-php/tree/2.4.9"
             },
-            "time": "2022-06-28T15:36:00+00:00"
+            "time": "2022-07-18T13:33:02+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -8853,5 +8852,5 @@
         "php": "^7.3||^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.0.0"
 }
