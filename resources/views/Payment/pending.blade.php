@@ -41,7 +41,7 @@
       <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
         <i class="checkmark">!</i>
       </div>
-        <h1>Aguarde...</h1> 
+        <h1>Aguarde...</h1>
         <p>Sua requisição está em processamento, em breve sua requisição terá um retorno dentro da plataforma.</p>
       </div>
     </body>

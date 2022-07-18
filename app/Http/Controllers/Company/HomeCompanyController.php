@@ -42,6 +42,7 @@ class HomeCompanyController extends Controller
         $user = Auth::user();
         $company = Company::where('user_id', $user->id)->first();
         $curriculumDownload = CurriculumCompany::where('company_id', $company->id)->count();
+        $plano = CompanyPlanRelation::where('company_id', $company->id)->first();
 
         $plan = CompanyCurriculumQuantity::where('company_id', $company->id)->first();
 
@@ -51,7 +52,8 @@ class HomeCompanyController extends Controller
             'status' => $company->status,
             'address' => $company->address,
             'credit' => $plan->quantity,
-            'curriculum' => $curriculumDownload
+            'curriculum' => $curriculumDownload,
+            'plan' => $plano->plan
         ]);
     }
 
@@ -191,7 +193,7 @@ class HomeCompanyController extends Controller
     public function payments()
     {
         $payments = Payments::where('user_id', Auth::id())->get();
-        $payments->map(function($payments){
+        $payments->map(function ($payments) {
             $payments->nfs = $this->getPayments($payments->id);
         });
 
@@ -201,8 +203,9 @@ class HomeCompanyController extends Controller
         ]);
     }
 
-    public function getPayments($payment_id){
-        $nfs = NfsControl::where('payment_id' , $payment_id)->get();
+    public function getPayments($payment_id)
+    {
+        $nfs = NfsControl::where('payment_id', $payment_id)->get();
         return $nfs;
     }
 }

@@ -136,8 +136,8 @@ return [
 
     /* keys acess API Mercado Pago and WebMania NFS */
 
-    'mp_public_key' => 'TEST-e03da535-2b92-422b-be7d-476682200051',
-    'mp_acess_token' => 'TEST-8029478245666882-071110-79e2eccaa2db9bc7b40d21ee3ee81d82-1150003921',
+    'mp_public_key' => 'APP_USR-5544ef78-b79e-480b-b90e-6a86bc80ef34',
+    'mp_acess_token' => 'APP_USR-2639075007624755-022605-cb1ef92ec90514b47da96b17cdb98edb-230427984',
     'nfs_token' => 'P5lhu8dDsOFpMiM7Et27W1BQ5G859uuvp6c7dtuw',
 
     'providers' => [

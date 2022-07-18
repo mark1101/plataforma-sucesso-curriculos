@@ -61,9 +61,13 @@ class HomeCandidateController extends Controller
 
         $candidate = Candidate::where('user_id', Auth::id())->first();
         $planUser = CandidatePlanRelation::where('candidate_id', $candidate->id)
-        ->first();
-        $plan = CandidatePlan::where('id' , $planUser->id)->first();
-        
+            ->first();
+        if (CandidatePlanRelation::where('candidate_id', $candidate->id)->exists()) {
+            $plan = CandidatePlan::where('id', $planUser->id)->first();
+        } else {
+            $plan = null;
+        }
+
         return view('Applicant.dashboard', [
             'name' => $userName,
             'curriculum' => $curriculumUser,
@@ -126,8 +130,8 @@ class HomeCandidateController extends Controller
         // Funcoes que irao rodar caso o cliente já estiver em um plano
 
         $candidate = Candidate::where('user_id', Auth::user()->id)
-        ->with('dueDate')
-        ->first();
+            ->with('dueDate')
+            ->first();
         $planCandidate = CandidatePlanRelation::where('candidate_id', $candidate->id)->first();
         $planCandidadeEdit = CandidatePlan::where('id', $plan_id)->first();
 
@@ -198,9 +202,11 @@ class HomeCandidateController extends Controller
             'candidate' => 1,
         ]);
 
+        $createDate = new DateTime();
+
         $newCandidate = Candidate::create([
-            'user_id' => $newUser['id'],
-            'name' => $newUser['name'],
+            'user_id' => $newUser->id,
+            'name' => $newUser->name
         ]);
 
 
@@ -226,9 +232,10 @@ class HomeCandidateController extends Controller
         // deleta o candidato
     }
 
-    public function payments(){
-        $payments = Payments::where('user_id' , Auth::id());
-        return view('Applicant.payments' , [
+    public function payments()
+    {
+        $payments = Payments::where('user_id', Auth::id());
+        return view('Applicant.payments', [
             'payments' => $payments->get()
         ]);
     }

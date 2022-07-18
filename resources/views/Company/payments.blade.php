@@ -13,11 +13,11 @@
     <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
-    <link rel="shortcut icon" type="imagex/png" href="/img/icone-aba.png">
+    <link rel="shortcut icon" type="imagex/png" href="/img/logo-white.png"> <!-- href="/img/icone-aba.png" -->
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
 
-    <title>Planos Empresa</title>
+    <title>Pagamentos</title>
 </head>
 
 <body style="background-color: #F2F2F2;">
@@ -88,7 +88,7 @@
                                     <td>R$ {{ $p->price }}</td>
                                     <td>{{ $p->status }}</td>
                                     <td>{{ \Carbon\Carbon::parse($p->created_at)->format('d/m/Y') }}</td>
-                                    @if ($p->nfs != null)
+                                    @if (count($p->nfs) > 0)
                                         <td><a href="{{ url('api/nfs/create', ['payment' => $p->id]) }}">Ver nota</a>
                                         </td>
                                     @else

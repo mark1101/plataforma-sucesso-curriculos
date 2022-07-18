@@ -32,8 +32,7 @@ class CompanyPaymentController extends Controller
                 ]);
             } else {
                 return view('Company.error-plan-on', [
-                    'message' => 'Erro ao tentar alterar seu plano, verifique se teus créditos grátis tenham acabado, ou entre 
-                    em contato conosco'
+                    'message' => 'Para fazer a troca do plano, você deverá gastar seus créditos grátis inicialmente'
                 ]);
             }
         }
@@ -59,7 +58,8 @@ class CompanyPaymentController extends Controller
             $result = json_decode($result);
         }
         curl_close($ch);
-        $status = $request->status;
+
+        $status = $result->status;
         if ($status == 'approved') {
             $plan = CompanyPlan::where('name', $result->additional_info->items[0]->title)->first();
             $plan = $plan->id;
@@ -89,6 +89,14 @@ class CompanyPaymentController extends Controller
 
             if ($alterPlan) {
                 if ($this->addCredit($company->id, $sum)) {
+                    Payments::create([
+                        'payment_id' => $payment_id,
+                        'user_id' => 4, //Auth::id();
+                        'product' => $plan->name,
+                        'type' => 0,
+                        'price' => $plan->price,
+                        'status' => 'approved',
+                    ]);
                     return response()->json([
                         'message' => 'Seu pagamento foi aprovado, plano alterado e crédito adicionado a sua conta!',
                         'status' => 'success'

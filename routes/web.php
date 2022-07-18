@@ -13,6 +13,7 @@ use App\Http\Controllers\General\CandidateCurriculumController;
 use App\Http\Controllers\General\CompanyCurriculumController;
 use App\Http\Controllers\MercadoPago\CandidadePaymentController;
 use App\Http\Controllers\MercadoPago\CompanyPaymentController;
+use App\Http\Controllers\MercadoPago\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -172,6 +173,10 @@ Route::get('/payment/failure', function () {
     return view('Payment.failure');
 });
 
+Route::get('/payment/pending' , [HomeController::class, 'paymentPending'])->name('payment.pending');
+Route::get('/payment/failure', function () {
+    return view('Payment.failure');
+})->name('payment.failure');
 
 Route::get('/payment/success/company', [CompanyPaymentController::class, 'pay'])
 ->name('payment.success.company');

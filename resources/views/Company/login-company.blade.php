@@ -1,6 +1,6 @@
 @extends('Layout.tertiary-login')
 
-@section('title', 'Sucesso Empregos - Login Empresa')
+@section('title', 'Login Empresa')
 
 @section('content')
 
@@ -18,12 +18,12 @@
                             de Guarapuava e região <br>
                             e contrate agora mesmo!
                         </h4> -->
-                        <p class="text-md">Baixe GRÁTIS os melhores currículos 
-                            de Guarapuava e região utilizando 
-                            nossos filtros avançados. Você poderá filtrar por área de atuação, 
-                            tempo de experiência, idade, genêro e muito mais. Chega de esperar 
+                        <p class="text-md">Baixe GRÁTIS os melhores currículos
+                            de Guarapuava e região utilizando
+                            nossos filtros avançados. Você poderá filtrar por área de atuação,
+                            tempo de experiência, idade, genêro e muito mais. Chega de esperar
                             semanas para contratar um funcionário. Escolha seu candidado e contrate
-                            hoje mesmo. 
+                            hoje mesmo.
                         </p>
                        <!-- <a href="">Baixar currículos</a> -->
                     </div>

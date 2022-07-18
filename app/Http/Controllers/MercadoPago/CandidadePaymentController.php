@@ -61,7 +61,8 @@ class CandidadePaymentController extends Controller
             $result = json_decode($result);
         }
         curl_close($ch);
-        $status = $request->status;
+        
+        $status = $result->status;
         if (!$status == 'approved') {
             $plan = CandidatePlan::where('name', $result->additional_info->items[0]->title)->first();
             $plan_id = $plan->id;
