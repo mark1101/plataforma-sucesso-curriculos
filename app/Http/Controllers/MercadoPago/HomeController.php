@@ -21,7 +21,7 @@ class HomeController extends Controller
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 
         $headers = array();
-        $headers[] = 'Authorization: Bearer APP_USR-2639075007624755-022605-cb1ef92ec90514b47da96b17cdb98edb-230427984';
+        $headers[] = 'Authorization: Bearer ' . config('app.mp_acess_token');
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
         $result = curl_exec($ch);

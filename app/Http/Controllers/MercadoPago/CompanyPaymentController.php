@@ -48,7 +48,7 @@ class CompanyPaymentController extends Controller
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 
         $headers = array();
-        $headers[] = 'Authorization: Bearer APP_USR-8029478245666882-071110-39788d2e54fe7884ba7744e6cbaf7523-1150003921';
+        $headers[] = 'Authorization: Bearer ' .config('app.mp_acess_token');
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
         $result = curl_exec($ch);
@@ -129,10 +129,6 @@ class CompanyPaymentController extends Controller
         } else {
             return false;
         }
-    }
-
-    public function peding(Request $request)
-    {
     }
 
     public function createNfs(Request $request, $payment_id)
