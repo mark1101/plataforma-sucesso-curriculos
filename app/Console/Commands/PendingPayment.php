@@ -64,7 +64,7 @@ class PendingPayment extends Command
 
             $result = curl_exec($ch);
             if (curl_errno($ch)) {
-                echo 'Error:' . curl_error($ch);
+                return 0;
             } else {
                 $result = json_decode($result);
             }
@@ -86,11 +86,7 @@ class PendingPayment extends Command
 
                     if ($planRequest->type != $companyPlan->plan->type) {
                         if ($credit->quantity != 0) {
-                            return response()->json([
-                                'message' => 'Os planos possuem tipos diferentes de qualificações,
-                        você precisa gastar seus créditos atuais para alterar o plano!',
-                                'status' => 'error'
-                            ], 201);
+                            return 1;
                         }
                     }
 
@@ -108,24 +104,15 @@ class PendingPayment extends Command
                                 'price' => $plan->price,
                                 'status' => 'approved',
                             ]);
-                            return response()->json([
-                                'message' => 'Seu pagamento foi aprovado, plano alterado e crédito adicionado a sua conta!',
-                                'status' => 'success'
-                            ], 201);
+                            return 1;
                         } else {
                             $alterPlan = CompanyPlanRelation::where('company_id', $company->id)->update([
                                 'plan_id' => $companyPlan->plan_id
                             ]);
-                            return response()->json([
-                                'message' => 'Erro ao concluir sua requisição, tente novamente mais tarde!',
-                                'status' => 'success'
-                            ], 201);
+                            return 0;
                         }
                     } else {
-                        return response()->json([
-                            'message' => 'Erro ao validar seu pagamento',
-                            'status' => 'error'
-                        ], 201);
+                        return 0;
                     }
                 } else {
                     $plan = CandidatePlan::where('name', $result->additional_info->items[0]->title)->first();
@@ -153,16 +140,11 @@ class PendingPayment extends Command
                                     'price' => $plan->price,
                                     'status' => 'approved',
                                 ]);
-                                return response()->json([
-                                    'status' => 'success',
-                                    'message' => 'Seu plano iniciado com sucesso!'
-                                ]);
+                                return 1;
+
                             } else {
                                 CandidatePlanRelation::where('candidate_id', $candidate->id)->delete();
-                                return response()->json([
-                                    'status' => 'error',
-                                    'message' => 'Erro ao adicionar plano, tente novamente mais tarde ou contate-nos pelo email'
-                                ]);
+                                return 0;
                             }
                         }
                     }
@@ -193,25 +175,16 @@ class PendingPayment extends Command
                                 'price' => $plan->price,
                                 'status' => 'approved',
                             ]);
-                            return response()->json([
-                                'status' => 'success',
-                                'message' => 'Seu plano foi alterado com sucesso!'
-                            ]);
+                            return 1;
                         } else {
                             $alterPlan = CandidatePlanRelation::where('candidate_id', $candidate->id)->update([
                                 'plan_id' => $planCandidate->plan_id
                             ]);
 
-                            return response()->json([
-                                'status' => 'error',
-                                'message' => 'Erro ao concluir sua requisição, tente novamente mais tarde!'
-                            ]);
+                            return 0;
                         }
                     } else {
-                        return response()->json([
-                            'status' => 'error',
-                            'message' => 'Erro ao alterar o plano, tente novamente mais tarde!'
-                        ]);
+                        return 0;
                     }
                 }
             }
