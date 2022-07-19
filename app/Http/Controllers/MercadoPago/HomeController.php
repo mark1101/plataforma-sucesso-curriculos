@@ -44,7 +44,7 @@ class HomeController extends Controller
             if (!Payments::where('payment_id', $payment_id)->exists()) {
                 Payments::create([
                     'payment_id' => $payment_id,
-                    'user_id' => 3,
+                    'user_id' => Auth::id(),
                     'product' => $plan->name,
                     'type' => 0,
                     'price' => $plan->price,
