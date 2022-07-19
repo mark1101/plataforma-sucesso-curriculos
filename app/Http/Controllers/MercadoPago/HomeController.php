@@ -33,8 +33,7 @@ class HomeController extends Controller
         }
         curl_close($ch);
         $status = $result->status;
-        return $result;
-
+    
         if ($status == 'pending') {
             $plan = CompanyPlan::where('name', $result->additional_info->items[0]->title)->first();
             Payments::create([
