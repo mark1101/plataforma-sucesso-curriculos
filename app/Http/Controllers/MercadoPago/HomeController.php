@@ -15,6 +15,7 @@ class HomeController extends Controller
     public function paymentPending(Request $request)
     {
         $payment_id = $request->get('payment_id');
+        $status = $request->get('status');
 
         $ch = curl_init();
 
@@ -33,27 +34,28 @@ class HomeController extends Controller
             $result = json_decode($result);
         }
         curl_close($ch);
-        $status = $result->status;
 
         if ($status == 'pending') {
-            if (Auth::user()->candidate) {
+            if (false) {
                 $plan = CandidatePlan::where('name', $result->additional_info->items[0]->title)->first();
             } else {
                 $plan = CompanyPlan::where('name', $result->additional_info->items[0]->title)->first();
             }
-            Payments::create([
-                'payment_id' => $payment_id,
-                'user_id' => Auth::id(),
-                'product' => $plan->name,
-                'type' => 0,
-                'price' => $plan->price,
-                'status' => 'pending',
-            ]);
-            return view('Payment.pending');
+            if (!Payments::where('payment_id', $payment_id)->exists()) {
+                Payments::create([
+                    'payment_id' => $payment_id,
+                    'user_id' => 3,
+                    'product' => $plan->name,
+                    'type' => 0,
+                    'price' => $plan->price,
+                    'status' => 'pending',
+                ]);
+            }
+            return redirect('/payment/pending/global');
         } else if ($status == 'approved') {
             return view('Payment.success');
         } else {
-            return view('Payment.failure');
+            return redirect('/payment/failure');
         }
     }
 }

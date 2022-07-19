@@ -165,7 +165,7 @@ Route::get('/planos', function () {
 
 Route::get('/payment/success', [CompanyPaymentController::class, 'payment'])->name('company.payment');
 
-Route::get('/payment/pending', function () {
+Route::get('/payment/pending/global', function () {
     return view('Payment.pending');
 });
 
