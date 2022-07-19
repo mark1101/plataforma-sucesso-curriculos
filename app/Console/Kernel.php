@@ -20,6 +20,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('send:report-not-active-curriculo')->everyMinute();
         $schedule->command('send:report-expiration-days')->twiceMonthly(1, 16, '23:00');
         $schedule->command('disable:curriculum')->daily();
+        $schedule->command('pending:payments')->hourly();
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CompanyPlan;
 use App\Models\Payments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
@@ -32,12 +33,13 @@ class HomeController extends Controller
         }
         curl_close($ch);
         $status = $result->status;
+        return $result;
 
         if ($status == 'pending') {
             $plan = CompanyPlan::where('name', $result->additional_info->items[0]->title)->first();
             Payments::create([
                 'payment_id' => $payment_id,
-                'user_id' => 2, //Auth::id();
+                'user_id' => Auth::id(),
                 'product' => $plan->name,
                 'type' => 0,
                 'price' => $plan->price,
