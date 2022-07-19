@@ -36,7 +36,7 @@ class HomeController extends Controller
         curl_close($ch);
 
         if ($status == 'pending') {
-            if (false) {
+            if (Auth::user()->candidate) {
                 $plan = CandidatePlan::where('name', $result->additional_info->items[0]->title)->first();
             } else {
                 $plan = CompanyPlan::where('name', $result->additional_info->items[0]->title)->first();
