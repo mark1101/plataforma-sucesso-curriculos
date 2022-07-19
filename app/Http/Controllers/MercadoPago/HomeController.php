@@ -46,6 +46,10 @@ class HomeController extends Controller
                 'status' => 'pending',
             ]);
             return view('Payment.pending');
+        } else if ($status == 'approved') {
+            return view('Payment.success');
+        } else {
+            return view('Payment.failure');
         }
     }
 }
