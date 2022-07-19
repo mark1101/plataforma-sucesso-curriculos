@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MercadoPago;
 
 use App\Http\Controllers\Controller;
+use App\Models\CandidatePlan;
 use App\Models\CompanyPlan;
 use App\Models\Payments;
 use Illuminate\Http\Request;
@@ -33,9 +34,13 @@ class HomeController extends Controller
         }
         curl_close($ch);
         $status = $result->status;
-    
+
         if ($status == 'pending') {
-            $plan = CompanyPlan::where('name', $result->additional_info->items[0]->title)->first();
+            if (Auth::user()->candidate) {
+                $plan = CandidatePlan::where('name', $result->additional_info->items[0]->title)->first();
+            } else {
+                $plan = CompanyPlan::where('name', $result->additional_info->items[0]->title)->first();
+            }
             Payments::create([
                 'payment_id' => $payment_id,
                 'user_id' => Auth::id(),
