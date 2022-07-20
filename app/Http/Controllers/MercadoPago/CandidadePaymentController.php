@@ -22,11 +22,22 @@ class CandidadePaymentController extends Controller
         $candidate = Candidate::where('user_id', Auth::id())->first();
         $planRelation = CandidatePlanRelation::where('candidate_id', $candidate->id)->first();
 
+        $dataCalc = strtotime(date('Y/m/d'));
+        $date = CandidateDueDate::where('user_id', Auth::id())->first();
+
         if ($planRelation) {
-            if ($plan->id != $planRelation->plan_id) {
-                return view('Applicant.cart', [
-                    'plan' => $plan
-                ]);
+            $verify = ($dataCalc - strtotime($date->due_date)) / 86400;
+            if ($verify < -1) {
+                $verify = $verify * -1;
+            }
+            if ($verify <= 7) {
+                if ($plan->id != $planRelation->plan_id) {
+                    return view('Applicant.cart', [
+                        'plan' => $plan
+                    ]);
+                } else {
+                    return view('Applicant.error-plan-on');
+                }
             } else {
                 return view('Applicant.error-plan-on');
             }
@@ -39,9 +50,6 @@ class CandidadePaymentController extends Controller
 
     public function pay(Request $request)
     {
-        //http://127.0.0.1:8000/payment/success/candidade
-        //{"payment_id": "23951350354"}
-
         $payment_id = $request->get('payment_id');
         $ch = curl_init();
 
@@ -61,13 +69,13 @@ class CandidadePaymentController extends Controller
             $result = json_decode($result);
         }
         curl_close($ch);
-        
+
         $status = $result->status;
         if (!$status == 'approved') {
             $plan = CandidatePlan::where('name', $result->additional_info->items[0]->title)->first();
             $plan_id = $plan->id;
 
-            $candidate = Candidate::where('user_id', 4)->first(); //Auth::id()
+            $candidate = Candidate::where('user_id', Auth::id())->first();
             $planRequest = CandidatePlanRelation::where('candidate_id', $candidate->id)->first();
 
             if ($planRequest == null) {
@@ -79,11 +87,11 @@ class CandidadePaymentController extends Controller
                     $planNew = CandidatePlan::where('id', $plan_id)->first();
                     $today = date('Y-m-d');
                     $sumData = date('Y-m-d', strtotime($today . "+ {$planNew->days} days"));
-                    if ($this->alterDueDate($today, $candidate)) {
-                        Curriculum::where('user_id', 4)->update(['active' => 1]);
+                    if ($this->alterDueDate($sumData, $candidate)) {
+                        Curriculum::where('user_id', Auth::id())->update(['active' => 1]);
                         Payments::create([
                             'payment_id' => $payment_id,
-                            'user_id' => 4, //Auth::id();
+                            'user_id' => Auth::id(), 
                             'product' => $plan->name,
                             'type' => 0,
                             'price' => $plan->price,
@@ -120,10 +128,10 @@ class CandidadePaymentController extends Controller
 
             if ($alterPlan) {
                 if ($this->alterDueDate($sumData, $candidate)) {
-                    Curriculum::where('user_id', 4)->update(['active' => 1]);
+                    Curriculum::where('user_id', Auth::id())->update(['active' => 1]);
                     Payments::create([
                         'payment_id' => $payment_id,
-                        'user_id' => 4, //Auth::id();
+                        'user_id' => Auth::id(),
                         'product' => $plan->name,
                         'type' => 0,
                         'price' => $plan->price,
