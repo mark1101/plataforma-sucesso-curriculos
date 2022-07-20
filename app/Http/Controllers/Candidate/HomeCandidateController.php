@@ -63,7 +63,7 @@ class HomeCandidateController extends Controller
         $planUser = CandidatePlanRelation::where('candidate_id', $candidate->id)
             ->first();
         if (CandidatePlanRelation::where('candidate_id', $candidate->id)->exists()) {
-            $plan = CandidatePlan::where('id', $planUser->id)->first();
+            $plan = CandidatePlan::where('id', $planUser->candidate_id)->first();
         } else {
             $plan = null;
         }

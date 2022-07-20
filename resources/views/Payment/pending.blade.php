@@ -42,7 +42,7 @@
         <i class="checkmark">!</i>
       </div>
         <h1>Aguarde...</h1>
-        <p>Sua requisição está em processamento, em breve sua requisição terá um retorno dentro da plataforma.</p>
+        <p>Sua requisição está em processamento, os pagamentos pendentes tem um tempo de compensação de até 2 horas.</p>
       </div>
     </body>
 </html>
