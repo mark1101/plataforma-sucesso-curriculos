@@ -64,7 +64,7 @@ class HomeCandidateController extends Controller
             $plan_relation = CandidatePlanRelation::where('candidate_id', $candidate->id)
             ->with('plan')
             ->first();
-            $plan = $plan_relation->plan->name;
+            $plan = $plan_relation->plan;
         } else {
             $plan = null;
         }
