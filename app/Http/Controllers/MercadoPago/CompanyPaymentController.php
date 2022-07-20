@@ -91,7 +91,7 @@ class CompanyPaymentController extends Controller
                 if ($this->addCredit($company->id, $sum)) {
                     Payments::create([
                         'payment_id' => $payment_id,
-                        'user_id' => 4, //Auth::id();
+                        'user_id' => Auth::id(),
                         'product' => $plan->name,
                         'type' => 0,
                         'price' => $plan->price,

@@ -67,7 +67,9 @@
     </header>
     <!--------- Header area end --------->
     <div class="container">
-        <h2>Oops, não é possível fazer a compra do mesmo plano ativo</h2>
+        <h2>Oops, não é possível realizar a troca de plano no momento, tente novamente mais tarde ou verifique nossas políticas. 
+            O candidato só terá sua atualização de plano quando estiver 7 dias ainda de crédito.
+        </h2>
         <a href="{{url('candidato-planos')}}" class="btn btn-primary">Voltar aos Planos</a>
     </div>
 

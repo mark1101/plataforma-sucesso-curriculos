@@ -117,11 +117,13 @@ class PendingPayment extends Command
                 } else {
                     $plan = CandidatePlan::where('name', $result->additional_info->items[0]->title)->first();
                     $plan_id = $plan->id;
-
-                    $candidate = Candidate::where('user_id', $item->user_id)->first();
+                    $candidate = Candidate::where('user_id', $item->user_id)
+                        ->with('dueDate')
+                        ->first();
                     $planRequest = CandidatePlanRelation::where('candidate_id', $candidate->id)->first();
+                    $backup = $planRequest;
 
-                    if ($planRequest == null) {
+                    if (!$planRequest) {
                         $createPlan = CandidatePlanRelation::create([
                             'candidate_id' => $candidate->id,
                             'plan_id' => (int) $plan->id
@@ -130,7 +132,7 @@ class PendingPayment extends Command
                             $planNew = CandidatePlan::where('id', $plan_id)->first();
                             $today = date('Y-m-d');
                             $sumData = date('Y-m-d', strtotime($today . "+ {$planNew->days} days"));
-                            if ($this->alterDueDate($today, $candidate)) {
+                            if ($this->alterDueDate($sumData, $candidate)) {
                                 Curriculum::where('user_id', $item->user_id)->update(['active' => 1]);
                                 Payments::create([
                                     'payment_id' => $item->payment_id,
@@ -141,7 +143,6 @@ class PendingPayment extends Command
                                     'status' => 'approved',
                                 ]);
                                 return 1;
-
                             } else {
                                 CandidatePlanRelation::where('candidate_id', $candidate->id)->delete();
                                 return 0;
@@ -149,41 +150,26 @@ class PendingPayment extends Command
                         }
                     }
 
-                    $candidate = Candidate::where('user_id', $item->user_id)
-                        ->with('dueDate')
-                        ->first();
-                    $planCandidate = CandidatePlanRelation::where('candidate_id', $candidate->id)->first();
-                    $planCandidadeEdit = CandidatePlan::where('id', $plan_id)->first();
-
-                    $days = strval($planCandidadeEdit->days);
-
+                    $days = strval($plan->days);
                     $dateContrated = $candidate->dueDate->due_date;
                     $sumData = date('Y-m-d', strtotime($dateContrated . " + {$days} days"));
 
-                    $alterPlan = CandidatePlanRelation::where('candidate_id', $candidate->id)->update([
-                        'plan_id' => $plan_id
-                    ]);
+                    $planRequest->plan_id = $plan_id;
+                    $planRequest->save();
 
-                    if ($alterPlan) {
-                        if ($this->alterDueDate($sumData, $candidate)) {
-                            Curriculum::where('user_id', 4)->update(['active' => 1]);
-                            Payments::create([
-                                'payment_id' => $item->payment_id,
-                                'user_id' => $item->user_id,
-                                'product' => $plan->name,
-                                'type' => 0,
-                                'price' => $plan->price,
-                                'status' => 'approved',
-                            ]);
-                            return 1;
-                        } else {
-                            $alterPlan = CandidatePlanRelation::where('candidate_id', $candidate->id)->update([
-                                'plan_id' => $planCandidate->plan_id
-                            ]);
-
-                            return 0;
-                        }
+                    if ($this->alterDueDate($sumData, $candidate)) {
+                        Curriculum::where('user_id', $item->user_id)->update(['active' => 1]);
+                        Payments::create([
+                            'payment_id' => $item->payment_id,
+                            'user_id' => $item->user_id,
+                            'product' => $plan->name,
+                            'type' => 0,
+                            'price' => $plan->price,
+                            'status' => 'approved',
+                        ]);
+                        return 1;
                     } else {
+                        $planRequest->plan_id = $backup->plan_id;
                         return 0;
                     }
                 }
