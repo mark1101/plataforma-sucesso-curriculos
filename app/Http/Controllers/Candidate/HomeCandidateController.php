@@ -59,11 +59,8 @@ class HomeCandidateController extends Controller
             }
         }
 
-        $candidate = Candidate::where('user_id', Auth::id())->first();
-        $planUser = CandidatePlanRelation::where('candidate_id', $candidate->id)
-            ->first();
-        if (CandidatePlanRelation::where('candidate_id', $candidate->id)->exists()) {
-            $plan = CandidatePlan::where('id', $planUser->candidate_id)->first();
+        if (CandidatePlanRelation::where('candidate_id', Auth::id())->exists()) {
+            $plan = CandidatePlan::where('id', Auth::id())->first();
         } else {
             $plan = null;
         }
@@ -79,7 +76,6 @@ class HomeCandidateController extends Controller
     public function index()
     {
         return view('Applicant.create-account');
-        // return view de cadastro do candidado
     }
 
     public function getData()
