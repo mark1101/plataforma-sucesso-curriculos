@@ -17,6 +17,6 @@ class CandidatePlanRelation extends Model
     }
 
     public function plan(){
-        return $this->hasOne(Plan::class, 'plan_id' , 'id');
+        return $this->hasOne(CandidatePlan::class, 'id' , 'plan_id');
     }
 }
