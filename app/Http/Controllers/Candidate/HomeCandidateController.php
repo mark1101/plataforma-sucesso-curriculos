@@ -59,8 +59,12 @@ class HomeCandidateController extends Controller
             }
         }
 
-        if (CandidatePlanRelation::where('candidate_id', Auth::id())->exists()) {
-            $plan = CandidatePlan::where('id', Auth::id())->first();
+        $candidate = Candidate::where('user_id' , Auth::id())->first();
+        if (CandidatePlanRelation::where('candidate_id', $candidate->id)->exists()) {
+            $plan_relation = CandidatePlanRelation::where('candidate_id', $candidate->id)
+            ->with('plan')
+            ->first();
+            $plan = $plan_relation->plan->name;
         } else {
             $plan = null;
         }
