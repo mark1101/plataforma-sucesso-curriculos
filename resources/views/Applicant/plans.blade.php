@@ -127,7 +127,7 @@
                                 </div>
                                 <hr />
                                 <div class="pricing__card__price">
-                                    <div class="rate--count">1x</div>
+                                    <div class="rate--count">6x</div>
                                     <span>R$<b>9</b>,90</span>
                                 </div>
                                 <div class="p">ou seja <b> R$0,33/dia</b></div>

@@ -1277,9 +1277,9 @@ textarea.form-control {
 
 .rate--count {
     position: absolute;
-    left: 17px;
+    left: 40px;
     top: -12px;
-    font-size: 15px;
+    font-size: 28px;
     font-weight: 600;
     font-style: italic;
 }
@@ -1328,20 +1328,20 @@ textarea.form-control {
 
 .card-sky-blue .pricing__card__title h5,
 .card-sky-blue .pricing__card__price span, .card-sky-blue .p b {
-    color: #004FB9;
+    color: #004198;
 }
 
 .card-sky-blue {
-    background-color: #004FB9;
+    background-color: #004198;
 }
 
 .card-sky .pricing__card__title h5,
 .card-sky .pricing__card__price span, .card-sky .p b {
-    color: #4976FF;
+    color: #004198;
 }
 
 .card-sky {
-    background-color: #4976FF;
+    background-color: #004198;
 }
 
 
