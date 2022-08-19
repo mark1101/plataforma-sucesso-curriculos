@@ -13,6 +13,7 @@ use App\Models\CurriculumCompany;
 use App\Models\NfsControl;
 use App\Models\Payments;
 use App\Models\User;
+use CreateCompanyCurriculumQuantityesTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -72,13 +73,21 @@ class HomeCompanyController extends Controller
 
     public function alterPlan($plan)
     {
+
+
         $company = Company::where('user_id', Auth::user()->id)->first();
         $companyPlan = CompanyPlanRelation::where('company_id', $company->id)
             ->with(['plan'])
             ->first();
-
         $planRequest = CompanyPlan::where('id', $plan)->first();
+        if ($companyPlan == null) {
+            $companyPlan = CompanyPlanRelation::create(['plan_id' => $plan, 'company_id' => $company->id]);
+        }
+
+        $planRequest = CompanyCurriculumQuantity::create(['company_id' => $planRequest, 'quantity' => $planRequest->quantity]);
+
         $credit = CompanyCurriculumQuantity::where('company_id', $company->id)->first();
+
         $sum = $planRequest->quantity + $credit->quantity;
 
         if ($planRequest->type != $companyPlan->plan->type) {
@@ -160,9 +169,16 @@ class HomeCompanyController extends Controller
             'quantity' => $plan->quantity
         ]);
 
+<<<<<<< HEAD
         CompanyPlanRelation::create([
             'company_id' => $newCompany['id'],
             'plan_id' => $plan->id,
+=======
+        $plan = CompanyPlan::where('type', 1)->first();
+        CompanyPlanRelation::create([
+            'company_id' => $newCompany['id'],
+            'plan_id' => $plan->id
+>>>>>>> 20e93c6fb9fd69bee15e2fc252994f2687c07e3d
         ]);
 
         if ($newCompany) {
