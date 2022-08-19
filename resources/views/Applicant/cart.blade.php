@@ -40,7 +40,7 @@ $preference->back_urls = [
     'failure' => route('payment.failure'),
     'pending' => route('payment.pending'),
 ];
-$preference->auto_return = 'approved';
+$preference->auto_return = 'all';
 $preference->save();
 ?>
 

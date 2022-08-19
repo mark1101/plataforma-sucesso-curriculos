@@ -15,7 +15,7 @@
                 <div class="hero__content__wrapp">
                     <h4>
                         <span>Boas vindas {{ $name }} </span>
-                        <p style="margin-top: 10px; font-size: 20px;">Obrigado por visitar o nosso site e saiba que estamos sempre empenhados em conseguir um ótimo emprego para você.<br>
+                        <p style="margin-top: 10px; font-size: 20px; font-weight: 400;">Obrigado por visitar o nosso site e saiba que estamos sempre empenhados em conseguir um ótimo emprego para você.<br>
                             Torcemos muito pelo seu <span>Sucesso!</span></p>
                     </h4>
                     @if ($plano != null)
@@ -27,8 +27,8 @@
                     <h5>Nenhum CNPJ bloqueado</h5>
                     @endif
                     @else
-                    <span style="font-size: 35px; color:#FEBC2C; font-weight:700">Atenção {{ $name }}!</span>
-                    <h5>Você não tem nenhum plano ativo no momento, seu currículo estará inativo para buscas no sistema.
+                    <span style="font-size: 35px; color:#F5264B; font-weight:900; text-transform: uppercase;">Atenção {{ $name }}!</span>
+                    <h5 style="font-weight: 400;">Você não tem nenhum plano ativo no momento, seu currículo estará inativo para buscas no sistema.
                     </h5>
                     <h5><a href="{{ url('candidato-planos') }}">Clique aqui</a> para ativar seu plano</h5>
                     @endif
