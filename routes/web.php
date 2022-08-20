@@ -9,6 +9,7 @@ use App\Http\Controllers\Company\HomeCompanyController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\SupportController;
 use App\Http\Controllers\Company;
+use App\Http\Controllers\General\AdminController;
 use App\Http\Controllers\General\CandidateCurriculumController;
 use App\Http\Controllers\General\CompanyCurriculumController;
 use App\Http\Controllers\MercadoPago\CandidadePaymentController;
@@ -61,6 +62,9 @@ Route::prefix('sugestao')->group(function () {
     Route::post('/register-suggestion', [SuggestionController::class, 'create']);
     Route::get('/agradecimento', [SuggestionController::class, 'thankYou']);
 });
+
+//ROUTES ADMIN
+Route::get('/gerenciar', [AdminController::class, 'index']);
 
 
 //ROUTES GUEST

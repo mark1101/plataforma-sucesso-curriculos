@@ -23,11 +23,12 @@ class User extends Authenticatable
         'password',
         'company',
         'candidate',
+        'admin',
         'status',
         'entry_date',
     ];
 
-  
+
     public function curriculumUser()
     {
         return $this->belongsTo(Curriculum::class, 'user_id', 'id');

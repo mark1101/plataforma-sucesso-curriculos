@@ -169,16 +169,10 @@ class HomeCompanyController extends Controller
             'quantity' => $plan->quantity
         ]);
 
-<<<<<<< HEAD
-        CompanyPlanRelation::create([
-            'company_id' => $newCompany['id'],
-            'plan_id' => $plan->id,
-=======
         $plan = CompanyPlan::where('type', 1)->first();
         CompanyPlanRelation::create([
             'company_id' => $newCompany['id'],
             'plan_id' => $plan->id
->>>>>>> 20e93c6fb9fd69bee15e2fc252994f2687c07e3d
         ]);
 
         if ($newCompany) {
