@@ -32,6 +32,9 @@ Vue.component('see-curriculum', require('./components/Candidate/SeeCurriculum').
 Vue.component('candidate-plans', require('./components/Candidate/Plans.vue').default);
 
 
+//COMPONENT GERAL
+Vue.component('geral', require('./components/Admin/Geral').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
