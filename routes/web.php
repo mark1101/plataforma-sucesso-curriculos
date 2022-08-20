@@ -64,7 +64,7 @@ Route::prefix('sugestao')->group(function () {
 });
 
 //ROUTES ADMIN
-Route::get('/gerenciar', [AdminController::class, 'index']);
+Route::get('/gerenciar/akp90', [AdminController::class, 'index']);
 
 
 //ROUTES GUEST
