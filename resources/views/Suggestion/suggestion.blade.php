@@ -16,7 +16,7 @@
                         <form action="{{url('/sugestao/register-suggestion')}}" method="POST">
                             @csrf
                             <textarea name="suggestion" id="suggestion" placeholder="Deixe sua sugestão aqui…"
-                                      class="form-control"></textarea>
+                                      class="form-control" required></textarea>
                             <div class="evaluation__content__bottom__btns">
                                 <button type="submit" class="bg-red"> Enviar</button>
                             </div>

@@ -17,7 +17,7 @@
                         </div>
                         <div class="ratings__textarea">
                                 <textarea name="" id="" class="form-control"
-                                          placeholder="Deixe sua avaliação aqui…"></textarea>
+                                          placeholder="Deixe sua avaliação aqui…" required></textarea>
                         </div>
                         <div class="evaluation__content__bottom__btns">
                             <button type="submit" class="bg-red"> Enviar</button>
