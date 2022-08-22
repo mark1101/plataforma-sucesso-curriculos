@@ -18,19 +18,19 @@
                                 @csrf
                                 <div class="single__input__item">
                                     <label for="name">Nome Completo</label>
-                                    <input type="text" class="form-control" name="name">
+                                    <input type="text" class="form-control" name="name" required>
                                 </div>
                                 <div class="single__input__item">
                                     <label for="email"> E-mail </label>
-                                    <input type="email" class="form-control" name="email">
+                                    <input type="email" class="form-control" name="email" required>
                                 </div>
                                 <div class="single__input__item">
                                     <label for="subject"> Assunto </label>
-                                    <input type="text" class="form-control" name="subject">
+                                    <input type="text" class="form-control" name="subject" required>
                                 </div>
                                 <div class="single__input__item">
                                     <label for="problem">Mensagem</label>
-                                    <textarea name="problem" id="problem" class="form-control"></textarea>
+                                    <textarea name="problem" id="problem" class="form-control" required></textarea>
                                 </div>
                                 <div class="evaluation__content__bottom__btns">
                                     <button type="submit" class="bg-red"> Enviar</button>
