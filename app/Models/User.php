@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -39,8 +40,15 @@ class User extends Authenticatable
         return $this->hasOne(Curriculum::class, 'curriculum_id', 'id');
     }
 
-    public function candidate(){
+    public function candidate()
+    {
         return $this->hasOne(Candidate::class);
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        // Não esquece: use App\Notifications\ResetPassword;
+        $this->notify(new ResetPassword($token));
     }
 
     /**
