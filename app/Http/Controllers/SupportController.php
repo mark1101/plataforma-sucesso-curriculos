@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendEmailSupport;
 use App\Models\Help;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -31,6 +32,9 @@ class SupportController extends Controller
             'problem' => $data['problem'],
             'date' => $today
         ]);
+
+        Mail::to('programacaohey@gmail.com')->send(new SendEmailSupport($new));
+        
         if ($new)
             return redirect('/suporte/agradecimento');
     }
