@@ -65,6 +65,9 @@ Route::prefix('sugestao')->group(function () {
 
 //ROUTES ADMIN
 Route::get('/gerenciar/akp90', [AdminController::class, 'index']);
+Route::get('/login/admin', function(){
+    return view('admin.login-admin');
+});
 
 
 //ROUTES GUEST
