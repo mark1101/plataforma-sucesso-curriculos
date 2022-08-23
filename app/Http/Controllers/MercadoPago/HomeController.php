@@ -58,4 +58,17 @@ class HomeController extends Controller
             return redirect('/payment/failure');
         }
     }
+
+    public function webhook(Request $request){
+        if($request['type'] == 'payment' && $request['live_mode'] == true){
+            $payment = new Payments();
+            $payment->user_id = $request->query('user');
+            $payment->payment_id = $request['data']['id'];
+            $payment->price = $request->query('value');
+            $payment->product = $request->query('product');
+            $payment->status = 'pending';
+            $payment->type = 1;
+            $payment->save();
+        }
+    }
 }

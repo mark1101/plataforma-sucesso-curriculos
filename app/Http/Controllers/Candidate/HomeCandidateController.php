@@ -69,12 +69,16 @@ class HomeCandidateController extends Controller
             $plan = null;
         }
 
+        $pending = Payments::where('user_id', Auth::id())
+        ->where('status', 'pending')->exists();
+
         return view('Applicant.dashboard', [
             'name' => $userName,
             'curriculum' => $curriculumUser,
             'expiration' => $expiration,
             'blocked' => $blocked,
-            'plano' => $plan
+            'plano' => $plan,
+            'payment' => $pending
         ]);
     }
     public function index()

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MercadoPago\CompanyPaymentController;
+use App\Http\Controllers\MercadoPago\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/nfs/create/{payment}' , [CompanyPaymentController::class, 'createNfs']);
+Route::post('/webook/mp', [HomeController::class, 'webhook']);

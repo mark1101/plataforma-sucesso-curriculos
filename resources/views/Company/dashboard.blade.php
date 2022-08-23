@@ -18,17 +18,18 @@
                     </h4>
                     <h3 class="textt" style="color:white">Plano ativo: <span>{{ $plan->name }}</span></h3>
                     <h3 class="textt" style="color:white">Você ainda tem: <span>{{ $credit }}</span> créditos</h3>
-                    <h3 class="textt" style="color:white">Quantidade adquirida: <span>{{ $curriculum }}</span> currículos</h3>
+                    <h3 class="textt" style="color:white">Quantidade adquirida: <span>{{ $curriculum }}</span> currículos
+                    </h3>
                 </div>
             </div>
 
             <div class="col-md-6 mt-5" style="text-align:-webkit-center">
 
-                <div class="evaluation__content__bottom__btns-red button_action" >
+                <div class="evaluation__content__bottom__btns-red button_action">
                     <a href="{{ url('/empresa/encontrar-curriculos') }}">Encontrar Currículos</a>
                 </div>
 
-                <div class="evaluation__content__bottom__btns-red mt-3 button_action" >
+                <div class="evaluation__content__bottom__btns-red mt-3 button_action">
                     <a href="{{ url('/empresa/acessar-curriculos') }}">acessar meus currículos</a>
                 </div>
 
@@ -39,8 +40,7 @@
     <!--------- Hero area end --------->
 
     <style>
-
-        .text{
+        .text {
             font-size: 25px;
         }
 
@@ -57,7 +57,7 @@
             }
         }
 
-        .button_action{
+        .button_action {
             max-width: 50%;
         }
 
@@ -66,8 +66,29 @@
                 max-width: 100%;
             }
         }
-
     </style>
 
 
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $(document).ready(function() {
+        if ({{ $payment == true }}) {
+            Swal.fire({
+                toast: true,
+                position: "top-end",
+                timerProgressBar: false,
+                icon: "warning",
+                timer: 5000,
+                title: "Você possui pagamento de plano pendente.",
+                text: "Regularize agora mesmo",
+                showConfirmButton: false,
+                cancelButtonText: "ok",
+                allowEscapeKey: true,
+            });
+        }
+    })
+</script>

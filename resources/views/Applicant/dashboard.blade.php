@@ -79,3 +79,25 @@
 
 
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $(document).ready(function() {
+        if ({{ $payment == true }}) {
+            Swal.fire({
+                toast: true,
+                position: "top-end",
+                timerProgressBar: false,
+                icon: "warning",
+                timer: 5000,
+                title: "Você possui pagamento de plano pendente.",
+                text: "Regularize agora mesmo",
+                showConfirmButton: false,
+                cancelButtonText: "ok",
+                allowEscapeKey: true,
+            });
+        }
+    })
+</script>
