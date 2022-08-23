@@ -41,7 +41,7 @@ $preference->back_urls = [
     'pending' => route('init'),
 ];
 $preference->auto_return = 'all';
-$preference->notification_url = 'http://sucessoempregos.com/api/webook/mp?user='.$user.'&value='.$plan->price.'&product='.$product;
+$preference->notification_url = 'https://sucessoempregos.com/api/webook/mp?user='.$user.'&value='.$plan->price.'&product='.$product;
 $preference->save();
 ?>
 
