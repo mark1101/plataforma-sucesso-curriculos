@@ -28,6 +28,7 @@ class AdminController extends Controller
 
         $tableCompany = Company::with('curriculumDownload', 'quantity')->get();
         $tableCandidate = Candidate::with('curriculum', 'planCandidate', 'planCandidate.plan', 'user')->get();
+        //dd($tableCandidate);
 
         return view('Admin.geral' , [
             'curriculum' => $curriculumC,

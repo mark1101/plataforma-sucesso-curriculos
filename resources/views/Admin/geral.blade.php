@@ -198,12 +198,11 @@
                                         <td>Inativo</td>
                                     @endif
                                     <td>{{ $tcan->created_at->format('d/m/Y') }}</td>
-                                    @if ($tcan->planCandidate->plan->name)
+                                    @if ($tcan->planCandidate)
                                         <td>{{ $tcan->planCandidate->plan->name }}</td>
                                     @else
                                         <td>Sem plano</td>
                                     @endif
-
                                 </tr>
                             @endforeach
                         </tbody>
