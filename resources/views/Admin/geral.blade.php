@@ -87,7 +87,6 @@
                         <div class="card-body">
                             <h5 class="card-title">Candidatos Cadastrados </h5>
                             <h2>{{ $candidate }}</h2>
-                            <a href="#" class="btn btn-primary">Ver candidatos</a>
                         </div>
                     </div>
                 </div>
@@ -96,7 +95,6 @@
                         <div class="card-body">
                             <h5 class="card-title">Empresas Cadastradas</h5>
                             <h2>{{ $company }}</h2>
-                            <a href="#" class="btn btn-primary">Ver Empresas</a>
                         </div>
                     </div>
                 </div>
@@ -112,7 +110,6 @@
                         <div class="card-body">
                             <h5 class="card-title">Curriculos Cadastrados</h5>
                             <h2>{{ $curriculum }}</h2>
-                            <a href="#" class="btn btn-primary">Ver Currículos</a>
                         </div>
                     </div>
                 </div>
@@ -121,7 +118,6 @@
                         <div class="card-body">
                             <h5 class="card-title">Planos de Candidatos</h5>
                             <h2>{{ $plansCandidade }}</h2>
-                            <a href="#" class="btn btn-primary">Ver Planos</a>
                         </div>
                     </div>
                 </div>
@@ -130,7 +126,6 @@
                         <div class="card-body">
                             <h5 class="card-title">Planos de Empresa</h5>
                             <h2>{{ $plansCompany }}</h2>
-                            <a href="#" class="btn btn-primary">Ver Planos</a>
                         </div>
                     </div>
                 </div>
@@ -150,7 +145,7 @@
                                 <th scope="col">CNPJ</th>
                                 <th scope="col">Endereço</th>
                                 <th scope="col">Entrada na Plataforma</th>
-                                <th scope="col">Curriculos Baixados</th>
+                               <!-- <th scope="col">Curriculos Baixados</th> -->
                                 <th scope="col">Créditos</th>
                             </tr>
                         </thead>
@@ -158,14 +153,10 @@
                             @foreach ($tableCompany as $tc)
                                 <tr>
                                     <th scope="row">{{ $tc->name }}</th>
-                                    <td>{{ $tc->cnpj }}</td>
+                                    <td>{{ $tc->cnpj}}</td>
                                     <td>{{ $tc->address }}</td>
                                     <td>{{ $tc->created_at->format('d/m/Y') }}</td>
-                                    @if ($tc->curriculumDownload)
-                                        <td>{{ $tc->curriculumDownload->count() }}</td>
-                                    @else
-                                        <td>0</td>
-                                    @endif
+                                   <!-- <td>{{ $tc->download }}</td> -->
                                     <td>{{ $tc->quantity->quantity }}</td>
                                 </tr>
                             @endforeach
