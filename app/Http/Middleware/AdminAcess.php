@@ -17,10 +17,14 @@ class AdminAcess
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->admin == 1) {
-            return $next($request);
+        if (Auth::check()) {
+            if (Auth::user()->admin == 1) {
+                return $next($request);
+            } else {
+                return redirect()->back();
+            }
         } else {
-            return redirect()->back();
+            return $next($request);
         }
     }
 }

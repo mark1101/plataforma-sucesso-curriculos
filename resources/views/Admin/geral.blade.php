@@ -29,7 +29,19 @@
         <div class="offcanvas-menu">
             <div class="main-menu">
                 <ul class="d-block">
-                    <li><a href="#">Plataforma de Gerenciamento</a></li>
+                    <li>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                {{ __('Sair do Painel') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -46,7 +58,18 @@
             <div class="header__right">
                 <div class="main__menu red--links">
                     <ul>
-                        <li><a href="#">Plataforma de Gerenciamento</a></li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                {{ __('Sair do Painel') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+
+                        </li>
                     </ul>
                 </div>
                 <div class="menu-open">
