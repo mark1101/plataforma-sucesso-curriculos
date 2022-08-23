@@ -32,8 +32,6 @@ class AdminController extends Controller
         $tableCompany = CompanyResource::collection(Company::with('quantity')->get());
         $tableCandidate = Candidate::with('curriculum', 'planCandidate', 'planCandidate.plan', 'user')->get();
 
-        dd(json_encode($tableCompany));
-
         return view('Admin.geral', [
             'curriculum' => $curriculumC,
             'candidate' => $candidadeC,
