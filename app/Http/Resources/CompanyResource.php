@@ -20,7 +20,7 @@ class CompanyResource extends JsonResource
             'cnpj' => $this->cnpj,
             'address' => $this->address, 
             'created_at' => $this->created_at,
-            'curriculumDownload' => $this->curriculumDown($this->quantity->company_id),
+            'download' => $this->curriculumDown($this->quantity->company_id),
             'quantity' => $this->quantity
         ];
     }
