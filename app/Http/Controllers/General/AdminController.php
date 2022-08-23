@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\General;
 
 use App\Http\Controllers\Controller;
+use App\Models\Candidate;
 use App\Models\CandidatePlan;
+use App\Models\Company;
 use App\Models\CompanyPlan;
 use App\Models\Curriculum;
 use App\Models\User;
@@ -13,23 +15,29 @@ class AdminController extends Controller
 {
     public function index(){
         $curriculum = Curriculum::all();
-        $curriculum = count($curriculum);
+        $curriculumC = count($curriculum);
         $candidade = User::where('candidate', 1)->get();
-        $candidade = count($candidade);
+        $candidadeC = count($candidade);
         $company = User::where('company', 1)->get();
-        $company = count($company);
+        $companyC = count($company);
 
         $plansCandidade = CandidatePlan::all();
-        $plansCandidade = count($plansCandidade);
+        $plansCandidadeC = count($plansCandidade);
         $plansCompany = CompanyPlan::all();
-        $plansCompany = count($plansCompany);
+        $plansCompanyC = count($plansCompany);
+
+        $tableCompany = Company::with('curriculumDownload', 'quantity')->get();
+        $tableCandidate = Candidate::with('curriculum', 'planCandidate', 'planCandidate.plan', 'user')->get();
 
         return view('admin.geral' , [
-            'curriculum' => $curriculum,
-            'candidate' => $candidade,
-            'company' => $company,
-            'plansCandidade' => $plansCandidade,
-            'plansCompany' => $plansCompany
+            'curriculum' => $curriculumC,
+            'candidate' => $candidadeC,
+            'company' => $companyC,
+            'plansCandidade' => $plansCandidadeC,
+            'plansCompany' => $plansCompanyC,
+
+            'tableCompany' => $tableCompany,
+            'tableCandidate' => $tableCandidate
         ]);
     }
 }

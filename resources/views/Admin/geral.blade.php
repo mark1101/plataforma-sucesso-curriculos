@@ -82,7 +82,7 @@
     </section>
 
     <section>
-        <div class="container mt-5">
+        <div class="container mt-5 mb-5">
             <div class="row">
                 <div class="col-sm-4">
                     <div class="card">
@@ -110,6 +110,81 @@
                             <a href="#" class="btn btn-primary">Ver Planos</a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container mt-5 mb-4">
+            <div class="card p-5">
+                <div class="col-sm-12">
+                    <h3>Dados de empresa - Relacionamento de Cadastro de Empresa</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome Empresa</th>
+                                <th scope="col">CNPJ</th>
+                                <th scope="col">Endereço</th>
+                                <th scope="col">Entrada na Plataforma</th>
+                                <th scope="col">Curriculos Baixados</th>
+                                <th scope="col">Créditos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($tableCompany as $tc)
+                                <tr>
+                                    <th scope="row">{{ $tc->name }}</th>
+                                    <td>{{ $tc->cnpj }}</td>
+                                    <td>{{ $tc->address }}</td>
+                                    <td>{{ $tc->created_at->format('d/m/Y') }}</td>
+                                    <td>{{ $tc->curriculumDownload->count() }}</td>
+                                    <td>{{ $tc->quantity->quantity }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container mt-5 mb-4">
+            <div class="card p-5">
+                <div class="col-sm-12">
+                    <h3>Dados de candidatos - Relacionamento de Cadastro de Candidatos</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome Candidato</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Curriculo</th>
+                                <th scope="col">Entrada na Plataforma</th>
+                                <th scope="col">Plano Atual</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($tableCandidate as $tcan)
+                                <tr>
+                                    <th scope="row">{{ $tcan->name }}</th>
+                                    <td>{{ $tcan->user->email }}</td>
+                                    @if ($tcan->curriculum->count() > 0)
+                                        <td>Ativo</td>
+                                    @else
+                                        <td>Inativo</td>
+                                    @endif
+                                    <td>{{ $tcan->created_at->format('d/m/Y') }}</td>
+                                    @if ($tcan->planCandidate->plan->name)
+                                        <td>{{ $tcan->planCandidate->plan->name }}</td>
+                                    @else
+                                        <td>Sem plano</td>
+                                    @endif
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
