@@ -28,7 +28,7 @@ class Candidate extends Model
     }
 
     public function planCandidate(){
-        return $this->hasOne(CandidatePlanRelation::class, 'id', 'user_id');
+        return $this->hasOne(CandidatePlanRelation::class, 'candidate_id', 'id');
     }
 
     public function dueDate(){
