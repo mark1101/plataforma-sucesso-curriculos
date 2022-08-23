@@ -30,8 +30,10 @@ use App\Http\Controllers\MercadoPago\HomeController;
 Route::get('/verify-acess', function () {
     if (Auth::user()->candidate == 1) {
         return redirect()->route('candidatedash');
-    } else {
+    } else if (Auth::user()->company == 1) {
         return redirect()->route('dashboard.company');
+    } else if (Auth::user()->admin == 1) {
+        return redirect()->route('dashboard.admin');
     }
 });
 
@@ -48,7 +50,6 @@ Route::get('/faq', function () {
 
 //ROUTES SUPPORT
 Route::prefix('suporte')->group(function () {
-
     Route::get('/cadastro', [SupportController::class, 'register']);
     Route::post('/register-support', [SupportController::class, 'create']);
     Route::get('/agradecimento', [SupportController::class, 'thankYou']);
@@ -64,9 +65,11 @@ Route::prefix('sugestao')->group(function () {
 });
 
 //ROUTES ADMIN
-Route::get('/gerenciar/akp90', [AdminController::class, 'index']);
-Route::get('/login/admin', function(){
-    return view('admin.login-admin');
+Route::middleware(['admin-acess'])->group(function () {
+    Route::get('/dados/admin', [AdminController::class, 'index'])->name('dashboard.admin');
+    Route::get('/login/admin', function () {
+        return view('admin.login-admin');
+    });
 });
 
 
@@ -105,7 +108,7 @@ Route::post('/empresa/register-company', [HomeCompanyController::class, 'create'
 Route::middleware(['candidate-acess'])->group(function () {
     Route::get('/candidato/dashboard', [HomeCandidateController::class, 'dashboard'])->name('candidatedash');
     Route::get('/carrinho-candidado/{id}', [CandidadePaymentController::class, 'returnCart']);
-    Route::get('/pagamentos/candidato' , [HomeCandidateController::class, 'payments']);
+    Route::get('/pagamentos/candidato', [HomeCandidateController::class, 'payments']);
 
     //CURRICULUM
     Route::post('/create-curriculum', [CandidateCurriculumController::class, 'create']);
@@ -180,17 +183,17 @@ Route::get('/payment/failure', function () {
     return view('Payment.failure');
 });
 
-Route::get('/payment/pending' , [HomeController::class, 'paymentPending'])->name('payment.pending');
+Route::get('/payment/pending', [HomeController::class, 'paymentPending'])->name('payment.pending');
 Route::get('/payment/failure', function () {
     return view('Payment.failure');
 })->name('payment.failure');
 
 Route::get('/payment/success/company', [CompanyPaymentController::class, 'pay'])
-->name('payment.success.company');
+    ->name('payment.success.company');
 
 Route::get('/payment/success/candidade', [CandidadePaymentController::class, 'pay'])
-->name('payment.success.candidade');
+    ->name('payment.success.candidade');
 
-Route::get('/nota/servico/falha' , function(){
+Route::get('/nota/servico/falha', function () {
     return view('Returns.error');
 });

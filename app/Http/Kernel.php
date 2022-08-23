@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AdminAcess;
 use App\Http\Middleware\CandidateAcess;
 use App\Http\Middleware\CompanyAcess;
 use App\Http\Middleware\GuestAcess;
@@ -70,6 +71,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'candidate-acess' => CandidateAcess::class,
         'company-acess' => CompanyAcess::class,
+        'admin-acess' => AdminAcess::class,
         'no-auth' => GuestAcess::class,
         'register-curriculum' => RegisterCurriculum::class,
         'see-curriculum' => SeeCurriculum::class,

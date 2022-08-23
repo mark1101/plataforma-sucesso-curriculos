@@ -22,7 +22,11 @@ class Company extends Model
     }
 
     public function curriculumDownload(){
-        return $this->belongsTo(CurriculumCompany::class, 'company_id' , 'id');
+        return $this->belongsTo(CurriculumCompany::class, 'id' , 'company_id');
+    }
+
+    public function quantity(){
+        return $this->hasOne(CompanyCurriculumQuantity::class, 'company_id', 'id');
     }
 
     public function experience(){

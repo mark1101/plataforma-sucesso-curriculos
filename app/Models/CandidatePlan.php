@@ -11,5 +11,5 @@ class CandidatePlan extends Model
     protected $fillable = [
         'name', 'price', 'days', 'recurrence', 
     ];
-
+    
 }

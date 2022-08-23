@@ -19,12 +19,16 @@ class Candidate extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class, 'user_id', 'id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     public function curriculum()
     {
-        return $this->belongsTo(Curriculum::class, 'user_id', 'id');
+        return $this->hasOne(Curriculum::class, 'user_id', 'user_id');
+    }
+
+    public function planCandidate(){
+        return $this->hasOne(CandidatePlanRelation::class, 'id', 'user_id');
     }
 
     public function dueDate(){
