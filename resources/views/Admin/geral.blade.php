@@ -17,7 +17,7 @@
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
 
-    <title>Planos Empresa</title>
+    <title>Administração</title>
 </head>
 
 <body style="background-color: #F2F2F2;">
@@ -53,7 +53,7 @@
     <header class="header__area position-relative">
         <div class="container">
             <div class="logo__main">
-                <a href="/empresa/dashboard"><img src="{{ asset('img/logo.svg') }}" alt=""></a>
+                <a href="/dados/admin"><img src="{{ asset('img/logo.svg') }}" alt=""></a>
             </div>
             <div class="header__right">
                 <div class="main__menu red--links">
