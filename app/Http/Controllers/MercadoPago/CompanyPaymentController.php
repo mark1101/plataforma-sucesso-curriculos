@@ -24,11 +24,15 @@ class CompanyPaymentController extends Controller
         $company = Company::where('user_id', Auth::id())->first();
         $planRelation = CompanyPlanRelation::where('company_id', $company->id)->first();
         $companyQuantity = CompanyCurriculumQuantity::where('company_id', $company->id)->first();
+        $user = Auth::id();
+        $product = str_replace(' ','', $plan['name']);
 
         if ($planRelation) {
             if ($plan->type != $planRelation->type && $companyQuantity->quantity == 0) {
                 return view('Company.cart', [
-                    'plan' => $plan
+                    'plan' => $plan,
+                    'user' => $user,
+                    'product' => $product
                 ]);
             } else {
                 return view('Company.error-plan-on', [

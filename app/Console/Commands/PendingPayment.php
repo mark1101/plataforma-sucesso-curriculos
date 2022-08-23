@@ -96,13 +96,8 @@ class PendingPayment extends Command
 
                     if ($alterPlan) {
                         if ($this->addCredit($company->id, $sum)) {
-                            Payments::create([
-                                'payment_id' => $item->payment_id,
-                                'user_id' => $item->user_id,
-                                'product' => $plan->name,
-                                'type' => 0,
-                                'price' => $plan->price,
-                                'status' => 'approved',
+                            Payments::where('payment_id', $item->payment_id)->update([
+                                'status' => 'approved'
                             ]);
                             return 1;
                         } else {
@@ -134,13 +129,8 @@ class PendingPayment extends Command
                             $sumData = date('Y-m-d', strtotime($today . "+ {$planNew->days} days"));
                             if ($this->alterDueDate($sumData, $candidate)) {
                                 Curriculum::where('user_id', $item->user_id)->update(['active' => 1]);
-                                Payments::create([
-                                    'payment_id' => $item->payment_id,
-                                    'user_id' => $item->user_id,
-                                    'product' => $plan->name,
-                                    'type' => 0,
-                                    'price' => $plan->price,
-                                    'status' => 'approved',
+                                Payments::where('payment_id', $item->payment_id)->update([
+                                    'status' => 'approved'
                                 ]);
                                 return 1;
                             } else {
@@ -159,13 +149,8 @@ class PendingPayment extends Command
 
                     if ($this->alterDueDate($sumData, $candidate)) {
                         Curriculum::where('user_id', $item->user_id)->update(['active' => 1]);
-                        Payments::create([
-                            'payment_id' => $item->payment_id,
-                            'user_id' => $item->user_id,
-                            'product' => $plan->name,
-                            'type' => 0,
-                            'price' => $plan->price,
-                            'status' => 'approved',
+                        Payments::where('payment_id', $item->payment_id)->update([
+                            'status' => 'approved'
                         ]);
                         return 1;
                     } else {

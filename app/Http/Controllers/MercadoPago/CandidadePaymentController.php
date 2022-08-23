@@ -25,6 +25,9 @@ class CandidadePaymentController extends Controller
         $dataCalc = strtotime(date('Y/m/d'));
         $date = CandidateDueDate::where('user_id', Auth::id())->first();
 
+        $user = Auth::id();
+        $product = str_replace(' ', '', $plan['name']);
+
         if ($planRelation) {
             $verify = ($dataCalc - strtotime($date->due_date)) / 86400;
             if ($verify < -1) {
@@ -33,7 +36,9 @@ class CandidadePaymentController extends Controller
             if ($verify <= 7) {
                 if ($plan->id != $planRelation->plan_id) {
                     return view('Applicant.cart', [
-                        'plan' => $plan
+                        'plan' => $plan,
+                        'user' => $user,
+                        'product' => $product
                     ]);
                 } else {
                     return view('Applicant.error-plan-on');
@@ -43,7 +48,9 @@ class CandidadePaymentController extends Controller
             }
         } else {
             return view('Applicant.cart', [
-                'plan' => $plan
+                'plan' => $plan,
+                'user' => $user,
+                'product' => $product
             ]);
         }
     }
@@ -91,7 +98,7 @@ class CandidadePaymentController extends Controller
                         Curriculum::where('user_id', Auth::id())->update(['active' => 1]);
                         Payments::create([
                             'payment_id' => $payment_id,
-                            'user_id' => Auth::id(), 
+                            'user_id' => Auth::id(),
                             'product' => $plan->name,
                             'type' => 0,
                             'price' => $plan->price,

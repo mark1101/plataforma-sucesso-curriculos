@@ -36,11 +36,12 @@ $item->unit_price = $plan->price;
 $preference->items = [$item];
 
 $preference->back_urls = [
-    'success' => route('payment.success.company'),
-    'failure' => route('payment.failure'),
-    'pending' => route('payment.pending'),
+    'success' => route('init'),
+    'failure' => route('init'),
+    'pending' => route('init'),
 ];
 $preference->auto_return = 'all';
+$preference->notification_url = 'http://sucessoempregos.com/api/webook/mp?user='.$user.'&value='.$plan->price.'&product='.$product;
 $preference->save();
 ?>
 

@@ -37,7 +37,7 @@ Route::get('/verify-acess', function () {
 
 Route::get('/', function () {
     return view('home-plataform');
-})->middleware('no-auth');
+})->middleware('no-auth')->name('init');
 
 Auth::routes();
 

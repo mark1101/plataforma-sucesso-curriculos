@@ -46,6 +46,8 @@ class HomeCompanyController extends Controller
         $plano = CompanyPlanRelation::where('company_id', $company->id)->first();
 
         $plan = CompanyCurriculumQuantity::where('company_id', $company->id)->first();
+        $pending = Payments::where('user_id', Auth::id())
+        ->where('status', 'pending')->exists();
 
         return view('Company.dashboard', [
             'name' => $company->name,
@@ -54,7 +56,8 @@ class HomeCompanyController extends Controller
             'address' => $company->address,
             'credit' => $plan->quantity,
             'curriculum' => $curriculumDownload,
-            'plan' => $plano->plan
+            'plan' => $plano->plan,
+            'payment' => $pending
         ]);
     }
 
