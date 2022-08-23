@@ -161,7 +161,11 @@
                                     <td>{{ $tc->cnpj }}</td>
                                     <td>{{ $tc->address }}</td>
                                     <td>{{ $tc->created_at->format('d/m/Y') }}</td>
-                                    <td>{{ $tc->curriculumDownload->count() }}</td>
+                                    @if ($tc->curriculumDownload)
+                                        <td>{{ $tc->curriculumDownload->count() }}</td>
+                                    @else
+                                        <td>0</td>
+                                    @endif
                                     <td>{{ $tc->quantity->quantity }}</td>
                                 </tr>
                             @endforeach
@@ -192,7 +196,7 @@
                                 <tr>
                                     <th scope="row">{{ $tcan->name }}</th>
                                     <td>{{ $tcan->user->email }}</td>
-                                    @if ($tcan->curriculum->count() > 0)
+                                    @if ($tcan->curriculum)
                                         <td>Ativo</td>
                                     @else
                                         <td>Inativo</td>
