@@ -3,17 +3,20 @@
 namespace App\Http\Controllers\General;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CompanyResource;
 use App\Models\Candidate;
 use App\Models\CandidatePlan;
 use App\Models\Company;
 use App\Models\CompanyPlan;
 use App\Models\Curriculum;
+use App\Models\CurriculumCompany;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $curriculum = Curriculum::all();
         $curriculumC = count($curriculum);
         $candidade = User::where('candidate', 1)->get();
@@ -26,11 +29,12 @@ class AdminController extends Controller
         $plansCompany = CompanyPlan::all();
         $plansCompanyC = count($plansCompany);
 
-        $tableCompany = Company::with('curriculumDownload', 'quantity')->get();
+        $tableCompany = CompanyResource::collection(Company::with('quantity')->get());
         $tableCandidate = Candidate::with('curriculum', 'planCandidate', 'planCandidate.plan', 'user')->get();
-        //dd($tableCandidate);
 
-        return view('Admin.geral' , [
+        dd(json_encode($tableCompany));
+
+        return view('Admin.geral', [
             'curriculum' => $curriculumC,
             'candidate' => $candidadeC,
             'company' => $companyC,
@@ -40,5 +44,10 @@ class AdminController extends Controller
             'tableCompany' => $tableCompany,
             'tableCandidate' => $tableCandidate
         ]);
+    }
+
+    public function sumCurriculum($company)
+    {
+        return CurriculumCompany::where('company_id', $company)->get();
     }
 }
