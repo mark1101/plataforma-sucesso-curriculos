@@ -29,7 +29,7 @@ class AdminController extends Controller
         $tableCompany = Company::with('curriculumDownload', 'quantity')->get();
         $tableCandidate = Candidate::with('curriculum', 'planCandidate', 'planCandidate.plan', 'user')->get();
 
-        return view('admin.geral' , [
+        return view('Admin.geral' , [
             'curriculum' => $curriculumC,
             'candidate' => $candidadeC,
             'company' => $companyC,

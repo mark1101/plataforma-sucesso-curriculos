@@ -68,7 +68,7 @@ Route::prefix('sugestao')->group(function () {
 Route::middleware(['admin-acess'])->group(function () {
     Route::get('/dados/admin', [AdminController::class, 'index'])->name('dashboard.admin');
     Route::get('/login/admin', function () {
-        return view('admin.login-admin');
+        return view('Admin.login-admin');
     });
 });
 
